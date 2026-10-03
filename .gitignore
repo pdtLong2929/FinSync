@@ -1,0 +1,46 @@
+# ==========================================
+# FinSync - Root .gitignore
+# ==========================================
+
+# ---- Environment & Secrets ----
+.env
+.env.local
+.env.*.local
+*.env
+secrets/
+*.key
+*.pem
+*.p12
+*.jks
+
+# ---- IDE & Editor ----
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+*.iml
+
+# ---- OS Generated Files ----
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ---- General Artifacts ----
+*.log
+*.tmp
+*.bak
+
+# ---- Test Coverage ----
+coverage/
+*.lcov
+htmlcov/
+
+# ---- AI Assistant ----
+.gemini/
+.agents/
