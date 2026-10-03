@@ -7,6 +7,8 @@
 .env.local
 .env.*.local
 *.env
+!.env.example
+!*.env.example
 secrets/
 *.key
 *.pem

@@ -1,10 +1,10 @@
-package com.finsync.api;
+package com.finsync;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FinSyncApiApplicationTests {
+class FinSyncApplicationTests {
 
 	@Test
 	void contextLoads() {

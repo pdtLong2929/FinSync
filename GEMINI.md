@@ -152,6 +152,30 @@ Khi một thành viên ghi nhận khoản chi chung cho nhóm, hệ thống sẽ
   └── GEMINI.md                     # File context cho AI Assistant
   ```
 
+### 6.5. Quy chuẩn Commit Message (Conventional Commits)
+- Bắt buộc tuân theo định dạng: `<type>(<scope>): <subject>`
+  - `feat`: Tính năng mới (ví dụ: `feat(auth): implement JWT token generation`)
+  - `fix`: Sửa lỗi (ví dụ: `fix(split): resolve decimal rounding error in debt calculation`)
+  - `docs`: Tài liệu, báo cáo (ví dụ: `docs(api): add swagger annotations for wallet endpoints`)
+  - `refactor`: Tái cấu trúc mã nguồn không làm đổi logic (ví dụ: `refactor(wallet): simplify balance computation`)
+  - `test`: Viết unit/integration test (ví dụ: `test(auth): add unit tests for AuthService`)
+  - `chore`: Cấu hình build, dependency, gitignore (ví dụ: `chore(deps): upgrade spring-boot to 3.2.0`)
+- Tiêu đề commit viết bằng **tiếng Anh**, thể hiện hành động ở thì hiện tại (imperative mood), không viết hoa chữ đầu, không kết thúc bằng dấu chấm.
+
+### 6.6. Quy chuẩn Coding Conventions
+- **Backend (Spring Boot / Java):**
+  - Đặt tên: Class/Interface dùng `PascalCase`, method/variable dùng `camelCase`, hằng số dùng `UPPER_SNAKE_CASE`.
+  - Cấu trúc phân tầng chuẩn: `controller` $\rightarrow$ `service` (interface + impl) $\rightarrow$ `repository` $\rightarrow$ `model/entity` + `dto`.
+  - Tuyệt đối không hardcode SQL, sử dụng Spring Data JPA queries hoặc JPQL.
+  - Sử dụng DTO để nhận và trả dữ liệu qua API, không trả trực tiếp Database Entity ra ngoài client.
+- **Mobile Client (Flutter / Dart):**
+  - Đặt tên: Class/Widget dùng `PascalCase`, biến/hàm dùng `camelCase`, tên file dùng `snake_case.dart`.
+  - Quản lý trạng thái: Sử dụng BLoC hoặc Riverpod, tách biệt hoàn toàn UI (Widgets) khỏi Business Logic.
+  - HTTP requests: Đóng gói thông qua Dio client với Interceptor tự động gắn JWT Token.
+- **Web Admin (React.js):**
+  - Đặt tên: Component dùng `PascalCase.jsx`, hooks/helpers dùng `camelCase.js`.
+  - Tách components nhỏ gọn, tái sử dụng, phân tách rõ `pages/` và `components/`.
+
 ---
 
 ## 7. Hướng Dẫn Dành Cho AI Assistant
