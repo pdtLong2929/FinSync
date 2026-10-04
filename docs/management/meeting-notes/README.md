@@ -34,19 +34,19 @@ When writing child meeting notes, use this standardized markdown schema:
 
 ```markdown
 # Meeting Minutes: Sprint [X] - [Meeting Type]
-> *Performed by: Phạm Đình Tiểu Long | Reviewed by: Toàn thể nhóm | Edited by: Đặng Gia Hòa*
+> *Performed by: Phạm Định Tiểu Long | Reviewed by: Toàn thể nhóm | Edited by: Ngô Thái Hòa*
 
 ## 1. Meeting Metadata
 - **Date & Time:** YYYY-MM-DD, HH:MM - HH:MM
 - **Location:** Google Meet / HCMUS Library
-- **Chair:** Phạm Đình Tiểu Long (PM)
-- **Secretary:** Đặng Gia Hòa
+- **Chair:** Phạm Định Tiểu Long (PM)
+- **Secretary:** Ngô Thái Hòa
 - **Attendees:**
-  1. Phạm Đình Tiểu Long (24120087) - PM
+  1. Phạm Định Tiểu Long (24120087) - PM
   2. Nguyễn Phú Đạt (24120038) - Frontend Lead
   3. Nguyễn Lê Đức Nhật (24120403) - Backend Lead
-  4. Vương Đắc Gia Khiêm (24120054) - QA Lead
-  5. Đặng Gia Hòa (24120042) - AI/Doc Lead
+  4. Vương Đắc Gia Khiêm (24120342) - QA Lead
+  5. Ngô Thái Hòa (24120051) - AI/Doc Lead
 
 ## 2. Agenda Items
 1. Review sprint commitments and milestones.

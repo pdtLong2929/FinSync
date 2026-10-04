@@ -1,7 +1,7 @@
 # FinSync - Agile Project Management & Scrum Context & AI Generation Guide
 
 > **AI Assistant Persona & Usage Context:**
-> When prompted to generate or update any document inside `docs/management/`, adopt the persona of a **Certified Scrum Master & Agile Project Manager** (Lead: Phạm Đình Tiểu Long - 24120087). Read this context guide completely to align with HCMUS CS300 course policies, TA guidelines, and professional software engineering project governance.
+> When prompted to generate or update any document inside `docs/management/`, adopt the persona of a **Certified Scrum Master & Agile Project Manager** (Lead: Phạm Định Tiểu Long - 24120087). Read this context guide completely to align with HCMUS CS300 course policies, TA guidelines, and professional software engineering project governance.
 
 ---
 
@@ -33,11 +33,11 @@ FinSync follows the **Scrum / Agile Framework** adapted for academic engineering
 ### 1.3. Team Roster & Assigned Leads
 | Student ID | Full Name | Academic Role | Primary Lead Responsibility |
 |---|---|---|---|
-| **24120087** | **Phạm Đình Tiểu Long** | **Project Manager / Group Leader** | Sprint facilitation, Jira management, progress tracking |
+| **24120087** | **Phạm Định Tiểu Long** | **Project Manager / Group Leader** | Sprint facilitation, Jira management, progress tracking |
 | **24120038** | **Nguyễn Phú Đạt** | **UI/UX & Frontend Lead** | UI/UX design, Jetpack Compose client architecture |
 | **24120403** | **Nguyễn Lê Đức Nhật** | **Backend Lead** | Spring Boot API architecture, DB schema, security |
-| **24120054** | **Vương Đắc Gia Khiêm** | **QA & DevOps Lead** | Test planning, test case authoring, Docker CI/CD |
-| **24120042** | **Đặng Gia Hòa** | **AI & Documentation Lead** | FastAPI microservice, Gemini integration, technical documentation |
+| **24120342** | **Vương Đắc Gia Khiêm** | **QA & DevOps Lead** | Test planning, test case authoring, Docker CI/CD |
+| **24120051** | **Ngô Thái Hòa** | **AI & Documentation Lead** | FastAPI microservice, Gemini integration, technical documentation |
 
 ---
 
@@ -78,18 +78,18 @@ When prompting an AI to generate child management documents, instruct it to use 
 ### 4.1. Template for Weekly Scrum Standup Notes
 ```markdown
 # Weekly Scrum Meeting Notes - Sprint [X] Week [Y]
-> *Performed by: Phạm Đình Tiểu Long | Reviewed by: Toàn thể nhóm | Edited by: Đặng Gia Hòa*
+> *Performed by: Phạm Định Tiểu Long | Reviewed by: Toàn thể nhóm | Edited by: Ngô Thái Hòa*
 
 - **Date & Time:** YYYY-MM-DD, HH:MM - HH:MM
 - **Location:** Online (Google Meet / Discord) / Offline (HCMUS Library)
-- **Chair / Facilitator:** Phạm Đình Tiểu Long (PM)
+- **Chair / Facilitator:** Phạm Định Tiểu Long (PM)
 - **Attendees:** Full team present (Long, Đạt, Nhật, Khiêm, Hòa)
 
 ---
 
 ## Member Standup Reports
 
-### 1. Phạm Đình Tiểu Long (Project Manager)
+### 1. Phạm Định Tiểu Long (Project Manager)
 - **What did I do since last week:**
   - Facilitated Sprint 1 backlog refinement and created 15 Jira tasks.
   - Setup repository governance, branch protection, and project guidelines.
@@ -129,7 +129,7 @@ When prompting an AI to generate child management documents, instruct it to use 
 - **Impediments / Blockers:**
   - None.
 
-### 5. Đặng Gia Hòa (AI & Documentation Lead)
+### 5. Ngô Thái Hòa (AI & Documentation Lead)
 - **What did I do since last week:**
   - Authored Requirements Vision and Functional Specification documents.
   - Researched Google Gemini 1.5 Pro API pricing, rate limits, and JSON mode.
@@ -143,7 +143,7 @@ When prompting an AI to generate child management documents, instruct it to use 
 ### 4.2. Template for Sprint Retrospective (`sprint[x]-retrospective.md`)
 ```markdown
 # Sprint [X] Retrospective Report
-> *Performed by: Phạm Đình Tiểu Long | Reviewed by: Toàn thể nhóm | Edited by: Đặng Gia Hòa*
+> *Performed by: Phạm Định Tiểu Long | Reviewed by: Toàn thể nhóm | Edited by: Ngô Thái Hòa*
 
 ## 1. What Went Well?
 - High collaboration on Discord; architectural decisions resolved quickly.

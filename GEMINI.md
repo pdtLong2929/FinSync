@@ -35,7 +35,7 @@ Hệ thống có **2 Actor chính**:
 
 | # | MSSV | Họ và Tên | Email | Vai trò chính trong nhóm | Trách nhiệm chính (Lead) |
 |---|----------|----------------------|---------------------------|---------------------------------|-------------------|
-| 1 | 24120087 | **Phạm Đình Tiểu Long** | phamlongkh2006@gmail.com | **Project Manager / Group Leader** | Quản lý tiến độ dự án, điều phối công việc, chủ trì họp Sprint, quản lý Jira board |
+| 1 | 24120087 | **Phạm Định Tiểu Long** | phamlongkh2006@gmail.com | **Project Manager / Group Leader** | Quản lý tiến độ dự án, điều phối công việc, chủ trì họp Sprint, quản lý Jira board |
 | 2 | 24120038 | **Nguyễn Phú Đạt** | nguyennphuudatt@gmail.com | **UI/UX Designer & Frontend Lead** | Lead thiết kế UI/UX (wireframes/mockups), đảm bảo tính nhất quán giao diện, lead phát triển client app |
 | 3 | 24120403 | **Nguyễn Lê Đức Nhật** | nldnhat182006@gmail.com | **Backend Lead** | Lead thiết kế kiến trúc backend, xây dựng API Spring Boot, thiết kế cơ sở dữ liệu |
 | 4 | 24120342 | **Vương Đắc Gia Khiêm** | vuongkhiemvl10@gmail.com | **QA Lead & DevOps** | Lead chiến lược kiểm thử, viết test cases, quản lý CI/CD pipeline, triển khai hệ thống |

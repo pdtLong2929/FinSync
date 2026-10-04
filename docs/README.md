@@ -26,10 +26,10 @@ docs/
 
 | Discipline | Subfolder | Primary Lead | Key Deliverables Governed |
 |---|---|---|---|
-| **Requirements** | [`docs/requirements/`](file:///D:/FinSync/FinSync/docs/requirements/README.md) | Đặng Gia Hòa (Doc Lead) | `vision.md`, `functional-requirements.md`, `non-functional-requirements.md`, `glossary.md`, `use-cases/` |
+| **Requirements** | [`docs/requirements/`](file:///D:/FinSync/FinSync/docs/requirements/README.md) | Ngô Thái Hòa (Doc Lead) | `vision.md`, `functional-requirements.md`, `non-functional-requirements.md`, `glossary.md`, `use-cases/` |
 | **Analysis & Design** | [`docs/analysis-and-design/`](file:///D:/FinSync/FinSync/docs/analysis-and-design/README.md) | Nguyễn Lê Đức Nhật (Backend) & Nguyễn Phú Đạt (UI/UX) | `architecture.md` (C4), `api-design.md`, `database-design.md` (ERD), `class-diagrams/`, `sequence-diagrams/`, `ui-design/` |
 | **Testing & QA** | [`docs/test/`](file:///D:/FinSync/FinSync/docs/test/README.md) | Vương Đắc Gia Khiêm (QA Lead) | `test-plan.md`, `test-cases/` (all 10 groups + AI), `test-results/`, defect tracking |
-| **Project Management** | [`docs/management/`](file:///D:/FinSync/FinSync/docs/management/README.md) | Phạm Đình Tiểu Long (PM) | `weekly-reports/`, `meeting-notes/`, Sprint Planning, Standups (3 Qs), Retrospectives (5 Qs) |
+| **Project Management** | [`docs/management/`](file:///D:/FinSync/FinSync/docs/management/README.md) | Phạm Định Tiểu Long (PM) | `weekly-reports/`, `meeting-notes/`, Sprint Planning, Standups (3 Qs), Retrospectives (5 Qs) |
 
 ---
 

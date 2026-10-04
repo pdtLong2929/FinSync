@@ -1,0 +1,108 @@
+/* ====================================================
+   PDF EXPORT & PRINT OPTIMIZATION (Markdown PDF)
+   ==================================================== */
+@page {
+  size: A4;
+  margin: 15mm 14mm 15mm 14mm;
+}
+
+/* Typography & Flow */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #24292e;
+}
+
+/* Headings: Never leave headings orphaned at the bottom of a page */
+h1, h2, h3, h4, h5, h6 {
+  page-break-after: avoid !important;
+  break-after: avoid !important;
+  margin-top: 1.1em;
+  margin-bottom: 0.4em;
+}
+
+/* Section dividers */
+hr {
+  border: 0;
+  height: 1px;
+  background: #e1e4e8;
+  margin: 18px 0;
+}
+
+/* Tables: Avoid splitting rows across pages */
+table {
+  page-break-inside: avoid !important;
+  break-inside: avoid !important;
+  font-size: 12px;
+  margin: 12px 0;
+  width: 100%;
+}
+
+/* Blockquotes and code blocks */
+blockquote, pre, .mermaid {
+  page-break-inside: avoid !important;
+  break-inside: avoid !important;
+}
+
+/* Universal Image Constraints */
+img {
+  display: block !important;
+  margin: 8px auto !important;
+  page-break-inside: avoid !important;
+  break-inside: avoid !important;
+  object-fit: contain !important;
+}
+
+/* Mobile App Screenshots (Money Lover & Splitwise)
+   Constrain height to ~270px so heading, phone image & caption fit naturally on 1 page */
+img[src*="moneylover"], img[src*="splitwise"], img[src*="app/"] {
+  max-height: 270px !important;
+  max-width: 160px !important;
+  width: auto !important;
+  height: auto !important;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Desktop Screenshots (Jira, Google Meet, Zalo, GitHub structure) */
+img[src*="jira"], img[src*="googlemeet"], img[src*="zalo"], img[src*="github"] {
+  max-height: 240px !important;
+  max-width: 88% !important;
+  width: auto !important;
+  height: auto !important;
+  border: 1px solid #d0d7de;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+/* Git Log Screenshots (PA1 commit history) */
+img[src*="git-log"] {
+  max-height: 175px !important;
+  max-width: 90% !important;
+  width: auto !important;
+  border: 1px solid #d0d7de;
+  border-radius: 4px;
+  margin: 5px auto !important;
+}
+
+/* Paragraphs containing images and captions */
+p {
+  orphans: 2;
+  widows: 2;
+  margin-top: 0.4em;
+  margin-bottom: 0.6em;
+}
+
+/* Caption styling */
+em {
+  display: block;
+  text-align: center;
+  font-size: 0.85em;
+  color: #586069;
+  margin-top: 3px;
+  margin-bottom: 12px;
+  page-break-before: avoid !important;
+  break-before: avoid !important;
+}

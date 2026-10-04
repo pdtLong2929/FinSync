@@ -29,7 +29,7 @@ WeeklyReport_Sprint[X]_Week[Y]_YYYY-MM-DD.md
 
 ```markdown
 # Weekly Progress Report - Sprint [X] Week [Y]
-> *Performed by: Phạm Đình Tiểu Long | Reviewed by: Toàn thể nhóm | Edited by: Đặng Gia Hòa*
+> *Performed by: Phạm Định Tiểu Long | Reviewed by: Toàn thể nhóm | Edited by: Ngô Thái Hòa*
 
 ## 1. Sprint Overview & Team Goals
 - **Sprint:** Sprint [X]
@@ -41,7 +41,7 @@ WeeklyReport_Sprint[X]_Week[Y]_YYYY-MM-DD.md
 
 ## 2. Individual Progress (3 Scrum Questions per Member)
 
-### 2.1. Phạm Đình Tiểu Long (Student ID: 24120087) - Project Manager
+### 2.1. Phạm Định Tiểu Long (Student ID: 24120087) - Project Manager
 - **1. What have I done since last week?**
   - Item 1...
 - **2. What will I do until next week?**
@@ -55,10 +55,10 @@ WeeklyReport_Sprint[X]_Week[Y]_YYYY-MM-DD.md
 ### 2.3. Nguyễn Lê Đức Nhật (Student ID: 24120403) - Backend Lead
 - [Same 3 questions]
 
-### 2.4. Vương Đắc Gia Khiêm (Student ID: 24120054) - QA & DevOps Lead
+### 2.4. Vương Đắc Gia Khiêm (Student ID: 24120342) - QA & DevOps Lead
 - [Same 3 questions]
 
-### 2.5. Đặng Gia Hòa (Student ID: 24120042) - AI & Documentation Lead
+### 2.5. Ngô Thái Hòa (Student ID: 24120051) - AI & Documentation Lead
 - [Same 3 questions]
 
 ---

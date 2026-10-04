@@ -281,7 +281,7 @@ The project strictly follows Agile/Scrum principles across structured 2-to-3-wee
 
 | # | Student ID | Full Name | Email | Primary Responsibility (Lead) |
 |---|:---:|---|---|---|
-| 1 | **24120087** | **Phạm Đình Tiểu Long** | phamlongkh2006@gmail.com | **Group Leader** / Project Manager / Scrum Master |
+| 1 | **24120087** | **Phạm Định Tiểu Long** | phamlongkh2006@gmail.com | **Group Leader** / Project Manager / Scrum Master |
 | 2 | **24120038** | **Nguyễn Phú Đạt** | nguyennphuudatt@gmail.com | **UI/UX Designer & Frontend Lead** (Android / Jetpack Compose) |
 | 3 | **24120403** | **Nguyễn Lê Đức Nhật** | nldnhat182006@gmail.com | **Backend Lead & Architecture** (Spring Boot 3 & PostgreSQL) |
 | 4 | **24120342** | **Vương Đắc Gia Khiêm** | vuongkhiemvl10@gmail.com | **QA Lead & DevOps Engineer** (CI/CD, Test Automation) |

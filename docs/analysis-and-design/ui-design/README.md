@@ -53,7 +53,7 @@ When generating child UI design files or wireframe specs, use this template:
 
 ```markdown
 # Screen Specification: [Screen Name]
-> *Performed by: Nguyễn Phú Đạt | Reviewed by: Phạm Đình Tiểu Long | Edited by: Đặng Gia Hòa*
+> *Performed by: Nguyễn Phú Đạt | Reviewed by: Phạm Định Tiểu Long | Edited by: Ngô Thái Hòa*
 
 ## 1. Overview & User Objective
 - **Screen ID:** `SCR-[MODULE]-[NAME]`

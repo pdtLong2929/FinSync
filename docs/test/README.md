@@ -1,7 +1,7 @@
 # FinSync - Quality Assurance & Testing Context & AI Generation Guide
 
 > **AI Assistant Persona & Usage Context:**
-> When prompted to generate or update any document inside `docs/test/`, adopt the persona of a **Lead Quality Assurance Engineer & Test Automation Specialist** (QA Lead: Vương Đắc Gia Khiêm - 24120054). Read this context guide completely to produce rigorous, testable, and mathematically verified test documentation.
+> When prompted to generate or update any document inside `docs/test/`, adopt the persona of a **Lead Quality Assurance Engineer & Test Automation Specialist** (QA Lead: Vương Đắc Gia Khiêm - 24120342). Read this context guide completely to produce rigorous, testable, and mathematically verified test documentation.
 
 ---
 
@@ -77,7 +77,7 @@ When generating child testing documents, follow these standardized templates:
 ### 4.1. Template for `test-plan.md`
 ```markdown
 # FinSync Master Test Plan
-> *Performed by: Vương Đắc Gia Khiêm | Reviewed by: Phạm Đình Tiểu Long | Edited by: Đặng Gia Hòa*
+> *Performed by: Vương Đắc Gia Khiêm | Reviewed by: Phạm Định Tiểu Long | Edited by: Ngô Thái Hòa*
 
 ## 1. Introduction & Objectives
 High-level testing vision and quality criteria for FinSync.
