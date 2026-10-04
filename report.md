@@ -129,12 +129,13 @@ A system administrator who accesses a simple web-based admin panel to perform ba
 
 | Component | Technology | Platform |
 |-----------|-----------|----------|
-| Mobile App (Regular User) | Flutter (Dart) | Android |
+| Mobile App (Regular User) | Kotlin (Jetpack Compose) | Android |
+| AI Microservice | Python (FastAPI) | Cloud Server |
 | Admin Web Panel (Administrator) | React.js | Web Browser |
 | Backend API Server | Spring Boot (Java) | Cloud Server |
 | Database | PostgreSQL | Cloud Server |
 
-The mobile application targets Android devices and is built with Flutter. The admin panel is a simple web application built with React.js. Both connect to a shared Spring Boot backend via RESTful APIs.
+The mobile application targets Android devices and is built with Kotlin and Jetpack Compose. The AI microservice is built with Python (FastAPI) to handle expense analytics algorithms and AI integration. The admin panel is a simple web application built with React.js. All client and microservice components connect to a shared Spring Boot backend via RESTful APIs.
 
 ### B.3. Key Features
 
