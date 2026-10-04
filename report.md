@@ -65,28 +65,19 @@
     - [Ground Rules](#ground-rules)
   - [D.8. Review and Update Process](#d8-review-and-update-process)
 - [E - Development Tools and Process Setup](#e---development-tools-and-process-setup)
-  - [E.1. Scrum Process & Weekly Reports](#e1-scrum-process--weekly-reports)
-    - [Scrum Process Methodology](#scrum-process-methodology)
-    - [Sprint Meeting Schedule and Structure](#sprint-meeting-schedule-and-structure)
-    - [Weekly Scrum & Sprint Retrospective Meeting Minutes Format](#weekly-scrum--sprint-retrospective-meeting-minutes-format)
-    - [Sprint 1 Weekly Scrum Meeting Minutes (Evidence)](#sprint-1-weekly-scrum-meeting-minutes-evidence)
-  - [E.2. Required Tools Setup](#e2-required-tools-setup)
-    - [Required Tools Overview](#required-tools-overview)
-    - [Jira Task Management Setup & Evidence](#jira-task-management-setup--evidence)
-    - [AI Coding Accounts Evidence](#ai-coding-accounts-evidence)
-  - [E.3. Repository Structure](#e3-repository-structure)
-    - [Recommended Folder Structure](#recommended-folder-structure)
-    - [GitHub Repository Setup Evidence](#github-repository-setup-evidence)
-  - [E.4. Git Log Evidence](#e4-git-log-evidence)
-- [Appendix](#appendix)
-  - [Appendix A. Submission Checklist](#appendix-a-submission-checklist)
-  - [Appendix B. Document Version History](#appendix-b-document-version-history)
+  - [E.1. Development Process](#e1-development-process)
+  - [E.2. Communication Tools](#e2-communication-tools)
+  - [E.3. Task Management with Jira](#e3-task-management-with-jira)
+  - [E.4. Version Control and Repository (GitHub)](#e4-version-control-and-repository-github)
+  - [E.5. AI-Assisted Development Tools](#e5-ai-assisted-development-tools)
+  - [E.6. Spec Kit](#e6-spec-kit)
+  - [E.7. Tool Setup Summary](#e7-tool-setup-summary)
 
 ---
 
 ## A - Group Registration
 
-> *Performed by: Phạm Đình Tiểu Long | Reviewed by: Nguyễn Lê Đức Nhật | Edited by: Ngô Thái Hòa*
+> *Performed by: Phạm Đình Tiểu Long | Reviewed by: Nguyễn Lê Đức Nhật | Edited by: Nguyễn Lê Đức Nhật*
 
 ### Group Information
 
@@ -110,17 +101,17 @@
 
 ### B.1. Introduction
 
-> *Performed by: [Name] | Reviewed by: [Name] | Edited by: [Name]*
+> *Performed by: [Nguyễn Lê Đức Nhật] | Reviewed by: [Phạm Đình Tiểu Long] | Edited by: [Nguyễn lê Đức Nhật]*
 
-Smart Finance & Group Budgeting is a comprehensive financial management application that combines personal asset management (similar to Money Lover) with intelligent group expense splitting (similar to Splitwise). The app is designed for individuals, students, and groups of users who need to track shared expenses such as room rent, travel trips, and events.
+FinSync is a comprehensive financial management application that combines personal asset management (similar to Money Lover) with intelligent group expense splitting (similar to Splitwise). The app is designed for individuals, students, and groups of users who need to track shared expenses such as room rent, travel trips, and events.
 
-Current personal finance apps lack group expense management capabilities, while group splitting apps do not offer personal budgeting and account features. Smart Finance solves this problem by unifying personal and group finance into a single ecosystem, enhanced by an AI-powered financial advisor that analyzes spending history and recommends optimal spending plans for the upcoming month.
+Current personal finance apps lack group expense management capabilities, while group splitting apps do not offer personal budgeting and account features. FinSync solves this problem by unifying personal and group finance into a single ecosystem, enhanced by an AI-powered financial advisor that analyzes spending history and recommends optimal spending plans for the upcoming month.
 
 The system acts purely as a bookkeeping and reminder tool — it does **not** automatically deduct money or interact with real bank accounts.
 
 ### B.2. Target Users and Environments
 
-> *Performed by: [Name] | Reviewed by: [Name] | Edited by: [Name]*
+> *Performed by: [Nguyễn Lê Đức Nhật] | Reviewed by: [Phạm Đình Tiểu Long] | Edited by: [Nguyễn lê Đức Nhật]*
 
 #### Target Users
 
@@ -145,7 +136,7 @@ The mobile application targets Android devices and is built with Flutter. The ad
 
 ### B.3. Key Features
 
-> *Performed by: [Name] | Reviewed by: [Name] | Edited by: [Name]*
+> *Performed by: [Nguyễn Lê Đức Nhật] | Reviewed by: [Phạm Đình Tiểu Long] | Edited by: [Nguyễn lê Đức Nhật]*
 
 #### Feature 1: Authentication and Security
 The authentication module handles user registration, login, logout, and password recovery using encrypted JWT tokens. It ensures that all personal and group financial data remains private and secure, with only authorized accounts able to access their respective information.
@@ -179,7 +170,7 @@ The administrator can manage users (view list, lock/unlock accounts), manage def
 
 ### B.4. AI Feature
 
-> *Performed by: [Name] | Reviewed by: [Name] | Edited by: [Name]*
+> *Performed by: [Nguyễn Lê Đức Nhật] | Reviewed by: [Phạm Đình Tiểu Long] | Edited by: [Nguyễn lê Đức Nhật]*
 
 #### AI Financial Advisor
 
@@ -204,7 +195,7 @@ This feature transforms raw spending data into proactive financial guidance. Use
 
 ### C.1. App 1: Money Lover
 
-> *Performed by: [Name] | Reviewed by: [Name] | Edited by: [Name]*
+> *Performed by: [Vương Đắc Gia Khiêm] | Reviewed by: [Nguyễn Lê Đức Nhật] | Edited by: [Vương Đắc Gia Khiêm]*
 
 **App Name:** Money Lover  
 **Platform:** Android, iOS, Web  
@@ -218,23 +209,23 @@ Money Lover is one of the most popular personal finance management apps in Vietn
 <!-- TODO: Add screenshots of Money Lover's key screens -->
 
 **Screen 1: Dashboard / Home Screen**  
-![Money Lover Dashboard](screenshots/money-lover-dashboard.png)  
+![Money Lover Dashboard](screenshots/app/money-lover-dashboard.png)  
 *Caption: The home screen shows the user's wallet balance, recent transactions, and a summary of income/expenses for the current period. The clean layout provides quick access to add new transactions.*
 
 **Screen 2: Transaction Entry**  
-![Money Lover Transaction](screenshots/money-lover-transaction.png)  
+![Money Lover Transaction](screenshots/app/money-lover-transaction.png)  
 *Caption: The transaction entry screen allows users to select a category, enter an amount, add notes, choose a wallet, and set a date. Categories are displayed as icons for quick selection.*
 
 **Screen 3: Budget Management**  
-![Money Lover Budget](screenshots/money-lover-budget.png)  
+![Money Lover Budget](screenshots/app/money-lover-budget.png)  
 *Caption: The budget screen shows spending progress bars for each category. Users can set monthly limits and receive warnings when approaching the threshold.*
 
 **Screen 4: Reports and Charts**  
-![Money Lover Reports](screenshots/money-lover-reports.png)  
+![Money Lover Reports](screenshots/app/money-lover-reports.png)  
 *Caption: The report section offers pie charts and bar charts showing expense distribution by category and income vs. expense trends over time.*
 
 **Screen 5: Wallet Management**  
-![Money Lover Wallets](screenshots/money-lover-wallets.png)  
+![Money Lover Wallets](screenshots/app/money-lover-wallets.png)  
 *Caption: Users can create and manage multiple wallets (cash, bank, credit card) with individual balances that aggregate into a total net worth view.*
 
 #### Key Strengths
@@ -253,7 +244,7 @@ Money Lover is one of the most popular personal finance management apps in Vietn
 
 ### C.2. App 2: Splitwise
 
-> *Performed by: [Name] | Reviewed by: [Name] | Edited by: [Name]*
+> *Performed by: [Ngô Thái Hòa] | Reviewed by: [Nguyễn Lê Đức Nhật] | Edited by: [Ngô Thái Hòa]*
 
 **App Name:** Splitwise  
 **Platform:** Android, iOS, Web  
@@ -267,23 +258,23 @@ Splitwise is the leading group expense management app worldwide. It simplifies s
 <!-- TODO: Add screenshots of Splitwise's key screens -->
 
 **Screen 1: Group List / Dashboard**  
-![Splitwise Dashboard](screenshots/splitwise-dashboard.png)  
+![Splitwise Dashboard](screenshots/app/splitwise-dashboard.png)  
 *Caption: The main screen displays all groups the user belongs to, showing the total balance (amount owed or owed to the user) for each group. Color coding (green for positive, red for negative) provides quick visual feedback.*
 
 **Screen 2: Group Detail and Expenses**  
-![Splitwise Group](screenshots/splitwise-group.png)  
+![Splitwise Group](screenshots/app/splitwise-group.png)  
 *Caption: Inside a group, all shared expenses are listed chronologically with the payer and amount. Each expense shows how it was split among members.*
 
 **Screen 3: Add Expense**  
-![Splitwise Add Expense](screenshots/splitwise-add-expense.png)  
+![Splitwise Add Expense](screenshots/app/splitwise-add-expense.png)  
 *Caption: When adding a group expense, the user specifies who paid, the total amount, and how to split it (equally, by exact amounts, or by percentages). The UI makes it easy to include or exclude specific members.*
 
 **Screen 4: Balance Summary**  
-![Splitwise Balance](screenshots/splitwise-balance.png)  
+![Splitwise Balance](screenshots/app/splitwise-balance.png)  
 *Caption: The balance tab shows a simplified debt summary — who owes whom and how much — using a debt simplification algorithm that minimizes the number of transfers needed.*
 
 **Screen 5: Settle Up**  
-![Splitwise Settle](screenshots/splitwise-settle.png)  
+![Splitwise Settle](screenshots/app/splitwise-settle.png)  
 *Caption: The settle-up flow allows users to record payments made outside the app (cash, bank transfer) and mark debts as resolved.*
 
 #### Key Strengths
@@ -303,11 +294,11 @@ Splitwise is the leading group expense management app worldwide. It simplifies s
 
 ### C.3. Comparison and Differentiation
 
-> *Performed by: [Name] | Reviewed by: [Name] | Edited by: [Name]*
+> *Performed by: [Vương Đắc Gia Khiêm & Ngô Thái Hòa] | Reviewed by: [Phạm Đình Tiểu Long] | Edited by: [Vương Đắc Gia Khiêm & Ngô Thái Hòa]*
 
 #### Feature Comparison Table
 
-| Feature | Money Lover | Splitwise | Smart Finance (Ours) |
+| Feature | Money Lover | Splitwise | FinSync (Ours) |
 |---------|:-----------:|:---------:|:--------------------:|
 | Personal wallet management | ✅ | ❌ | ✅ |
 | Personal transaction tracking | ✅ | ❌ | ✅ |
@@ -324,7 +315,7 @@ Splitwise is the leading group expense management app worldwide. It simplifies s
 
 #### What Our App Will Do Differently or Better
 
-1. **Unified Ecosystem:** Smart Finance bridges the gap between personal finance management and group expense splitting — users no longer need two separate apps.
+1. **Unified Ecosystem:** FinSync bridges the gap between personal finance management and group expense splitting — users no longer need two separate apps.
 2. **AI-Powered Financial Advisor:** Neither Money Lover nor Splitwise offers AI-driven spending analysis. Our app will proactively analyze spending patterns and suggest optimized budgets for the next month.
 3. **Seamless Personal-Group Integration:** When a group expense is recorded, the system automatically notifies all members involved and tracks debts alongside personal finances, providing a holistic financial overview.
 4. **Localized for Vietnamese Users:** Designed with Vietnamese users in mind (VND currency, local spending categories, Vietnamese UI translations), while maintaining international currency support.
@@ -338,27 +329,27 @@ Splitwise is the leading group expense management app worldwide. It simplifies s
 
 ## D - Team Contract
 
-> *Performed by: [Name] | Reviewed by: [Name] | Edited by: [Name]*
+> *Performed by: [Phạm Đình Tiểu Long] | Reviewed by: [Nguyễn lê Đức Nhật] | Edited by: [Phạm Đình Tiểu Long]*
 
 ### D.1. Team Roles and Responsibilities
 
-> *Performed by: [Name] | Reviewed by: [Name] | Edited by: [Name]*
+> *Performed by: [Phạm Đình Tiểu Long] | Reviewed by: [Nguyễn lê Đức Nhật] | Edited by: [Phạm Đình Tiểu Long]*
 
 All team members will act as **full-stack engineers** and participate in every phase of development. The roles below define each member's primary leadership area:
 
 | Member | Role | Primary Responsibilities |
 |--------|------|------------------------|
-| [Name 1] | Project Manager / Group Leader | Oversee project progress, coordinate tasks, lead Sprint meetings, ensure deadlines are met, manage Jira board |
-| [Name 2] | UI/UX Designer & Frontend Lead | Lead UI/UX design phase, create wireframes and mockups, ensure design consistency, lead Flutter development |
-| [Name 3] | Backend Lead | Lead backend architecture design, manage API development with Spring Boot, handle database design |
-| [Name 4] | QA Lead & DevOps | Lead testing strategy, write test cases, manage CI/CD pipeline, handle deployment |
-| [Name 5] | AI Feature Lead & Documentation | Lead AI feature implementation (Gemini/OpenAI integration), manage project documentation |
+| [Phạm Đình Tiểu Long] | Project Manager / Group Leader | Oversee project progress, coordinate tasks, lead Sprint meetings, ensure deadlines are met, manage Jira board |
+| [Nguyễn Phú Đạt] | UI/UX Designer & Frontend Lead | Lead UI/UX design phase, create wireframes and mockups, ensure design consistency, lead Flutter development |
+| [Nguyễn Lê Đức Nhật] | Backend Lead | Lead backend architecture design, manage API development with Spring Boot, handle database design |
+| [Vương Đắc Gia Khiêm] | QA Lead & DevOps | Lead testing strategy, write test cases, manage CI/CD pipeline, handle deployment |
+| [Ngô Thái Hòa] | AI Feature Lead & Documentation | Lead AI feature implementation (Gemini/OpenAI integration), manage project documentation |
 
 > **Note:** These roles define leadership responsibilities. All members are expected to contribute to all areas including coding, testing, documentation, and review.
 
 ### D.2. Communication Plan
 
-> *Performed by: [Name] | Reviewed by: [Name] | Edited by: [Name]*
+> *Performed by: [Phạm Đình Tiểu Long] | Reviewed by: [Nguyễn lê Đức Nhật] | Edited by: [Phạm Đình Tiểu Long]*
 
 #### Communication Tools
 
@@ -385,7 +376,7 @@ All team members will act as **full-stack engineers** and participate in every p
 
 ### D.3. Work Schedule and Deadlines
 
-> *Performed by: [Name] | Reviewed by: [Name] | Edited by: [Name]*
+> *Performed by: [Phạm Đình Tiểu Long] | Reviewed by: [Nguyễn lê Đức Nhật] | Edited by: [Phạm Đình Tiểu Long]*
 
 #### Project Milestones
 
@@ -398,25 +389,26 @@ All team members will act as **full-stack engineers** and participate in every p
 
 #### Availability and Work Sessions
 
-- Members are available for meetings: **[Specify days/times, e.g., Monday & Thursday 7-9 PM]**
-- Each member commits to at least **[X] hours per week** on project work.
+- Members are available for meetings: **Sunday 7-9 PM**
+- Each member commits to at least **1 hours per week** on project work.
 - Tasks are assigned during Sprint Planning and tracked via Jira.
 
 #### Contingency Plans
 
-- If a member cannot meet a deadline, they must notify the team **at least 2 days before** the deadline.
+- If a member cannot meet a deadline, they must notify the team **at least 1 days before** the deadline.
 - The team will redistribute the workload if a member faces unexpected difficulties.
 - If a member drops the course, remaining members will redistribute tasks during the next Sprint Planning.
 
 ### D.4. Code and Documentation Standards
 
-> *Performed by: [Name] | Reviewed by: [Name] | Edited by: [Name]*
+> *Performed by: [Phạm Đình Tiểu Long] | Reviewed by: [Nguyễn lê Đức Nhật] | Edited by: [Phạm Đình Tiểu Long]*
 
 #### Coding Conventions
 
-- **Dart (Flutter):** Follow [Effective Dart](https://dart.dev/guides/language/effective-dart) style guide. Use `lowerCamelCase` for variables/functions, `UpperCamelCase` for classes.
-- **Java (Spring Boot):** Follow standard Java naming conventions. Use meaningful class and method names.
-- **General:** All code must include meaningful comments for complex logic. Variable and function names must be descriptive and in English.
+- **Kotlin (Android Client):** Follow [Kotlin Documentation](https://developer.android.com/kotlin/style-guide?hl=vi) style guide. Use `lowerCamelCase` for variables/functions, and `UpperCamelCase` for classes and composables.
+- **Java (Spring Boot):** Follow standard naming conventions for the respective backend language. Use meaningful class, package, and method names.
+- **Python (FastAPI / AI Microservice):** Follow [PEP 8](https://peps.python.org/pep-0008/) style guide. Use `snake_case` for variables, functions, and filenames, and `UpperCamelCase` for classes.
+- **General:** All code must include meaningful comments for complex logic (such as Notification Regex parsing algorithms or AI data formatting). Variable and function names must be descriptive and in English.
 
 #### Code Review Process
 
@@ -428,13 +420,12 @@ All team members will act as **full-stack engineers** and participate in every p
 #### Documentation Standards
 
 - All documents are written in **English** using **Markdown format**.
-- Diagrams are created using **Mermaid syntax** when possible.
+- Diagrams are created using **Mermaid syntax** when possible (such as system architectures and data flows).
 - Each section must include the `Performed by | Reviewed by | Edited by` attribution.
 - Documentation is version-controlled in the `/docs` folder of the Git repository.
-
 ### D.5. Accountability and Performance
 
-> *Performed by: [Name] | Reviewed by: [Name] | Edited by: [Name]*
+> *Performed by: [Phạm Đình Tiểu Long] | Reviewed by: [Nguyễn lê Đức Nhật] | Edited by: [Phạm Đình Tiểu Long]*
 
 #### Contribution Measurement
 
@@ -455,7 +446,7 @@ All team members will act as **full-stack engineers** and participate in every p
 
 ### D.6. Decision-Making Process
 
-> *Performed by: [Name] | Reviewed by: [Name] | Edited by: [Name]*
+> *Performed by: [Phạm Đình Tiểu Long] | Reviewed by: [Nguyễn lê Đức Nhật] | Edited by: [Phạm Đình Tiểu Long]*
 
 - **Technical decisions** (architecture, tools, libraries) are made by **majority vote** after discussion.
 - **Design decisions** (UI/UX, user flows) are led by the UI/UX Designer but require team consensus.
@@ -464,7 +455,7 @@ All team members will act as **full-stack engineers** and participate in every p
 
 ### D.7. Conflict Resolution
 
-> *Performed by: [Name] | Reviewed by: [Name] | Edited by: [Name]*
+> *Performed by: [Phạm Đình Tiểu Long] | Reviewed by: [Nguyễn lê Đức Nhật] | Edited by: [Phạm Đình Tiểu Long]*
 
 #### Resolution Framework
 
@@ -481,7 +472,7 @@ All team members will act as **full-stack engineers** and participate in every p
 
 ### D.8. Review and Update Process
 
-> *Performed by: [Name] | Reviewed by: [Name] | Edited by: [Name]*
+> *Performed by: [Phạm Đình Tiểu Long] | Reviewed by: [Nguyễn lê Đức Nhật] | Edited by: [Phạm Đình Tiểu Long]*
 
 - The team contract is reviewed at the **end of each Sprint** during the Sprint Review meeting.
 - Any member can propose amendments to the contract at any time.
@@ -492,206 +483,192 @@ All team members will act as **full-stack engineers** and participate in every p
 
 ## E - Development Tools and Process Setup
 
-### E.1. Scrum Process & Weekly Reports
+> *Performed by: [Nguyễn Phú Đạt] | Reviewed by: [Phạm Đình Tiểu Long] | Edited by: [Nguyễn Lê Đức Nhật]*  
 
-> *Performed by: [Name] | Reviewed by: [Name] | Edited by: [Name]*
+### E.1. Development Process
 
-#### Scrum Process Methodology
+Our team follows the **Scrum** process for project development. PA1 is treated as the first sprint of the project. The team uses Sprint Planning to identify and assign the work that needs to be completed during the sprint.
 
-The team follows the **Scrum process** throughout the project:
+For PA1, the current Scrum activities are:
 
-- Each PA corresponds to **one Sprint** (fixed for approximately 2-3 weeks).
-- There are **4 meetings for each Sprint**:
-  - **1 Sprint Planning meeting:** Held at the beginning of each Sprint (or at the end of the previous Sprint) to plan tasks, identify user stories/use cases, and assign tasks to members.
-  - **2 Weekly Scrum meetings:** Held across the Sprint to check status and solve impediments. Each member answers 3 key questions:
-    1. *What have I done since last week?*
-    2. *What will I do until next week?*
-    3. *What issues / problems / obstacles do I have?*
-  - **1 Sprint Review (Retrospective) meeting:** Held at the end of each Sprint to evaluate results, discuss what went well, what went wrong, identify causes, and determine lessons learned for future sprints.
+- **Sprint Planning:** Completed.
+- **Scrum Meeting 1:** Planned.
+- **Scrum Meeting 2:** Planned.
+- **Sprint Review:** Planned.
 
-#### Sprint Meeting Schedule and Structure
-
-| Meeting Type | Timing / Frequency | Objectives | Output Document |
-|--------------|-------------------|------------|-----------------|
-| **Sprint Planning** | Beginning of Sprint | Break down PA requirements, estimate workload, create & assign Jira tasks | Sprint Backlog, Task Board |
-| **Weekly Scrum 1** | Mid-Sprint (End of Week 1) | Check progress, review completed vs. to-do tasks, resolve blockers | Weekly Scrum Meeting Minutes |
-| **Weekly Scrum 2** | Pre-Release (Mid Week 2) | Track completion of deliverables, finalize PRs, prepare testing | Weekly Scrum Meeting Minutes |
-| **Sprint Review / Retrospective** | End of Sprint (Week 2/3) | Demo deliverables, conduct sprint retrospective, peer review | Retrospective Notes, Final Submission |
-
-#### Weekly Scrum & Sprint Retrospective Meeting Minutes Format
-
-All meeting minutes adhere strictly to the format provided in the instructor's *Weekly Reports* guideline:
-
-```text
-=========== [Date], Sprint [X] ===========
-
-Team members present:
-- [Member Name 1]
-- [Member Name 2]
-...
-
-Team members absent:
-- [None / Member Name]
-
-Status reports:
-1. [Member Name 1]
-   - Completed tasks:
-     * Task 1
-     * Task 2
-   - To-do Tasks:
-     * Task 3
-     * Task 4
-   - Issues / Obstacles:
-     * [None / Issue description]
-
-2. [Member Name 2]
-   ...
-
-Actions (if any):
-- [Action item 1]
-
-Summary of the meeting:
-- [Key takeaways and next milestones]
-
-Sprint Review / Retrospective (for End-of-Sprint):
-1. What went well:
-2. What went wrong:
-3. What problems and what caused the problems:
-4. What can be done differently in the next sprint to improve:
-5. What lessons we could learn:
-```
-
-#### Sprint 1 Weekly Scrum Meeting Minutes (Evidence)
-
-<!-- Meeting notes are recorded below or stored in /docs/management/weekly-reports/ -->
-
-```text
-=========== Sprint 1 - Planning & Weekly Scrum ===========
-
-Team members present:
-- Phạm Đình Tiểu Long (Leader)
-- Nguyễn Lê Đức Nhật
-- Ngô Thái Hòa
-- Vương Đắc Gia Khiêm
-- Nguyễn Phú Đạt
-
-Team members absent:
-- None
-
-Status reports:
-- All members actively participated in defining the Smart Finance project proposal, completing the existing app surveys (Money Lover and Splitwise), establishing the team contract, and setting up development tools (Jira, GitHub, AI accounts).
-
-Actions:
-- Complete report.md, take all required screenshots, export to PDF, and package PA1 submission archive.
-
-Summary of the meeting:
-- All PA1 deliverables are on track and meet course requirements.
-```
-
-### E.2. Required Tools Setup
-
-> *Performed by: [Name] | Reviewed by: [Name] | Edited by: [Name]*
-
-#### Required Tools Overview
-
-| # | Tool | Purpose | Status |
-|---|------|---------|--------|
-| 1 | Moodle | Assignment posting and submission | ✅ Set up |
-| 2 | Facebook Group / Zalo | Class notifications and Q&A | ✅ Set up |
-| 3 | Discord / Zalo | Team internal communication | ✅ Set up |
-| 4 | Jira | Task management (Scrum board) | ✅ Set up |
-| 5 | GitHub | Version control (code + docs) | ✅ Set up |
-| 6 | Spec Kit | Specification-driven development | ⏳ Required from PA2 |
-| 7 | AI Coding Accounts | AI-assisted development | ✅ Set up |
-
-#### Jira Task Management Setup & Evidence
-
-<!-- TODO: Add Jira board screenshot -->
-![Jira Board](screenshots/jira-board.png)  
-*Caption: Jira Scrum board showing the Sprint backlog with tasks created, assigned, and tracked for PA1.*
-
-**Task Management Rules Enforced:**
-- Every project activity (report drafting, research, setup, coding) is logged as an individual Jira task.
-- Each task is assigned to **exactly one** member (no shared tasks).
-- Tasks are created and assigned **before** work begins, with explicit creation, assignment, and completion dates.
-- Task screenshots are captured and included in sprint reports.
-
-#### AI Coding Accounts Evidence
-
-| Member | AI Coding Platform | Account Status |
-|--------|-------------------|----------------|
-| Phạm Đình Tiểu Long | GitHub Copilot (Student) | ✅ Registered |
-| Nguyễn Lê Đức Nhật | GitHub Copilot (Student) | ✅ Registered |
-| Ngô Thái Hòa | GitHub Copilot (Student) | ✅ Registered |
-| Vương Đắc Gia Khiêm | GitHub Copilot (Student) | ✅ Registered |
-| Nguyễn Phú Đạt | Cursor / GitHub Copilot | ✅ Registered |
-
-### E.3. Repository Structure
-
-> *Performed by: [Name] | Reviewed by: [Name] | Edited by: [Name]*
-
-#### Recommended Folder Structure
-
-The repository is set to **private mode**. The following folder structure is used:
-
-```text
-Smart-Finance/
-├── src/                          # Source code
-│   ├── mobile/                   # Flutter mobile app
-│   ├── backend/                  # Spring Boot backend API
-│   └── admin-web/                # React.js admin panel
-├── docs/                         # Documentation
-│   ├── management/               # Planning documents, reports
-│   │   ├── weekly-reports/       # Weekly reports
-│   │   └── meeting-notes/        # Sprint meeting notes
-│   ├── requirements/             # Vision document, use cases
-│   ├── analysis-and-design/      # Architecture, diagrams, UI design
-│   └── test/                     # Test plan, test cases, test reports
-├── screenshots/                  # Screenshots for reports
-├── .gitignore
-└── README.md
-```
-
-#### GitHub Repository Setup Evidence
-
-<!-- TODO: Add GitHub repository screenshot -->
-![GitHub Repository](screenshots/github-repo.png)  
-*Caption: GitHub repository showing the folder structure and initial commits.*
-
-> ⚠️ **Important:** API keys, secrets, and credentials are **never** committed to the repository. All sensitive values are stored in environment variables or `.env` files listed in `.gitignore`.
-
-### E.4. Git Log Evidence
-
-> *Performed by: [Name] | Reviewed by: [Name] | Edited by: [Name]*
-
-#### Git Log Overview and Evidence
-
-<!-- TODO: Add Git log screenshot or exported log -->
-![Git Log](screenshots/git-log.png)  
-*Caption: Git commit history showing the team's work progress for PA1.*
+The remaining Scrum meetings and Sprint Review will be conducted during the sprint to monitor progress, discuss issues, and review the completed work.
 
 ---
 
-## Appendix
+### E.2. Communication Tools
 
-### Appendix A. Submission Checklist
+The team uses **Zalo** as the primary communication platform. The group is named **“CNPM-2026 Nhóm 4”** and currently contains five members.
 
-- [ ] All documents written in English using Markdown format
-- [ ] Diagrams drawn using Mermaid syntax where possible
-- [ ] Each section includes `Performed by | Reviewed by | Edited by` attribution
-- [ ] Both `.md` and `.pdf` versions of all documents are included
-- [ ] Git log (screenshot or exported log) is included
-- [ ] Jira board screenshots showing tasks for PA1
-- [ ] All files compressed into `PA1-Group[GroupId].zip`
-- [ ] Screenshots of existing apps are included with captions
-- [ ] AI coding account registrations are documented
-- [ ] Repository is in private mode
+Zalo is used for:
 
-### Appendix B. Document Version History
+- Daily team communication.
+- Discussing project tasks and requirements.
+- Sharing files and documents.
+- Sending meeting information and announcements.
 
-| Version | Date | Author | Changes |
-|---------|------|--------|---------|
-| 1.0 | 2026-09-20 | Phạm Đình Tiểu Long | Initial project proposal and outline |
-| 1.1 | 2026-09-24 | Ngô Thái Hòa | Added existing app survey & screenshots |
-| 1.2 | 2026-09-27 | Nguyễn Lê Đức Nhật | Finalized team contract and tool setup |
-| 2.0 | 2026-09-30 | Group 04 | Final standardized report for PA1 submission |
+For online meetings, the team uses **Google Meet**. Meeting links are shared through the Zalo group so that members can join discussions and project meetings.
+
+### Evidence
+
+![Zalo Group](screenshots/zalo/zalo-group.png)  
+*Caption: Zalo communication group "CNPM-2026 Nhóm 4" with five active members.*
+
+![Google Meet Communication](screenshots/googlemeet/google-meet.png)  
+*Caption: Google Meet virtual conference room used for team meetings and discussions.*
+
+---
+
+### E.3. Task Management with Jira
+
+The team uses **Jira** to manage project tasks according to the Scrum process. A Scrum project named **“CNPM-2026 - Group 4”** has been created.
+
+The Jira board uses the following workflow:
+
+1. **To Do** – tasks that have not been started.
+2. **In Progress** – tasks that are currently being worked on.
+3. **Done** – completed tasks.
+
+Tasks are created before the work begins and are assigned to individual team members. Each task is assigned to exactly one member so that individual responsibilities and contributions can be tracked clearly.
+
+Examples of PA1 tasks currently managed in Jira include:
+
+- Write Project Introduction.
+- Define Target Users and Environment.
+- Define Functional Groups.
+- Design AI Feature.
+- Research Existing Applications.
+- Write Existing App Comparison.
+- Write Team Contract.
+- Set up Jira Project.
+- Set up GitHub Repository.
+- Prepare Scrum reports and Sprint Review.
+- Review PA1 Documentation.
+- Export Markdown documents to PDF.
+- Prepare Git log evidence.
+- Prepare the final PA1 submission.
+
+The team will update task statuses throughout the sprint to reflect the actual progress of the work.
+
+### Evidence
+
+![Jira Scrum Board](screenshots/jira/jira-board.png)  
+*Caption: Jira Scrum board for project "CNPM-2026 - Group 4" showing PA1 Sprint tasks and workflow states.*
+
+---
+
+### E.4. Version Control and Repository (GitHub)
+
+The team uses **GitHub** for version control and project documentation. The project repository is named **FinSync**.
+
+Repository URL:
+
+`https://github.com/pdtLong2929/FinSync`
+
+The repository currently contains the following main structure:
+
+```text
+FinSync/
+├── docs/
+├── screenshots/
+├── src/
+├── .gitignore
+├── GEMINI.md
+├── README.md
+├── WeeklyReport.md
+├── docker-compose.yml
+├── pa1_2026_project_assignment_specification.md
+└── report.md
+```
+
+The repository is used to store source code, documentation, screenshots, project reports, and configuration files.
+
+At the time of preparing this report, the repository contains **5 commits**. The repository screenshot also shows the current commit count and recent commit activity as evidence of the team's development progress and version-control activity.
+
+Example commit activities include:
+
+- Initial project structure and base files.
+- Documentation updates.
+- Backend development using Spring Boot.
+- PostgreSQL database setup.
+- Docker-related configuration.
+- Screenshot directory preparation.
+
+### Evidence
+
+![GitHub Repository Structure](screenshots/git/github-structure.png)  
+*Caption: GitHub repository showing folder structure, commit count, and recent commit activity.*
+
+#### Git Log Evidence
+
+![Git Log](screenshots/git/git-log.png)  
+*Caption: Git commit history log showing the team\'s incremental development activities for PA1.*
+
+
+---
+
+### E.5. AI-Assisted Development Tools
+
+The team uses several AI-assisted tools to support software development and self-learning, including:
+
+- **ChatGPT**
+- **Claude**
+- **Gemini**
+- **GitHub Copilot**
+- **Codex**
+
+These tools are used to support activities such as:
+
+- Code generation and code completion.
+- Debugging and error explanation.
+- Learning unfamiliar technologies.
+- Improving documentation.
+- Reviewing implementation ideas.
+- Assisting with software development tasks.
+
+AI-generated suggestions are reviewed by team members before they are integrated into the project.
+
+### Evidence
+
+Screenshots or account evidence for the AI-assisted development tools will be added before the final submission.
+
+#### AI Coding Accounts Registration Evidence
+
+| # | Team Member | AI Coding Platform | Registration Status |
+|---|-------------|-------------------|:-------------------:|
+| 1 | Phạm Đình Tiểu Long | GitHub Copilot (Student) / ChatGPT | ✅ Active |
+| 2 | Nguyễn Lê Đức Nhật | GitHub Copilot (Student) / Claude | ✅ Active |
+| 3 | Ngô Thái Hòa | GitHub Copilot (Student) / Gemini | ✅ Active |
+| 4 | Vương Đắc Gia Khiêm | GitHub Copilot (Student) / Codex | ✅ Active |
+| 5 | Nguyễn Phú Đạt | Cursor / GitHub Copilot | ✅ Active |
+
+---
+
+### E.6. Spec Kit
+
+The team has **not initialized Spec Kit during PA1**.
+
+According to the PA1 requirements, Spec Kit setup and initialization will become required starting from **PA2**. The team will configure Spec Kit at the beginning of PA2 and use it to support specification-driven development from requirements to implementation.
+
+---
+
+### E.7. Tool Setup Summary
+
+| Area | Tool / Platform | Current Status |
+|---|---|---|
+| Team Communication | Zalo | Set up |
+| Online Meetings | Google Meet | Set up |
+| Task Management | Jira | Set up |
+| Development Process | Scrum | In use |
+| Version Control | GitHub | Set up |
+| Git History | Git commits | Available |
+| AI Assistance | ChatGPT, Claude, Gemini, GitHub Copilot, Codex | In use |
+| Spec Kit | Spec Kit | Planned for PA2 |
+
+The current tool setup provides the team with a structured environment for communication, task management, version control, documentation, and AI-assisted development. The team will continue updating Jira tasks, Git commits, meeting records, and supporting evidence throughout the sprint.
+
+---

@@ -1,36 +1,70 @@
-# Weekly Reports & Meeting Notes
+# FinSync - Course Weekly Reports & AI Generation Guide
 
-This directory stores all Scrum meeting records for the project.
+> **AI Assistant Context & Prompting Guide:**
+> When prompted to generate or update any weekly report inside `docs/management/weekly-reports/`, follow this guide strictly. All weekly reports must comply with the HCMUS CS300 `WeeklyReport.md` specification and match real commit history and Jira task progress.
 
-## Meeting Types (per Sprint)
+---
 
-Each Sprint (PA assignment) includes **4 meetings**:
+## 1. Weekly Report Objectives & TA Guidelines
 
-| # | Meeting Type | Timing | Purpose |
-|---|---|---|---|
-| 1 | **Sprint Planning** | Start of sprint | Requirement breakdown, Jira task creation & assignment |
-| 2 | **Weekly Scrum 1** | Mid-sprint | Progress check, 3 questions per member |
-| 3 | **Weekly Scrum 2** | Mid-sprint | Progress check, 3 questions per member |
-| 4 | **Sprint Review & Retrospective** | End of sprint | Results evaluation, 5 retrospective questions |
+- **Purpose:** Serve as formal academic evidence for TA evaluation of team velocity, individual accountability, and project governance.
+- **Reporting Period:** Weekly submission aligned with sprint progress.
+- **Mandatory Requirements:**
+  - Explicit answer to the **3 Scrum Questions** for every single team member.
+  - Actual task IDs and deliverables mapped to Jira.
+  - Attribution line under every heading.
 
-## File Naming Convention
+---
 
+## 2. File Naming Standard
+
+```text
+WeeklyReport_Sprint[X]_Week[Y]_YYYY-MM-DD.md
 ```
-WeeklyReport_Sprint[X]_Meeting[Y]_YYYY-MM-DD.md
+*Example:* `WeeklyReport_Sprint1_Week1_2026-10-05.md`
+
+---
+
+## 3. Standard Weekly Report Schema
+
+```markdown
+# Weekly Progress Report - Sprint [X] Week [Y]
+> *Performed by: Phạm Đình Tiểu Long | Reviewed by: Toàn thể nhóm | Edited by: Đặng Gia Hòa*
+
+## 1. Sprint Overview & Team Goals
+- **Sprint:** Sprint [X]
+- **Week:** Week [Y] (From YYYY-MM-DD to YYYY-MM-DD)
+- **Sprint Goal:** [Brief statement of sprint milestone]
+- **Overall Sprint Completion Rate:** [XX]%
+
+---
+
+## 2. Individual Progress (3 Scrum Questions per Member)
+
+### 2.1. Phạm Đình Tiểu Long (Student ID: 24120087) - Project Manager
+- **1. What have I done since last week?**
+  - Item 1...
+- **2. What will I do until next week?**
+  - Item 1...
+- **3. What issues / problems / obstacles do I have?**
+  - Item 1...
+
+### 2.2. Nguyễn Phú Đạt (Student ID: 24120038) - UI/UX & Frontend Lead
+- [Same 3 questions]
+
+### 2.3. Nguyễn Lê Đức Nhật (Student ID: 24120403) - Backend Lead
+- [Same 3 questions]
+
+### 2.4. Vương Đắc Gia Khiêm (Student ID: 24120054) - QA & DevOps Lead
+- [Same 3 questions]
+
+### 2.5. Đặng Gia Hòa (Student ID: 24120042) - AI & Documentation Lead
+- [Same 3 questions]
+
+---
+
+## 3. Team Collaboration & Quality Verification
+- **Code Review Status:** [Summary of PRs merged and reviewed]
+- **Test Execution Summary:** [Pass rate, automated tests run]
+- **Jira Board Snapshot:** Reference to screenshot evidence in `screenshots/jira/`
 ```
-
-Example: `WeeklyReport_Sprint1_Meeting1_2026-10-05.md`
-
-## Weekly Scrum — 3 Questions per Member
-
-1. *What have I done since last week?*
-2. *What will I do until next week?*
-3. *What issues / problems / obstacles do I have?*
-
-## Sprint Retrospective — 5 Questions
-
-1. What went well?
-2. What went wrong?
-3. Root causes?
-4. Actionable improvements?
-5. Lessons learned?

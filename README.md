@@ -1,12 +1,15 @@
 # FinSync — Smart Personal Finance & Group Expense Management with AI
 
-[![Java](https://img.shields.io/badge/Java-17%2B-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
+[![Java](https://img.shields.io/badge/Java-21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
 [![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.x-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)](https://spring.io/projects/spring-boot)
+[![Kotlin](https://img.shields.io/badge/Kotlin-Android-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://developer.android.com/kotlin)
 [![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev/)
 [![React](https://img.shields.io/badge/React-18.x-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![Python](https://img.shields.io/badge/Python-FastAPI-3776AB?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 [![Google Gemini](https://img.shields.io/badge/Google_Gemini-API-8E75C2?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
-[![License](https://img.shields.io/badge/License-Academic_Use_Only-blue?style=for-the-badge)](#academic-disclaimer)
+[![License](https://img.shields.io/badge/License-Academic_Use_Only-blue?style=for-the-badge)](#-academic-disclaimer)
 
 > **CS300 — CSC13002: Introduction to Software Engineering | Fall 2026**  
 > **Faculty of Information Technology, VNU-HCM University of Science (HCMUS)**  
@@ -27,9 +30,8 @@
 - [Repository Structure](#-repository-structure)
 - [Getting Started](#-getting-started)
   - [Prerequisites](#prerequisites)
-  - [Backend Setup (Spring Boot)](#backend-setup-spring-boot)
-  - [Mobile Client Setup (Flutter)](#mobile-client-setup-flutter)
-  - [Admin Web Setup (React)](#admin-web-setup-react)
+  - [Option A: One-Click Run with Docker Compose](#option-a-one-click-run-with-docker-compose-recommended)
+  - [Option B: Manual Local Setup](#option-b-manual-local-setup)
 - [Agile & Scrum Engineering Process](#-agile--scrum-engineering-process)
 - [Team Members & Contribution](#-team-members--contribution)
 - [Academic Disclaimer](#-academic-disclaimer)
@@ -38,7 +40,7 @@
 
 ## 🌟 Overview
 
-**FinSync** is a unified financial management platform engineered to bridge the gap between **individual asset tracking** (like *Money Lover*) and **collaborative group expense splitting** (like *Splitwise*), empowered by an intelligent **AI Financial Advisor**.
+**FinSync** is a unified financial management ecosystem engineered to bridge the critical gap between **individual personal finance tracking** (similar to *Money Lover*) and **collaborative group expense splitting** (similar to *Splitwise*), empowered by an intelligent **AI Financial Advisor**.
 
 ### 🛡️ Core Business Principle
 FinSync acts purely as a **manual bookkeeping, debt calculation, and financial advisory engine**. The system **never** directly accesses real banking credentials, holds user funds, or triggers automated bank account deductions. All settlements are finalized externally by users and recorded within the platform for transparent reconciliation.
@@ -49,7 +51,7 @@ FinSync acts purely as a **manual bookkeeping, debt calculation, and financial a
 
 | Pain Point in Existing Solutions | FinSync Solution |
 |---|---|
-| **Fragmented Experience:** Personal finance apps lack multi-user bill splitting; bill-splitting apps lack personal net-worth dashboards and custom budgets. | **Single Unified Ecosystem:** Harmonizes private personal ledgers and shared group funds in one place without context switching. |
+| **Fragmented Experience:** Personal finance apps lack multi-user bill splitting; bill-splitting apps lack personal net-worth dashboards, wallets, and custom budgets. | **Single Unified Ecosystem:** Harmonizes private personal ledgers and shared group funds in one place without context switching. |
 | **Complex Group Debts:** Roommates, travel buddies, and event organizers face messy transfer chains ("A owes B, B owes C, C owes A"). | **Smart Debt Simplification:** Graph-based debt optimization algorithm minimizes total transaction hops and payment counts. |
 | **Passive Record Keeping:** Traditional expense apps only record past logs without providing proactive future spending insights. | **AI Financial Advisor:** Context-aware LLM scans monthly spending patterns, flags budget anomalies, and suggests optimal categorical allocations. |
 
@@ -113,63 +115,79 @@ graph TD
 ```mermaid
 graph LR
     subgraph Clients
-        Mobile["📱 Mobile App (Flutter / Dart)"]
+        Android["📱 Android Client (Kotlin / Compose)"]
+        Flutter["📱 Mobile App (Flutter / Dart)"]
         AdminWeb["💻 Admin Panel (React.js)"]
     end
 
     subgraph Backend Services
-        Gateway["REST API Server (Spring Boot 3)"]
+        Gateway["REST API Server (Spring Boot 3 / Java 21)"]
         Security["Spring Security + JWT"]
+        AIMicro["🤖 AI Microservice (Python / FastAPI)"]
     end
 
     subgraph External & Storage
-        DB[("PostgreSQL")]
-        AI["🤖 Google Gemini API"]
+        DB[("PostgreSQL 16")]
+        AI["🧠 Google Gemini API"]
     end
 
-    Mobile -->|HTTPS / REST API| Security
+    Android -->|HTTPS / REST API| Security
+    Flutter -->|HTTPS / REST API| Security
     AdminWeb -->|HTTPS / REST API| Security
     Security --> Gateway
     Gateway --> DB
-    Gateway --> AI
+    Gateway --> AIMicro
+    AIMicro --> AI
 ```
 
-- **Mobile Client:** Flutter (Dart) — Cross-platform Android/iOS client, BLoC / Riverpod state architecture, Dio HTTP client.
-- **Web Admin Portal:** React.js — Modern administrative control panel.
-- **Backend API:** Spring Boot 3 (Java 17+), RESTful API design, Spring Security with stateless JWT authentication, SpringDoc OpenAPI (Swagger).
-- **Database:** PostgreSQL (Cloud instance) with Spring Data JPA / Hibernate ORM.
-- **AI Engine:** Google Gemini API / OpenAI API integrated securely via backend server.
-- **DevOps & Tooling:** Docker, Git, GitHub Actions, Jira Software.
+- **Mobile Clients:** 
+  - **Android Client:** Kotlin, Jetpack Compose (Modern Reactive UI), Coroutines, Retrofit HTTP client.
+  - **Cross-Platform Client (Alternative):** Flutter (Dart), BLoC / Riverpod state architecture, Dio HTTP client.
+- **Backend API Service:** Spring Boot 3 (Java 21), RESTful layered architecture (`controller` $\rightarrow$ `service` $\rightarrow$ `repository`), Spring Security with stateless JWT authentication, Flyway migration, SpringDoc OpenAPI (Swagger).
+- **AI Microservice & Data Processing:** Python (FastAPI) responsible for Notification Regex parsing algorithms (bank SMS/notification extraction) and formatted prompt interfacing with Google Gemini API / OpenAI API.
+- **Web Admin Portal:** React.js — Modern administrative dashboard for system monitoring and user account management.
+- **Database:** PostgreSQL 16 (Cloud instance / Docker container) with Spring Data JPA / Hibernate ORM.
+- **DevOps & Tooling:** Docker & Docker Compose, Git, GitHub Actions, Jira Software.
 
 ---
 
 ## 📂 Repository Structure
 
+The repository enforces a clean, modular structure separating source code, documentation, test suites, and visual evidence:
+
 ```text
 FinSync/
-├── .gitignore                          # Global project gitignore (secrets, IDE, OS)
-├── README.md                           # Project overview and developer onboarding
-├── GEMINI.md                           # AI assistant context & software engineering rules
-├── WeeklyReport.md                     # Agile Scrum meeting minutes & weekly retrospectives
-├── report.md                           # Project assignment final report
-├── src/                                # Source code root
-│   ├── backend/                        # Spring Boot REST API service
-│   │   ├── src/main/java/com/finsync/  # Application controllers, services, repositories
-│   │   ├── pom.xml                     # Maven dependencies
-│   │   └── .gitignore                  # Java / Maven specific ignore rules
-│   ├── mobile/                         # Flutter mobile application
-│   │   └── .gitignore                  # Flutter / Dart / Android ignore rules
-│   └── admin-web/                      # React.js administration web application
-│       └── .gitignore                  # Node.js / React ignore rules
-├── docs/                               # Comprehensive project documentation
-│   ├── requirements/                   # Vision, use cases, functional & non-functional specs
-│   ├── analysis-and-design/            # Architecture, API design, database schema, diagrams
-│   ├── management/                     # Scrum meeting notes, sprint backlogs
-│   └── test/                           # Test plans, test cases, and test run reports
-└── screenshots/                        # Visual artifacts
-    ├── app/                            # Mobile & Web screen captures
-    ├── jira/                           # Jira board sprint progress screenshots
-    └── git/                            # Git commit history & PR verification images
+├── .gitignore                                    # Global project gitignore (secrets, IDE, OS)
+├── docker-compose.yml                            # Centralized Docker Compose orchestration
+├── GEMINI.md                                     # AI Assistant context, architecture & coding standards
+├── README.md                                     # Master project overview & developer onboarding
+├── WeeklyReport.md                               # Agile Scrum meeting minutes & weekly retrospectives
+├── report.md                                     # Main Project Assignment 1 (PA1) report
+├── E.md                                          # Development tools and process setup documentation
+├── pa1_2026_project_assignment_specification.md  # Official course assignment specification
+├── src/                                          # Application source code root
+│   ├── backend/                                  # Spring Boot 3 REST API service (Java 21)
+│   │   ├── src/main/java/com/finsync/            # Controllers, services, repositories, entities, DTOs
+│   │   ├── src/main/resources/                   # application.properties (parameterized via .env)
+│   │   ├── Dockerfile                            # Multi-stage container build (Temurin JRE 21)
+│   │   ├── pom.xml                               # Maven project dependencies
+│   │   ├── .env.example                          # Safe environment variable template
+│   │   └── .gitignore                            # Java/Maven specific ignore rules
+│   ├── mobile/                                   # Client mobile application (Android / Flutter)
+│   │   └── .gitignore                            # Mobile specific ignore rules
+│   └── admin-web/                                # React.js administration web portal
+│       └── .gitignore                            # Node.js / React specific ignore rules
+├── docs/                                         # Comprehensive software engineering documentation
+│   ├── requirements/                             # Vision document, use cases, functional & non-functional specs
+│   ├── analysis-and-design/                      # Architecture, API design, database schema, diagrams
+│   ├── management/                               # Scrum meeting notes, sprint backlogs
+│   └── test/                                     # Test plans, test cases, and test run reports
+└── screenshots/                                  # Visual evidence and report artifacts
+    ├── app/                                      # Existing app survey (Money Lover & Splitwise screens)
+    ├── git/                                      # GitHub structure and Git log evidence
+    ├── googlemeet/                               # Google Meet conference meeting screenshot
+    ├── jira/                                     # Jira board sprint progress screenshots
+    └── zalo/                                     # Zalo communication group screenshot
 ```
 
 ---
@@ -177,44 +195,69 @@ FinSync/
 ## 🛠️ Getting Started
 
 ### Prerequisites
-- **Java Development Kit (JDK):** Version 17 or higher
-- **Maven:** 3.8+ (or use included `./mvnw`)
-- **Flutter SDK:** 3.19+ and Dart SDK
+- **Java Development Kit (JDK):** Version 21
+- **Docker & Docker Compose:** Latest version
 - **Node.js:** 18+ and npm
-- **PostgreSQL Server:** 15+
+- **Android Studio / Flutter SDK:** For mobile client development
+- **Python:** 3.10+ (for AI microservice)
 
-### Backend Setup (Spring Boot)
+---
+
+### Option A: One-Click Run with Docker Compose (Recommended)
+
+To spin up the entire database and backend server with a single command:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/pdtLong2929/FinSync.git
+   cd FinSync
+   ```
+2. Launch the services:
+   ```bash
+   docker compose up -d
+   ```
+3. Verify running containers:
+   ```bash
+   docker compose ps
+   ```
+4. Access Swagger API documentation at: `http://localhost:8080/swagger-ui.html`
+
+---
+
+### Option B: Manual Local Setup
+
+#### 1. Backend Service (Spring Boot)
 1. Navigate to the backend directory:
    ```bash
    cd src/backend
    ```
-2. Configure your environment variables in `src/main/resources/application.properties` (or set environment variables `DB_URL`, `DB_USERNAME`, `DB_PASSWORD`, `GEMINI_API_KEY`).
-3. Build and launch the backend server:
+2. Copy `.env.example` to create your local `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+3. Edit `.env` with your PostgreSQL database password and credentials.
+4. Launch the application using the Maven wrapper:
    ```bash
    ./mvnw clean spring-boot:run
    ```
-4. Access Swagger API documentation at: `http://localhost:8080/swagger-ui.html`
 
-### Mobile Client Setup (Flutter)
+#### 2. Mobile Client (Android / Flutter)
 1. Navigate to the mobile directory:
    ```bash
    cd src/mobile
    ```
-2. Install dependencies:
+2. Open the project in **Android Studio** (for Kotlin) or run Flutter tools:
    ```bash
    flutter pub get
-   ```
-3. Run the development app on an emulator or connected device:
-   ```bash
    flutter run
    ```
 
-### Admin Web Setup (React)
+#### 3. Admin Web Portal (React)
 1. Navigate to the admin web directory:
    ```bash
    cd src/admin-web
    ```
-2. Install packages and start Vite/Webpack dev server:
+2. Install dependencies and start the development server:
    ```bash
    npm install
    npm run dev
@@ -224,7 +267,7 @@ FinSync/
 
 ## 🔄 Agile & Scrum Engineering Process
 
-The project adheres to Agile/Scrum methodologies across multiple 2-to-3-week Sprints:
+The project strictly follows Agile/Scrum principles across structured 2-to-3-week Sprints:
 - **Sprint Cadence:** 1 Sprint Planning $\rightarrow$ 2 Weekly Scrum Standups $\rightarrow$ 1 Sprint Review & Retrospective.
 - **Traceability:** Every technical commit, design task, or document draft is mapped to a dedicated **Jira Issue**.
 - **Peer Review & Git Flow:** All functional changes are delivered via dedicated feature branches (`feature/*`, `fix/*`, `docs/*`) and merged strictly through peer-reviewed **Pull Requests**.
@@ -234,18 +277,18 @@ The project adheres to Agile/Scrum methodologies across multiple 2-to-3-week Spr
 ## 👥 Team Members & Contribution
 
 > **Group 04 — Introduction to Software Engineering (CS300 / CSC13002)**  
-> *All members act as Full-Stack Engineers across all lifecycle phases.*
+> *All members act as Full-Stack Engineers across all development lifecycle phases.*
 
-| # | Student ID | Full Name | Email | Primary Responsibility |
+| # | Student ID | Full Name | Email | Primary Responsibility (Lead) |
 |---|:---:|---|---|---|
 | 1 | **24120087** | **Phạm Đình Tiểu Long** | phamlongkh2006@gmail.com | **Group Leader** / Project Manager / Scrum Master |
-| 2 | **24120403** | **Nguyễn Lê Đức Nhật** | nldnhat182006@gmail.com | UI/UX Designer & Mobile Frontend Lead (Flutter) |
-| 3 | **24120051** | **Ngô Thái Hòa** | ngothaihoa235@gmail.com | Backend Architecture & API Lead (Spring Boot) |
-| 4 | **24120342** | **Vương Đắc Gia Khiêm** | vuongkhiemvl10@gmail.com | QA Lead & DevOps Engineer (CI/CD, Test Automation) |
-| 5 | **24120038** | **Nguyễn Phú Đạt** | nguyennphuudatt@gmail.com | AI Feature Lead & Technical Documentation Lead |
+| 2 | **24120038** | **Nguyễn Phú Đạt** | nguyennphuudatt@gmail.com | **UI/UX Designer & Frontend Lead** (Android / Jetpack Compose) |
+| 3 | **24120403** | **Nguyễn Lê Đức Nhật** | nldnhat182006@gmail.com | **Backend Lead & Architecture** (Spring Boot 3 & PostgreSQL) |
+| 4 | **24120342** | **Vương Đắc Gia Khiêm** | vuongkhiemvl10@gmail.com | **QA Lead & DevOps Engineer** (CI/CD, Test Automation) |
+| 5 | **24120051** | **Ngô Thái Hòa** | ngothaihoa235@gmail.com | **AI Feature Lead & Technical Documentation Lead** |
 
 ---
 
 ## ⚖️ Academic Disclaimer
 
-This project is developed exclusively for academic evaluation under the **CS300 - CSC13002: Introduction to Software Engineering** course at the **Faculty of Information Technology, VNU-HCM University of Science**. All trademarks, brand names, and references (such as Money Lover, Splitwise, Google Gemini) belong to their respective owners and are referenced solely for comparative analysis and educational purposes.
+This project is developed exclusively for academic evaluation under the **CS300 - CSC13002: Introduction to Software Engineering** course at the **Faculty of Information Technology, VNU-HCM University of Science (HCMUS)**. All trademarks, brand names, and references (such as Money Lover, Splitwise, Google Gemini) belong to their respective owners and are referenced solely for comparative analysis and educational purposes.

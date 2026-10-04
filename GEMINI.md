@@ -33,26 +33,25 @@ Hệ thống có **2 Actor chính**:
 
 > *Tất cả thành viên đều tham gia với tư cách Full-stack Engineer trong toàn bộ vòng đời dự án. Vai trò dưới đây nhằm xác định người chịu trách nhiệm chính (Lead).*
 
-| # | MSSV | Họ và Tên | Email | Vai trò chính trong nhóm | Trách nhiệm chính |
+| # | MSSV | Họ và Tên | Email | Vai trò chính trong nhóm | Trách nhiệm chính (Lead) |
 |---|----------|----------------------|---------------------------|---------------------------------|-------------------|
-| 1 | 24120087 | **Phạm Đình Tiểu Long** | phamlongkh2006@gmail.com | **Group Leader** / Project Manager | Điều phối dự án, chủ trì họp Scrum, quản lý Jira, tổng hợp báo cáo |
-| 2 | 24120403 | **Nguyễn Lê Đức Nhật** | nldnhat182006@gmail.com | UI/UX Designer & Frontend Lead | Thiết kế giao diện (Figma), lead phát triển Flutter mobile app |
-| 3 | 24120051 | **Ngô Thái Hòa** | ngothaihoa235@gmail.com | Backend Lead | Kiến trúc hệ thống, xây dựng API Spring Boot, thiết kế Database |
-| 4 | 24120342 | **Vương Đắc Gia Khiêm** | vuongkhiemvl10@gmail.com | QA Lead & DevOps | Quản lý quy trình kiểm thử (Test Plan/Cases), CI/CD, deployment |
-| 5 | 24120038 | **Nguyễn Phú Đạt** | nguyennphuudatt@gmail.com | AI Feature Lead & Documentation | Tích hợp AI (Gemini/OpenAI API), quản lý tài liệu kỹ thuật |
-
+| 1 | 24120087 | **Phạm Đình Tiểu Long** | phamlongkh2006@gmail.com | **Project Manager / Group Leader** | Quản lý tiến độ dự án, điều phối công việc, chủ trì họp Sprint, quản lý Jira board |
+| 2 | 24120038 | **Nguyễn Phú Đạt** | nguyennphuudatt@gmail.com | **UI/UX Designer & Frontend Lead** | Lead thiết kế UI/UX (wireframes/mockups), đảm bảo tính nhất quán giao diện, lead phát triển client app |
+| 3 | 24120403 | **Nguyễn Lê Đức Nhật** | nldnhat182006@gmail.com | **Backend Lead** | Lead thiết kế kiến trúc backend, xây dựng API Spring Boot, thiết kế cơ sở dữ liệu |
+| 4 | 24120342 | **Vương Đắc Gia Khiêm** | vuongkhiemvl10@gmail.com | **QA Lead & DevOps** | Lead chiến lược kiểm thử, viết test cases, quản lý CI/CD pipeline, triển khai hệ thống |
+| 5 | 24120051 | **Ngô Thái Hòa** | ngothaihoa235@gmail.com | **AI Feature Lead & Documentation** | Lead triển khai tính năng AI (Gemini/OpenAI integration), quản lý tài liệu kỹ thuật |
 ---
 
 ## 3. Kiến Trúc & Công Nghệ Sử Dụng (Tech Stack)
 
-- **Mobile Client (Regular User):** Flutter (Dart) — ứng dụng Android native/cross-platform. Quản lý trạng thái bằng BLoC / Riverpod, HTTP client bằng Dio.
+- **Mobile Client (Regular User):** 
+  - Android Client: Kotlin / Jetpack Compose (tuân thủ Kotlin style guide, UI reactive với Composables) hoặc Flutter (Dart).
+  - Tích hợp gọi API Backend qua HTTP Client với interceptor tự động gắn JWT Token.
+- **Backend API Server:** Spring Boot (Java 21), kiến trúc RESTful API phân tầng chuẩn, bảo mật Spring Security + JWT, Flyway migration. API Documentation bằng Swagger / SpringDoc OpenAPI.
+- **AI Microservice & Data Processing:** Python (FastAPI) tích hợp Google Gemini API / OpenAI API để xử lý thuật toán phân tích chi tiêu, Notification Regex parsing algorithms và sinh kế hoạch tài chính tối ưu.
 - **Web Admin Panel (Administrator):** React.js — quản trị người dùng, quản lý danh mục thu/chi mặc định, xem thống kê hệ thống.
-- **Backend API Server:** Spring Boot (Java), kiến trúc RESTful API, bảo mật Spring Security + JWT. API Documentation bằng Swagger / SpringDoc OpenAPI.
-- **Cơ sở dữ liệu (Database):** PostgreSQL (Cloud Server), ORM sử dụng Spring Data JPA / Hibernate.
-- **Tích hợp Trí tuệ Nhân tạo (AI Feature):** Gọi Google Gemini API / OpenAI API từ Backend để phân tích lịch sử giao dịch và sinh đề xuất kế hoạch chi tiêu tối ưu cho người dùng.
-- **Quản lý phiên bản & Quản trị:** Git + GitHub (Repository ở chế độ **Private**), Jira (quản lý task theo Scrum).
-- **Môi trường hoạt động:** Ứng dụng di động Android (Flutter) cho Regular User + trang quản trị web (React.js) cho Administrator. Cả hai kết nối với máy chủ Backend chung qua RESTful API.
-
+- **Cơ sở dữ liệu (Database):** PostgreSQL (Cloud/Docker), ORM sử dụng Spring Data JPA / Hibernate.
+- **DevOps & Quản trị dự án:** Docker & Docker Compose, Git + GitHub (Repository ở chế độ **Private**), Jira (quản lý task theo chuẩn Agile/Scrum).
 ---
 
 ## 4. Phân Vùng Nghiệp Vụ Cốt Lõi (Core Business Domains)
@@ -162,20 +161,28 @@ Khi một thành viên ghi nhận khoản chi chung cho nhóm, hệ thống sẽ
   - `chore`: Cấu hình build, dependency, gitignore (ví dụ: `chore(deps): upgrade spring-boot to 3.2.0`)
 - Tiêu đề commit viết bằng **tiếng Anh**, thể hiện hành động ở thì hiện tại (imperative mood), không viết hoa chữ đầu, không kết thúc bằng dấu chấm.
 
-### 6.6. Quy chuẩn Coding Conventions
-- **Backend (Spring Boot / Java):**
-  - Đặt tên: Class/Interface dùng `PascalCase`, method/variable dùng `camelCase`, hằng số dùng `UPPER_SNAKE_CASE`.
-  - Cấu trúc phân tầng chuẩn: `controller` $\rightarrow$ `service` (interface + impl) $\rightarrow$ `repository` $\rightarrow$ `model/entity` + `dto`.
+### 6.6. Quy chuẩn Coding Conventions (Theo Team Contract mục D.4)
+- **Android Client (Kotlin):**
+  - Tuân thủ [Kotlin Style Guide](https://developer.android.com/kotlin/style-guide).
+  - Đặt tên: Biến và hàm dùng lowerCamelCase, Class/Interface và Composables dùng UpperCamelCase (PascalCase).
+  - Phân tách rõ UI (Jetpack Compose) và ViewModel/State.
+- **Mobile Client (Flutter / Dart - nếu dùng):**
+  - Tuân thủ [Effective Dart](https://dart.dev/guides/language/effective-dart).
+  - Đặt tên: Class/Widget dùng PascalCase, biến/hàm dùng lowerCamelCase, tên file dùng snake_case.dart.
+- **Backend (Java / Spring Boot):**
+  - Tuân thủ quy chuẩn đặt tên Java chuẩn: Class/Interface dùng PascalCase, method/variable dùng lowerCamelCase, hằng số dùng UPPER_SNAKE_CASE.
+  - Cấu trúc phân tầng chuẩn: controller $\rightarrow$ service (interface + impl) $\rightarrow$ 
+epository $\rightarrow$ model/entity + dto.
   - Tuyệt đối không hardcode SQL, sử dụng Spring Data JPA queries hoặc JPQL.
   - Sử dụng DTO để nhận và trả dữ liệu qua API, không trả trực tiếp Database Entity ra ngoài client.
-- **Mobile Client (Flutter / Dart):**
-  - Đặt tên: Class/Widget dùng `PascalCase`, biến/hàm dùng `camelCase`, tên file dùng `snake_case.dart`.
-  - Quản lý trạng thái: Sử dụng BLoC hoặc Riverpod, tách biệt hoàn toàn UI (Widgets) khỏi Business Logic.
-  - HTTP requests: Đóng gói thông qua Dio client với Interceptor tự động gắn JWT Token.
+- **AI Microservice (Python / FastAPI):**
+  - Tuân thủ [PEP 8](https://peps.python.org/pep-0008/) style guide.
+  - Đặt tên: Biến, hàm và tên file dùng snake_case.py; Class dùng UpperCamelCase (PascalCase).
+  - Xử lý các logic thuật toán phức tạp như Notification Regex parsing algorithms, AI data formatting.
 - **Web Admin (React.js):**
-  - Đặt tên: Component dùng `PascalCase.jsx`, hooks/helpers dùng `camelCase.js`.
-  - Tách components nhỏ gọn, tái sử dụng, phân tách rõ `pages/` và `components/`.
-
+  - Đặt tên: Component dùng PascalCase.jsx, hooks/helpers dùng camelCase.js.
+  - Tách components nhỏ gọn, tái sử dụng, phân tách rõ pages/ và components/.
+- **Quy tắc chung:** Mọi mã nguồn phải có comment giải thích rõ ràng cho các đoạn logic phức tạp. Tên biến, hàm, lớp phải có tính mô tả cao và viết hoàn toàn bằng **tiếng Anh**.
 ---
 
 ## 7. Hướng Dẫn Dành Cho AI Assistant
