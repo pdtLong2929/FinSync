@@ -336,17 +336,17 @@ Splitwise is the leading group expense management app worldwide. It simplifies s
 
 > *Performed by: Phạm Định Tiểu Long | Reviewed by: Nguyễn Lê Đức Nhật | Edited by: Phạm Định Tiểu Long*
 
-The table below defines the specific assignment of responsibilities for each member in the project:
+> *All members participate as Full-stack Engineers throughout the entire project lifecycle. The roles below define the primary lead responsibilities for each member:*
 
-| Member | Role | Primary Responsibilities |
-|--------|------|------------------------|
-| Phạm Định Tiểu Long | Group Leader | Task delegation to members, repository initialization (repository creation only), author Section A (Group Registration) and Section D (Team Contract). |
-| Nguyễn Lê Đức Nhật | Technical Lead & Architecture | Project setup following repository creation, configure Spring Boot dependencies, write Dockerfile and docker-compose configurations, author Section B (Project Proposal), and review/consolidate all members' report contributions. |
-| Ngô Thái Hòa | Product Analyst & AI Feature Lead | Author Section B.4 (AI Feature specification), author Section C.1 (Money Lover survey, screenshots, strengths, and limitations), and contribute to Section C.3 comparative feature matrix. |
-| Vương Đắc Gia Khiêm | Product Analyst (Splitwise) | Author Section C.2 (Splitwise survey, screenshots, strengths, and limitations) and contribute to Section C.3 comparative feature matrix. |
-| Nguyễn Phú Đạt | Tools & Process Lead | Author Section E (Development Tools & Process Setup): configure communication tools (Zalo, Google Meet), Jira Scrum project, GitHub workflow, AI tools, and Weekly Reports. |
+| # | Student ID | Full Name | Email | Main Role | Primary Responsibilities (Lead) |
+|---|------------|-----------|-------|-----------|----------------------------------|
+| 1 | 24120087 | **Phạm Định Tiểu Long** | phamlongkh2006@gmail.com | **Project Manager / Group Leader** | Manage project progress, coordinate tasks, facilitate Sprint meetings, manage Jira board |
+| 2 | 24120038 | **Nguyễn Phú Đạt** | nguyennphuudatt@gmail.com | **UI/UX Designer & Frontend Lead** | Lead UI/UX design (wireframes/mockups), ensure interface consistency, lead client app development |
+| 3 | 24120403 | **Nguyễn Lê Đức Nhật** | nldnhat182006@gmail.com | **Backend Lead** | Lead backend architecture design, build Spring Boot APIs, design database schema |
+| 4 | 24120342 | **Vương Đắc Gia Khiêm** | vuongkhiemvl10@gmail.com | **QA Lead & DevOps** | Lead testing strategy, author test cases, manage CI/CD pipeline, system deployment |
+| 5 | 24120051 | **Ngô Thái Hòa** | ngothaihoa235@gmail.com | **AI Feature Lead & Documentation** | Lead AI feature implementation (Gemini/OpenAI integration), manage technical documentation |
 
-> **Note:** All members participate actively in peer reviews, and all technical and documentation submissions are subject to review by the Technical Lead (Nguyễn Lê Đức Nhật) and Group Leader (Phạm Định Tiểu Long).
+> **Note:** All members participate actively in peer reviews, and all technical and documentation submissions are subject to review by the respective leads and the Group Leader.
 
 ### D.2. Communication Plan
 
