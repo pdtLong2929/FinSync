@@ -1,0 +1,7 @@
+# IntelliJ IDEA - Root .gitignore
+
+# ---- Workspace Files ----
+/workspace.xml
+
+# ---- Maven ----
+/mavenHomeManager.xml

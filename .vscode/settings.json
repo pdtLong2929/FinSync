@@ -1,0 +1,15 @@
+{
+    "markdown-pdf.sanitize": "gfm-allow-style",
+    "markdown-pdf.format": "A4",
+    "markdown-pdf.margin": {
+        "top": "15mm",
+        "bottom": "15mm",
+        "left": "14mm",
+        "right": "14mm"
+    },
+    "markdown-pdf.printBackground": true,
+    "markdown-pdf.styles": [
+        "pdf-styles.css"
+    ],
+    "markdown-pdf.stylesRelativePathFile": true
+}
