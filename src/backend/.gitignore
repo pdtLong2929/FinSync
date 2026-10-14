@@ -44,3 +44,6 @@ application-prod.properties
 # ---- H2 database (local dev) ----
 *.db
 *.h2.db
+
+
+.idea/
