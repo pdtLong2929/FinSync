@@ -1,0 +1,226 @@
+AI Usage Guidelines  
+Computational Thinking - CS10014
+
+**Computational Thinking**
+
+# AI Usage Guidelines
+
+With the rapid development of Artificial Intelligence (hereafter referred to as AI) in recent years, especially Large Language Models such as ChatGPT, etc., many students have been able to enhance their learning efficiency. However, to ensure fairness and accurate reflection of individual capability, **the use of AI tools in assignments and course projects must have clear boundaries**. Therefore, this document aims to establish specific guidelines for students to follow.
+
+## 1 Objectives
+
+- Guide students to use AI in an **ethical**, **effective**, and **responsible** manner.
+
+- Ensure that the course project output accurately reflects the student’s abilities.
+
+- Help students understand that AI is a support tool, not a full replacement for human learning and research.
+
+## 2 Core Principles
+
+| Principle | Description |
+| --- | --- |
+| Transparency | Clearly state AI usage: which tools and platforms, what parts of the work, and provide evidence (prompts, history). |
+| Understanding | Students must understand and be able to explain all content that involved AI assistance. |
+| No blind copying | Students must not directly copy AI-generated content without any revision. |
+| Academic integrity | AI is not an official source and may be inaccurate, so students must validate the information. |
+
+## 3 Scope of Application
+
+- Applicable to all projects in the “Computational Thinking” course, regardless of whether they are individual or group-based.
+
+- Covers theoretical reports, algorithm implementation, presentation, and result evaluation.
+
+Faculty of Information Technology, University of Science, VNU-HCM  
+Page 1
+
+---
+
+AI Usage Guidelines  
+Computational Thinking - CS10014
+
+## 4 Permissible AI Use Cases
+
+### 4.1 Knowledge lookup assistance
+
+**Allowed:**
+
+- Using AI to look up or ask questions about algorithms.
+
+**Requirements:**
+
+- Cross-verify information with course materials or authoritative academic sources.
+
+- When using for reports, rephrase using your own words.
+
+**Example:**
+
+You may ask ChatGPT “How does the Dijkstra’s algorithm work?”, and then verify using the textbook and rewrite it in your own wording in the report.
+
+### 4.2 Code suggestion and editing
+
+**Allowed:**
+
+- Asking for suggestions on algorithm implementation structure.
+
+- Using AI to debug or improve code performance.
+
+**Not allowed:**
+
+- Copying entire AI-generated code without understanding it.
+
+- Submitting AI-generated code without testing or validation.
+
+**Requirements:**
+
+- Students must save prompts and outputs for reference when needed.
+
+- The instructor may request in-class or oral explanation.
+
+**Example:**
+
+Use the prompt: How to implement Dijkstra’s algorithm, then complete it and test using your group’s testcases.
+
+Faculty of Information Technology, University of Science, VNU-HCM  
+Page 2
+
+---
+
+AI Usage Guidelines  
+Computational Thinking - CS10014
+
+### 4.3 Writing and presenting reports with conditions
+
+**AI can only be used to:**
+
+- Suggest presentation formats and report structure.
+
+- Check grammar or rephrase for professionalism.
+
+- Translate to English without altering original meaning.
+
+**Not allowed:**
+
+- Using AI to generate entire content without checking or editing.
+
+- Paraphrasing content without citation.
+
+**Requirements:**
+
+- The **Appendix** must include an “AI Usage Notes” section clearly stating where AI was used.
+
+**Example:**
+
+You may use Gemini to suggest criteria for a comparison table of BFS and DFS algorithms, and indicate which parts were AI-generated and which were student work.
+
+### 4.4 Creating test data
+
+**Allowed:**
+
+- Generate small simulated datasets (e.g., CSV, JSON files or spreadsheets).
+
+- Create illustrative examples (e.g., a small graph).
+
+**Not allowed:**
+
+- Using AI-generated data to draw academic conclusions without validation.
+
+### 4.5 PROHIBITED: auto-generation of solutions, analysis, evaluations, and reports
+
+**Strictly NOT allowed:**
+
+- Using AI to write the entire report (even if edited).
+
+- Generating fake results.
+
+- Producing analysis or model comparison without actual results.
+
+Faculty of Information Technology, University of Science, VNU-HCM  
+Page 3
+
+---
+
+AI Usage Guidelines  
+Computational Thinking - CS10014
+
+## 5 Mandatory Requirements in Reports
+
+Always include an **Appendix** with **ONE OF** the following declarations and supporting details:
+
+- **A. Declaration of No AI Use**
+
+  “Throughout the entire project/assignment, the student did not use any AI tools in any form.”
+
+- **B. AI Usage Notes:**
+
+  If AI tools (e.g., ChatGPT, Copilot, Gemini, Claude, etc.) were used, include the following details:
+
+    - Tool name, version, and platform.
+
+    - Access time (date and hour).
+
+    - Prompts used.
+
+    - Purpose of use.
+
+    - Which content was generated by AI.
+
+    - Which content was done independently and how the student edited or validated it.
+
+    - Screenshots or chat history.
+
+**Examples:**
+
+    - **ChatGPT.** GPT-4, OpenAI, chat.openai.com, accessed 13:00 on May 25, 2025, prompt: “Explain the A* algorithm and provide a Python example”, used to assist section 3.2 of the report; AI generated description and sample code, student revised and validated with Russell & Norvig’s textbook.
+
+    - **Copilot.** Copilot, GitHub via Visual Studio Code, accessed 23:00 on May 26, 2025, prompt: “Write a heuristic function h(n) for the A* algorithm”, used to generate a function skeleton for section 3.3; student modified it according to the assignment and tested with sample data.
+
+    - **Gemini.** Gemini 1.5, Google, gemini.google.com, accessed 08:00 on May 27, 2025, prompt: “Compare the advantages and disadvantages of DFS and BFS in AI”, used for the algorithm comparison section in Chapter 2; AI provided rough content, student rewrote in academic language, added examples and textbook references.
+
+**Note:** Reports missing both sections will not be graded.
+
+Faculty of Information Technology, University of Science, VNU-HCM  
+Page 4
+
+---
+
+AI Usage Guidelines  
+Computational Thinking - CS10014
+
+## 6 Violation Handling
+
+### 6.1 Violation Definition
+
+A violation occurs when:
+
+- Submitting any part of the report or code that was generated by AI but not declared in the **Appendix**;
+
+- Failing to demonstrate understanding of the submitted content during oral examination;
+
+- Using AI for prohibited tasks listed above;
+
+- Manipulating or falsifies the AI Usage Notes (e.g., deleting prompts, providing false evidence).
+
+Each detected case as listed above will be counted as **one violation event**.
+
+### 6.2 Violation Penalties
+
+- First detected violation: written warning and deduction of the related section’s score.
+
+- Second detected violation (either repeated or a different type): the student(s) will receive **a zero (0) score** for the entire course and will be reported to the lecturer and the Board of Dean for further actions.
+
+## References
+
+This guideline is built based on the following resources:
+
+- Modern Language Association (MLA). “How Do You Cite Generative AI in MLA Style? ” MLA Style Center, 2023, [https://style.mla.org/citing-generative-ai/](https://style.mla.org/citing-generative-ai/).
+
+- MIT Libraries. “How to Cite Generative AI Tools (like ChatGPT).” MIT Libraries, 2024, [https://libguides.mit.edu/c.php?g=1353444&p=9991326](https://libguides.mit.edu/c.php?g=1353444&p=9991326).
+
+- Harvard Library. “Citing Generative AI Tools.” Harvard Library Research Guides, 2024, [https://guides.library.harvard.edu/c.php?g=1330621&p=10046069](https://guides.library.harvard.edu/c.php?g=1330621&p=10046069).
+
+- Bradley, Mitchell. “How to Cite ChatGPT.” Lifewire, 2023, [https://www.lifewire.com/how-to-cite-chatgpt-8663395](https://www.lifewire.com/how-to-cite-chatgpt-8663395).
+
+*Updated on October 9, 2025.*
+
+Faculty of Information Technology, University of Science, VNU-HCM  
+Page 5
