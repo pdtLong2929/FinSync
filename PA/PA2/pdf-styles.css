@@ -30,19 +30,43 @@ hr {
   margin: 18px 0;
 }
 
-/* Tables: Avoid splitting rows across pages */
+/* Allow long tables to span pages while keeping individual rows together. */
 table {
-  page-break-inside: avoid !important;
-  break-inside: avoid !important;
+  page-break-inside: auto !important;
+  break-inside: auto !important;
   font-size: 12px;
   margin: 12px 0;
   width: 100%;
+}
+
+thead {
+  display: table-header-group;
+}
+
+tr {
+  page-break-inside: avoid !important;
+  break-inside: avoid !important;
+}
+
+th, td {
+  overflow-wrap: anywhere;
 }
 
 /* Blockquotes and code blocks */
 blockquote, pre, .mermaid {
   page-break-inside: avoid !important;
   break-inside: avoid !important;
+}
+
+.mermaid {
+  text-align: center;
+}
+
+.mermaid svg {
+  max-width: 100%;
+  max-height: 240mm;
+  width: auto;
+  height: auto;
 }
 
 /* Universal Image Constraints */
@@ -95,8 +119,10 @@ p {
   margin-bottom: 0.6em;
 }
 
-/* Caption styling */
-em {
+/* Style emphasized image captions without changing inline emphasis or attribution.
+   Captions may be in the paragraph after an image or in the same paragraph. */
+p:has(> img) + p > em:only-child,
+p:has(> img) > em {
   display: block;
   text-align: center;
   font-size: 0.85em;
