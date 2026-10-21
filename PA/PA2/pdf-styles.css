@@ -1,65 +1,26 @@
-/* ====================================================
-   PDF EXPORT & PRINT OPTIMIZATION (Markdown PDF)
-   ==================================================== */
+﻿/* Keep the Markdown renderer's default appearance, as used by PA1.
+   Add only table, image, and pagination rules needed by the longer PA2 report. */
 @page {
   size: A4;
-  margin: 15mm 14mm 15mm 14mm;
+  margin: 15mm 14mm;
 }
 
-/* Typography & Flow */
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  font-size: 13px;
-  line-height: 1.5;
-  color: #24292e;
-}
-
-/* Headings: Never leave headings orphaned at the bottom of a page */
-h1, h2, h3, h4, h5, h6 {
-  page-break-after: avoid !important;
-  break-after: avoid !important;
-  margin-top: 1.1em;
-  margin-bottom: 0.4em;
-}
-
-/* Section dividers */
-hr {
-  border: 0;
-  height: 1px;
-  background: #e1e4e8;
-  margin: 18px 0;
-}
-
-/* Allow long tables to span pages while keeping individual rows together. */
 table {
-  page-break-inside: auto !important;
-  break-inside: auto !important;
-  font-size: 12px;
-  margin: 12px 0;
   width: 100%;
   table-layout: auto;
-}
-
-thead {
-  display: table-header-group;
-}
-
-tr {
-  page-break-inside: avoid !important;
-  break-inside: avoid !important;
+  border-collapse: collapse;
 }
 
 th, td {
-  overflow-wrap: break-word;
-  word-break: normal;
-  vertical-align: top;
   padding: 6px 8px;
+  vertical-align: top;
+  word-break: normal;
+  overflow-wrap: break-word;
 }
 
-/* Blockquotes and code blocks */
-blockquote, pre, .mermaid {
-  page-break-inside: avoid !important;
-  break-inside: avoid !important;
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 .mermaid {
@@ -73,66 +34,34 @@ blockquote, pre, .mermaid {
   height: auto;
 }
 
-/* Universal Image Constraints */
-img {
-  display: block !important;
-  margin: 8px auto !important;
-  page-break-inside: avoid !important;
-  break-inside: avoid !important;
-  object-fit: contain !important;
-}
+@media print {
+  h1, h2, h3, h4, h5, h6 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
 
-/* Mobile App Screenshots (Money Lover & Splitwise)
-   Constrain height to ~270px so heading, phone image & caption fit naturally on 1 page */
-img[src*="moneylover"], img[src*="splitwise"], img[src*="app/"] {
-  max-height: 270px !important;
-  max-width: 160px !important;
-  width: auto !important;
-  height: auto !important;
-  border: 1px solid #d0d7de;
-  border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-}
+  table {
+    font-size: 12px;
+    break-inside: auto;
+    page-break-inside: auto;
+  }
 
-/* Desktop Screenshots (Jira, Google Meet, Zalo, GitHub structure) */
-img[src*="jira"], img[src*="googlemeet"], img[src*="zalo"], img[src*="github"] {
-  max-height: 240px !important;
-  max-width: 88% !important;
-  width: auto !important;
-  height: auto !important;
-  border: 1px solid #d0d7de;
-  border-radius: 4px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-}
+  thead {
+    display: table-header-group;
+  }
 
-/* Git Log Screenshots (PA1 commit history) */
-img[src*="git-log"] {
-  max-height: 175px !important;
-  max-width: 90% !important;
-  width: auto !important;
-  border: 1px solid #d0d7de;
-  border-radius: 4px;
-  margin: 5px auto !important;
-}
+  tr, img, .mermaid {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
 
-/* Paragraphs containing images and captions */
-p {
-  orphans: 2;
-  widows: 2;
-  margin-top: 0.4em;
-  margin-bottom: 0.6em;
-}
+  p {
+    orphans: 2;
+    widows: 2;
+  }
 
-/* Style emphasized image captions without changing inline emphasis or attribution.
-   Captions may be in the paragraph after an image or in the same paragraph. */
-p:has(> img) + p > em:only-child,
-p:has(> img) > em {
-  display: block;
-  text-align: center;
-  font-size: 0.85em;
-  color: #586069;
-  margin-top: 3px;
-  margin-bottom: 12px;
-  page-break-before: avoid !important;
-  break-before: avoid !important;
+  p:has(> img) + p {
+    break-before: avoid;
+    page-break-before: avoid;
+  }
 }
