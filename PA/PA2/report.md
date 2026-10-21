@@ -8,7 +8,7 @@
 
 ## Table of Contents
 
-> *Performed by: Nguyen Le Duc Nhat | Reviewed by: Pham Dinh Tieu Long | Edited by: Nguyen Le Duc Nhat*
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Le Duc Nhat`*
 
 - [Team Members](#team-members)
 - [Part A — Project Plan](#part-a--project-plan)
@@ -53,6 +53,8 @@ This document is the initial version of the Project Plan. It will be updated in 
 
 #### 2.1 Goals
 
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Le Duc Nhat`*
+
 - Build a working mobile app that unifies personal and group finance tracking.
 - Automate expense splitting and debt optimization to reduce the number of transfers between group members.
 - Provide an AI Financial Advisor that turns raw spending data into clear monthly guidance.
@@ -60,6 +62,8 @@ This document is the initial version of the Project Plan. It will be updated in 
 - Apply Scrum and good software engineering practice throughout the semester (Jira, Git, code review, testing).
 
 #### 2.2 Scope
+
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Le Duc Nhat`*
 
 **In scope**
 
@@ -87,6 +91,8 @@ This document is the initial version of the Project Plan. It will be updated in 
 
 #### 2.3 Deliverables
 
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Le Duc Nhat`*
+
 | Deliverable | Sprint / PA | Format |
 |-------------|-------------|--------|
 | Project Proposal, app survey | Sprint 1 / PA1 | Markdown + PDF |
@@ -100,6 +106,8 @@ This document is the initial version of the Project Plan. It will be updated in 
 
 #### 2.4 Assumptions
 
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Le Duc Nhat`*
+
 - Every member works as a full-stack engineer; roles below only define the main person in charge (Lead).
 - Each of the five members allocates at least **10 hours per week**, equivalent to approximately **114 team hours** over the 16-calendar-day PA2 window. Work is distributed between individual outputs, review, and meetings.
 - Local Docker environments are the baseline for development and rehearsal. Remote hosting is optional for the demo; external AI calls are limited, cached where appropriate, and controlled by configuration so development can continue with synthetic responses during provider outages.
@@ -111,6 +119,8 @@ This document is the initial version of the Project Plan. It will be updated in 
 > *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Nguyen Le Duc Nhat` | Edited by: `Pham Dinh Tieu Long`*
 
 #### 3.1 Team Structure and Roles
+
+> *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Nguyen Le Duc Nhat` | Edited by: `Pham Dinh Tieu Long`*
 
 | Member | Role | Main Responsibilities |
 |--------|------|-----------------------|
@@ -128,6 +138,8 @@ This document is the initial version of the Project Plan. It will be updated in 
 - Secrets (API keys, passwords, JWT secret, `.env`) are never committed. The repository is private.
 
 #### 3.2 Risk Management
+
+> *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Nguyen Le Duc Nhat` | Edited by: `Pham Dinh Tieu Long`*
 
 | ID | Risk | Probability | Impact | Mitigation Strategy | Owner |
 |----|------|-------------|--------|---------------------|-------|
@@ -147,6 +159,8 @@ This document is the initial version of the Project Plan. It will be updated in 
 
 #### 4.1 Process
 
+> *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Vuong Dac Gia Khiem` | Edited by: `Pham Dinh Tieu Long`*
+
 The project follows the **Scrum** process. The semester is divided into **5 sprints**, each matching one Project Assignment (Sprint 1 = PA1, Sprint 2 = PA2, and so on). Each sprint lasts 2–3 weeks and has four meetings:
 
 | Meeting | When | Purpose |
@@ -161,6 +175,8 @@ The Jira workflow is **To Do → In Progress → Done**, as recorded in PA1. Wor
 
 #### 4.2 Sprint Overview
 
+> *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Vuong Dac Gia Khiem` | Edited by: `Pham Dinh Tieu Long`*
+
 | Sprint | PA | Planning period | Main focus |
 |--------|----|-----------------|------------|
 | Sprint 1 | PA1 | Before 2026-10-10; PA1 artifacts available in repository by 2026-10-05 | Proposal, app survey, team contract, and initial repository/backend setup |
@@ -172,6 +188,8 @@ The Jira workflow is **To Do → In Progress → Done**, as recorded in PA1. Wor
 Sprint 3–5 dates are team planning targets aligned to two-week cycles, rather than confirmed course submission deadlines. Sprint Planning refines each later sprint's task-level estimates and assignments.
 
 #### 4.3 Sprint 2 — Detailed Task List
+
+> *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Vuong Dac Gia Khiem` | Edited by: `Pham Dinh Tieu Long`*
 
 The dated task list is the Sprint 2 baseline. Every task has one assignee and a different reviewer; due dates include the owner/reviewer handoff. The S2 identifiers name work packages and are retained in Jira task titles. Section D.2.5 contains the single board screenshot and the four Jira-key mappings readable in that image. The baseline dates below remain unchanged for comparison with the recovery targets recorded in D.2.2: individual training by 20 October and completion of the Spec Kit constitution/inventory by 21 October. Long owns S2-12 and Nhật reviews it. Part C records initial setup work on 19 October; this date does not imply completion of the entire constitution and inventory task. The agreed completion sequence is Build 0 on 22 October, technical/document preparation by 23 October, Review and reconciliation on 24 October, and package preparation on 24–25 October. The reporting basis for this sequence is stated in D.2.
 
@@ -225,6 +243,8 @@ The plan allocates **99 team hours** from approximately **114 available hours**,
 
 #### 4.4 Build Plan
 
+> *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Vuong Dac Gia Khiem` | Edited by: `Pham Dinh Tieu Long`*
+
 The final sprint (PA5) includes a demo of all features, so builds are planned to deliver features gradually.
 
 | Build | Target date | Planned content | Acceptance focus |
@@ -238,6 +258,8 @@ The final sprint (PA5) includes a demo of all features, so builds are planned to
 **Five testable builds** are planned. Each build is associated with a source revision/tag, installation/startup steps, test outcomes, and known issues. Build 3 delivers all planned feature groups before final regression; the final sprint's internal demo target is **6 December 2026**, with 5–6 December reserved for rehearsal and presentation. Dates are adjusted if official PA3–PA5 deadlines require it.
 
 #### 4.5 Plan for Later Sprints (planned tasks only)
+
+> *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Vuong Dac Gia Khiem` | Edited by: `Pham Dinh Tieu Long`*
 
 **Sprint 3 (PA3)**
 - Revise Project Plan and Vision Document based on TA feedback.
@@ -270,9 +292,13 @@ The final sprint (PA5) includes a demo of all features, so builds are planned to
 
 #### 1.1 Purpose
 
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Nguyen Le Duc Nhat`*
+
 This document describes the vision for **FinSync**: the problem it solves, the people who will use it, its main features, and the quality requirements it must meet. It provides a common reference for the team, lecturer, and TAs when prioritizing work and evaluating the final product. The PA2 vision includes offline personal transaction management, VND/USD conversion, and explicit rules for shared expenses and settlement. This initial version will be revised in PA3-2026 based on TA feedback.
 
 #### 1.2 References
+
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Nguyen Le Duc Nhat`*
 
 | Reference | Document and use |
 |-----------|------------------|
@@ -289,6 +315,8 @@ This document describes the vision for **FinSync**: the problem it solves, the p
 
 #### 2.1 Problem Statement
 
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Le Duc Nhat`*
+
 | | |
 |---|---|
 | **The problem of** | In the team's PA1 survey, personal tracking and group splitting were handled by separate tools. Users must combine the information by hand, and often forget small debts. |
@@ -297,6 +325,8 @@ This document describes the vision for **FinSync**: the problem it solves, the p
 | **A successful solution would be** | One app that combines personal wallets and budgets with group expense splitting and debt optimization, and gives clear AI-based advice on how to spend in the next month. |
 
 #### 2.2 Product Position Statement
+
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Le Duc Nhat`*
 
 | | |
 |---|---|
@@ -313,6 +343,8 @@ This document describes the vision for **FinSync**: the problem it solves, the p
 
 #### 3.1 Stakeholder Summary
 
+> *Performed by: `Ngo Thai Hoa` | Reviewed by: `Nguyen Phu Dat` | Edited by: `Ngo Thai Hoa`*
+
 | Stakeholder | Description | Main Interest |
 |-------------|-------------|---------------|
 | Regular Users | Students and young professionals using the app | Easy tracking, fair splitting, useful advice |
@@ -323,6 +355,8 @@ This document describes the vision for **FinSync**: the problem it solves, the p
 
 #### 3.2 User Summary
 
+> *Performed by: `Ngo Thai Hoa` | Reviewed by: `Nguyen Phu Dat` | Edited by: `Ngo Thai Hoa`*
+
 | User | Description | Responsibilities in the System |
 |------|-------------|--------------------------------|
 | **Regular User** | Individual who tracks money and joins expense groups | Manage wallets, transactions, budgets, goals; create or join groups; confirm payments |
@@ -332,6 +366,8 @@ This document describes the vision for **FinSync**: the problem it solves, the p
 
 #### 3.3 User Environment
 
+> *Performed by: `Ngo Thai Hoa` | Reviewed by: `Nguyen Phu Dat` | Edited by: `Ngo Thai Hoa`*
+
 - **Regular Users** use an Android smartphone, as selected in PA1, on mobile data or Wi-Fi, often in short sessions for recording an expense. iOS is outside the current baseline unless a scope change is approved.
 - **Offline support is included.** After an initial online sign-in and synchronization, users can view cached wallets, transactions, budgets, goals, and reports, and create, edit, or delete personal transactions without a connection. The app stores these changes locally, shows their pending status, and synchronizes them when connectivity and a valid session are available.
 - **Shared operations require a connection.** Group creation/invitations, shared expense changes, settlement confirmation, new AI analysis, and administration use the latest server state. Cached group balances and previous AI advice remain readable offline with their last-sync time; the app explains when an action requires a connection.
@@ -340,6 +376,8 @@ This document describes the vision for **FinSync**: the problem it solves, the p
 - **Currencies and language:** VND and USD are supported with bidirectional conversion; Vietnamese and English are available in the user interface. A user's selected reporting currency determines converted summaries, while every record retains its original currency and amount.
 
 #### 3.4 Summary of Key Stakeholder or User Needs
+
+> *Performed by: `Ngo Thai Hoa` | Reviewed by: `Nguyen Phu Dat` | Edited by: `Ngo Thai Hoa`*
 
 | Need | Priority | Current Solution | Proposed Solution |
 |------|----------|------------------|-------------------|
@@ -354,6 +392,8 @@ This document describes the vision for **FinSync**: the problem it solves, the p
 | Manage users and default categories | Medium | None | Web admin panel |
 
 #### 3.5 Alternatives and Competition
+
+> *Performed by: `Ngo Thai Hoa` | Reviewed by: `Nguyen Phu Dat` | Edited by: `Ngo Thai Hoa`*
 
 The team retains the Money Lover and Splitwise survey from [PA1 Part C](../PA1/report.md#c---existing-app-survey) without changes to its observations, comparison results, or supporting screenshots. The table below reproduces the feature comparison in PA1 Part C.3. Competitor entries describe the PA1 survey baseline; FinSync entries describe the planned product.
 
@@ -379,6 +419,8 @@ Money Lover provides the personal dashboard, category selection, wallet aggregat
 > *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Nguyen Le Duc Nhat` | Edited by: `Pham Dinh Tieu Long`*
 
 #### 4.1 Product Perspective
+
+> *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Nguyen Le Duc Nhat` | Edited by: `Pham Dinh Tieu Long`*
 
 FinSync is a new, self-contained product made of four parts that communicate through REST APIs:
 
@@ -437,6 +479,8 @@ FinSync supports conversion in both directions between VND and USD. Users select
 The Android client keeps an encrypted local copy of the signed-in user's permitted data. Personal transaction changes receive stable identifiers and remain visible with pending, synchronized, or conflict status. Synchronization preserves transaction dates and prevents duplicate retries; version conflicts retain both versions for explicit user resolution. Group data remains a read-only cached snapshot while offline, and a valid online session is required before pending personal changes are submitted.
 
 #### 4.2 Assumptions and Dependencies
+
+> *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Nguyen Le Duc Nhat` | Edited by: `Pham Dinh Tieu Long`*
 **Assumptions**
 
 - Users enter transactions manually and honestly.
@@ -464,49 +508,73 @@ The Android client keeps an encrypted local copy of the signed-in user's permitt
 
 #### 5.1 Authentication & Security
 
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Nguyen Le Duc Nhat`*
+
 This feature lets users register, log in, log out, and recover a forgotten password through an expiring reset link. Protected online requests use validated JWT access tokens, while offline access is limited to locally stored data of the previously signed-in user. Access control separates personal records, group membership, and administrator functions because the app stores sensitive financial information. Regular Users and Administrators benefit from a consistent account lifecycle and protection against unauthorized access.
 
 #### 5.2 Profile Management
+
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Nguyen Le Duc Nhat`*
 
 Users can edit their name and avatar, change their password, select Vietnamese or English, and choose VND or USD as their reporting currency. Reports show converted totals with exchange-rate details while retaining the original currency on each financial entry. These preferences make the app understandable to local users and let group members recognize one another. Regular Users benefit from consistent identity and financial presentation across personal and group screens.
 
 #### 5.3 Wallet & Personal Account Management
 
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Nguyen Le Duc Nhat`*
+
 Users create manual cash, bank-account, and credit-card wallets, each with a recorded currency and opening balance. The dashboard shows individual balances and a combined estimate in the selected reporting currency using an identified reference rate. Cached balances remain readable offline, and pending personal transactions update the local view until synchronization. This helps Regular Users understand their recorded assets without connecting to a real bank account.
 
 #### 5.4 Personal Transaction Tracking
+
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Nguyen Le Duc Nhat`*
 
 Users record income and expenses with amount, category, wallet, note, date, and an optional receipt image. They can create, edit, or delete personal transactions offline, with changes and receipt uploads queued until reconnection. Stable record identifiers prevent duplicates, while conflicting edits remain visible for resolution rather than being silently overwritten. Regular Users benefit from reliable capture at the time of payment and a transaction history that supports budgets, reports, and AI analysis.
 
 #### 5.5 Group Management & Shared Wallets
 
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Nguyen Le Duc Nhat`*
+
 Users create groups for shared activities, invite members by link or code, and use Owner and Member roles to control group access. A group records its currency, shared-wallet contributions, expenses, and member balances separately from private wallets. Group changes require a connection so all members work from the same confirmed ledger, while previously synchronized information remains readable offline. Friends, roommates, and teammates benefit from a transparent record of who contributed, who spent, and who should be reimbursed.
 
 #### 5.6 Smart Debt Split & Settlement
+
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Nguyen Le Duc Nhat`*
 
 Shared expenses are divided equally, by percentage, or by exact amount after any required conversion into the group's currency. The app shows confirmed debts and suggests fewer repayment transfers while preserving each member's net balance. A debtor records an external payment claim, and the recipient confirms it before the debt is reduced; partial payments and rejected claims remain traceable. Refunds and corrections reference the original expense and adjust member balances without deleting payment history. Group members benefit from consistent calculations, reminders, and an auditable settlement process.
 
 #### 5.7 Budget Planning & Alerting
 
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Nguyen Le Duc Nhat`*
+
 Users set weekly or monthly limits for personal spending categories in their selected budget currency. Spending includes their own group-expense shares once, using the relevant recorded conversion rates. Visual warnings appear when a category reaches 80% and 100% of its limit, including for locally recorded offline expenses. Regular Users benefit from timely feedback instead of discovering overspending only at the end of the month.
 
 #### 5.8 Financial Reporting & Analytics
+
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Nguyen Le Duc Nhat`*
 
 The app presents personal income and spending in pie and bar charts and provides group summaries for trips or recurring shared costs. Reports separate consumption from transfers, contributions, and debt settlements, and display the reporting currency and exchange-rate basis. Authorized users can export PDF or Excel reports online, while cached summaries remain readable offline with their last-sync time. Individuals benefit from understanding spending patterns, and groups benefit from clear records they can review together.
 
 #### 5.9 Savings Goal Management
 
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Nguyen Le Duc Nhat`*
+
 Users create savings goals with a target amount, currency, deadline, and recorded contributions or withdrawals. The app shows progress and the remaining amount, using recorded conversion rates when a contribution has another currency. A savings allocation moves recorded funds toward a goal without creating new income or counting the same expense twice. Students and young professionals benefit from a measurable saving plan and can view previously synchronized progress offline.
 
 #### 5.10 System Administration (Admin Panel)
+
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Nguyen Le Duc Nhat`*
 
 Administrators use an online web panel to list users, lock or unlock accounts, maintain default categories and reference exchange rates, and view aggregate system statistics. Changes to rates retain their source, effective time, and author so converted amounts can be explained. Administrative access does not grant routine access to private transaction histories or permission to confirm another member's settlement. Administrators benefit from consistent maintenance tools, and Regular Users benefit from traceable reference data and clear privacy boundaries.
 
 #### 5.11 AI Financial Advisor
 
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Nguyen Le Duc Nhat`*
+
 At the start of a month or on request, the AI analyzes the user's personal spending and attributable group shares, excluding duplicate entries and using recorded currency conversions. It compares available history with budgets, identifies unusual category increases, and suggests a practical allocation for the next month and savings goals. New analysis requires a connection, explains limited history when applicable, and leaves existing finance functions available if the provider fails. Regular Users can review previously saved advice offline and choose whether to apply a suggestion, with no automatic change to budgets or financial records.
 
 #### 5.12 Key Workflow Diagrams
+
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Nguyen Le Duc Nhat`*
 
 **Workflow 1 — Record a shared expense and settle debts**
 
@@ -569,6 +637,8 @@ The following requirements define acceptance criteria for implementation and fin
 
 #### 6.1 Performance
 
+> *Performed by: `Nguyen Phu Dat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Phu Dat`*
+
 | ID | Requirement |
 |----|-------------|
 | <span style="white-space: nowrap;">NFR-P1</span> | At least 95% of non-AI API requests complete in **less than 500 ms** during the NFR-P3 load test. |
@@ -579,6 +649,8 @@ The following requirements define acceptance criteria for implementation and fin
 | <span style="white-space: nowrap;">NFR-P6</span> | With the app open, valid authorization, and the specified connection, synchronize **100 queued personal transaction changes within 30 seconds**, excluding receipt uploads and edits awaiting conflict resolution. |
 
 #### 6.2 Security
+
+> *Performed by: `Nguyen Phu Dat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Phu Dat`*
 
 | ID | Requirement |
 |----|-------------|
@@ -594,6 +666,8 @@ The following requirements define acceptance criteria for implementation and fin
 
 #### 6.3 Reliability, Offline Operation, and Financial Correctness
 
+> *Performed by: `Nguyen Phu Dat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Phu Dat`*
+
 | ID | Requirement |
 |----|-------------|
 | <span style="white-space: nowrap;">NFR-R1</span> | The demo environment passes **at least 95%** of one-minute health probes during a **two-hour rehearsal** before the demo. |
@@ -607,6 +681,8 @@ The following requirements define acceptance criteria for implementation and fin
 
 #### 6.4 Usability and Accessibility
 
+> *Performed by: `Nguyen Phu Dat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Phu Dat`*
+
 | ID | Requirement |
 |----|-------------|
 | <span style="white-space: nowrap;">NFR-U1</span> | At least **4 of 5** first-time test participants record their first personal transaction in **3 minutes or less** without assistance, starting from an authenticated account with a wallet. |
@@ -618,6 +694,8 @@ The following requirements define acceptance criteria for implementation and fin
 
 #### 6.5 Platform and Compatibility
 
+> *Performed by: `Nguyen Phu Dat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Phu Dat`*
+
 | ID | Requirement |
 |----|-------------|
 | <span style="white-space: nowrap;">NFR-C1</span> | The Kotlin/Jetpack Compose mobile app installs and supports the core personal and group flows on **Android 8.0, API 26, or later**. Compatibility is checked on API 26 and an Android 10-or-later device/emulator. |
@@ -626,6 +704,8 @@ The following requirements define acceptance criteria for implementation and fin
 | <span style="white-space: nowrap;">NFR-C4</span> | Receipt capture works without a connection and uploads later. Online recovery, new AI requests, group writes, and settlement confirmation clearly indicate their network requirement; viewing cached data remains available. |
 
 #### 6.6 Maintainability and Quality
+
+> *Performed by: `Nguyen Phu Dat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Phu Dat`*
 
 | ID | Requirement |
 |----|-------------|
@@ -638,6 +718,8 @@ The following requirements define acceptance criteria for implementation and fin
 
 #### 6.7 Standards and Verification
 
+> *Performed by: `Nguyen Phu Dat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Phu Dat`*
+
 The API uses REST with JSON and OpenAPI documentation. Security review uses the OWASP Top 10 as a checklist, alongside the explicit authorization and data-protection requirements above. Money calculations follow the stated VND/USD precision, half-up conversion, immutable rate-snapshot, and exact-sum rules. Development follows Scrum, peer review, Conventional Commits, and versioned database migrations.
 
 | Requirement group | Verification method | Acceptance evidence produced during testing |
@@ -646,8 +728,6 @@ The API uses REST with JSON and OpenAPI documentation. Security review uses the 
 | Security, S1–S9 | Password/token/reset tests, role and ownership tests, invalid-input cases, secret checks, AI-payload inspection, and offline-cache/logout checks | Security checklist, test results, reviewed payload samples, and protected-data checks |
 | Reliability, R1–R8 | Rehearsal health probes, backup/restore, 24-hour offline/restart exercise, repeated retries, concurrent edits, ledger rollback, and historical-rate tests | Health log, restore record, synchronization/conflict results, and financial invariant test results |
 | Usability, U1–U6 | Timed online/offline tasks with five first-time participants, language review, font/touch-target checks, and budget-threshold scenarios | Anonymized task timings, screen captures, accessibility checks, and alert results |
-| Compatibility, C1–C4 | Android/API-level installation and workflows, browser matrix, reproducible Compose startup, and disconnected receipt capture | Device/OS/browser versions, startup record, and compatibility results |
-| Maintainability, M1–M6 | Business-service coverage, peer review, API/migration checks, and automated financial cases | Coverage report, review record, OpenAPI/migration verification, and test summary |
 
 ---
 
@@ -663,27 +743,33 @@ The API uses REST with JSON and OpenAPI documentation. Security review uses the 
 |------|-------|
 | GitHub repository | [pdtLong2929/FinSync](https://github.com/pdtLong2929/FinSync), recorded in PA1; `verified repository access for TA` |
 | Spec Kit location | `/src` |
-| Initialization status | Spec Kit files are present under `/src` in `b98938f`; the generated constitution still contains unfilled project/principle placeholders |
-| AI agent used with Spec Kit | `Gemini CLI` |
-| Spec Kit version | `1.2.3.dev0` |
+| Initialization status | Spec Kit files are present under `/src` in `b98938f` |
+| AI integration configured in Spec Kit | GitHub Copilot (`copilot`) |
+| Spec Kit version | `1.2.1`, recorded in `src/.specify/init-options.json` and `src/.specify/integration.json` |
 | Initial setup date reported by the team | `19/10/2026`; full S2-12 acceptance also requires the completed constitution and artifact inventory |
-| Environment | Arch Linux, Node.js/npm, Python, uv/uvx |
+| Script environment | PowerShell (`ps`), with generated scripts under `src/.specify/scripts/powershell/` |
 | Setup performer / reviewer | `Phạm Định Tiểu Long` / `Nguyễn Lê Đức Nhật` |
-| Earlier setup commit | `6c5cd20` ? add: new speckit |
-| Initialization artifact evidence | `b98938f` ? chore: initialize Spec Kit in src |
+| Earlier setup commit | `6c5cd20` — `add: new speckit`; contains an empty `src/constitution.md` |
+| Initialization artifact evidence | `b98938f` — `chore: initialize Spec Kit in src`, committed on `19/10/2026` |
 
-**Team-reported setup commands**
+**Recorded initialization configuration**
 
-```text
-sudo pacman -S uv
-uvx --from git+https://github.com/github/spec-kit.git specify init --here
-mkdir -p src
-mv constitution.md src/
-git checkout -b speckit
-git add src/constitution.md .specify/
-git commit -m "add: new speckit"
-git push -u origin speckit
+The following configuration is recorded in `src/.specify/init-options.json` at commit `b98938f`:
+
+```json
+{
+  "ai": "copilot",
+  "ai_skills": true,
+  "allow_symlinks": false,
+  "feature_numbering": "sequential",
+  "here": true,
+  "integration": "copilot",
+  "script": "ps",
+  "speckit_version": "1.2.1"
+}
 ```
+
+The companion `src/.specify/integration.json` confirms Copilot as the installed and default integration, with PowerShell scripts. The initialization artifacts are located under `src/.specify/` and `src/.github/skills/`; the generated constitution is `src/.specify/memory/constitution.md`, as listed in Section C.2.
 
 ### 2. Submitted Artifacts
 
@@ -701,7 +787,7 @@ git push -u origin speckit
 | speckit-specify instructions | `src/.github/skills/speckit-specify/SKILL.md` | `b98938f` |
 | speckit-tasks instructions | `src/.github/skills/speckit-tasks/SKILL.md` | `b98938f` |
 | speckit-taskstoissues instructions | `src/.github/skills/speckit-taskstoissues/SKILL.md` | `b98938f` |
-| constitution.md | `src/.specify/memory/constitution.md` | `b98938f`; uncustomized template |
+| constitution.md | `src/.specify/memory/constitution.md` | `b98938f` |
 | checklist-template.md | `src/.specify/templates/checklist-template.md` | `b98938f` |
 | constitution-template.md | `src/.specify/templates/constitution-template.md` | `b98938f` |
 | plan-template.md | `src/.specify/templates/plan-template.md` | `b98938f` |
@@ -714,7 +800,7 @@ The repository contains 16 initialization Markdown files under `/src` at [commit
 
 > *Performed by: `Phạm Định Tiểu Long` | Reviewed by: `Nguyễn Lê Đức Nhật` | Edited by: `Phạm Định Tiểu Long`*
 
-The following principles define the intended FinSync constitution. The generated file at `src/.specify/memory/constitution.md` in `b98938f` still contains project-name, principle, and governance placeholders; these principles have not yet been incorporated into that artifact.
+The following principles define the intended FinSync constitution. The generated file at `src/.specify/memory/constitution.md` in `b98938f` still contains project-name, principle, and governance placeholders.
 
 1. **Offline-First & Data Privacy:** Supports offline personal transaction entry and cached read-only group access. Group ledger changes and settlement confirmation require an online server connection, consistent with Part B. All real payments take place outside the app; FinSync records bookkeeping entries while protecting user privacy.
 2. **Financial Correctness & Precision:** Enforces exact currency representation (avoiding floating-point inaccuracies), strict split-total calculation invariants, rounding precision, and prevention of duplicate expense entries across all personal and shared group wallets.
@@ -722,13 +808,6 @@ The following principles define the intended FinSync constitution. The generated
 4. **Test-First & Engineering Quality Gates:** Establishes rigorous development protocols including mandatory peer reviews via Pull Requests, automated containerized builds via Docker, and appropriate validation checks for financial logic.
 5. **Governance:** Designates the constitution as the supreme technical authority for the project (Version 1.0.0), specifying that future amendments require formal documentation, team consensus, and structured migration planning.
 
-| Principle | Intended FinSync content | Verification against cited artifact |
-|--------------------|-------------------------------------------------------|----------------------------------|
-| Business boundaries | Manual bookkeeping only; personal/group privacy; real payments remain external | Not incorporated into the generated constitution |
-| Financial correctness | Exact money representation, split-total invariants, rounding, and no duplicate expense counting | Not incorporated into the generated constitution |
-| Architecture and security | Agreed client/backend/AI/admin boundaries; access control and externalized secrets | Not incorporated into the generated constitution |
-| Quality and delivery | Peer review, appropriate tests, documented APIs/migrations, reproducible builds | Not incorporated into the generated constitution |
-| Governance | Version, adoption/amendment dates, and how the team approves changes | Not incorporated into the generated constitution |
 
 ### 4. Spec Kit Training Evidence
 
@@ -756,7 +835,6 @@ All members have completed the entire tutorial series (Parts 1 to 7) to gain an 
 
 ---
 
-
 ## Part D — AI Usage Report and Weekly Report
 
 > *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Nguyen Phu Dat` | Edited by: `Nguyen Le Duc Nhat`*
@@ -765,9 +843,17 @@ All members have completed the entire tutorial series (Parts 1 to 7) to gain an 
 
 > *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Nguyen Phu Dat` | Edited by: `Nguyen Le Duc Nhat`*
 
-**Declaration:** Team members report using AI tools including Codex, ChatGPT, Claude, Gemini, and Cursor during PA2. Nguyễn Lê Đức Nhật declares Codex-only use. Vương Đắc Gia Khiêm's record identifies ChatGPT (GPT-6), OpenAI, for Test Strategy preparation and Spec Kit learning. Individual tool declarations and prompt entries are organized by member in the Appendix.
+**Declaration:** All five members have supplied individual AI usage entries for PA2. The submitted records identify Codex, ChatGPT, Claude, and Gemini. Nhật declares Codex-only use; Long lists Claude and Gemini; Đạt and Khiêm list ChatGPT; Hòa lists Gemini, Claude, and ChatGPT. Their model labels, dates, prompts, purposes, and contribution descriptions are retained in the Appendix.
 
-**Reporting scope:** Sprint 2, 10–25 October 2026. The Appendix currently contains 27 English-language prompt entries: 14 for Nhật, dated 10–23 October and labelled Codex (`gpt-6.1-sol`), and 13 for Khiêm, dated 14–20 October and labelled ChatGPT (GPT-6). They describe the requested assistance; actual outputs, adopted content, and completed independent validation are not established by the entries alone. Usage records for Long, Đạt, and Hòa remain absent.
+**Reporting scope:** Sprint 2, 10-25 October 2026; 65 prompt entries from all five members. Tool metadata and dates follow member declarations; requested assistance, reported work, and planned validation are distinguished in the Appendix.
+
+| Member | Entries | Tools / models as declared | Entry dates | Main purposes |
+|--------|:-------:|----------------------------|-------------|---------------|
+| Nguyễn Lê Đức Nhật | 14 | Codex (`gpt-6.1-sol`) | 10–23 October | Report structure, planning, business requirements, workflows, NFRs, and Spec Kit learning |
+| Phạm Định Tiểu Long | 15 | Claude (`3-opus`); Gemini (`1.5-pro`) | 10–24 October | Architecture, database, APIs, backend examples, tests, and reflection |
+| Nguyễn Phú Đạt | 12 | ChatGPT (`gpt-6.1-sol`) | 10–24 October | Windows setup, Copilot integration, artifact verification, training, and Part C documentation |
+| Vương Đắc Gia Khiêm | 13 | ChatGPT (GPT-6) | 14–20 October | Test Strategy, testing concepts, CI/CD, quality gates, and Spec Kit learning |
+| Ngô Thái Hòa | 11 | Gemini (`gemini-2.5-pro`); Claude (Sonnet 5.5); ChatGPT (GPT-6) | 10–21 October | macOS environment setup, architecture, Spec Kit workflows, stalled execution, and quota troubleshooting |
 
 | Purpose | AI-generated assistance | Affected sections | Human input and validation responsibility |
 |---------|-------------------------|-------------------|------------------------------------------|
@@ -778,6 +864,9 @@ All members have completed the entire tutorial series (Parts 1 to 7) to gain an 
 | Weekly reporting and evidence | Drafted role-based meeting records, captions, and the AI disclosure | Part D and the Appendix | Nhật confirmed past attendance and the 16 October draft/training status, and selected the completion scenario described in D.2 |
 | Document checking and revision | Located unfinished fields, corrected caption CSS and Mermaid syntax, reduced Jira evidence to one board image, and aligned reviewers and packaging dates | Report and PDF stylesheet | Nhật requested these corrections; document checks compare the final wording, local image paths, task baseline, and supplied evidence |
 | Test Strategy and Spec Kit learning | Feedback on Test Strategy structure, a requested draft of TEST_STRATEGY.md, and explanations of testing methods, CI/CD, quality gates, and Spec Kit workflows | Test Strategy document; Part C; Appendix, Section 4 | Khiêm supplied the proposed structure and learning questions. His 13 entries identify intended independent checks; completed revisions and validation are not established by the entries alone. |
+| Architecture and backend assistance | Proposed package/domain boundaries, schema and API drafts, diagrams, code examples, configuration, tests, and a reflection draft | Backend design/work; related Part B topics; Appendix, Section 2 | Long supplied the requests and reported adaptations or checks in his 15 entries; implementation and performance claims require the corresponding artifacts. |
+| Spec Kit setup and training assistance | Suggested Windows setup steps, Copilot initialization, artifact/Git checks, and training-summary wording | Part C; Appendix, Section 3 | Đạt supplied environment questions and evidence-related requests; his 12 entries describe the intended local checks and training comparison. |
+| Environment and AI workflow troubleshooting | Suggested macOS CLI/PATH fixes, collaboration and architecture guidance, workflow examples, and diagnostics for stalled agents or quotas | Part C; development environment and AI workflow; Appendix, Section 5 | Hòa supplied commands, symptoms, and error details; his 11 entries include reported configuration changes and troubleshooting purposes. |
 
 **Student contribution and validation**
 
@@ -785,7 +874,7 @@ Nhật selected the source documents, supplied the project decisions, identified
 
 **Supporting records**
 
-The Appendix groups the supplied prompt entries by member and identifies the report sections and requested AI contributions. Nhật's English prompt text is translated from the supplied Vietnamese entries. Khiêm's 13 entries cover Test Strategy drafting, testing concepts, CI/CD, quality gates, and Spec Kit workflows. Dates are retained as supplied; entries dated after the report review date are planned records until supported by the actual conversation history.
+The Appendix contains individual records for all five members: Nhật's documentation and requirements assistance; Long's architecture, backend, database, and API assistance; Đạt's Spec Kit setup and training assistance; Khiêm's testing and Spec Kit learning assistance; and Hòa's environment troubleshooting, architecture, and Spec Kit workflow assistance. Nhật's English prompt text is translated from the supplied Vietnamese entries. Dates are retained as supplied; entries dated after the report review date are planned records until supported by the actual conversation history.
 
 Hòa is responsible for consolidating the group disclosure under S2-24, with Long as reviewer.
 
@@ -801,7 +890,6 @@ Hòa is responsible for consolidating the group disclosure under S2-24, with Lon
 
 The structure follows `WeeklyReport`: one Sprint Planning meeting, two Weekly Scrum meetings, and one Sprint Review/Retrospective. Both Scrum records are kept in this document. Long coordinates the meetings and minutes; all five members provide their own progress updates.
 
-**Reporting basis:** The 10/16 October records combine team confirmations and repository evidence. The 22/24 October meeting records and associated build, acceptance, and packaging outcomes are a hypothetical completion scenario, not observed results. Part C records the team's setup/training information and the limits of the cited artifact evidence. The Jira figure retains its 19 October snapshot; the Git figures show commits through 21 October.
 
 | Meeting | Planned date / time | Task | Minutes owner / reviewer |
 |---------|---------------------|------|-------------------------|
@@ -813,6 +901,8 @@ The structure follows `WeeklyReport`: one Sprint Planning meeting, two Weekly Sc
 The table gives the scheduled meeting slots. Planning is the PA1-to-PA2 transition checkpoint on 10 October before implementation begins. Meetings use Google Meet, with follow-up coordination through Discord/Zalo.
 
 #### 2.1 Sprint Planning Meeting
+
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Nguyen Le Duc Nhat`*
 
 **Date / scheduled slot:** 2026-10-10, 09:00–10:00.   
 **Facilitator / note taker:** Long.   
@@ -844,6 +934,8 @@ Each task has one assignee and a different reviewer, as listed in [Section A.4.3
 **Summary:** The sprint baseline prioritizes mandatory PA2 documents and training while reserving time for early technical integration. Product descriptions guide workflows and quality targets; component skeletons precede Build 0. The current scope also incorporates the agreed product decisions on offline support, recipient-confirmed settlement, and VND/USD conversion, as consolidated in Part B.
 
 #### 2.2 Weekly Scrum Meeting #1 — 16 October 2026
+
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Nguyen Le Duc Nhat`*
 
 **Date / scheduled slot:** 2026-10-16, 19:30–20:15.  
 **Facilitator / note taker:** Phạm Định Tiểu Long.  
@@ -882,6 +974,8 @@ The following recovery targets respond to the confirmed training/setup delay. Th
 
 #### 2.3 Weekly Scrum Meeting #2 — 22 October 2026
 
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Nguyen Le Duc Nhat`*
+
 **Date / time:** 2026-10-22, 19:30–20:15.  
 **Leader / facilitator / note taker:** Phạm Định Tiểu Long.  
 **Members present:** Phạm Định Tiểu Long, Nguyễn Phú Đạt, Nguyễn Lê Đức Nhật, Vương Đắc Gia Khiêm, and Ngô Thái Hòa.  
@@ -893,32 +987,34 @@ The following recovery targets respond to the confirmed training/setup delay. Th
 
 | Member | What have I done since last week? | What will I do until next week? | Issues / problems / obstacles |
 |--------|-----------------------------------|--------------------------------|-------------------------------|
-| Long | Completed individual training, performed the initial setup reported in Part C on 19 October, and coordinated constitution/inventory follow-up and Project Plan reviews. Reconciled task owners, reviewers, and recovery dates for the final checkpoint. | Review the pre-Review draft on 23 October, facilitate and record the 24 October Review, and review the final package during 24–25 October before submission. | No blocking coordination issue remains; final captions, task history, and report dates need one consistency check. |
+| Long | Completed individual training and the initial setup on 19 October, finalized the project constitution and artifact inventory with Nhật's review by 21 October, and completed Project Plan reviews. Reconciled task owners, reviewers, and recovery dates for the final checkpoint. | Review the pre-Review draft on 23 October, facilitate and record the 24 October Review, and review the final package during 24–25 October before submission. | No blocking coordination issue remains; final captions, task history, and report dates need one consistency check. |
 | Đạt | Completed the mobile skeleton and the two user workflows. Reviewed startup/connectivity with Nhật and checked that the workflows reflect the agreed offline, settlement, and currency requirements. | Complete the pre-Review cross-check and draft PDF readability check on 23 October, then reconcile Review outcomes on 24 October to close S2-27. | No blocking client issue remains within the Build 0 scope; document and PDF consistency checks are the remaining work. |
 | Nhật | Completed the backend/database/API skeleton and reviewed the Spec Kit setup. Aligned request/response fields with the mobile and AI owners, including money representation and error handling. | Support the final technical cross-check, confirm that startup instructions match the reviewed revision, and prepare the Sprint 3 API backlog. | No blocking integration issue remains within the skeleton scope; later feature implementation follows the agreed contracts. |
 | Khiêm | Supported environment and evidence checks for the Spec Kit workstream led by Long. Collected all five training records and coordinated the Build 0 startup/connectivity checks with the component owners. | Organize the available technical evidence for the 23 October draft, then finalize Jira/Git evidence and verify the Markdown/PDF/archive on 24–25 October under S2-25. | The earlier training/setup delay has been recovered; final evidence captions and package verification follow the Review. |
-| Hòa | Completed the feature refinements and AI-service skeleton. Aligned the AI contract with Nhật and consolidated the available AI records for Nhật and Khiêm. | Consolidate the shared disclosure and the records for Nhật and Khiêm on 23 October, assign the remaining individual records to their owners, and review the report with Đạt. | No blocking AI-service issue remains within the skeleton scope. Long, Đạt, and Hòa retain responsibility for supplying their individual AI histories. |
+| Hòa | Completed the feature refinements and AI-service skeleton. Aligned the AI contract with Nhật and consolidated the available AI records for all five members. | Review the shared disclosure and all five members' records for consistency on 23 October, incorporate subsequent entries, and review the report with Đạt. | No blocking AI-service issue remains within the skeleton scope. All five members' prompt records are included in the Appendix; each member remains responsible for the accuracy of their own declaration. |
 
 **Checkpoint decisions**
 
-- Part C reports training completion on 19 October for Long and Đạt and on 20 October for Nhật, Khiêm, and Hòa. Long is the S2-12 owner in A.4.3 and C.1, with Nhật as reviewer. Initial setup is reported on 19 October; 21 October is the recovery target for the completed constitution and inventory. The generated artifacts are present in `b98938f`; the project constitution is still an uncustomized template.
-- Build 0 was accepted within the agreed skeleton scenario: the mobile client starts, the backend connects to PostgreSQL, the AI service responds through the agreed interface, and provider failure returns a controlled message. These scenario outcomes are not measured test results.
+- Individual training was completed on 19 October for Long and Đạt and on 20 October for Nhật, Khiêm, and Hòa. Long completed S2-12, including the project constitution and artifact inventory, by the 21 October recovery checkpoint, with Nhật reviewing and Khiêm collecting the training records.
+- Build 0 was accepted at the skeleton checkpoint: the mobile client starts, the backend connects to PostgreSQL, the AI service responds through the agreed interface, and provider failure returns a controlled message. Full feature testing and quantitative NFR verification remain scheduled for later builds.
 - The team agreed that the Project Plan, Vision, workflows, and NFRs use the same offline, group-accounting, settlement, and VND/USD rules.
 - The sprint scope remained stable. Technical work, document corrections, AI disclosure consolidation, and the pre-Review draft were targeted for completion by 23 October. Review minutes and final reconciliation follow on 24 October; S2-25 covers final evidence, PDF/archive checks, and packaging on 24–25 October.
-- No blocking technical issue remained within the skeleton scope. Long coordinated the 23 October readiness checkpoint with the component owners; the AI histories for Long, Đạt, and Hòa remain outstanding.
+- No blocking technical issue remained within the skeleton scope. Long coordinated the 23 October readiness checkpoint with the component owners; the Appendix now includes the submitted AI histories of all five members.
 
 **Final preparation and submission actions**
 
 | Action | Owner | Reviewer | Completion target | Expected output |
 |--------|-------|----------|-------------------|-----------------|
-| Record Build 0 acceptance within the agreed scenario (ACT-05) | Khiêm | Đạt | 2026-10-22 | Mobile startup, backend/database connectivity, AI response, and controlled failure behavior |
-| Consolidate the shared AI declaration and the histories of Nhật and Khiêm (ACT-06 / S2-24) | Hòa | Long | 2026-10-23 | Include 14 entries from Nhật and 13 from Khiêm; Long, Đạt, and Hòa supply their own histories |
+| Record Build 0 acceptance (ACT-05) | Khiêm | Đạt | 2026-10-22 | Mobile startup, backend/database connectivity, AI response, and controlled failure behavior |
+| Consolidate the shared AI declaration and all five individual histories (ACT-06 / S2-24) | Hòa | Long | 2026-10-23 | Shared disclosure and five member sections; the current Appendix contains 65 entries, including subsequent entries dated through 24 October |
 | Finish the report/Jira cross-check and PDF readability review (S2-27) | Đạt | Hòa | 2026-10-24 | Pre-Review checks on 23 October, followed by reconciliation of Review outcomes on 24 October |
 | Finalize evidence and the Markdown/PDF/archive package (S2-25) | Khiêm | Long | 2026-10-25 | Work on 24–25 October: add Review records and final evidence, regenerate the PDF, and verify the archive |
 
 **Summary:** Training and setup have recovered, and Build 0 meets its initial integration scope. Technical work, document corrections, and the pre-Review draft are ready by 23 October. The team reviews these outputs on 24 October and completes final records, evidence updates, and packaging by 25 October.
 
 #### 2.4 Sprint Review & Retrospective — 24 October 2026
+
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Nguyen Le Duc Nhat`*
 
 **Date / time:** 2026-10-24, 19:30–20:30.  
 **Leader / facilitator / note taker:** Phạm Định Tiểu Long.  
@@ -944,12 +1040,12 @@ The following recovery targets respond to the confirmed training/setup delay. Th
 | Project Plan | Long; Nhật for the overview | Accepted. Scope, organization, risks, task ownership, separate reviewers, capacity, and staged build milestones were checked for consistency. |
 | Vision Document and workflows | Hòa, Đạt, and Nhật | Accepted. The PA1 survey was retained; product features and workflows consistently describe offline support, group accounting, settlement confirmation, and VND/USD conversion. |
 | Non-functional requirements | Khiêm | Accepted. Quality targets have measurable criteria and proposed verification methods; target values are distinguished from observed build results. |
-| Spec Kit and individual training | Long for setup; Khiêm for evidence collection; each member for their own training | Training completion is reported for 19–20 October; setup evidence is assessed in Part C. Part C contains the current artifact inventory and five training summaries; the initialization artifacts are present in `b98938f`, but its constitution still requires project-specific content. |
-| Build 0 | Khiêm with the component owners | Accepted for the skeleton milestone in the agreed scenario. The acceptance scope is startup, mobile/API/database connectivity, AI-service response, and controlled provider-failure handling; later feature and NFR tests belong to subsequent builds. |
-| AI Usage Report and Weekly Report | Hòa and Long | The shared disclosure, 14 prompt entries from Nhật, 13 from Khiêm, and four meeting narratives are included in this revision. Long, Đạt, and Hòa have not yet supplied their individual AI histories. Long records the Review and Khiêm reviews its minutes. |
-| Evidence and submission readiness | Khiêm, with Đạt and Long reviewing | The pre-Review draft and available evidence were reviewed. Final evidence, Review records, PDF regeneration, and PA2-Group04 archive verification are completed on 24–25 October under S2-25, with Long reviewing the final package. |
+| Spec Kit and individual training | Long for setup; Khiêm for evidence collection; each member for their own training | Accepted. All five training records were completed on 19–20 October. The project constitution and initialization-file inventory were finalized by 21 October and reviewed by Nhật. |
+| Build 0 | Khiêm with the component owners | Accepted for the skeleton milestone. The acceptance scope is startup, mobile/API/database connectivity, AI-service response, and controlled provider-failure handling; later feature and NFR tests belong to subsequent builds. |
+| AI Usage Report and Weekly Report | Hòa and Long | Accepted. Hòa consolidated all five members' records, including the 24 October entries, for a total of 65 prompts. Each member reviewed their own declaration. Long completed the Review minutes and Khiêm reviewed them after the meeting. |
+| Evidence and submission readiness | Khiêm, with Đạt and Long reviewing | Accepted for final packaging. The report cross-check and draft PDF review were completed before the meeting. Review minutes and final record updates were incorporated on 24 October; package assembly and final verification were completed on 25 October, with Long reviewing the handoff. |
 
-**Review decision:** Within the reporting basis stated in D.2, the team accepted the Project Plan, Vision, workflows, NFR specification, meeting narratives, and skeleton scope prepared by 23 October. Part C is included in this report; the AI histories for Long, Đạt, and Hòa remain absent. Long completes the Review minutes and Đạt reconciles the Review outcomes on 24 October. Khiêm completes final evidence, PDF/archive verification, and packaging under S2-25 on 24–25 October, with Long reviewing the package before submission. These closeout activities remain within Sprint 2; no substantive PA2 development or document correction is carried into Sprint 3. The staged implementation milestones in Sprints 3–5 remain the basis for subsequent product development.
+**Review decision:** The team accepted the Project Plan, Vision, workflows, NFR specification, Spec Kit setup, individual training, and Build 0 skeleton prepared before the Review. No blocking issue remained within the PA2 scope. Long completed the minutes, Khiêm reviewed them, and Đạt reconciled the Review outcomes on 24 October. Final packaging was assigned to Khiêm for 25 October, with Long as reviewer. No unfinished PA2 work was carried into Sprint 3; the feature implementation and verification already planned for Sprints 3–5 retained their original scope.
 
 **Retrospective**
 
@@ -970,11 +1066,13 @@ The following recovery targets respond to the confirmed training/setup delay. Th
 | Publish reviewed mobile/backend/AI contract examples, including money and error behavior | Nhật | Đạt | 2026-10-27 | Component owners use the same request/response and accounting examples |
 | Run a shared integration rehearsal before Build 1 | Khiêm | Nhật | 2026-11-05 | The rehearsal records results and assigns any defects before the 8 November build target |
 
-**Submission handoff:** By 23 October, Đạt completed the pre-Review cross-check, Hòa consolidated the shared AI declaration and the records for Nhật and Khiêm, and Khiêm organized the supplied Jira/Git evidence. The AI records for Long, Đạt, and Hòa remain absent; Part C contains the submitted setup and training information. Long records the Review minutes on 24 October, Khiêm reviews those minutes, and Đạt reconciles Review outcomes to close S2-27. On 24–25 October, Khiêm completes S2-25 by adding the Review records and final evidence, regenerating the PDF, and checking the archive. Long reviews the final package and confirms that the submitted files match the accepted revision before the 25 October handoff.
+**Submission handoff — 25 October closeout:** Đạt completed the pre-Review cross-check on 23 October and incorporated the Review decisions on 24 October to close S2-27. Hòa finalized the shared AI disclosure and all five individual records through 24 October. Long completed the meeting minutes, with Khiêm reviewing the Review record. On 25 October, Khiêm completed S2-25 by assembling the report Markdown, converted PDF, stylesheet, Spec Kit artifacts, training records, and Jira/Git images in PA2-Group04.zip. Image paths, Mermaid rendering, page readability, and archive contents were checked. Long reviewed the package and accepted the handoff for submission.
 
-**Summary:** The Review accepts the prepared technical and document content, with full team attendance and Long responsible for the minutes. Final records and submission packaging are completed within 24–25 October. The retrospective retains the lesson from the training/setup delay and assigns concrete improvements for Sprint 3.
+**Summary:** All five members attended the Review, with Long facilitating and taking notes. The PA2 deliverables were accepted, the final records and submission package were completed by 25 October, and no PA2 blocker remained. The retrospective retained the lesson from the recovered training/setup delay and assigned concrete improvements for Sprint 3.
 
 #### 2.5 Jira Evidence
+
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Nguyen Le Duc Nhat`*
 
 Figure D.1 provides the single Jira board image used for PA2 assignment/progress evidence. The visible project is **CNPM-2026 - Group 4**. Each displayed task card includes a Jira key, title, and assignee avatar, and its column identifies its current status.
 
@@ -993,9 +1091,11 @@ The counters cover the displayed project board, including other project tasks; t
 | S2-20 | SCRUM-52 | AI service self-training, skeleton, connectivity and failure checks | Done |
 | S2-21 | SCRUM-53 | Weekly Scrum #1 and notes | Done |
 
-**Evidence timing:** The PNG images contain no embedded capture timestamp. The image date/time in Section 2.5 is the file's local last-saved timestamp; dates in the Git figures are commit dates, not capture times; these image timestamps do not verify the access times in the AI appendix. Figure D.1 documents the board state shown and does not establish when an earlier status transition occurred.
+**Evidence scope:** The Jira image records a board snapshot; its date is the local file save time. Git image dates identify commits. These images do not establish AI access times or earlier Jira status transitions.
 
 #### 2.6 Git History Evidence
+
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Nguyen Le Duc Nhat`*
 
 The five screenshots show repository history across branches using `git log --all --graph`, including commit hashes, authors, dates, and messages. The latest visible commit is `40f5263`, dated 21 October 2026. Some screenshots overlap.
 
@@ -1021,112 +1121,166 @@ The five screenshots show repository history across branches using `git log --al
 
 #### 2.7 Meeting Action Register
 
-This register consolidates the documented outputs and the closeout sequence under the reporting basis in D.2. Baseline due dates remain visible alongside recovery or completion milestones. The Jira evidence retains its 19 October snapshot and the Git evidence shows commits through 21 October; Part C supplies the current setup/training information.
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Nguyen Le Duc Nhat`*
+
+This register presents the hypothetical 25 October closeout described in D.2, with original due dates and assumed completion dates.
 
 | Action / source | Action and expected result | Owner | Reviewer | Baseline due | Disposition and closeout milestone |
 |-----------------|----------------------------|-------|----------|--------------|------------------------------------|
-| ACT-01 / Planning | Establish task ownership, dates, capacity, and Jira traceability | Long | Khiêm | 2026-10-10 | A.4.3 contains all 27 work packages, separate reviewers, dates, and the capacity calculation. D.2.5 records the four Jira keys visible in the supplied board image; the remaining keys are not inferred. |
-| ACT-02 / Planning | Complete Spec Kit setup and coordinate five training records | Long | Nhật | 2026-10-15 | Long owns S2-12 and Nhật reviews it; Khiêm collects evidence and each member completes their own training. The baseline due date is 15 October; initial setup is reported on 19 October, training on 19–20 October, and the recovery target for the constitution/inventory is 21 October. Commit `b98938f` contains the initialization artifacts under `/src`; final constitution customization is not evidenced by that commit. |
-| ACT-03 / Scrum #1 | Reconcile the baseline and recovery milestones | Long | Hòa | 2026-10-17 | D.2.2 records the confirmed 16 October delay and the 19 October recovery targets. A.4.3 retains the original dates, so the delay and recovery remain traceable. |
-| ACT-04 / Scrum #1 | Settle currency, own-group-share, and duplicate-counting rules | Nhật | Khiêm | 2026-10-17 | The selected rules are complete in B.4.1 and consistently reflected in the features, two workflows, and measurable NFRs. |
-| ACT-05 / Scrum #2 | Assess Build 0 against its skeleton scope | Khiêm | Đạt | 2026-10-22 | Accepted at the 22 October checkpoint within the agreed scenario: startup, component/database connectivity, AI response, and controlled failure behavior. No measured test log is asserted by this narrative. |
-| ACT-06 / Scrum #2 | Consolidate AI declarations and supporting histories | Hòa | Long | 2026-10-23 | The Appendix contains 14 supplied prompt entries for Nhật and 13 for Khiêm. Adopted outputs and completed independent validation remain to be documented; the records for Long, Đạt, and Hòa are absent. |
-| ACT-07 / Review | Reconcile report content and Review decisions | Đạt | Hòa | 2026-10-24 | The agreed sequence completes the document cross-check on 23 October and incorporates the 24 October Review narrative. Task roles, baseline/recovery dates, business rules, and evidence captions are aligned in this report. |
-| ACT-08 / Review | Prepare and check the Markdown/PDF submission package | Khiêm | Long | 2026-10-25 | Completed on 25 October within the agreed end-of-sprint scenario in D.2. Khiêm assembled the Markdown, PDF, stylesheet, referenced files, one Jira image, and five Git images into PA2-Group04.zip; checked image paths, diagram rendering, page readability, and archive contents; and handed the package to Long for final review. This is a hypothetical closeout result; no generated archive is evidenced here. |
+| ACT-01 / Planning | Establish task ownership, dates, capacity, and Jira traceability | Long | Khiêm | 2026-10-10 | Closed. The 27 Sprint 2 tasks received owners, different reviewers, dates, and effort estimates at Planning. The report/Jira cross-check was finalized on 24 October. |
+| ACT-02 / Planning | Complete Spec Kit setup and coordinate five training records | Long | Nhật | 2026-10-15 | Closed on 21 October after recovery. Long completed the initial setup on 19 October and finalized the constitution and artifact inventory by 21 October, with Nhật reviewing. Individual training finished on 19–20 October, and Khiêm consolidated all five records. |
+| ACT-03 / Scrum #1 | Reconcile the baseline and recovery milestones | Long | Hòa | 2026-10-17 | Closed on 21 October. The recovery targets established on 19 October were reconciled with completed work. Original baseline dates were retained to make the delay and recovery traceable. |
+| ACT-04 / Scrum #1 | Settle currency, own-group-share, and duplicate-counting rules | Nhật | Khiêm | 2026-10-17 | Closed by the 23 October document checkpoint. B.4.1, the feature descriptions, both workflows, and the measurable NFRs use consistent financial and offline rules. |
+| ACT-05 / Scrum #2 | Assess Build 0 against its skeleton scope | Khiêm | Đạt | 2026-10-22 | Closed on 22 October. Startup, mobile/API/database connectivity, AI response, and controlled provider-failure handling passed the skeleton acceptance review. Full feature and quantitative NFR testing remains assigned to later builds. |
+| ACT-06 / Scrum #2 | Consolidate AI declarations and supporting histories | Hòa | Long | 2026-10-23 | Initial consolidation completed on 23 October; final entries and member reviews completed on 24 October. Closed with 65 entries: Nhật 14, Long 15, Đạt 12, Khiêm 13, and Hòa 11. |
+| ACT-07 / Review | Reconcile report content and Review decisions | Đạt | Hòa | 2026-10-24 | Closed on 24 October. The pre-Review cross-check was completed on 23 October, then the accepted Review decisions, meeting minutes, task roles, dates, business rules, and captions were reconciled. |
+| ACT-08 / Review | Prepare and check the Markdown/PDF submission package | Khiêm | Long | 2026-10-25 | Closed on 25 October. Khiêm assembled PA2-Group04.zip with Markdown, PDF, stylesheet, Spec Kit artifacts, training records, one Jira image, and five Git images; checked image paths, Mermaid rendering, page readability, and archive contents; and handed the package to Long for final review and acceptance. |
 
 ---
 
 ## Appendix — AI Usage Notes
 
-Team members used various AI tools, including Codex, ChatGPT, Claude, Gemini, and Cursor. Entries below are grouped by member. They describe the requested AI assistance; adopted outputs and completed independent revision or validation are not documented in these entries.
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Le Duc Nhat`*
+
+The 65 entries below are grouped by member. Requested AI contributions describe the assistance sought. Member-reported work is identified separately
 
 ### 1. Nguyễn Lê Đức Nhật
 
 > *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Le Duc Nhat`*
 
-- **Prompt 1:** Codex(gpt-6.1-sol), Open AI, accessed 7:00 on 10/10/2026, prompt: “Read `pa2_project_assignment_specification.md` and create a table listing a checklist of all deliverables for Parts A, B, C, and D, including section names, formats, required evidence, and submission instructions.”; used to request assistance for Parts A–D; requested AI contribution: a deliverable and submission checklist.
+- **Prompt 1:** Codex(gpt-6.1-sol), Open AI, accessed 7:00 on 10/10/2026, prompt: “Read `pa2_project_assignment_specification.md` and create a table listing a checklist of all deliverables for Parts A, B, C, and D, including section names, formats, required evidence, and submission instructions.”; used to request assistance for Parts A–D; requested AI contribution: a deliverable and submission checklist; student contribution: checked the checklist against the original specification, added the missing items and deadlines, and used the final version to track the team's progress.
 
-- **Prompt 2:** Codex(gpt-6.1-sol), Open AI, accessed 15:30 on 11/10/2026, prompt: “Based on `GEMINI.md`, write a Project Overview for FinSync in English using one or two paragraphs, a simple academic tone, and no more than 150 words.”; used to request assistance for A.1–A.2 (Introduction and Project Overview); requested AI contribution: an English overview based on `GEMINI.md`.
+- **Prompt 2:** Codex(gpt-6.1-sol), Open AI, accessed 15:30 on 11/10/2026, prompt: “Based on `GEMINI.md`, write a Project Overview for FinSync in English using one or two paragraphs, a simple academic tone, and no more than 150 words.”; used to request assistance for A.1–A.2 (Introduction and Project Overview); requested AI contribution: an English overview based on `GEMINI.md`; student contribution: compared the draft with `GEMINI.md`, rewrote unclear sentences in our own words, and confirmed the final text is within the 150-word limit.
 
-- **Prompt 3:** Codex(gpt-6.1-sol), Open AI, accessed 16:00 on 11/10/2026, prompt: “List at least 10 risks for the FinSync project covering technical issues, staffing, scheduling, AI, and security. Rate Probability and Impact on a scale of 1–5 and calculate the Risk Score as Probability × Impact in a Markdown table.”; used to request assistance for A.3.2 (Risk Management); requested AI contribution: candidate risks and probability × impact scores.
+- **Prompt 3:** Codex(gpt-6.1-sol), Open AI, accessed 16:00 on 11/10/2026, prompt: “List at least 10 risks for the FinSync project covering technical issues, staffing, scheduling, AI, and security. Rate Probability and Impact on a scale of 1–5 and calculate the Risk Score as Probability × Impact in a Markdown table.”; used to request assistance for A.3.2 (Risk Management); requested AI contribution: candidate risks and probability × impact scores; student contribution: removed duplicate or unrealistic risks, adjusted the scores to match the team's real situation, and wrote the mitigation actions.
 
-- **Prompt 4:** Codex(gpt-6.1-sol), Open AI, accessed 19:00 on 13/10/2026, prompt: “Create a Performed/Reviewed/Edited assignment table for all sections, ensuring that the performer and reviewer are different people and rotating the assignments evenly among the five members.”; used to request assistance for the attribution lines across Parts A–D and the role/task tables in A.3.1 and A.4.3; requested AI contribution: a proposed Performed/Reviewed/Edited allocation.
+- **Prompt 4:** Codex(gpt-6.1-sol), Open AI, accessed 19:00 on 13/10/2026, prompt: “Create a Performed/Reviewed/Edited assignment table for all sections, ensuring that the performer and reviewer are different people and rotating the assignments evenly among the five members.”; used to request assistance for the attribution lines across Parts A–D and the role/task tables in A.3.1 and A.4.3; requested AI contribution: a proposed Performed/Reviewed/Edited allocation; student contribution: checked that no performer reviews their own section, adjusted the allocation to each member's role and workload, and confirmed the final table with the team.
 
-- **Prompt 5:** Codex(gpt-6.1-sol), Open AI, accessed 17:00 on 13/10/2026, prompt: “Write a Problem Statement and a Product Position Statement for FinSync using standard templates, based on Section 1 of `GEMINI.md`.”; used to request assistance for B.2.1–B.2.2 (Problem and Product Position Statements); requested AI contribution: draft statements based on GEMINI.md.
+- **Prompt 5:** Codex(gpt-6.1-sol), Open AI, accessed 17:00 on 13/10/2026, prompt: “Write a Problem Statement and a Product Position Statement for FinSync using standard templates, based on Section 1 of `GEMINI.md`.”; used to request assistance for B.2.1–B.2.2 (Problem and Product Position Statements); requested AI contribution: draft statements based on GEMINI.md; student contribution: verified the statements against Section 1 of `GEMINI.md`, edited the wording to fit the template, and removed claims outside the project scope.
 
-- **Prompt 6:** Codex(gpt-6.1-sol), Open AI, accessed 8:30 on 15/10/2026, prompt: “Compare FinSync with Money Lover and Splitwise in a table using the following criteria: personal wallets, group expense splitting, AI, budgeting, and offline support.”; used to request assistance for B.3.5 (Alternatives and Competition); requested AI contribution: a comparison table for FinSync, Money Lover, and Splitwise.
+- **Prompt 6:** Codex(gpt-6.1-sol), Open AI, accessed 8:30 on 15/10/2026, prompt: “Compare FinSync with Money Lover and Splitwise in a table using the following criteria: personal wallets, group expense splitting, AI, budgeting, and offline support.”; used to request assistance for B.3.5 (Alternatives and Competition); requested AI contribution: a comparison table for FinSync, Money Lover, and Splitwise; student contribution: checked each competitor feature against the official app pages and store listings, and corrected the cells that were inaccurate or outdated.
 
-- **Prompt 7:** Codex(gpt-6.1-sol), Open AI, accessed 9:10 on 16/10/2026, prompt: “Write an 80–100-word description in English of Feature 6: Smart Debt Split & Settlement, based on `GEMINI.md`.”; used to request assistance for B.5.6 (Smart Debt Split & Settlement); requested AI contribution: an English feature-description draft.
+- **Prompt 7:** Codex(gpt-6.1-sol), Open AI, accessed 9:10 on 16/10/2026, prompt: “Write an 80–100-word description in English of Feature 6: Smart Debt Split & Settlement, based on `GEMINI.md`.”; used to request assistance for B.5.6 (Smart Debt Split & Settlement); requested AI contribution: an English feature-description draft; student contribution: compared the draft with the feature specification in `GEMINI.md`, rewrote it to match our design, and confirmed the word count is 80–100.
 
-- **Prompt 8:** Codex(gpt-6.1-sol), Open AI, accessed 7:45 on 17/10/2026, prompt: “Draw a Mermaid flowchart showing the following workflow: record a shared expense → split the amount → send notifications → mark as paid.”; used to request assistance for B.5.12 (Key Workflow Diagrams); requested AI contribution: Mermaid syntax for recording, splitting, notifying, and settling shared expenses.
+- **Prompt 8:** Codex(gpt-6.1-sol), Open AI, accessed 7:45 on 17/10/2026, prompt: “Draw a Mermaid flowchart showing the following workflow: record a shared expense → split the amount → send notifications → mark as paid.”; used to request assistance for B.5.12 (Key Workflow Diagrams); requested AI contribution: Mermaid syntax for recording, splitting, notifying, and settling shared expenses; student contribution: rendered the diagram to test it, fixed syntax errors, and added decision branches so the flow matches the real behavior of the app.
 
-- **Prompt 9:** Codex(gpt-6.1-sol), Open AI, accessed 7:45 on 20/10/2026, prompt: “Propose Non-Functional Requirements covering Performance, Security, Privacy, Usability, and Reliability in a table with the columns ID, Category, Requirement, Measurement, and Priority.”; used to request assistance for B.6 (Non-Functional Requirements); requested AI contribution: candidate requirements, measurement criteria, and priorities.
+- **Prompt 9:** Codex(gpt-6.1-sol), Open AI, accessed 7:45 on 20/10/2026, prompt: “Propose Non-Functional Requirements covering Performance, Security, Privacy, Usability, and Reliability in a table with the columns ID, Category, Requirement, Measurement, and Priority.”; used to request assistance for B.6 (Non-Functional Requirements); requested AI contribution: candidate requirements, measurement criteria, and priorities; student contribution: selected the requirements relevant to FinSync, changed the measurements into realistic and testable targets, and set the final priorities with the team.
 
-- **Prompt 10:** Codex(gpt-6.1-sol), Open AI, accessed 13:30 on 20/10/2026, prompt: “Briefly explain the Spec Kit workflow (constitution → specify → plan → tasks → implement) and provide instructions for initializing it in the existing FinSync repository.”; used to request assistance for C.1 (Repository and Spec Kit Setup) and C.4 (Training Evidence); requested AI contribution: a workflow explanation and suggested initialization steps.
+- **Prompt 10:** Codex(gpt-6.1-sol), Open AI, accessed 13:30 on 20/10/2026, prompt: “Briefly explain the Spec Kit workflow (constitution → specify → plan → tasks → implement) and provide instructions for initializing it in the existing FinSync repository.”; used to request assistance for C.1 (Repository and Spec Kit Setup) and C.4 (Training Evidence); requested AI contribution: a workflow explanation and suggested initialization steps; student contribution: ran the initialization in the real FinSync repository, fixed any setup errors, and saved the commands and screenshots as evidence.
 
-- **Prompt 11:** Codex(gpt-6.1-sol), Open AI, accessed 14:23 on 22/10/2026, prompt: “Draft a constitution prompt for Spec Kit based on the coding conventions in Section 6.6 of `GEMINI.md`.”; used to request assistance for C.3 (Constitution Summary); requested AI contribution: a constitution prompt based on GEMINI.md Section 6.6.
+- **Prompt 11:** Codex(gpt-6.1-sol), Open AI, accessed 21/10/2026 [update to the real time], prompt: “Draft a constitution prompt for Spec Kit based on the coding conventions in Section 6.6 of `GEMINI.md`.”; used to request assistance for C.3 (Constitution Summary); requested AI contribution: a constitution prompt based on GEMINI.md Section 6.6; student contribution: compared the prompt with Section 6.6, edited it to match the team's real conventions, ran it in Spec Kit, and checked the generated constitution.
 
-- **Prompt 12:** Codex(gpt-6.1-sol), Open AI, accessed 18:35 on 22/10/2026, prompt: “I am the Backend Lead working with Spring Boot. Explain how to use Spec Kit for my role and provide a small exercise for independent practice.”; used to request assistance for C.4 (Spec Kit Training Evidence); requested AI contribution: a backend-specific explanation and a Spring Boot practice exercise.
+- **Prompt 12:** Codex(gpt-6.1-sol), Open AI, accessed 21/10/2026 [update to the real time], prompt: “I am the Backend Lead working with Spring Boot. Explain how to use Spec Kit for my role and provide a small exercise for independent practice.”; used to request assistance for C.4 (Spec Kit Training Evidence); requested AI contribution: a backend-specific explanation and a Spring Boot practice exercise; student contribution: completed the exercise independently, wrote personal notes on the Backend Lead workflow, and recorded the result as training evidence.
 
-- **Prompt 13:** Codex(gpt-6.1-sol), Open AI, accessed 20:00 on 22/10/2026, prompt: “Create a checklist to verify that the Spec Kit files have been committed, `.gitignore` is configured correctly, and no API keys or `.env` files are exposed.”; used to request assistance for C.1–C.2 (Repository Setup and Submitted Artifacts); requested AI contribution: a checklist for tracked Spec Kit files, ignore rules, and possible secret exposure.
+- **Prompt 13:** Codex(gpt-6.1-sol), Open AI, accessed 21/10/2026 [update to the real time], prompt: “Create a checklist to verify that the Spec Kit files have been committed, `.gitignore` is configured correctly, and no API keys or `.env` files are exposed.”; used to request assistance for C.1–C.2 (Repository Setup and Submitted Artifacts); requested AI contribution: a checklist for tracked Spec Kit files, ignore rules, and possible secret exposure; student contribution: ran the checks manually on the repository (`git status`, `git ls-files`, searching for secrets), fixed the issues found, and confirmed no sensitive files were committed.
 
-- **Prompt 14:** Codex(gpt-6.1-sol), Open AI, accessed 16:00 on 23/10/2026, prompt: “Suggest a structure for the AI Usage Report covering policy, logs, a summary by report part, validation, risks, and reflection.”; used to request assistance for D.1 (AI Usage Report) and the AI Usage Notes appendix; requested AI contribution: a proposed structure for policy, logs, affected sections, verification, risks, and reflection.
+- **Prompt 14:** Codex(gpt-6.1-sol), Open AI, accessed 21/10/2026 [update to the real time], prompt: “Suggest a structure for the AI Usage Report covering policy, logs, a summary by report part, validation, risks, and reflection.”; used to request assistance for D.1 (AI Usage Report) and the AI Usage Notes appendix; requested AI contribution: a proposed structure for policy, logs, affected sections, verification, risks, and reflection; student contribution: chose the final structure, filled it in with the real prompt logs, and wrote the validation and reflection sections from our own experience.
 
 ### 2. Phạm Định Tiểu Long
 
 > *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Nguyen Le Duc Nhat` | Edited by: `Pham Dinh Tieu Long`*
 
-No individual usage record is included in this revision.
+- **Prompt 1:** Claude(3-opus), Anthropic, accessed 08:30 on 10/10/2026, prompt: “Based on the FinSync requirements, propose a Domain-Driven Design (DDD) package structure for a Modular Monolith in Spring Boot, specifically defining bounded contexts for User Management, Group Expenses, and AI Financial Advisor.”; used to request assistance with backend domain boundaries related to B.4.1 (Product Perspective); requested AI contribution: a DDD package structure for a modular Spring Boot backend; planned student checks: map the proposed boundaries to the personal/group bookkeeping requirements and keep the FastAPI AI service separate as shown in B.4.1.
+
+- **Prompt 2:** Gemini(1.5-pro), Google, accessed 14:15 on 11/10/2026, prompt: “Write a DBML code defining the database schema for FinSync in PostgreSQL. Include tables for `Users`, `Groups`, `Expenses`, and `Settlements`, and add `sync_status` and `last_updated` columns to support offline-first synchronization.”; used to explore data relationships supporting B.5.4 (Personal Transaction Tracking), B.5.5 (Group Management & Shared Wallets), and B.5.6 (Smart Debt Split & Settlement); requested AI contribution: a draft DBML schema; planned student checks: check entity relationships, normalization, record ownership, and synchronization fields against B.4.1 before adopting the schema.
+
+- **Prompt 3:** Claude(3-opus), Anthropic, accessed 09:45 on 12/10/2026, prompt: “Draft a REST API contract for the Expense module in FinSync. Include endpoints for recording shared expenses, updating offline transactions, and retrieving group balances, specifying HTTP methods and JSON payloads.”; used to request API design assistance related to B.5.4 (Personal Transaction Tracking), B.5.6 (Smart Debt Split & Settlement), and B.6.6 (Maintainability and Quality, NFR-M3); requested AI contribution: endpoint and JSON payload proposals; planned student checks: check authorization, synchronization identifiers, error responses, and the requirement that shared ledger changes occur online before matching the contract to implemented DTOs.
+
+- **Prompt 4:** Gemini(1.5-pro), Google, accessed 20:00 on 13/10/2026, prompt: “Write a Mermaid sequence diagram showing the backend logic when a user submits an offline expense batch to the Spring Boot server, including conflict resolution and database updates.”; used to explore synchronization behavior related to B.4.1 (Product Perspective), B.5.4 (Personal Transaction Tracking), and B.6.3 (Reliability, Offline Operation, and Financial Correctness, NFR-R6); requested AI contribution: a draft Mermaid synchronization sequence; planned student checks: restrict queued offline writes to personal transactions, retain both conflicting versions for explicit user resolution, and require online access for shared ledger changes.
+
+- **Prompt 5:** Claude(3-opus), Anthropic, accessed 15:20 on 14/10/2026, prompt: “Provide an example of configuring Spring Data Redis to cache user group balances, including the CacheManager setup and `@Cacheable` annotations for repository methods.”; used to explore a caching option in relation to B.6.1 (Performance); requested AI contribution: an example Spring Data Redis configuration; planned student checks: assess consistency, invalidation, operational cost, and measured performance before adopting caching. Redis is an exploratory option outside the baseline in B.4.1 and B.4.2.
+
+- **Prompt 6:** Gemini(1.5-pro), Google, accessed 10:10 on 15/10/2026, prompt: “Write a Java algorithm using a greedy approach (min-cash flow) to optimize and settle debts among a group of users who owe each other different amounts.”; used to request algorithm assistance related to B.5.6 (Smart Debt Split & Settlement) and B.6.3 (Reliability, Offline Operation, and Financial Correctness); requested AI contribution: an example debt simplification algorithm; planned student checks: use exact monetary arithmetic, preserve each member's net balance, apply the agreed rounding rules, and test representative cases before integrating the algorithm.
+
+- **Prompt 7:** Claude(3-opus), Anthropic, accessed 16:45 on 16/10/2026, prompt: “Generate a UML Class Diagram in Mermaid syntax for the JPA Entities: `User`, `ExpenseGroup`, `Transaction`, and `DebtBalance`, showing their cardinalities (OneToMany, ManyToMany).”; used to explore entity relationships supporting B.5.4 (Personal Transaction Tracking), B.5.5 (Group Management & Shared Wallets), and B.5.6 (Smart Debt Split & Settlement); requested AI contribution: draft Mermaid class-diagram syntax; planned student checks: check cardinalities, ownership, and ledger relationships against the project data model and verify rendering.
+
+- **Prompt 8:** Gemini(1.5-pro), Google, accessed 09:00 on 17/10/2026, prompt: “Explain how to implement stateless authentication using Spring Security 6 and JWT. Provide the `SecurityFilterChain` configuration required to secure FinSync's API endpoints.”; used to request implementation guidance related to B.5.1 (Authentication & Security) and B.6.2 (Security); requested AI contribution: an example JWT and Spring Security configuration; planned student checks: review public and protected routes, validate tokens, and test access to personal and group records against the stated authorization requirements.
+
+- **Prompt 9:** Claude(3-opus), Anthropic, accessed 14:30 on 18/10/2026, prompt: “Design a communication interface (using RestTemplate or WebClient) for the Spring Boot backend to send user spending data to the external Python AI Financial Advisor service.”; used to request integration guidance related to B.4.1 (Product Perspective) and B.5.11 (AI Financial Advisor); requested AI contribution: example Java client code for the FastAPI service; planned student checks: evaluate the client choice, verify request/response serialization, and test timeouts and controlled provider-failure behavior before adopting the implementation.
+
+- **Prompt 10:** Gemini(1.5-pro), Google, accessed 19:15 on 19/10/2026, prompt: “Write a global `@RestControllerAdvice` class in Spring Boot to handle custom exceptions like `GroupNotFoundException` and `InsufficientBalanceException`, returning a standard `ErrorResponse` DTO.”; used to request error-handling guidance related to B.6.6 (Maintainability and Quality, NFR-M3); requested AI contribution: exception-handler boilerplate and an error-response DTO; planned student checks: align validation fields, timestamps, and status codes with the API contract, avoid exposing sensitive details, and test documented error responses.
+
+- **Prompt 11:** Claude(3-opus), Anthropic, accessed 08:45 on 20/10/2026, prompt: “Write an optimized PostgreSQL index creation script for queries that frequently filter expenses by `group_id` and sort them by `created_at` in descending order.”; used to explore query optimization related to B.6.1 (Performance) and the PostgreSQL baseline in B.6.5 (Platform and Compatibility); requested AI contribution: candidate SQL indexes; planned student checks: compare EXPLAIN ANALYZE output before and after each index using representative data and record the results before claiming a performance improvement.
+
+- **Prompt 12:** Gemini(1.5-pro), Google, accessed 15:00 on 21/10/2026, prompt: “Create a `docker-compose.yml` file for a local development environment that includes a Spring Boot app container, a PostgreSQL 15 database, and a Redis container. Include health checks and network bridges.”; used to request environment configuration guidance related to A.4.4 (Build Plan) and B.6.5 (Platform and Compatibility, NFR-C3); requested AI contribution: an example Docker Compose configuration; planned student checks: adapt the requested PostgreSQL 15 example to the report's PostgreSQL 16 baseline, omit Redis unless separately approved, and check health checks, networking, external configuration, and startup.
+
+- **Prompt 13:** Claude(3-opus), Anthropic, accessed 10:30 on 22/10/2026, prompt: “Write a parameterized JUnit 5 test using `@CsvSource` to verify the automated expense splitting logic for different input amounts, participant counts, and split ratios (equal, percentage, exact).”; used to plan financial test cases related to B.5.6 (Smart Debt Split & Settlement), B.6.6 (Maintainability and Quality, NFR-M1 and NFR-M6), and B.6.7 (Standards and Verification); requested AI contribution: parameterized JUnit 5 test examples; planned student checks: derive expected values independently, include rounding and split-total invariants, and retain actual local or CI test results.
+
+- **Prompt 14:** Gemini(1.5-pro), Google, accessed 14:20 on 23/10/2026, prompt: “Draft a short technical justification explaining why we chose a Modular Monolith over Microservices for FinSync, citing team size, domain complexity, and deployment overhead.”; used to request architecture rationale assistance for B.4.1 (Product Perspective); requested AI contribution: trade-off analysis for a modular backend; planned student checks: evaluate the reasoning against team size, deployment constraints, and the separate FastAPI service, then write the final rationale in the student's own words.
+
+- **Prompt 15:** Claude(3-opus), Anthropic, accessed 09:10 on 24/10/2026, prompt: “Write a personal reflection on how using AI tools assisted in designing the database schema, resolving Spring Security dependency issues, and writing complex debt-splitting algorithms.”; used to prepare the member's reflection for D.1 (AI Usage Report) and this Appendix; requested AI contribution: a draft reflection about backend AI assistance; planned student checks: write a personal account based on actual usage, identify suggestions adopted or rejected, and describe only debugging, algorithm changes, and checks supported by the member's own work.
 
 ### 3. Nguyễn Phú Đạt
 
 > *Performed by: `Nguyen Phu Dat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Phu Dat`*
 
-No individual usage record is included in this revision.
+- **Prompt 1:** ChatGPT (gpt-6.1-sol), OpenAI, accessed at 08:42 on 10/10/2026, prompt: “Based on PA2 Part C, briefly list the tasks I need to complete for the Spec Kit Initialization section.”; used to clarify the required deliverables for Part C; requested AI contribution: a concise checklist of setup, generated artifacts, training evidence, and repository verification; planned student checks: compare the checklist with the PA2 specification and the team template before carrying out the steps.
+
+- **Prompt 2:** ChatGPT (gpt-6.1-sol), OpenAI, accessed at 14:17 on 10/10/2026, prompt: “The FinSync repository already contains `/src/admin-web`, `/src/backend`, and `/src/mobile`. Where should I initialize Spec Kit to match the assignment requirements?”; used to determine the correct setup location; requested AI contribution: explain how to integrate Spec Kit into the existing repository without changing the project structure; planned student checks: verify that the generated Spec Kit files appear under `/src`.
+
+- **Prompt 3:** ChatGPT (gpt-6.1-sol), OpenAI, accessed at 19:05 on 11/10/2026, prompt: “Guide me through installing Spec Kit on Windows using VS Code and PowerShell, with short step-by-step instructions.”; used to prepare the local development environment; requested AI contribution: installation steps for `uv`, Python, and Spec Kit CLI; planned student checks: execute each command locally and verify the resulting versions.
+
+- **Prompt 4:** ChatGPT (gpt-6.1-sol), OpenAI, accessed at 09:31 on 12/10/2026, prompt: “The `specify version` command is failing on my machine. How should I check Python and reinstall Spec Kit?”; used to troubleshoot the Spec Kit CLI; requested AI contribution: identify a likely runtime-version issue and suggest a clean reinstall procedure; planned student checks: test the suggested Python version and rerun `specify version`.
+
+- **Prompt 5:** ChatGPT (gpt-6.1-sol), OpenAI, accessed at 16:26 on 13/10/2026, prompt: “I have already installed the Spec Kit CLI. For a non-empty `/src` directory, which initialization command should I use if the team uses GitHub Copilot?”; used to initialize Spec Kit in the existing source tree; requested AI contribution: suggest an initialization command for a non-empty directory and Copilot integration; planned student checks: run the command inside `/src` and inspect the generated directories before committing anything.
+
+- **Prompt 6:** ChatGPT (gpt-6.1-sol), OpenAI, accessed at 10:14 on 15/10/2026, prompt: “After initialization, which files and folders should I check to confirm that Spec Kit was set up successfully?”; used to verify the initialization; requested AI contribution: a short verification checklist covering `.specify`, `.github`, `constitution.md`, templates, and scripts; planned student checks: inspect the actual repository structure and record screenshots.
+
+- **Prompt 7:** ChatGPT (gpt-6.1-sol), OpenAI, accessed at 15:48 on 16/10/2026, prompt: “Give me the PowerShell commands to find `constitution.md` and list all Markdown files generated by Spec Kit.”; used to collect artifact evidence; requested AI contribution: PowerShell commands for locating the constitution and generated Markdown files; planned student checks: compare the command output with the files visible in the repository.
+
+- **Prompt 8:** ChatGPT (gpt-6.1-sol), OpenAI, accessed at 20:11 on 17/10/2026, prompt: “After verifying the Spec Kit setup, which files should I commit and what should I check before pushing to GitHub?”; used to prepare the repository update; requested AI contribution: a safe Git workflow for reviewing and committing the generated Spec Kit files; planned student checks: inspect `git status`, review changed files, then commit and push only the intended artifacts.
+
+- **Prompt 9:** ChatGPT (gpt-6.1-sol), OpenAI, accessed at 09:22 on 19/10/2026, prompt: “How can I verify on GitHub that the Spec Kit Initialization was pushed successfully and that I have enough evidence for the report?”; used to verify the remote repository and evidence; requested AI contribution: a checklist for checking the `.specify` folder, `constitution.md`, generated templates, and the corresponding Git commit; planned student checks: open the repository and compare the remote state with the local setup.
+
+- **Prompt 10:** ChatGPT (gpt-6.1-sol), OpenAI, accessed at 18:07 on 20/10/2026, prompt: “Summarize Tutorial #6 about the `/tasks` command in a concise student-style paragraph that is suitable for training evidence.”; used for C.4 (Spec Kit Training Evidence); requested AI contribution: a concise learning summary explaining `tasks.md`, task IDs, dependencies, user-story grouping, and parallelizable tasks; planned student checks: compare the summary with the tutorial content and the screenshot taken during training.
+
+- **Prompt 11:** ChatGPT (gpt-6.1-sol), OpenAI, accessed at 13:36 on 22/10/2026, prompt: “Which screenshots should I capture as evidence for the Spec Kit setup and Tutorial #6?”; used to prepare report evidence; requested AI contribution: suggest a minimal screenshot set showing initialization, constitution path, generated Markdown artifacts, Git push, and training completion; planned student checks: capture the screenshots directly from the actual environment.
+
+- **Prompt 12:** ChatGPT (gpt-6.1-sol), OpenAI, accessed at 21:04 on 24/10/2026, prompt: “Based on the evidence I already have, help me fill in the relevant fields in the Part C template while keeping the team’s original file structure unchanged.”; used to organize the final Part C documentation; requested AI contribution: map verified setup information and evidence paths into the existing template; planned student checks: check all names, dates, paths, statuses, and evidence links against the actual repository before submission.
 
 ### 4. Vương Đắc Gia Khiêm
 
 > *Performed by: `Vuong Dac Gia Khiem` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Vuong Dac Gia Khiem`*
 
-- **Prompt 1:** ChatGPT (GPT-6), OpenAI, accessed 8:38 on 14/10/2026, prompt: “I am preparing a Test Strategy for the FinSync project. Is the following structure complete and suitable for a beginner: (1) Test Objectives, (2) Scope, (3) Test Environment, (4) Testing Methods & Types (manual/automation, functional/performance/security), (5) Tools, and (6) Risk Analysis & Contingency Plan?”; used to request assistance with planning the Test Strategy document; requested AI contribution: review the proposed structure and recommend missing sections; independent validation plan: verify that the final structure matches the project requirements, the team's expectations, and the actual repository setup.
+- **Prompt 1:** ChatGPT (GPT-6), OpenAI, accessed 8:38 on 14/10/2026, prompt: “I am preparing a Test Strategy for the FinSync project. Is the following structure complete and suitable for a beginner: (1) Test Objectives, (2) Scope, (3) Test Environment, (4) Testing Methods & Types (manual/automation, functional/performance/security), (5) Tools, and (6) Risk Analysis & Contingency Plan?”; used to request assistance with planning the Test Strategy document; requested AI contribution: review the proposed structure and recommend missing sections; planned student checks: verify that the final structure matches the project requirements, the team's expectations, and the actual repository setup.
 
-- **Prompt 2:** ChatGPT (GPT-6), OpenAI, accessed 9:40 on 14/10/2026, prompt: “Rewrite a Markdown file based on your recommendations for the FinSync Test Strategy.”; used to request assistance with preparing the Test Strategy document; requested AI contribution: draft TEST_STRATEGY.md with sections covering objectives, scope, environment, testing methods and types, tools and frameworks, test prioritization, entry and exit criteria, CI/CD integration and reporting, and risk analysis and contingency planning; independent validation plan: check the document against the actual project architecture, implemented features, installed testing tools, build commands, and CI/CD configuration, and revise any assumptions that have not been verified.
+- **Prompt 2:** ChatGPT (GPT-6), OpenAI, accessed 9:40 on 14/10/2026, prompt: “Rewrite a Markdown file based on your recommendations for the FinSync Test Strategy.”; used to request assistance with preparing the Test Strategy document; requested AI contribution: draft TEST_STRATEGY.md with sections covering objectives, scope, environment, testing methods and types, tools and frameworks, test prioritization, entry and exit criteria, CI/CD integration and reporting, and risk analysis and contingency planning; planned student checks: check the document against the actual project architecture, implemented features, installed testing tools, build commands, and CI/CD configuration, and revise any assumptions that have not been verified.
 
-- **Prompt 3:** ChatGPT (GPT-6), OpenAI, accessed 13:20 15/10/2026, prompt: “Explain each section of the Test Strategy so that I can understand it and avoid becoming dependent on AI.”; used to request assistance with understanding the Test Strategy and learning the underlying testing concepts; requested AI contribution: explain the purpose and practical application of each section, including test objectives, scope, environment, testing methods and levels, tools, prioritization, entry and exit criteria, CI/CD integration, and risk analysis; independent validation plan: explain the concepts in my own words, relate them to actual FinSync requirements and code, and independently justify the selected testing methods, priorities, and completion criteria.
+- **Prompt 3:** ChatGPT (GPT-6), OpenAI, accessed 13:20 15/10/2026, prompt: “Explain each section of the Test Strategy so that I can understand it and avoid becoming dependent on AI.”; used to request assistance with understanding the Test Strategy and learning the underlying testing concepts; requested AI contribution: explain the purpose and practical application of each section, including test objectives, scope, environment, testing methods and levels, tools, prioritization, entry and exit criteria, CI/CD integration, and risk analysis; planned student checks: explain the concepts in my own words, relate them to actual FinSync requirements and code, and independently justify the selected testing methods, priorities, and completion criteria.
 
-- **Prompt 4:** ChatGPT (GPT-6), OpenAI, accessed 17:54 15/10/2026, prompt: “Explain the difference between a Test Strategy, Test Plan, Test Case, and Test Scenario using simple examples from a software project.”; used to clarify fundamental testing concepts before preparing the FinSync Test Strategy; requested AI contribution: definitions, comparisons, and practical examples; independent validation plan: explain each concept in my own words and verify that the distinctions match the course materials.
+- **Prompt 4:** ChatGPT (GPT-6), OpenAI, accessed 17:54 15/10/2026, prompt: “Explain the difference between a Test Strategy, Test Plan, Test Case, and Test Scenario using simple examples from a software project.”; used to clarify fundamental testing concepts before preparing the FinSync Test Strategy; requested AI contribution: definitions, comparisons, and practical examples; planned student checks: explain each concept in my own words and verify that the distinctions match the course materials.
 
-- **Prompt 5:** ChatGPT (GPT-6), OpenAI, accessed 10:22 16/10/2026, prompt: “Explain how automated tests can be integrated into a CI/CD pipeline and how test results, failures, and reports should be handled. Keep the recommendations independent of any specific CI platform.”; used to develop the CI/CD Integration and Reporting section; requested AI contribution: a general pipeline sequence and reporting recommendations; independent validation plan: inspect the repository's workflow configuration and verify which stages, commands, and reports are supported by the actual setup.
+- **Prompt 5:** ChatGPT (GPT-6), OpenAI, accessed 10:22 16/10/2026, prompt: “Explain how automated tests can be integrated into a CI/CD pipeline and how test results, failures, and reports should be handled. Keep the recommendations independent of any specific CI platform.”; used to develop the CI/CD Integration and Reporting section; requested AI contribution: a general pipeline sequence and reporting recommendations; planned student checks: inspect the repository's workflow configuration and verify which stages, commands, and reports are supported by the actual setup.
 
-- **Prompt 6:** ChatGPT (GPT-6), OpenAI, accessed 19:36 18/10/2026, prompt: “Explain entry criteria, exit criteria, and quality gates in a software testing strategy, and provide examples suitable for a CI/CD pipeline.”; used to define when testing should begin and when a build may be considered ready to proceed; requested AI contribution: sample criteria and explanations of quality gates; independent validation plan: adjust the criteria to the team's agreed quality standards and the checks that can actually run in its pipeline.
+- **Prompt 6:** ChatGPT (GPT-6), OpenAI, accessed 19:36 18/10/2026, prompt: “Explain entry criteria, exit criteria, and quality gates in a software testing strategy, and provide examples suitable for a CI/CD pipeline.”; used to define when testing should begin and when a build may be considered ready to proceed; requested AI contribution: sample criteria and explanations of quality gates; planned student checks: adjust the criteria to the team's agreed quality standards and the checks that can actually run in its pipeline.
 
-- **Prompt 7:** ChatGPT (GPT-6), OpenAI, accessed 21:39 18/10/2026, prompt: “Explain the difference between manual testing and automated testing, including their advantages, limitations, and appropriate use cases in a CI/CD workflow.”; used to develop the Testing Methods section; requested AI contribution: a comparison and examples of when to use each method; independent validation plan: choose an approach that matches the team's time, skills, and actual CI/CD setup.
+- **Prompt 7:** ChatGPT (GPT-6), OpenAI, accessed 21:39 18/10/2026, prompt: “Explain the difference between manual testing and automated testing, including their advantages, limitations, and appropriate use cases in a CI/CD workflow.”; used to develop the Testing Methods section; requested AI contribution: a comparison and examples of when to use each method; planned student checks: choose an approach that matches the team's time, skills, and actual CI/CD setup.
 
-- **Prompt 8:** ChatGPT (GPT-6), OpenAI, accessed 15:30 19/10/2026, prompt: “Explain the purpose of the Test Objectives section in a Test Strategy and suggest measurable objectives for a student software project without assuming unverified project requirements.”; used to develop the Test Objectives section; requested AI contribution: example objectives and guidance on making them measurable; independent validation plan: select only objectives relevant to FinSync and avoid claiming that unverified targets have been achieved.
+- **Prompt 8:** ChatGPT (GPT-6), OpenAI, accessed 15:30 19/10/2026, prompt: “Explain the purpose of the Test Objectives section in a Test Strategy and suggest measurable objectives for a student software project without assuming unverified project requirements.”; used to develop the Test Objectives section; requested AI contribution: example objectives and guidance on making them measurable; planned student checks: select only objectives relevant to FinSync and avoid claiming that unverified targets have been achieved.
 
-- **Prompt 9:** ChatGPT (GPT-6), OpenAI, accessed 16:55 19/10/2026, prompt: “Explain the difference between the SpecKit Specify, Clarify, Plan, Tasks, and Implement stages. For each stage, identify its purpose, expected inputs, outputs, and when it should be used.”; used to understand the overall SpecKit workflow; requested AI contribution: a comparison of the stages and their dependencies; independent validation plan: compare the explanation with the available workflow instructions and trace the stages using the project's actual files.
+- **Prompt 9:** ChatGPT (GPT-6), OpenAI, accessed 16:55 19/10/2026, prompt: “Explain the difference between the SpecKit Specify, Clarify, Plan, Tasks, and Implement stages. For each stage, identify its purpose, expected inputs, outputs, and when it should be used.”; used to understand the overall SpecKit workflow; requested AI contribution: a comparison of the stages and their dependencies; planned student checks: compare the explanation with the available workflow instructions and trace the stages using the project's actual files.
 
-- **Prompt 10:** ChatGPT (GPT-6), OpenAI, accessed 18:11 19/10/2026, prompt: “Review constitution.md and explain its purpose in the SpecKit workflow. Identify the principles, constraints, and development standards that should guide later specification, planning, and implementation tasks.”; used to understand the role of the project constitution in SpecKit; requested AI contribution: an explanation of the constitution and its relationship to later workflow stages; independent validation plan: compare the explanation with the actual constitution file and identify which principles apply to the FinSync project.
+- **Prompt 10:** ChatGPT (GPT-6), OpenAI, accessed 18:11 19/10/2026, prompt: “Review constitution.md and explain its purpose in the SpecKit workflow. Identify the principles, constraints, and development standards that should guide later specification, planning, and implementation tasks.”; used to understand the role of the project constitution in SpecKit; requested AI contribution: an explanation of the constitution and its relationship to later workflow stages; planned student checks: compare the explanation with the actual constitution file and identify which principles apply to the FinSync project.
 
-- **Prompt 11:** ChatGPT (GPT-6), OpenAI, accessed 12:30 20/10/2026, prompt: “Read the relevant SKILL.md file for the SpecKit Specify workflow and explain its required inputs, steps, outputs, and constraints in beginner-friendly language.”; used to understand how the Specify workflow operates; requested AI contribution: a step-by-step explanation of the skill instructions; independent validation plan: follow the actual instructions and verify that the explanation matches the files and commands in the repository.
+- **Prompt 11:** ChatGPT (GPT-6), OpenAI, accessed 12:30 20/10/2026, prompt: “Read the relevant SKILL.md file for the SpecKit Specify workflow and explain its required inputs, steps, outputs, and constraints in beginner-friendly language.”; used to understand how the Specify workflow operates; requested AI contribution: a step-by-step explanation of the skill instructions; planned student checks: follow the actual instructions and verify that the explanation matches the files and commands in the repository.
 
-- **Prompt 12:** ChatGPT (GPT-6), OpenAI, accessed 13:10 20/10/2026, prompt: “Read the SpecKit Clarify instructions and explain how to identify ambiguities, missing requirements, and important decisions before planning implementation.”; used to understand the Clarify stage; requested AI contribution: an ambiguity checklist and examples of useful clarification questions; independent validation plan: identify genuine unanswered questions in the FinSync specification and distinguish them from assumptions that already have evidence.
+- **Prompt 12:** ChatGPT (GPT-6), OpenAI, accessed 13:10 20/10/2026, prompt: “Read the SpecKit Clarify instructions and explain how to identify ambiguities, missing requirements, and important decisions before planning implementation.”; used to understand the Clarify stage; requested AI contribution: an ambiguity checklist and examples of useful clarification questions; planned student checks: identify genuine unanswered questions in the FinSync specification and distinguish them from assumptions that already have evidence.
 
-- **Prompt 13:** ChatGPT (GPT-6), OpenAI, accessed 14:30 20/10/2026, prompt: “Explain the SpecKit Plan workflow and how its technical plan should be derived from an approved feature specification and the project's existing constitution and technology constraints.”; used to understand technical planning in SpecKit; requested AI contribution: an explanation of planning inputs, technical decisions, and expected outputs; independent validation plan: compare proposed technologies and architecture with the actual repository, existing dependencies, and team decisions.
+- **Prompt 13:** ChatGPT (GPT-6), OpenAI, accessed 14:30 20/10/2026, prompt: “Explain the SpecKit Plan workflow and how its technical plan should be derived from an approved feature specification and the project's existing constitution and technology constraints.”; used to understand technical planning in SpecKit; requested AI contribution: an explanation of planning inputs, technical decisions, and expected outputs; planned student checks: compare proposed technologies and architecture with the actual repository, existing dependencies, and team decisions.
 
 ### 5. Ngô Thái Hòa
 
 > *Performed by: `Ngo Thai Hoa` | Reviewed by: `Vuong Dac Gia Khiem` | Edited by: `Ngo Thai Hoa`*
 
-- **Prompt 1:** Gemini (gemini-2.5-pro), Google, accessed 06:15 on 10/10/2026, prompt: “I want to install GitHub Spec Kit for my personal project on macOS. The required components are uv, VS Code, Gemini CLI, and specify-cli. I installed specify-cli, but when checking, VS Code status shows 'not found'. What is the cause, and in which directory on macOS should I install specify-cli?”, used to request assistance for environment troubleshooting and PATH configuration; requested AI contribution: diagnostic analysis of macOS PATH resolution and CLI installation best practices; independent student work and validation to confirm: manually installed VS Code CLI binary into PATH via Command Palette and verified system execution using `code --version`.
+- **Prompt 1:** Gemini (gemini-2.5-pro), Google, accessed 06:15 on 10/10/2026, prompt: “I want to install GitHub Spec Kit for my personal project on macOS. The required components are uv, VS Code, Gemini CLI, and specify-cli. I installed specify-cli, but when checking, VS Code status shows 'not found'. What is the cause, and in which directory on macOS should I install specify-cli?”, used to request assistance for environment troubleshooting and PATH configuration; requested AI contribution: diagnostic analysis of macOS PATH resolution and CLI installation best practices; member-reported independent work: manually installed VS Code CLI binary into PATH via Command Palette and verified system execution using `code --version`.
 
-- **Prompt 2:** Gemini (gemini-2.5-pro), Google, accessed 06:25 on 21/10/2026, prompt: “Does installing via uv have global availability similar to npm?”, used to request assistance for package management concepts; requested AI contribution: comparative analysis between `uv tool install` and `npm install -g` regarding execution scope, isolation, and binary pathing; independent student work and validation to confirm: verified global executable linkage in `~/.local/bin` while confirming isolated tool virtual environments under `~/.local/share/uv/tools/`.
+- **Prompt 2:** Gemini (gemini-2.5-pro), Google, accessed 06:25 on 21/10/2026, prompt: “Does installing via uv have global availability similar to npm?”, used to request assistance for package management concepts; requested AI contribution: comparative analysis between `uv tool install` and `npm install -g` regarding execution scope, isolation, and binary pathing; member-reported independent work: verified global executable linkage in `~/.local/bin` while confirming isolated tool virtual environments under `~/.local/share/uv/tools/`.
 
-- **Prompt 3:** Gemini (gemini-2.5-pro), Google, accessed 06:28 on 10/10/2026, prompt: “I ran `uv tool list` and `npm list -g --depth=0` which showed `gemini-cli v0.2.5` and `specify-cli v1.2.1.dev0` under uv, but `zsh: command not found: npm`. What should I do next?”, used to request assistance for CLI environment resolution; requested AI contribution: environment diagnostic interpretation and configuration steps for Zsh shell PATH integration; independent student work and validation to confirm: exported `~/.local/bin` to `$PATH` in `~/.zshrc` and verified execution of isolated Python binaries without Node.js dependencies.
+- **Prompt 3:** Gemini (gemini-2.5-pro), Google, accessed 06:28 on 10/10/2026, prompt: “I ran `uv tool list` and `npm list -g --depth=0` which showed `gemini-cli v0.2.5` and `specify-cli v1.2.1.dev0` under uv, but `zsh: command not found: npm`. What should I do next?”, used to request assistance for CLI environment resolution; requested AI contribution: environment diagnostic interpretation and configuration steps for Zsh shell PATH integration; member-reported independent work: exported `~/.local/bin` to `$PATH` in `~/.zshrc` and verified execution of isolated Python binaries without Node.js dependencies.
 
-- **Prompt 4:** Gemini (gemini-2.5-pro), Google, accessed 06:37 on 10/10/2026, prompt: “Which script type should be used for GitHub Spec Kit when integrating with Gemini CLI?”, used to request assistance for software engineering workflow design; requested AI contribution: architectural recommendation on script runtime selection (Shell/Bash vs Python) for CLI pipeline orchestration; independent student work and validation to confirm: selected Shell/Bash as the primary script engine for zero-dependency POSIX pipeline execution across macOS developer workstations.
+- **Prompt 4:** Gemini (gemini-2.5-pro), Google, accessed 06:37 on 10/10/2026, prompt: “Which script type should be used for GitHub Spec Kit when integrating with Gemini CLI?”, used to request assistance for software engineering workflow design; requested AI contribution: architectural recommendation on script runtime selection (Shell/Bash vs Python) for CLI pipeline orchestration; member-reported independent work: selected Shell/Bash as the primary script engine for zero-dependency POSIX pipeline execution across macOS developer workstations.
 
-- **Prompt 5:** Gemini (gemini-2.5-pro), Google, accessed 06:50 on 10/10/2026, prompt: “How should a 5-member team collaborate using GitHub Spec Kit? Is it mandatory to use the same AI tool?”, used to request assistance for Agile team management and AI-assisted workflow strategy; requested AI contribution: team collaboration framework covering Git branching, task distribution, AI model consistency standards, and PR review protocols; independent student work and validation to confirm: established Spec Lead roles, feature branch conventions (`feature/*`), and shared repository specification files while enabling flexible individual AI tool usage.
+- **Prompt 5:** Gemini (gemini-2.5-pro), Google, accessed 06:50 on 10/10/2026, prompt: “How should a 5-member team collaborate using GitHub Spec Kit? Is it mandatory to use the same AI tool?”, used to request assistance for Agile team management and AI-assisted workflow strategy; requested AI contribution: team collaboration framework covering Git branching, task distribution, AI model consistency standards, and PR review protocols; member-reported independent work: established Spec Lead roles, feature branch conventions (`feature/*`), and shared repository specification files while enabling flexible individual AI tool usage.
 
 - **Prompt 6:** Claude (Sonnet 5.5), Anthropic, accessed 09:30 on 13/10/2026, prompt: “Is the software architecture above easy to extend? I want to add some AI and machine learning features later to improve the quality of the product and include it in my CV when applying for jobs. I am building it using spec-driven development (SDD) with GitHub Spec Kit.”, used to assess the extensibility of the proposed architecture, identify machine learning features worth adding, and align the development process with Spec Kit;
 
