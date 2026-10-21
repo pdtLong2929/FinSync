@@ -37,6 +37,7 @@ table {
   font-size: 12px;
   margin: 12px 0;
   width: 100%;
+  table-layout: auto;
 }
 
 thead {
@@ -49,7 +50,10 @@ tr {
 }
 
 th, td {
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  word-break: normal;
+  vertical-align: top;
+  padding: 6px 8px;
 }
 
 /* Blockquotes and code blocks */

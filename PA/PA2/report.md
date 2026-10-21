@@ -22,7 +22,7 @@
 ## Team Members
 > *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Le Duc Nhat`*
 
-| # | Student ID | Full Name | Email | Main Role |
+| # | <span style="white-space: nowrap;">Student ID</span> | <span style="white-space: nowrap;">Full Name</span> | Email | <span style="white-space: nowrap;">Main Role</span> |
 |---|------------|-----------|-------|-----------|
 | 1 | 24120087 | Phạm Định Tiểu Long | phamlongkh2006@gmail.com | Project Manager / Group Leader |
 | 2 | 24120038 | Nguyễn Phú Đạt | nguyennphuudatt@gmail.com | UI/UX Designer & Frontend Lead |
@@ -88,14 +88,14 @@ This document is the initial version of the Project Plan. It will be updated in 
 
 | Deliverable | Sprint / PA | Format |
 |-------------|-------------|--------|
-| Project Proposal, app survey | Sprint 1 / PA1 | Markdown + PDF |
-| Project Plan (initial), Vision Document (initial), Spec Kit init | Sprint 2 / PA2 | Markdown + PDF, repo artifacts |
-| Revised Project Plan and Vision Document after TA feedback | Sprint 3 / PA3 | Markdown + PDF |
-| Use cases, architecture and design documents | Sprint 3–4 | Markdown + PDF |
-| Test plan and test cases | Sprint 4 | Markdown + PDF |
-| Source code: mobile app, backend API, AI microservice, admin web | Sprint 2–5 | GitHub repository (private) |
+| Project Proposal, app survey | <span style="white-space: nowrap;">Sprint 1</span> / PA1 | Markdown + PDF |
+| Project Plan (initial), Vision Document (initial), <span style="white-space: nowrap;">Spec Kit</span> init | <span style="white-space: nowrap;">Sprint 2</span> / PA2 | Markdown + PDF, repo artifacts |
+| Revised Project Plan and Vision Document after TA feedback | <span style="white-space: nowrap;">Sprint 3</span> / PA3 | Markdown + PDF |
+| Use cases, architecture and design documents | <span style="white-space: nowrap;">Sprint 3–4</span> | Markdown + PDF |
+| Test plan and test cases | <span style="white-space: nowrap;">Sprint 4</span> | Markdown + PDF |
+| Source code: mobile app, backend API, AI microservice, admin web | <span style="white-space: nowrap;">Sprint 2–5</span> | GitHub repository (private) |
 | Test builds | See [Build Plan](#44-build-plan) | APK / deployed environment |
-| Final demo of all features | Sprint 5 / PA5 | Live demo |
+| Final demo of all features | <span style="white-space: nowrap;">Sprint 5</span> / PA5 | Live demo |
 
 ### 2.4 Assumptions
 > *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Le Duc Nhat`*
@@ -133,8 +133,8 @@ This document is the initial version of the Project Plan. It will be updated in 
 | ID | Risk | Probability | Impact | Mitigation Strategy | Owner |
 |----|------|-------------|--------|---------------------|-------|
 | R1 | Member unavailability or uneven workload | Medium | High | Limit most work packages to three days, reserve review time, use a different reviewer as backup, and redistribute incomplete work during Scrum. | Long |
-| R2 | Scope creep across eleven feature groups | High | High | Deliver a basic usable flow for every planned feature by Build 3; prioritize correctness and integration, and defer cosmetic depth through a documented scope decision. | Long |
-| R3 | Learning Kotlin/Compose, Spec Kit, and deployment tools | Medium | Medium | Schedule individual training and small runnable skeletons in Sprint 2; retain the PA1 stack and share setup instructions. | Đạt |
+| R2 | Scope creep across eleven feature groups | High | High | Deliver a basic usable flow for every planned feature by <span style="white-space: nowrap;">Build 3</span>; prioritize correctness and integration, and defer cosmetic depth through a documented scope decision. | Long |
+| R3 | Learning Kotlin/Compose, <span style="white-space: nowrap;">Spec Kit</span>, and deployment tools | Medium | Medium | Schedule individual training and small runnable skeletons in <span style="white-space: nowrap;">Sprint 2</span>; retain the PA1 stack and share setup instructions. | Đạt |
 | R4 | AI quota, latency, cost, or invalid suggestions | Medium | Medium | Use bounded requests, aggregate input, schema validation, a 30-second timeout, cached advice, and synthetic development responses. Keep finance functions independent of the AI provider. | Hòa |
 | R5 | Mobile/backend/AI/admin integration failures | Medium | High | Define API contracts and shared currency/accounting rules early, smoke-test each build, and integrate before the final review. | Nhật |
 | R6 | Exposed credentials or unauthorized financial access | Low | High | Externalize secrets, review tracked files and authorization tests, limit AI payloads, and rotate any exposed credential. | Khiêm |
@@ -152,7 +152,7 @@ The project follows the **Scrum** process. The semester is divided into **5 spri
 
 | Meeting | When | Purpose |
 |---------|------|---------|
-| Sprint Planning (1) | At the transition before sprint implementation; Sprint 2 kickoff slot: 10 October, 09:00–10:00 | Prioritize work, allocate capacity, and assign tasks |
+| Sprint Planning (1) | At the transition before sprint implementation; <span style="white-space: nowrap;">Sprint 2</span> kickoff slot: 10 October, <span style="white-space: nowrap;">09:00–10:00</span> | Prioritize work, allocate capacity, and assign tasks |
 | Weekly Scrum (2) | During sprint | Each member answers: done since last week / plan until next week / obstacles |
 | Sprint Review & Retrospective (1) | End of sprint | Review results; what went well, what went wrong, root causes, improvements, lessons learned |
 
@@ -165,11 +165,11 @@ The Jira workflow is **To Do → In Progress → Done**, as recorded in PA1. Wor
 
 | Sprint | PA | Planning period | Main focus |
 |--------|----|-----------------|------------|
-| Sprint 1 | PA1 | Before 2026-10-10; PA1 artifacts available in repository by 2026-10-05 | Proposal, app survey, team contract, and initial repository/backend setup |
-| Sprint 2 | PA2 | **2026-10-10 to 2026-10-25** | Initial plan/vision, Spec Kit/training, skeletons, and Build 0 |
-| Sprint 3 | PA3 | 2026-10-26 to 2026-11-08 | Revised documents; Auth, Profile, Wallet, offline Personal Transactions; AI/admin prototypes; Build 1 |
-| Sprint 4 | PA4 | 2026-11-09 to 2026-11-22 | Groups, shared fund, split/settlement/refunds, currency conversion, budgets, savings, reports; Build 2 |
-| Sprint 5 | PA5 | 2026-11-23 to 2026-12-06 | Complete AI/admin/export, full regression and offline rehearsal, release candidate, final build, and demo |
+| <span style="white-space: nowrap;">Sprint 1</span> | PA1 | Before <span style="white-space: nowrap;">2026-10-10</span>; PA1 artifacts available in repository by <span style="white-space: nowrap;">2026-10-05</span> | Proposal, app survey, team contract, and initial repository/backend setup |
+| <span style="white-space: nowrap;">Sprint 2</span> | PA2 | **<span style="white-space: nowrap;">2026-10-10</span> to <span style="white-space: nowrap;">2026-10-25</span>** | Initial plan/vision, <span style="white-space: nowrap;">Spec Kit</span>/training, skeletons, and <span style="white-space: nowrap;">Build 0</span> |
+| <span style="white-space: nowrap;">Sprint 3</span> | PA3 | <span style="white-space: nowrap;">2026-10-26</span> to <span style="white-space: nowrap;">2026-11-08</span> | Revised documents; Auth, Profile, Wallet, offline Personal Transactions; AI/admin prototypes; <span style="white-space: nowrap;">Build 1</span> |
+| <span style="white-space: nowrap;">Sprint 4</span> | PA4 | <span style="white-space: nowrap;">2026-11-09</span> to <span style="white-space: nowrap;">2026-11-22</span> | Groups, shared fund, split/settlement/refunds, currency conversion, budgets, savings, reports; <span style="white-space: nowrap;">Build 2</span> |
+| <span style="white-space: nowrap;">Sprint 5</span> | PA5 | <span style="white-space: nowrap;">2026-11-23</span> to <span style="white-space: nowrap;">2026-12-06</span> | Complete AI/admin/export, full regression and offline rehearsal, release candidate, final build, and demo |
 
 Sprint 3–5 dates are team planning targets aligned to two-week cycles, rather than confirmed course submission deadlines. Sprint Planning refines each later sprint's task-level estimates and assignments.
 
@@ -180,35 +180,35 @@ The dated task list is the Sprint 2 baseline. Every task has one assignee and a 
 
 Long, Đạt, Nhật, Khiêm, and Hòa refer to the members in the team table. Meetings involve all five members; the assigned owner facilitates and records the minutes. Estimates below cover the owner's task execution; peer review and other members' meeting attendance are budgeted separately.
 
-| Local ID | Task | Assignee | Reviewer | Planned start | Due date | Owner effort (h) |
+| <span style="white-space: nowrap;">Local ID</span> | Task | Assignee | Reviewer | <span style="white-space: nowrap;">Planned start</span> | <span style="white-space: nowrap;">Due date</span> | Owner effort (h) |
 |----------|------|----------|----------|---------------|----------|------------------|
-| S2-01 | Sprint 2 Planning and meeting notes | Long | Hòa | 2026-10-10 | 2026-10-10 | 1.5 |
-| S2-02 | Project Plan — Introduction and Overview | Nhật | Long | 2026-10-13 | 2026-10-14 | 2 |
-| S2-03 | Project Plan — Organization and Risk Management | Long | Khiêm | 2026-10-13 | 2026-10-14 | 2 |
-| S2-04 | Project Plan — Schedule and Build Plan | Long | Khiêm | 2026-10-15 | 2026-10-16 | 2 |
-| S2-05 | Vision — Introduction and Positioning | Hòa | Long | 2026-10-13 | 2026-10-14 | 2 |
-| S2-06 | Vision — Users, Stakeholders, Alternatives; review PA1 survey | Đạt | Hòa | 2026-10-13 | 2026-10-15 | 3 |
-| S2-07 | Vision — Product Overview and accounting boundaries | Nhật | Khiêm | 2026-10-15 | 2026-10-16 | 3 |
-| S2-08 | Vision — Product Features, 3–5 sentences per feature | Hòa | Nhật | 2026-10-15 | 2026-10-17 | 4 |
-| S2-09 | Two Mermaid user workflows | Đạt | Khiêm | 2026-10-18 | 2026-10-19 | 3 |
-| S2-10 | Vision — NFR targets and verification methods | Khiêm | Nhật | 2026-10-18 | 2026-10-19 | 3 |
-| S2-11 | Review existing GitHub setup, folders, ignore rules, and branch rules | Khiêm | Long | 2026-10-10 | 2026-10-11 | 1.5 |
-| S2-12 | Initialize Spec Kit in `/src`; complete constitution and artifact inventory | Khiêm | Nhật | 2026-10-13 | 2026-10-15 | 3 |
-| S2-13 | Spec Kit training and individual evidence — Long | Long | Hòa | 2026-10-10 | 2026-10-12 | 3 |
-| S2-14 | Spec Kit training and individual evidence — Đạt | Đạt | Long | 2026-10-10 | 2026-10-12 | 3 |
-| S2-15 | Spec Kit training and individual evidence — Nhật | Nhật | Đạt | 2026-10-10 | 2026-10-12 | 3 |
-| S2-16 | Spec Kit training and individual evidence — Khiêm | Khiêm | Nhật | 2026-10-10 | 2026-10-12 | 3 |
-| S2-17 | Spec Kit training and individual evidence — Hòa | Hòa | Khiêm | 2026-10-10 | 2026-10-12 | 3 |
-| S2-18 | Kotlin / Compose self-training and runnable mobile skeleton | Đạt | Nhật | 2026-10-16 | 2026-10-18 | 4 |
-| S2-19 | Review/complete backend skeleton, database, migrations, and API documentation | Nhật | Khiêm | 2026-10-17 | 2026-10-19 | 6 |
-| S2-20 | AI service self-training, skeleton, connectivity and failure smoke test | Hòa | Nhật | 2026-10-18 | 2026-10-20 | 4 |
-| S2-21 | Weekly Scrum #1 and notes | Long | Hòa | 2026-10-16 | 2026-10-16 | 1 |
-| S2-22 | Weekly Scrum #2 and notes | Long | Hòa | 2026-10-22 | 2026-10-22 | 1 |
-| S2-23 | Sprint Review & Retrospective and notes | Long | Khiêm | 2026-10-24 | 2026-10-24 | 1.5 |
-| S2-24 | Consolidate AI usage records and prompt histories | Hòa | Long | 2026-10-21 | 2026-10-23 | 2 |
-| S2-25 | Jira/Git evidence, Markdown/PDF visual check, final submission package | Khiêm | Long | 2026-10-24 | 2026-10-25 | 3 |
-| S2-26 | Produce Build 0 and record environment smoke-test results | Khiêm | Đạt | 2026-10-21 | 2026-10-22 | 2 |
-| S2-27 | Cross-check report against PA2, resolve reviews, and reconcile Jira | Đạt | Hòa | 2026-10-23 | 2026-10-24 | 2 |
+| <span style="white-space: nowrap;">S2-01</span> | <span style="white-space: nowrap;">Sprint 2</span> Planning and meeting notes | Long | Hòa | <span style="white-space: nowrap;">2026-10-10</span> | <span style="white-space: nowrap;">2026-10-10</span> | 1.5 |
+| <span style="white-space: nowrap;">S2-02</span> | Project Plan — Introduction and Overview | Nhật | Long | <span style="white-space: nowrap;">2026-10-13</span> | <span style="white-space: nowrap;">2026-10-14</span> | 2 |
+| <span style="white-space: nowrap;">S2-03</span> | Project Plan — Organization and Risk Management | Long | Khiêm | <span style="white-space: nowrap;">2026-10-13</span> | <span style="white-space: nowrap;">2026-10-14</span> | 2 |
+| <span style="white-space: nowrap;">S2-04</span> | Project Plan — Schedule and Build Plan | Long | Khiêm | <span style="white-space: nowrap;">2026-10-15</span> | <span style="white-space: nowrap;">2026-10-16</span> | 2 |
+| <span style="white-space: nowrap;">S2-05</span> | Vision — Introduction and Positioning | Hòa | Long | <span style="white-space: nowrap;">2026-10-13</span> | <span style="white-space: nowrap;">2026-10-14</span> | 2 |
+| <span style="white-space: nowrap;">S2-06</span> | Vision — Users, Stakeholders, Alternatives; review PA1 survey | Đạt | Hòa | <span style="white-space: nowrap;">2026-10-13</span> | <span style="white-space: nowrap;">2026-10-15</span> | 3 |
+| <span style="white-space: nowrap;">S2-07</span> | Vision — Product Overview and accounting boundaries | Nhật | Khiêm | <span style="white-space: nowrap;">2026-10-15</span> | <span style="white-space: nowrap;">2026-10-16</span> | 3 |
+| <span style="white-space: nowrap;">S2-08</span> | Vision — Product Features, 3–5 sentences per feature | Hòa | Nhật | <span style="white-space: nowrap;">2026-10-15</span> | <span style="white-space: nowrap;">2026-10-17</span> | 4 |
+| <span style="white-space: nowrap;">S2-09</span> | Two Mermaid user workflows | Đạt | Khiêm | <span style="white-space: nowrap;">2026-10-18</span> | <span style="white-space: nowrap;">2026-10-19</span> | 3 |
+| <span style="white-space: nowrap;">S2-10</span> | Vision — NFR targets and verification methods | Khiêm | Nhật | <span style="white-space: nowrap;">2026-10-18</span> | <span style="white-space: nowrap;">2026-10-19</span> | 3 |
+| <span style="white-space: nowrap;">S2-11</span> | Review existing GitHub setup, folders, ignore rules, and branch rules | Khiêm | Long | <span style="white-space: nowrap;">2026-10-10</span> | <span style="white-space: nowrap;">2026-10-11</span> | 1.5 |
+| <span style="white-space: nowrap;">S2-12</span> | Initialize <span style="white-space: nowrap;">Spec Kit</span> in `/src`; complete constitution and artifact inventory | Khiêm | Nhật | <span style="white-space: nowrap;">2026-10-13</span> | <span style="white-space: nowrap;">2026-10-15</span> | 3 |
+| <span style="white-space: nowrap;">S2-13</span> | <span style="white-space: nowrap;">Spec Kit</span> training and individual evidence — Long | Long | Hòa | <span style="white-space: nowrap;">2026-10-10</span> | <span style="white-space: nowrap;">2026-10-12</span> | 3 |
+| <span style="white-space: nowrap;">S2-14</span> | <span style="white-space: nowrap;">Spec Kit</span> training and individual evidence — Đạt | Đạt | Long | <span style="white-space: nowrap;">2026-10-10</span> | <span style="white-space: nowrap;">2026-10-12</span> | 3 |
+| <span style="white-space: nowrap;">S2-15</span> | <span style="white-space: nowrap;">Spec Kit</span> training and individual evidence — Nhật | Nhật | Đạt | <span style="white-space: nowrap;">2026-10-10</span> | <span style="white-space: nowrap;">2026-10-12</span> | 3 |
+| <span style="white-space: nowrap;">S2-16</span> | <span style="white-space: nowrap;">Spec Kit</span> training and individual evidence — Khiêm | Khiêm | Nhật | <span style="white-space: nowrap;">2026-10-10</span> | <span style="white-space: nowrap;">2026-10-12</span> | 3 |
+| <span style="white-space: nowrap;">S2-17</span> | <span style="white-space: nowrap;">Spec Kit</span> training and individual evidence — Hòa | Hòa | Khiêm | <span style="white-space: nowrap;">2026-10-10</span> | <span style="white-space: nowrap;">2026-10-12</span> | 3 |
+| <span style="white-space: nowrap;">S2-18</span> | Kotlin / Compose self-training and runnable mobile skeleton | Đạt | Nhật | <span style="white-space: nowrap;">2026-10-16</span> | <span style="white-space: nowrap;">2026-10-18</span> | 4 |
+| <span style="white-space: nowrap;">S2-19</span> | Review/complete backend skeleton, database, migrations, and API documentation | Nhật | Khiêm | <span style="white-space: nowrap;">2026-10-17</span> | <span style="white-space: nowrap;">2026-10-19</span> | 6 |
+| <span style="white-space: nowrap;">S2-20</span> | AI service self-training, skeleton, connectivity and failure smoke test | Hòa | Nhật | <span style="white-space: nowrap;">2026-10-18</span> | <span style="white-space: nowrap;">2026-10-20</span> | 4 |
+| <span style="white-space: nowrap;">S2-21</span> | <span style="white-space: nowrap;">Weekly Scrum #1</span> and notes | Long | Hòa | <span style="white-space: nowrap;">2026-10-16</span> | <span style="white-space: nowrap;">2026-10-16</span> | 1 |
+| <span style="white-space: nowrap;">S2-22</span> | <span style="white-space: nowrap;">Weekly Scrum #2</span> and notes | Long | Hòa | <span style="white-space: nowrap;">2026-10-22</span> | <span style="white-space: nowrap;">2026-10-22</span> | 1 |
+| <span style="white-space: nowrap;">S2-23</span> | Sprint Review & Retrospective and notes | Long | Khiêm | <span style="white-space: nowrap;">2026-10-24</span> | <span style="white-space: nowrap;">2026-10-24</span> | 1.5 |
+| <span style="white-space: nowrap;">S2-24</span> | Consolidate AI usage records and prompt histories | Hòa | Long | <span style="white-space: nowrap;">2026-10-21</span> | <span style="white-space: nowrap;">2026-10-23</span> | 2 |
+| <span style="white-space: nowrap;">S2-25</span> | Jira/Git evidence, Markdown/PDF visual check, final submission package | Khiêm | Long | <span style="white-space: nowrap;">2026-10-24</span> | <span style="white-space: nowrap;">2026-10-25</span> | 3 |
+| <span style="white-space: nowrap;">S2-26</span> | Produce <span style="white-space: nowrap;">Build 0</span> and record environment smoke-test results | Khiêm | Đạt | <span style="white-space: nowrap;">2026-10-21</span> | <span style="white-space: nowrap;">2026-10-22</span> | 2 |
+| <span style="white-space: nowrap;">S2-27</span> | Cross-check report against PA2, resolve reviews, and reconcile Jira | Đạt | Hòa | <span style="white-space: nowrap;">2026-10-23</span> | <span style="white-space: nowrap;">2026-10-24</span> | 2 |
 
 **Capacity allocation**
 
@@ -231,13 +231,13 @@ The plan allocates **99 team hours** from approximately **114 available hours**,
 
 The final sprint (PA5) includes a demo of all features, so builds are planned to deliver features gradually.
 
-| Build | Target date | Planned content | Acceptance focus |
+| Build | <span style="white-space: nowrap;">Target date</span> | Planned content | Acceptance focus |
 |-------|-------------|-----------------|------------------|
-| Build 0 — skeleton | 2026-10-22 | Runnable mobile/backend/database/AI skeletons and startup instructions | Environment reproduction, service connectivity, failure handling, and recorded smoke tests |
-| Build 1 | 2026-11-08 | Auth, Profile, wallets, offline personal transactions and synchronization; AI/admin prototypes | Access control, restart/retry safety, conflict handling, and core transaction flows |
-| Build 2 | 2026-11-22 | Groups/shared fund, splits/refunds, confirmed settlements, VND/USD conversion, budgets, savings, reports | Exact financial totals, historical rates, group permissions, and connected/offline boundaries |
-| Build 3 — release candidate | 2026-11-29 | All ten functional groups and AI Advisor, complete admin/rate tools, PDF/Excel export | End-to-end feature coverage, security/performance tests, and 24-hour offline rehearsal |
-| Final build | 2026-12-04 | Reviewed fixes to the release candidate | Regression closure, complete runbook, final data/evidence, and demo rehearsal |
+| <span style="white-space: nowrap;">Build 0</span> — skeleton | <span style="white-space: nowrap;">2026-10-22</span> | Runnable mobile/backend/database/AI skeletons and startup instructions | Environment reproduction, service connectivity, failure handling, and recorded smoke tests |
+| <span style="white-space: nowrap;">Build 1</span> | <span style="white-space: nowrap;">2026-11-08</span> | Auth, Profile, wallets, offline personal transactions and synchronization; AI/admin prototypes | Access control, restart/retry safety, conflict handling, and core transaction flows |
+| <span style="white-space: nowrap;">Build 2</span> | <span style="white-space: nowrap;">2026-11-22</span> | Groups/shared fund, splits/refunds, confirmed settlements, VND/USD conversion, budgets, savings, reports | Exact financial totals, historical rates, group permissions, and connected/offline boundaries |
+| <span style="white-space: nowrap;">Build 3</span> — release candidate | <span style="white-space: nowrap;">2026-11-29</span> | All ten functional groups and AI Advisor, complete admin/rate tools, PDF/Excel export | End-to-end feature coverage, security/performance tests, and 24-hour offline rehearsal |
+| <span style="white-space: nowrap;">Final build</span> | <span style="white-space: nowrap;">2026-12-04</span> | Reviewed fixes to the release candidate | Regression closure, complete runbook, final data/evidence, and demo rehearsal |
 
 **Five testable builds** are planned. Each build is associated with a source revision/tag, installation/startup steps, test outcomes, and known issues. Build 3 delivers all planned feature groups before final regression; the final sprint's internal demo target is **6 December 2026**, with 5–6 December reserved for rehearsal and presentation. Dates are adjusted if official PA3–PA5 deadlines require it.
 
@@ -475,7 +475,7 @@ The Android client keeps an encrypted local copy of the signed-in user's permitt
 | Administrator-maintained exchange-rate table | VND/USD conversion with recorded rate/source/time | Stale or missing rates are shown explicitly and never silently invented |
 | Android encrypted local storage and sync queue | Offline personal transactions and cached authorized data | Device storage, session renewal, and explicit resolution of conflicting edits |
 | Transactional email service | Password recovery using expiring, single-use reset links | Delivery failure or delay; recovery requires a connection |
-| GitHub, Jira, Spec Kit | Development process | Learning curve |
+| GitHub, Jira, <span style="white-space: nowrap;">Spec Kit</span> | Development process | Learning curve |
 
 ## 5. Product Features
 > *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Nguyen Le Duc Nhat`*
@@ -601,75 +601,75 @@ The following requirements define acceptance criteria for implementation and fin
 
 | ID | Requirement |
 |----|-------------|
-| NFR-P1 | At least 95% of non-AI API requests complete in **less than 500 ms** during the NFR-P3 load test. |
-| NFR-P2 | The dashboard and first page of up to 50 transactions appear in **less than 2 seconds** in at least **19 of 20** warm-load trials on the specified mobile test environment. Cached offline lists meet the same target. |
-| NFR-P3 | Support **100 concurrent authenticated users for 10 minutes**, each making one non-AI request every two seconds, with an unexpected-error rate **below 1%**. The request mix is 70% reads and 30% personal transaction writes; expected validation and authorization rejections are reported separately. |
-| NFR-P4 | An online AI request produces advice or a controlled failure response within **30 seconds**. The interface shows progress and a retry option; successful and failed analysis counts are reported separately. |
-| NFR-P5 | Recalculate group balances and simplified repayment suggestions for **20 members and 500 expenses in less than 2 seconds**, preserving each member's net position. |
-| NFR-P6 | With the app open, valid authorization, and the specified connection, synchronize **100 queued personal transaction changes within 30 seconds**, excluding receipt uploads and edits awaiting conflict resolution. |
+| <span style="white-space: nowrap;">NFR-P1</span> | At least 95% of non-AI API requests complete in **less than 500 ms** during the <span style="white-space: nowrap;">NFR-P3</span> load test. |
+| <span style="white-space: nowrap;">NFR-P2</span> | The dashboard and first page of up to 50 transactions appear in **less than 2 seconds** in at least **19 of 20** warm-load trials on the specified mobile test environment. Cached offline lists meet the same target. |
+| <span style="white-space: nowrap;">NFR-P3</span> | Support **100 concurrent authenticated users for 10 minutes**, each making one non-AI request every two seconds, with an unexpected-error rate **below 1%**. The request mix is 70% reads and 30% personal transaction writes; expected validation and authorization rejections are reported separately. |
+| <span style="white-space: nowrap;">NFR-P4</span> | An online AI request produces advice or a controlled failure response within **30 seconds**. The interface shows progress and a retry option; successful and failed analysis counts are reported separately. |
+| <span style="white-space: nowrap;">NFR-P5</span> | Recalculate group balances and simplified repayment suggestions for **20 members and 500 expenses in less than 2 seconds**, preserving each member's net position. |
+| <span style="white-space: nowrap;">NFR-P6</span> | With the app open, valid authorization, and the specified connection, synchronize **100 queued personal transaction changes within 30 seconds**, excluding receipt uploads and edits awaiting conflict resolution. |
 
 ### 6.2 Security
 > *Performed by: `Nguyen Phu Dat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Phu Dat`*
 
 | ID | Requirement |
 |----|-------------|
-| NFR-S1 | Store passwords only as salted BCrypt hashes; no plaintext or recoverable password is stored or logged. |
-| NFR-S2 | Use **HTTPS with TLS 1.2 or later** for deployed client/API and external-service communication. Local development uses isolated test data. |
-| NFR-S3 | Access tokens expire after **60 minutes**; refresh sessions expire after **7 days**. Protected requests reject invalid or expired tokens. Logout removes local tokens and private cached data, revokes the refresh session, and invalidates its active access token on the server. Synchronization after session expiry requires reauthentication. |
-| NFR-S4 | All private-record, group-membership, administrator-role, and settlement-recipient authorization checks pass the agreed negative-test suite. A Group Owner cannot confirm a payment intended for another member. |
-| NFR-S5 | Keep API keys, passwords, signing secrets, and real environment files outside tracked source and submission files. Application logs and AI requests must omit credentials and access tokens. |
-| NFR-S6 | Validate amounts, currencies, split totals, uploaded file types, and user input on the server. Use parameterized database access and safe UI rendering; all invalid-input and script-injection cases in the security suite must pass. |
-| NFR-S7 | Send the AI provider only the signed-in user's necessary category totals, budget limits, own group shares, and goal progress. Exclude other members' private records, names, emails, phone numbers, raw receipts, and authentication data. |
-| NFR-S8 | Encrypt private offline records and receipt files at rest with keys protected by the Android system keystore. Cached data belongs to one signed-in account, requires device/app unlock to access, and is cleared on explicit logout or account removal from the device. |
-| NFR-S9 | Password-reset links expire after **15 minutes**, can be used only once, and do not expose whether an unknown email address has an account. |
+| <span style="white-space: nowrap;">NFR-S1</span> | Store passwords only as salted BCrypt hashes; no plaintext or recoverable password is stored or logged. |
+| <span style="white-space: nowrap;">NFR-S2</span> | Use **HTTPS with TLS 1.2 or later** for deployed client/API and external-service communication. Local development uses isolated test data. |
+| <span style="white-space: nowrap;">NFR-S3</span> | Access tokens expire after **60 minutes**; refresh sessions expire after **7 days**. Protected requests reject invalid or expired tokens. Logout removes local tokens and private cached data, revokes the refresh session, and invalidates its active access token on the server. Synchronization after session expiry requires reauthentication. |
+| <span style="white-space: nowrap;">NFR-S4</span> | All private-record, group-membership, administrator-role, and settlement-recipient authorization checks pass the agreed negative-test suite. A Group Owner cannot confirm a payment intended for another member. |
+| <span style="white-space: nowrap;">NFR-S5</span> | Keep API keys, passwords, signing secrets, and real environment files outside tracked source and submission files. Application logs and AI requests must omit credentials and access tokens. |
+| <span style="white-space: nowrap;">NFR-S6</span> | Validate amounts, currencies, split totals, uploaded file types, and user input on the server. Use parameterized database access and safe UI rendering; all invalid-input and script-injection cases in the security suite must pass. |
+| <span style="white-space: nowrap;">NFR-S7</span> | Send the AI provider only the signed-in user's necessary category totals, budget limits, own group shares, and goal progress. Exclude other members' private records, names, emails, phone numbers, raw receipts, and authentication data. |
+| <span style="white-space: nowrap;">NFR-S8</span> | Encrypt private offline records and receipt files at rest with keys protected by the Android system keystore. Cached data belongs to one signed-in account, requires device/app unlock to access, and is cleared on explicit logout or account removal from the device. |
+| <span style="white-space: nowrap;">NFR-S9</span> | Password-reset links expire after **15 minutes**, can be used only once, and do not expose whether an unknown email address has an account. |
 
 ### 6.3 Reliability, Offline Operation, and Financial Correctness
 > *Performed by: `Nguyen Phu Dat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Phu Dat`*
 
 | ID | Requirement |
 |----|-------------|
-| NFR-R1 | The demo environment passes **at least 95%** of one-minute health probes during a **two-hour rehearsal** before the demo. |
-| NFR-R2 | Back up hosted project data **daily**, retain the latest **7 daily backups**, and demonstrate restoration to a separate test database within **30 minutes** before the final demo. The QA/DevOps Lead owns backup and restore verification. |
-| NFR-R3 | Use exact decimal arithmetic with whole-dong VND and cent-precision USD. In every split/refund test, allocated shares equal the recorded amount exactly, and every group debt/fund journal balances to zero. Stable remainder allocation produces the same result on repeated calculation. |
-| NFR-R4 | During an AI-provider outage or invalid response, personal tracking, group bookkeeping, and cached advice remain available within their normal connectivity limits; no financial record or budget is changed by a failed AI request. |
-| NFR-R5 | After initial synchronization, users can create, edit, and delete personal transactions for cached wallets with **no network connection**. A **24-hour offline test with 100 local changes**, including app restart, loses no acknowledged local change and retains pending status. |
-| NFR-R6 | Replaying each queued change **three times** creates no duplicate financial effect. Conflicting edits from two devices are detected, both versions are retained, and the user resolves the conflict before that record is marked synchronized. |
-| NFR-R7 | A payment claim remains pending until the intended recipient confirms. Rejection, repeated confirmation, server failure, and attempts to exceed the outstanding debt produce **no incorrect balance change** in the settlement test suite; dependent ledger updates commit together or roll back together. |
-| NFR-R8 | Every converted entry stores its original amount/currency and applied rate/source/time. Changing the reference rate or reporting preference does not alter existing group shares, original amounts, or confirmed payments. Missing rates never produce an invented converted total. |
+| <span style="white-space: nowrap;">NFR-R1</span> | The demo environment passes **at least 95%** of one-minute health probes during a **two-hour rehearsal** before the demo. |
+| <span style="white-space: nowrap;">NFR-R2</span> | Back up hosted project data **daily**, retain the latest **7 daily backups**, and demonstrate restoration to a separate test database within **30 minutes** before the final demo. The QA/DevOps Lead owns backup and restore verification. |
+| <span style="white-space: nowrap;">NFR-R3</span> | Use exact decimal arithmetic with whole-dong VND and cent-precision USD. In every split/refund test, allocated shares equal the recorded amount exactly, and every group debt/fund journal balances to zero. Stable remainder allocation produces the same result on repeated calculation. |
+| <span style="white-space: nowrap;">NFR-R4</span> | During an AI-provider outage or invalid response, personal tracking, group bookkeeping, and cached advice remain available within their normal connectivity limits; no financial record or budget is changed by a failed AI request. |
+| <span style="white-space: nowrap;">NFR-R5</span> | After initial synchronization, users can create, edit, and delete personal transactions for cached wallets with **no network connection**. A **24-hour offline test with 100 local changes**, including app restart, loses no acknowledged local change and retains pending status. |
+| <span style="white-space: nowrap;">NFR-R6</span> | Replaying each queued change **three times** creates no duplicate financial effect. Conflicting edits from two devices are detected, both versions are retained, and the user resolves the conflict before that record is marked synchronized. |
+| <span style="white-space: nowrap;">NFR-R7</span> | A payment claim remains pending until the intended recipient confirms. Rejection, repeated confirmation, server failure, and attempts to exceed the outstanding debt produce **no incorrect balance change** in the settlement test suite; dependent ledger updates commit together or roll back together. |
+| <span style="white-space: nowrap;">NFR-R8</span> | Every converted entry stores its original amount/currency and applied rate/source/time. Changing the reference rate or reporting preference does not alter existing group shares, original amounts, or confirmed payments. Missing rates never produce an invented converted total. |
 
 ### 6.4 Usability and Accessibility
 > *Performed by: `Nguyen Phu Dat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Phu Dat`*
 
 | ID | Requirement |
 |----|-------------|
-| NFR-U1 | At least **4 of 5** first-time test participants record their first personal transaction in **3 minutes or less** without assistance, starting from an authenticated account with a wallet. |
-| NFR-U2 | At least **4 of 5** participants save a basic expense in **30 seconds or less** from the add-transaction screen, excluding receipt capture/upload. Use the same task script online and offline and record results separately. |
-| NFR-U3 | All primary screens use consistent labels and components; text supports Android font scaling to **150%** without hiding required actions, and primary touch targets are at least **48 dp**. |
-| NFR-U4 | Provide Vietnamese and English labels for all primary flows, VND/USD formatting, original and converted amounts, and the applied rate's effective date. Amounts are always labelled with their currency. |
-| NFR-U5 | Offline, pending synchronization, conflict, and pending/confirmed settlement states are distinguishable using text or icons as well as color. Shared-data views show their last successful synchronization time. |
-| NFR-U6 | Budget warnings are updated when a relevant local or synchronized expense causes spending to cross **80% or 100%** of its limit; offline warnings identify that group data may be stale. |
+| <span style="white-space: nowrap;">NFR-U1</span> | At least **4 of 5** first-time test participants record their first personal transaction in **3 minutes or less** without assistance, starting from an authenticated account with a wallet. |
+| <span style="white-space: nowrap;">NFR-U2</span> | At least **4 of 5** participants save a basic expense in **30 seconds or less** from the add-transaction screen, excluding receipt capture/upload. Use the same task script online and offline and record results separately. |
+| <span style="white-space: nowrap;">NFR-U3</span> | All primary screens use consistent labels and components; text supports Android font scaling to **150%** without hiding required actions, and primary touch targets are at least **48 dp**. |
+| <span style="white-space: nowrap;">NFR-U4</span> | Provide Vietnamese and English labels for all primary flows, VND/USD formatting, original and converted amounts, and the applied rate's effective date. Amounts are always labelled with their currency. |
+| <span style="white-space: nowrap;">NFR-U5</span> | Offline, pending synchronization, conflict, and pending/confirmed settlement states are distinguishable using text or icons as well as color. Shared-data views show their last successful synchronization time. |
+| <span style="white-space: nowrap;">NFR-U6</span> | Budget warnings are updated when a relevant local or synchronized expense causes spending to cross **80% or 100%** of its limit; offline warnings identify that group data may be stale. |
 
 ### 6.5 Platform and Compatibility
 > *Performed by: `Nguyen Phu Dat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Phu Dat`*
 
 | ID | Requirement |
 |----|-------------|
-| NFR-C1 | The Kotlin/Jetpack Compose mobile app installs and supports the core personal and group flows on **Android 8.0, API 26, or later**. Compatibility is checked on API 26 and an Android 10-or-later device/emulator. |
-| NFR-C2 | The online admin panel supports the **two most recent stable desktop versions** of Chrome, Edge, and Firefox available at final acceptance; record the tested version numbers. |
-| NFR-C3 | The server targets **Java 21 and PostgreSQL 16**. Backend, database, AI service, and admin deployment are reproducible on a Docker-capable Linux host using documented Docker Compose commands and external configuration. |
-| NFR-C4 | Receipt capture works without a connection and uploads later. Online recovery, new AI requests, group writes, and settlement confirmation clearly indicate their network requirement; viewing cached data remains available. |
+| <span style="white-space: nowrap;">NFR-C1</span> | The Kotlin/Jetpack Compose mobile app installs and supports the core personal and group flows on **Android 8.0, API 26, or later**. Compatibility is checked on API 26 and an Android 10-or-later device/emulator. |
+| <span style="white-space: nowrap;">NFR-C2</span> | The online admin panel supports the **two most recent stable desktop versions** of Chrome, Edge, and Firefox available at final acceptance; record the tested version numbers. |
+| <span style="white-space: nowrap;">NFR-C3</span> | The server targets **Java 21 and PostgreSQL 16**. Backend, database, AI service, and admin deployment are reproducible on a Docker-capable Linux host using documented Docker Compose commands and external configuration. |
+| <span style="white-space: nowrap;">NFR-C4</span> | Receipt capture works without a connection and uploads later. Online recovery, new AI requests, group writes, and settlement confirmation clearly indicate their network requirement; viewing cached data remains available. |
 
 ### 6.6 Maintainability and Quality
 > *Performed by: `Nguyen Phu Dat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Phu Dat`*
 
 | ID | Requirement |
 |----|-------------|
-| NFR-M1 | Automated tests achieve **at least 70% line coverage** of backend services implementing splitting, settlement, refunds, currency conversion, and budget calculations. Coverage is measured against the reviewed build. |
-| NFR-M2 | Follow Java naming conventions, the Kotlin Style Guide, PEP 8, and the agreed React conventions. Another member reviews each change before merge; review findings are resolved or explicitly accepted. |
-| NFR-M3 | Document all public REST endpoints, authorization rules, request/response schemas, and error responses in OpenAPI. Document synchronization identifiers and conflict responses. |
-| NFR-M4 | Apply server database changes through versioned Flyway migrations and verify both a clean setup and upgrade from the previous test build. |
-| NFR-M5 | Use Conventional Commits and retain traceability from a Jira task to its implementation/document output and review record. |
-| NFR-M6 | Automated financial tests include equal/percentage/exact splits, rounding remainders, partial/rejected settlements, refunds after settlement, duplicate retries, offline conflicts, and VND/USD conversion using fixed test rates. |
+| <span style="white-space: nowrap;">NFR-M1</span> | Automated tests achieve **at least 70% line coverage** of backend services implementing splitting, settlement, refunds, currency conversion, and budget calculations. Coverage is measured against the reviewed build. |
+| <span style="white-space: nowrap;">NFR-M2</span> | Follow Java naming conventions, the Kotlin Style Guide, PEP 8, and the agreed React conventions. Another member reviews each change before merge; review findings are resolved or explicitly accepted. |
+| <span style="white-space: nowrap;">NFR-M3</span> | Document all public REST endpoints, authorization rules, request/response schemas, and error responses in OpenAPI. Document synchronization identifiers and conflict responses. |
+| <span style="white-space: nowrap;">NFR-M4</span> | Apply server database changes through versioned Flyway migrations and verify both a clean setup and upgrade from the previous test build. |
+| <span style="white-space: nowrap;">NFR-M5</span> | Use Conventional Commits and retain traceability from a Jira task to its implementation/document output and review record. |
+| <span style="white-space: nowrap;">NFR-M6</span> | Automated financial tests include equal/percentage/exact splits, rounding remainders, partial/rejected settlements, refunds after settlement, duplicate retries, offline conflicts, and VND/USD conversion using fixed test rates. |
 
 ### 6.7 Standards and Verification
 > *Performed by: `Nguyen Phu Dat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Phu Dat`*
@@ -697,11 +697,11 @@ The API uses REST with JSON and OpenAPI documentation. Security review uses the 
 | Item | Value |
 |------|-------|
 | GitHub repository | [pdtLong2929/FinSync](https://github.com/pdtLong2929/FinSync), recorded in PA1; `verified repository access for TA` |
-| Spec Kit location | `/src` |
+| <span style="white-space: nowrap;">Spec Kit</span> location | `/src` |
 | Initialization status | Incomplete in cited commit `6c5cd20`: constitution is empty and listed templates are absent |
-| AI agent used with Spec Kit | `Gemini CLI` |
-| Spec Kit version | `1.2.3.dev0` |
-| Setup date | `19/10/2026` |
+| AI agent used with <span style="white-space: nowrap;">Spec Kit</span> | `Gemini CLI` |
+| <span style="white-space: nowrap;">Spec Kit</span> version | `1.2.3.dev0` |
+| Setup date | <span style="white-space: nowrap;"><code>19/10/2026</code></span> |
 | Environment | Arch Linux, Node.js/npm, Python, uv/uvx |
 | Setup performer / reviewer | `Phạm Định Tiểu Long` / `Nguyễn Lê Đức Nhật` |
 | Evidence / commit | `6c5cd20 (HEAD -> speckit, origin/speckit) add: new speckit` |
@@ -761,11 +761,11 @@ The following principles summarize the intended FinSync constitution. They are a
 
 | Member | Completed / Date | Tutorial(s) / Evidence | Individual Learning Summary | Reviewer / Date |
 |--------|------------------|------------------------|-----------------------------|-----------------|
-| Phạm Định Tiểu Long | ☑ / `19/10/2026` | `https://drive.google.com/drive/folders/1kren79mDeP6oG1WoA7sGW7CYb0sZIgS1?usp=drive_link` | `Completed tutorials #1-#7. Practiced end-to-end Spec Kit workflow and repo init. Key lesson: strict rules in constitution.md effectively prevent AI architectural drift.` | Hòa / `20/10/2026`|
-| Nguyễn Phú Đạt | ☑ / `19/10/2026` | `https://drive.google.com/drive/folders/1kren79mDeP6oG1WoA7sGW7CYb0sZIgS1?usp=drive_link` | Learned how the `/clarify` command identifies edge cases before planning and reduces rework. | Long / `20/10/2026`|
-| Nguyễn Lê Đức Nhật | ☑ / `20/10/2026` | `https://drive.google.com/drive/folders/1kren79mDeP6oG1WoA7sGW7CYb0sZIgS1?usp=drive_link` | `Gained hands-on experience turning user ideas into concrete specs using /specify; learned that thorough acceptance criteria make the final task checklist much easier to execute.` | Đạt / `20/10/2026`|
-| Vương Đắc Gia Khiêm | ☑ / `20/10/2026` | `https://drive.google.com/drive/folders/1kren79mDeP6oG1WoA7sGW7CYb0sZIgS1?usp=drive_link` | Learned to use the interactive `/clarify` command to refine requirements before code generation and align them with the project constitution. | Nhật / `20/10/2026`|
-| Ngô Thái Hòa | ☑ / `20/10/2026` | `https://drive.google.com/drive/folders/1kren79mDeP6oG1WoA7sGW7CYb0sZIgS1?usp=drive_link` | `Realized that spec-driven development eliminates guesswork and trial-and-error by enforcing clear structure right from workspace initialization.` | Khiêm / `20/10/2026`|
+| Phạm Định Tiểu Long | ☑ / <span style="white-space: nowrap;"><code>19/10/2026</code></span> | `https://drive.google.com/drive/folders/1kren79mDeP6oG1WoA7sGW7CYb0sZIgS1?usp=drive_link` | `Completed tutorials #1-#7. Practiced end-to-end Spec Kit workflow and repo init. Key lesson: strict rules in constitution.md effectively prevent AI architectural drift.` | Hòa / <span style="white-space: nowrap;"><code>20/10/2026</code></span>|
+| Nguyễn Phú Đạt | ☑ / <span style="white-space: nowrap;"><code>19/10/2026</code></span> | `https://drive.google.com/drive/folders/1kren79mDeP6oG1WoA7sGW7CYb0sZIgS1?usp=drive_link` | Learned how the `/clarify` command identifies edge cases before planning and reduces rework. | Long / <span style="white-space: nowrap;"><code>20/10/2026</code></span>|
+| Nguyễn Lê Đức Nhật | ☑ / <span style="white-space: nowrap;"><code>20/10/2026</code></span> | `https://drive.google.com/drive/folders/1kren79mDeP6oG1WoA7sGW7CYb0sZIgS1?usp=drive_link` | `Gained hands-on experience turning user ideas into concrete specs using /specify; learned that thorough acceptance criteria make the final task checklist much easier to execute.` | Đạt / <span style="white-space: nowrap;"><code>20/10/2026</code></span>|
+| Vương Đắc Gia Khiêm | ☑ / <span style="white-space: nowrap;"><code>20/10/2026</code></span> | `https://drive.google.com/drive/folders/1kren79mDeP6oG1WoA7sGW7CYb0sZIgS1?usp=drive_link` | Learned to use the interactive `/clarify` command to refine requirements before code generation and align them with the project constitution. | Nhật / <span style="white-space: nowrap;"><code>20/10/2026</code></span>|
+| Ngô Thái Hòa | ☑ / <span style="white-space: nowrap;"><code>20/10/2026</code></span> | `https://drive.google.com/drive/folders/1kren79mDeP6oG1WoA7sGW7CYb0sZIgS1?usp=drive_link` | `Realized that spec-driven development eliminates guesswork and trial-and-error by enforcing clear structure right from workspace initialization.` | Khiêm / <span style="white-space: nowrap;"><code>20/10/2026</code></span>|
 
 All members have completed the entire tutorial series (Parts 1 to 7) to gain an end-to-end understanding of GitHub Spec Kit. To thoroughly assess individual comprehension and ensure mastery of each stage, specific modules were assigned to each member for in-depth verification:
 
@@ -818,14 +818,14 @@ Hòa is responsible for consolidating the group disclosure under S2-24, with Lon
 
 The structure follows `WeeklyReport`: one Sprint Planning meeting, two Weekly Scrum meetings, and one Sprint Review/Retrospective. Both Scrum records are kept in this document. Long coordinates the meetings and minutes; all five members provide their own progress updates.
 
-**Reporting basis:** The 10/16 October records combine team confirmations and repository evidence. The 22/24 October meeting records and associated build, acceptance, and packaging outcomes are a hypothetical completion scenario, not observed results. Part C records the team's setup/training information and the limits of the cited artifact evidence. Jira/Git figures retain the supplied 19 October snapshots.
+**Reporting basis:** The 10/16 October records combine team confirmations and repository evidence. The 22/24 October meeting records and associated build, acceptance, and packaging outcomes are a hypothetical completion scenario, not observed results. Part C records the team's setup/training information and the limits of the cited artifact evidence. The Jira figure retains its 19 October snapshot; the Git figures show commits through 21 October.
 
 | Meeting | Planned date / time | Task | Minutes owner / reviewer |
 |---------|---------------------|------|-------------------------|
-| Sprint Planning | 2026-10-10, 09:00–10:00, before sprint work begins | S2-01 | Long / Hòa |
-| Weekly Scrum #1 | 2026-10-16, 19:30–20:15 | S2-21 | Long / Hòa |
-| Weekly Scrum #2 | 2026-10-22, 19:30–20:15 | S2-22 | Long / Hòa |
-| Sprint Review & Retrospective | 2026-10-24, 19:30–20:30 | S2-23 | Long / Khiêm |
+| Sprint Planning | <span style="white-space: nowrap;">2026-10-10</span>, <span style="white-space: nowrap;">09:00–10:00</span>, before sprint work begins | <span style="white-space: nowrap;">S2-01</span> | Long / Hòa |
+| <span style="white-space: nowrap;">Weekly Scrum #1</span> | <span style="white-space: nowrap;">2026-10-16</span>, <span style="white-space: nowrap;">19:30–20:15</span> | <span style="white-space: nowrap;">S2-21</span> | Long / Hòa |
+| <span style="white-space: nowrap;">Weekly Scrum #2</span> | <span style="white-space: nowrap;">2026-10-22</span>, <span style="white-space: nowrap;">19:30–20:15</span> | <span style="white-space: nowrap;">S2-22</span> | Long / Hòa |
+| Sprint Review & Retrospective | <span style="white-space: nowrap;">2026-10-24</span>, <span style="white-space: nowrap;">19:30–20:30</span> | <span style="white-space: nowrap;">S2-23</span> | Long / Khiêm |
 
 The table gives the scheduled meeting slots. Planning is the PA1-to-PA2 transition checkpoint on 10 October before implementation begins. Meetings use Google Meet, with follow-up coordination through Discord/Zalo.
 
@@ -843,9 +843,9 @@ The table gives the scheduled meeting slots. Planning is the PA1-to-PA2 transiti
 |----------|--------------|---------------------------------------------|-----------------|
 | 1 | Project Plan, schedule, risk management, and coordination | Long; Nhật for Introduction/Overview | Initial plan covering five sprints, task/reviewer assignments, risks, and builds |
 | 1 | Vision, positioning, user needs, and product boundaries | Hòa for positioning/features; Đạt for user research; Nhật for product perspective | Refined descriptions of all ten functional groups and AI Advisor; two Mermaid workflows |
-| 1 | Spec Kit setup and training evidence | Khiêm for setup; every member for individual training | Customized constitution, generated Markdown inventory, and five individual evidence records |
+| 1 | <span style="white-space: nowrap;">Spec Kit</span> setup and training evidence | Khiêm for setup; every member for individual training | Customized constitution, generated Markdown inventory, and five individual evidence records |
 | 1 | Quality targets and PA2 evidence | Khiêm for NFRs/evidence; Hòa for the AI log; Long for minutes | Measurable NFRs, AI Usage Notes, four meeting records, and Jira/Git evidence |
-| 2 | Mobile/backend/AI skeletons and Build 0 | Đạt for mobile; Nhật for backend; Hòa for AI; Khiêm for integration | Reproducible startup instructions and documented smoke-test results |
+| 2 | Mobile/backend/AI skeletons and <span style="white-space: nowrap;">Build 0</span> | Đạt for mobile; Nhật for backend; Hòa for AI; Khiêm for integration | Reproducible startup instructions and documented smoke-test results |
 
 Each task has one assignee and a different reviewer, as listed in [Section A.4.3](#43-sprint-2--detailed-task-list). The baseline allocates 99 team hours against approximately 114 available hours, including separate review/attendance budgets and a correction buffer.
 
@@ -875,11 +875,11 @@ Each task has one assignee and a different reviewer, as listed in [Section A.4.3
 
 | Member | What have I done since last week? | What will I do until next week? | Issues / problems / obstacles |
 |--------|-----------------------------------|--------------------------------|-------------------------------|
-| Long | Initial organization, risk, schedule, and build-plan drafts are available in the shared report under S2-03/S2-04. | Coordinate review of the drafts, reconcile task ownership/dates, and track recovery of training/setup before the next Scrum. | The training/setup workstream is behind its original early-sprint milestones; draft documents alone do not establish readiness for integration. |
-| Đạt | User/stakeholder descriptions and the PA1 survey baseline are available for the vision draft under S2-06. | Complete the mobile skeleton (S2-18), finalize two workflows (S2-09), and review the integrated Build 0. | The mobile client needs agreed request/response fields, connectivity states, and currency/accounting behavior before integration. |
-| Nhật | Introduction and product-perspective drafts are available; the initial PA2 report was committed on 16 October as 42b3819. | Complete the backend/database/API skeleton (S2-19), review the Spec Kit setup, and align the backend/AI contract. | Exact money representation, duplicate prevention, and group/personal boundaries require consistent treatment across components; successful integration is not yet evidenced. |
-| Khiêm | Repository preparation and the Spec Kit/training workstream have been identified for technical follow-up; completed initialization/training evidence is not yet available. | Finish Spec Kit initialization (S2-12), collect each member's training evidence, define the Build 0 checklist, and prepare NFR verification methods (S2-10). | Spec Kit/training remain incomplete against the 12/15 October baseline targets and need a recovery checkpoint. |
-| Hòa | Vision introduction/positioning and product-feature descriptions are available as initial draft material under S2-05/S2-08. | Refine the features with peer feedback, complete the AI skeleton (S2-20), and consolidate AI-use evidence (S2-24). | AI-provider timeout, quota, and invalid-output handling remain integration risks to test; per-member usage histories must be collected. |
+| Long | Initial organization, risk, schedule, and build-plan drafts are available in the shared report under <span style="white-space: nowrap;">S2-03</span>/<span style="white-space: nowrap;">S2-04</span>. | Coordinate review of the drafts, reconcile task ownership/dates, and track recovery of training/setup before the next Scrum. | The training/setup workstream is behind its original early-sprint milestones; draft documents alone do not establish readiness for integration. |
+| Đạt | User/stakeholder descriptions and the PA1 survey baseline are available for the vision draft under <span style="white-space: nowrap;">S2-06</span>. | Complete the mobile skeleton (<span style="white-space: nowrap;">S2-18</span>), finalize two workflows (<span style="white-space: nowrap;">S2-09</span>), and review the integrated <span style="white-space: nowrap;">Build 0</span>. | The mobile client needs agreed request/response fields, connectivity states, and currency/accounting behavior before integration. |
+| Nhật | Introduction and product-perspective drafts are available; the initial PA2 report was committed on 16 October as 42b3819. | Complete the backend/database/API skeleton (<span style="white-space: nowrap;">S2-19</span>), review the <span style="white-space: nowrap;">Spec Kit</span> setup, and align the backend/AI contract. | Exact money representation, duplicate prevention, and group/personal boundaries require consistent treatment across components; successful integration is not yet evidenced. |
+| Khiêm | Repository preparation and the <span style="white-space: nowrap;">Spec Kit</span>/training workstream have been identified for technical follow-up; completed initialization/training evidence is not yet available. | Finish <span style="white-space: nowrap;">Spec Kit</span> initialization (<span style="white-space: nowrap;">S2-12</span>), collect each member's training evidence, define the <span style="white-space: nowrap;">Build 0</span> checklist, and prepare NFR verification methods (<span style="white-space: nowrap;">S2-10</span>). | <span style="white-space: nowrap;">Spec Kit</span>/training remain incomplete against the 12/15 October baseline targets and need a recovery checkpoint. |
+| Hòa | Vision introduction/positioning and product-feature descriptions are available as initial draft material under <span style="white-space: nowrap;">S2-05</span>/<span style="white-space: nowrap;">S2-08</span>. | Refine the features with peer feedback, complete the AI skeleton (<span style="white-space: nowrap;">S2-20</span>), and consolidate AI-use evidence (<span style="white-space: nowrap;">S2-24</span>). | AI-provider timeout, quota, and invalid-output handling remain integration risks to test; per-member usage histories must be collected. |
 
 **Repository record:** Commit 8af0078 on 14 October reorganized PA1 materials and added the PA2 specification; commit 42b3819 on 16 October added the initial PA2 report. These support document preparation without establishing successful training, reviewed task closure, or a passing build.
 
@@ -889,13 +889,13 @@ The following recovery targets respond to the confirmed training/setup delay. Th
 
 | Follow-up | Task / expected output | Owner | Reviewer | Recovery target |
 |-----------|------------------------|-------|----------|-----------------|
-| SC1-01 | Complete Long's training and retain an individual learning/evidence record (S2-13) | Long | Hòa | 2026-10-20 |
-| SC1-02 | Complete Đạt's training and retain an individual learning/evidence record (S2-14) | Đạt | Long | 2026-10-20 |
-| SC1-03 | Complete Nhật's training and retain an individual learning/evidence record (S2-15) | Nhật | Đạt | 2026-10-20 |
-| SC1-04 | Complete Khiêm's training and retain an individual learning/evidence record (S2-16) | Khiêm | Nhật | 2026-10-20 |
-| SC1-05 | Complete Hòa's training and retain an individual learning/evidence record (S2-17) | Hòa | Khiêm | 2026-10-20 |
-| SC1-06 | Complete Spec Kit setup, project constitution, and generated-file inventory under /src (S2-12) | Khiêm | Nhật | 2026-10-21 |
-| SC1-07 | Coordinate outstanding document reviews and record actual progress/recovery dates in Jira (ACT-03/ACT-04) | Long | Hòa | 2026-10-21 |
+| <span style="white-space: nowrap;">SC1-01</span> | Complete Long's training and retain an individual learning/evidence record (<span style="white-space: nowrap;">S2-13</span>) | Long | Hòa | <span style="white-space: nowrap;">2026-10-20</span> |
+| <span style="white-space: nowrap;">SC1-02</span> | Complete Đạt's training and retain an individual learning/evidence record (<span style="white-space: nowrap;">S2-14</span>) | Đạt | Long | <span style="white-space: nowrap;">2026-10-20</span> |
+| <span style="white-space: nowrap;">SC1-03</span> | Complete Nhật's training and retain an individual learning/evidence record (<span style="white-space: nowrap;">S2-15</span>) | Nhật | Đạt | <span style="white-space: nowrap;">2026-10-20</span> |
+| <span style="white-space: nowrap;">SC1-04</span> | Complete Khiêm's training and retain an individual learning/evidence record (<span style="white-space: nowrap;">S2-16</span>) | Khiêm | Nhật | <span style="white-space: nowrap;">2026-10-20</span> |
+| <span style="white-space: nowrap;">SC1-05</span> | Complete Hòa's training and retain an individual learning/evidence record (<span style="white-space: nowrap;">S2-17</span>) | Hòa | Khiêm | <span style="white-space: nowrap;">2026-10-20</span> |
+| <span style="white-space: nowrap;">SC1-06</span> | Complete <span style="white-space: nowrap;">Spec Kit</span> setup, project constitution, and generated-file inventory under /src (<span style="white-space: nowrap;">S2-12</span>) | Khiêm | Nhật | <span style="white-space: nowrap;">2026-10-21</span> |
+| <span style="white-space: nowrap;">SC1-07</span> | Coordinate outstanding document reviews and record actual progress/recovery dates in Jira (<span style="white-space: nowrap;">ACT-03</span>/<span style="white-space: nowrap;">ACT-04</span>) | Long | Hòa | <span style="white-space: nowrap;">2026-10-21</span> |
 
 **Summary:** Initial plan and vision drafts provide a basis for review, but Spec Kit/training are the confirmed schedule gap. The recovery plan prioritizes individual evidence and reproducible setup before the 22 October integration checkpoint. Scope is kept stable so the remaining days can be used for technical checks, review, and submission evidence.
 
@@ -914,9 +914,9 @@ The following recovery targets respond to the confirmed training/setup delay. Th
 | Member | What have I done since last week? | What will I do until next week? | Issues / problems / obstacles |
 |--------|-----------------------------------|--------------------------------|-------------------------------|
 | Long | Completed individual training, coordinated the delayed setup/training work, and consolidated peer feedback on the Project Plan. Reconciled task owners, reviewers, and recovery dates for the final checkpoint. | Review the pre-Review draft on 23 October, facilitate and record the 24 October Review, and review the final package during 24–25 October before submission. | No blocking coordination issue remains; final captions, task history, and report dates need one consistency check. |
-| Đạt | Completed the mobile skeleton and the two user workflows. Reviewed startup/connectivity with Nhật and checked that the workflows reflect the agreed offline, settlement, and currency requirements. | Complete the pre-Review cross-check and draft PDF readability check on 23 October, then reconcile Review outcomes on 24 October to close S2-27. | No blocking client issue remains within the Build 0 scope; document and PDF consistency checks are the remaining work. |
-| Nhật | Completed the backend/database/API skeleton and reviewed the Spec Kit setup. Aligned request/response fields with the mobile and AI owners, including money representation and error handling. | Support the final technical cross-check, confirm that startup instructions match the reviewed revision, and prepare the Sprint 3 API backlog. | No blocking integration issue remains within the skeleton scope; later feature implementation follows the agreed contracts. |
-| Khiêm | Coordinated the Spec Kit workstream, with Long reporting the setup work in Part C. Collected all five training records and coordinated the Build 0 startup/connectivity checks with the component owners. | Organize the available technical evidence for the 23 October draft, then finalize Jira/Git evidence and verify the Markdown/PDF/archive on 24–25 October under S2-25. | The earlier training/setup delay has been recovered; final evidence captions and package verification follow the Review. |
+| Đạt | Completed the mobile skeleton and the two user workflows. Reviewed startup/connectivity with Nhật and checked that the workflows reflect the agreed offline, settlement, and currency requirements. | Complete the pre-Review cross-check and draft PDF readability check on 23 October, then reconcile Review outcomes on 24 October to close <span style="white-space: nowrap;">S2-27</span>. | No blocking client issue remains within the <span style="white-space: nowrap;">Build 0</span> scope; document and PDF consistency checks are the remaining work. |
+| Nhật | Completed the backend/database/API skeleton and reviewed the <span style="white-space: nowrap;">Spec Kit</span> setup. Aligned request/response fields with the mobile and AI owners, including money representation and error handling. | Support the final technical cross-check, confirm that startup instructions match the reviewed revision, and prepare the <span style="white-space: nowrap;">Sprint 3</span> API backlog. | No blocking integration issue remains within the skeleton scope; later feature implementation follows the agreed contracts. |
+| Khiêm | Coordinated the <span style="white-space: nowrap;">Spec Kit</span> workstream, with Long reporting the setup work in Part C. Collected all five training records and coordinated the <span style="white-space: nowrap;">Build 0</span> startup/connectivity checks with the component owners. | Organize the available technical evidence for the 23 October draft, then finalize Jira/Git evidence and verify the Markdown/PDF/archive on 24–25 October under <span style="white-space: nowrap;">S2-25</span>. | The earlier training/setup delay has been recovered; final evidence captions and package verification follow the Review. |
 | Hòa | Completed the feature refinements and AI-service skeleton. Aligned the AI contract with Nhật and consolidated his available prompt history, tool metadata, and revision notes. | Complete the shared disclosure structure and Nhật's record on 23 October, assign the remaining individual records to their owners, and review the report with Đạt. | No blocking AI-service issue remains within the skeleton scope. Long, Đạt, Khiêm, and Hòa retain responsibility for supplying their individual AI histories. |
 
 **Checkpoint decisions**
@@ -931,10 +931,10 @@ The following recovery targets respond to the confirmed training/setup delay. Th
 
 | Action | Owner | Reviewer | Completion target | Expected output |
 |--------|-------|----------|-------------------|-----------------|
-| Record Build 0 acceptance within the agreed scenario (ACT-05) | Khiêm | Đạt | 2026-10-22 | Mobile startup, backend/database connectivity, AI response, and controlled failure behavior |
-| Consolidate the shared AI declaration and Nhật's history (ACT-06 / S2-24) | Hòa | Long | 2026-10-23 | Complete available record; the other four members supply their own histories |
-| Finish the report/Jira cross-check and PDF readability review (S2-27) | Đạt | Hòa | 2026-10-24 | Pre-Review checks on 23 October, followed by reconciliation of Review outcomes on 24 October |
-| Finalize evidence and the Markdown/PDF/archive package (S2-25) | Khiêm | Long | 2026-10-25 | Work on 24–25 October: add Review records and final evidence, regenerate the PDF, and verify the archive |
+| Record <span style="white-space: nowrap;">Build 0</span> acceptance within the agreed scenario (<span style="white-space: nowrap;">ACT-05</span>) | Khiêm | Đạt | <span style="white-space: nowrap;">2026-10-22</span> | Mobile startup, backend/database connectivity, AI response, and controlled failure behavior |
+| Consolidate the shared AI declaration and Nhật's history (<span style="white-space: nowrap;">ACT-06</span> / <span style="white-space: nowrap;">S2-24</span>) | Hòa | Long | <span style="white-space: nowrap;">2026-10-23</span> | Complete available record; the other four members supply their own histories |
+| Finish the report/Jira cross-check and PDF readability review (<span style="white-space: nowrap;">S2-27</span>) | Đạt | Hòa | <span style="white-space: nowrap;">2026-10-24</span> | Pre-Review checks on 23 October, followed by reconciliation of Review outcomes on 24 October |
+| Finalize evidence and the Markdown/PDF/archive package (<span style="white-space: nowrap;">S2-25</span>) | Khiêm | Long | <span style="white-space: nowrap;">2026-10-25</span> | Work on 24–25 October: add Review records and final evidence, regenerate the PDF, and verify the archive |
 
 **Summary:** Training and setup have recovered, and Build 0 meets its initial integration scope. Technical work, document corrections, and the pre-Review draft are ready by 23 October. The team reviews these outputs on 24 October and completes final records, evidence updates, and packaging by 25 October.
 
@@ -952,11 +952,11 @@ The following recovery targets respond to the confirmed training/setup delay. Th
 
 | Time | Activity | Presenter / lead |
 |------|----------|------------------|
-| 19:30–19:40 | Present the Project Plan, Vision, workflows, and task consistency checks | Long, Hòa, Đạt, and Nhật |
-| 19:40–19:55 | Demonstrate Build 0 and review the recorded startup/connectivity checks | Khiêm with Đạt, Nhật, and Hòa |
-| 19:55–20:05 | Review Spec Kit artifacts and the five individual training records | Khiêm and all members |
-| 20:05–20:15 | Review AI disclosures, available meeting records/evidence, the draft PDF, and the final packaging plan | Hòa, Khiêm, and Long |
-| 20:15–20:30 | Discuss retrospective findings and agree on Sprint 3 improvements | All members |
+| <span style="white-space: nowrap;">19:30–19:40</span> | Present the Project Plan, Vision, workflows, and task consistency checks | Long, Hòa, Đạt, and Nhật |
+| <span style="white-space: nowrap;">19:40–19:55</span> | Demonstrate <span style="white-space: nowrap;">Build 0</span> and review the recorded startup/connectivity checks | Khiêm with Đạt, Nhật, and Hòa |
+| <span style="white-space: nowrap;">19:55–20:05</span> | Review <span style="white-space: nowrap;">Spec Kit</span> artifacts and the five individual training records | Khiêm and all members |
+| <span style="white-space: nowrap;">20:05–20:15</span> | Review AI disclosures, available meeting records/evidence, the draft PDF, and the final packaging plan | Hòa, Khiêm, and Long |
+| <span style="white-space: nowrap;">20:15–20:30</span> | Discuss retrospective findings and agree on <span style="white-space: nowrap;">Sprint 3</span> improvements | All members |
 
 **Deliverable review**
 
@@ -965,10 +965,10 @@ The following recovery targets respond to the confirmed training/setup delay. Th
 | Project Plan | Long; Nhật for the overview | Accepted. Scope, organization, risks, task ownership, separate reviewers, capacity, and staged build milestones were checked for consistency. |
 | Vision Document and workflows | Hòa, Đạt, and Nhật | Accepted. The PA1 survey was retained; product features and workflows consistently describe offline support, group accounting, settlement confirmation, and VND/USD conversion. |
 | Non-functional requirements | Khiêm | Accepted. Quality targets have measurable criteria and proposed verification methods; target values are distinguished from observed build results. |
-| Spec Kit and individual training | Khiêm; each member for their own training | Training completion is reported for 19–20 October; setup evidence is assessed in Part C. Part C contains the current artifact inventory and five training summaries; its cited constitution is empty and the listed templates are missing from that commit. |
-| Build 0 | Khiêm with the component owners | Accepted for the skeleton milestone in the agreed scenario. The acceptance scope is startup, mobile/API/database connectivity, AI-service response, and controlled provider-failure handling; later feature and NFR tests belong to subsequent builds. |
+| <span style="white-space: nowrap;">Spec Kit</span> and individual training | Khiêm; each member for their own training | Training completion is reported for 19–20 October; setup evidence is assessed in Part C. Part C contains the current artifact inventory and five training summaries; its cited constitution is empty and the listed templates are missing from that commit. |
+| <span style="white-space: nowrap;">Build 0</span> | Khiêm with the component owners | Accepted for the skeleton milestone in the agreed scenario. The acceptance scope is startup, mobile/API/database connectivity, AI-service response, and controlled provider-failure handling; later feature and NFR tests belong to subsequent builds. |
 | AI Usage Report and Weekly Report | Hòa and Long | The shared disclosure, Nhật's prompt history, and the four meeting narratives are complete for this revision. The other four members provide their own AI histories. Long records the Review and Khiêm reviews its minutes. |
-| Evidence and submission readiness | Khiêm, with Đạt and Long reviewing | The pre-Review draft and available evidence were reviewed. Final evidence, Review records, PDF regeneration, and PA2-Group04 archive verification are completed on 24–25 October under S2-25, with Long reviewing the final package. |
+| Evidence and submission readiness | Khiêm, with Đạt and Long reviewing | The pre-Review draft and available evidence were reviewed. Final evidence, Review records, PDF regeneration, and PA2-Group04 archive verification are completed on 24–25 October under <span style="white-space: nowrap;">S2-25</span>, with Long reviewing the final package. |
 
 **Review decision:** Within the reporting basis stated in D.2, the team accepted the Project Plan, Vision, workflows, NFR specification, meeting narratives, and skeleton scope prepared by 23 October. Part C is included in this report; the four other members' AI histories remain absent. Long completes the Review minutes and Đạt reconciles the Review outcomes on 24 October. Khiêm completes final evidence, PDF/archive verification, and packaging under S2-25 on 24–25 October, with Long reviewing the package before submission. These closeout activities remain within Sprint 2; no substantive PA2 development or document correction is carried into Sprint 3. The staged implementation milestones in Sprints 3–5 remain the basis for subsequent product development.
 
@@ -976,8 +976,8 @@ The following recovery targets respond to the confirmed training/setup delay. Th
 
 | Required question | Discussion and conclusion |
 |-------------------|---------------------------|
-| What went well? | All five members participated in each meeting, and the role-based allocation gave each workstream a clear owner and a different reviewer. Reusing the PA1 baseline helped the team refine the plan and vision, while the shared Build 0 checkpoint brought the component owners together before the final Review. |
-| What went wrong? | Spec Kit and individual training missed their initial early-sprint targets. Although the team recovered the work before the second Scrum, this reduced the time available for review and concentrated evidence/package preparation near the end of the sprint. |
+| What went well? | All five members participated in each meeting, and the role-based allocation gave each workstream a clear owner and a different reviewer. Reusing the PA1 baseline helped the team refine the plan and vision, while the shared <span style="white-space: nowrap;">Build 0</span> checkpoint brought the component owners together before the final Review. |
+| What went wrong? | <span style="white-space: nowrap;">Spec Kit</span> and individual training missed their initial early-sprint targets. Although the team recovered the work before the second Scrum, this reduced the time available for review and concentrated evidence/package preparation near the end of the sprint. |
 | What problems occurred and what caused them? | The team underestimated the combined effort for learning, environment setup, and retaining individual evidence. Component work also needed agreement on API fields and financial rules. Recovery used named owners, revised checkpoints, and a shared startup review to resolve these dependencies. |
 | What can be done differently next sprint? | Define each task's acceptance criteria and dependencies during Planning, validate the environment early, and retain evidence when work is completed. Review API examples before dependent feature work and schedule an integration rehearsal before the release build. |
 | What lessons were learned? | Training, setup, implementation, review, and evidence collection each require explicit time. Recovery dates should remain traceable alongside the original plan. A shared build checkpoint and concrete accounting examples help the team find cross-component inconsistencies before the final Review. |
@@ -986,10 +986,10 @@ The following recovery targets respond to the confirmed training/setup delay. Th
 
 | Improvement | Owner | Reviewer | Target | Success criterion |
 |-------------|-------|----------|--------|-------------------|
-| Prepare Sprint 3 tasks with an assignee, different reviewer, estimate, dependencies, and acceptance criteria | Long | Khiêm | 2026-10-26 | Every task selected at Planning contains the required fields before work starts |
-| Use a per-task evidence and review checklist from the start of the sprint | Khiêm | Long | 2026-10-26 | A completed sample shows where the output, review decision, and supporting evidence are retained |
-| Publish reviewed mobile/backend/AI contract examples, including money and error behavior | Nhật | Đạt | 2026-10-27 | Component owners use the same request/response and accounting examples |
-| Run a shared integration rehearsal before Build 1 | Khiêm | Nhật | 2026-11-05 | The rehearsal records results and assigns any defects before the 8 November build target |
+| Prepare <span style="white-space: nowrap;">Sprint 3</span> tasks with an assignee, different reviewer, estimate, dependencies, and acceptance criteria | Long | Khiêm | <span style="white-space: nowrap;">2026-10-26</span> | Every task selected at Planning contains the required fields before work starts |
+| Use a per-task evidence and review checklist from the start of the sprint | Khiêm | Long | <span style="white-space: nowrap;">2026-10-26</span> | A completed sample shows where the output, review decision, and supporting evidence are retained |
+| Publish reviewed mobile/backend/AI contract examples, including money and error behavior | Nhật | Đạt | <span style="white-space: nowrap;">2026-10-27</span> | Component owners use the same request/response and accounting examples |
+| Run a shared integration rehearsal before <span style="white-space: nowrap;">Build 1</span> | Khiêm | Nhật | <span style="white-space: nowrap;">2026-11-05</span> | The rehearsal records results and assigns any defects before the 8 November build target |
 
 **Submission handoff:** By 23 October, Đạt completed the pre-Review cross-check, Hòa consolidated the shared AI declaration and Nhật's record, and Khiêm organized the supplied Jira/Git evidence. The four other AI records remain absent; Part C contains the submitted setup and training information. Long records the Review minutes on 24 October, Khiêm reviews those minutes, and Đạt reconciles Review outcomes to close S2-27. On 24–25 October, Khiêm completes S2-25 by adding the Review records and final evidence, regenerating the PDF, and checking the archive. Long reviews the final package and confirms that the submitted files match the accepted revision before the 25 October handoff.
 
@@ -1008,56 +1008,57 @@ Figure D.1 provides the single Jira board image used for PA2 assignment/progress
 
 The counters cover the displayed project board, including other project tasks; they are not a count of only the 27 Sprint 2 tasks. The following local IDs and Jira keys can be read directly from the visible cards:
 
-| Local ID in A.4.3 | Jira key | Visible task | Status shown |
+| Local ID in A.4.3 | <span style="white-space: nowrap;">Jira key</span> | Visible task | Status shown |
 |------------------|----------|--------------|--------------|
-| S2-07 | SCRUM-39 | Vision — Product Overview and accounting boundaries | Done |
-| S2-09 | SCRUM-41 | Two Mermaid user workflows | Done |
-| S2-20 | SCRUM-52 | AI service self-training, skeleton, connectivity and failure checks | Done |
-| S2-21 | SCRUM-53 | Weekly Scrum #1 and notes | Done |
+| <span style="white-space: nowrap;">S2-07</span> | <span style="white-space: nowrap;">SCRUM-39</span> | Vision — Product Overview and accounting boundaries | Done |
+| <span style="white-space: nowrap;">S2-09</span> | <span style="white-space: nowrap;">SCRUM-41</span> | Two Mermaid user workflows | Done |
+| <span style="white-space: nowrap;">S2-20</span> | <span style="white-space: nowrap;">SCRUM-52</span> | AI service self-training, skeleton, connectivity and failure checks | Done |
+| <span style="white-space: nowrap;">S2-21</span> | <span style="white-space: nowrap;">SCRUM-53</span> | <span style="white-space: nowrap;">Weekly Scrum #1</span> and notes | Done |
 
-**Evidence timing:** The PNG images contain no embedded capture timestamp. Image dates/times in Sections 2.5 and 2.6 are the files' local last-saved timestamps; these image timestamps do not verify the access times in the AI appendix. Figure D.1 documents the board state shown and does not establish when an earlier status transition occurred.
+**Evidence timing:** The PNG images contain no embedded capture timestamp. The image date/time in Section 2.5 is the file's local last-saved timestamp; dates in the Git figures are commit dates, not capture times; these image timestamps do not verify the access times in the AI appendix. Figure D.1 documents the board state shown and does not establish when an earlier status transition occurred.
 
 ### 2.6 Git History Evidence
 > *Performed by: Vuong Dac Gia Khiem | Reviewed by: Pham Dinh Tieu Long | Edited by: Vuong Dac Gia Khiem*
 
-The two supplied screenshots show the repository history produced by `git log --all --graph`, including commit hashes, author names, dates, and messages. The repository's checked-out branch at inspection is **`documentation`**; the command's `--all` option includes histories from multiple branches.
+The five screenshots show repository history across branches using `git log --all --graph`, including commit hashes, authors, dates, and messages. The latest visible commit is `40f5263`, dated 21 October 2026. Some screenshots overlap.
 
-**Figure D.2 — Git commit history**
 
-![FinSync Git history through commit 94af8ca](screenshots/git/git-log-sprint2-01.png)
+![Git history overview with PA2 updates](screenshots/git/git-log-sprint2-01.png)
 
-*Caption: Repository history showing PA2 preparation on 14 and 16 October and the 19 October documentation updates. The newest visible commit is 94af8ca — Nguyen Nhat, 19 October 2026, “draft for PA2 report”. Evidence image saved locally on 19 October 2026 at 11:19:17 (UTC+07:00).*
+*Figure D.2 — PA2 report updates, evidence additions, and Spec Kit commits.*
 
-| Visible commit | Author | Commit date | Message / relevance |
-|----------------|--------|-------------|---------------------|
-| 94af8ca | Nguyen Nhat | 2026-10-19 | draft for PA2 report |
-| 992b4bf | Nguyen Nhat | 2026-10-19 | add AI-Usage.md |
-| 42b3819 | Nguyen Nhat | 2026-10-16 | prepare for PA2 |
-| 8af0078 | Nguyen Nhat | 2026-10-14 | prepare for PA2 |
+![Recent PA2 documentation commits](screenshots/git/git-log-sprint2-02.png)
 
-**Figure D.3 — Git history continuation**
+*Figure D.3 — PA2 documentation and screenshot updates from 14–21 October 2026.*
 
-![Continuation of FinSync Git history showing earlier setup and documentation](screenshots/git/git-log-sprint2-02.png)
+![Spec Kit and test strategy commits across branches](screenshots/git/git-log-sprint2-03.png)
 
-*Caption: Continuation of Figure D.2, showing earlier repository, documentation, survey-image, and backend setup work, including contributors Nguyen Nhat, Long Pham, Khiem Vuong, and ThaiShoaF. Evidence image saved locally on 19 October 2026 at 11:19:33 (UTC+07:00).*
+*Figure D.4 — Branch history showing Spec Kit initialization and test strategy commits.*
 
-The continuation supplies project history before PA2 as well as side-branch changes dated 14–15 October. Figure D.2's repeated log lines are counted once. Commit `94af8ca` identifies the history snapshot, not a later final submission commit. This Markdown revision is dated 20 October 2026. The supplied images preserve their original dates and captions; no later repository state is inferred from them.
+![Project documentation survey and backend history](screenshots/git/git-log-sprint2-04.png)
+
+*Figure D.5 — Earlier project documentation, app-survey screenshots, and backend setup.*
+
+![Consolidated repository commit graph](screenshots/git/git-log-sprint2-05.png)
+
+*Figure D.6 — Repository commit graph covering project setup and PA2 work, 3–21 October 2026.*
+
 
 ### 2.7 Meeting Action Register
 > *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
 
-This register consolidates the documented outputs and the closeout sequence under the reporting basis in D.2. Baseline due dates remain visible alongside recovery or completion milestones. The supplied Jira/Git evidence retains its 19 October snapshot; Part C supplies the current setup/training information.
+This register consolidates the documented outputs and the closeout sequence under the reporting basis in D.2. Baseline due dates remain visible alongside recovery or completion milestones. The Jira evidence retains its 19 October snapshot and the Git evidence shows commits through 21 October; Part C supplies the current setup/training information.
 
-| Action / source | Action and expected result | Owner | Reviewer | Baseline due | Disposition and closeout milestone |
+| Action / source | Action and expected result | Owner | Reviewer | <span style="white-space: nowrap;">Baseline due</span> | Disposition and closeout milestone |
 |-----------------|----------------------------|-------|----------|--------------|------------------------------------|
-| ACT-01 / Planning | Establish task ownership, dates, capacity, and Jira traceability | Long | Khiêm | 2026-10-10 | A.4.3 contains all 27 work packages, separate reviewers, dates, and the capacity calculation. D.2.5 records the four Jira keys visible in the supplied board image; the remaining keys are not inferred. |
-| ACT-02 / Planning | Complete Spec Kit setup and five training records | Khiêm | Nhật | 2026-10-15 | Part C reports Long's setup work on 19 October and individual training on 19–20 October. The cited commit contains an empty constitution and no listed templates, so setup acceptance remains unsupported. |
-| ACT-03 / Scrum #1 | Reconcile the baseline and recovery milestones | Long | Hòa | 2026-10-17 | D.2.2 records the confirmed 16 October delay and the 19 October recovery targets. A.4.3 retains the original dates, so the delay and recovery remain traceable. |
-| ACT-04 / Scrum #1 | Settle currency, own-group-share, and duplicate-counting rules | Nhật | Khiêm | 2026-10-17 | The selected rules are complete in B.4.1 and consistently reflected in the features, two workflows, and measurable NFRs. |
-| ACT-05 / Scrum #2 | Assess Build 0 against its skeleton scope | Khiêm | Đạt | 2026-10-22 | Accepted at the 22 October checkpoint within the agreed scenario: startup, component/database connectivity, AI response, and controlled failure behavior. No measured test log is asserted by this narrative. |
-| ACT-06 / Scrum #2 | Consolidate AI declarations and supporting histories | Hòa | Long | 2026-10-23 | The Appendix contains 14 supplied prompt entries for Nhật; adopted outputs and independent validation are not documented there. The four other members' individual histories are absent. |
-| ACT-07 / Review | Reconcile report content and Review decisions | Đạt | Hòa | 2026-10-24 | The agreed sequence completes the document cross-check on 23 October and incorporates the 24 October Review narrative. Task roles, baseline/recovery dates, business rules, and evidence captions are aligned in this report. |
-| ACT-08 / Review | Prepare and check the Markdown/PDF submission package | Khiêm | Long | 2026-10-25 | Completed on 25 October within the agreed end-of-sprint scenario in D.2. Khiêm assembled the Markdown, PDF, stylesheet, referenced files, one Jira image, and two Git images into PA2-Group04.zip; checked image paths, diagram rendering, page readability, and archive contents; and handed the package to Long for final review. This is a hypothetical closeout result; no generated archive is evidenced here. |
+| <span style="white-space: nowrap;">ACT-01</span> / Planning | Establish task ownership, dates, capacity, and Jira traceability | Long | Khiêm | <span style="white-space: nowrap;">2026-10-10</span> | A.4.3 contains all 27 work packages, separate reviewers, dates, and the capacity calculation. D.2.5 records the four Jira keys visible in the supplied board image; the remaining keys are not inferred. |
+| <span style="white-space: nowrap;">ACT-02</span> / Planning | Complete <span style="white-space: nowrap;">Spec Kit</span> setup and five training records | Khiêm | Nhật | <span style="white-space: nowrap;">2026-10-15</span> | Part C reports Long's setup work on 19 October and individual training on 19–20 October. The cited commit contains an empty constitution and no listed templates, so setup acceptance remains unsupported. |
+| <span style="white-space: nowrap;">ACT-03</span> / Scrum #1 | Reconcile the baseline and recovery milestones | Long | Hòa | <span style="white-space: nowrap;">2026-10-17</span> | D.2.2 records the confirmed 16 October delay and the 19 October recovery targets. A.4.3 retains the original dates, so the delay and recovery remain traceable. |
+| <span style="white-space: nowrap;">ACT-04</span> / Scrum #1 | Settle currency, own-group-share, and duplicate-counting rules | Nhật | Khiêm | <span style="white-space: nowrap;">2026-10-17</span> | The selected rules are complete in B.4.1 and consistently reflected in the features, two workflows, and measurable NFRs. |
+| <span style="white-space: nowrap;">ACT-05</span> / Scrum #2 | Assess <span style="white-space: nowrap;">Build 0</span> against its skeleton scope | Khiêm | Đạt | <span style="white-space: nowrap;">2026-10-22</span> | Accepted at the 22 October checkpoint within the agreed scenario: startup, component/database connectivity, AI response, and controlled failure behavior. No measured test log is asserted by this narrative. |
+| <span style="white-space: nowrap;">ACT-06</span> / Scrum #2 | Consolidate AI declarations and supporting histories | Hòa | Long | <span style="white-space: nowrap;">2026-10-23</span> | The Appendix contains 14 supplied prompt entries for Nhật; adopted outputs and independent validation are not documented there. The four other members' individual histories are absent. |
+| <span style="white-space: nowrap;">ACT-07</span> / Review | Reconcile report content and Review decisions | Đạt | Hòa | <span style="white-space: nowrap;">2026-10-24</span> | The agreed sequence completes the document cross-check on 23 October and incorporates the 24 October Review narrative. Task roles, baseline/recovery dates, business rules, and evidence captions are aligned in this report. |
+| <span style="white-space: nowrap;">ACT-08</span> / Review | Prepare and check the Markdown/PDF submission package | Khiêm | Long | <span style="white-space: nowrap;">2026-10-25</span> | Completed on 25 October within the agreed end-of-sprint scenario in D.2. Khiêm assembled the Markdown, PDF, stylesheet, referenced files, one Jira image, and five Git images into PA2-Group04.zip; checked image paths, diagram rendering, page readability, and archive contents; and handed the package to Long for final review. This is a hypothetical closeout result; no generated archive is evidenced here. |
 
 ---
 
