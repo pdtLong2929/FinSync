@@ -1,12 +1,20 @@
 {
+<<<<<<< HEAD
   "version": "1.2.2.dev0",
+=======
+  "version": "1.2.3.dev0",
+>>>>>>> 49d9e32 (add: add .specify/ and specs/)
   "integration_state_schema": 1,
   "installed_integrations": [
     "gemini"
   ],
   "integration_settings": {
     "gemini": {
+<<<<<<< HEAD
       "script": "py",
+=======
+      "script": "sh",
+>>>>>>> 49d9e32 (add: add .specify/ and specs/)
       "invoke_separator": "."
     }
   },
