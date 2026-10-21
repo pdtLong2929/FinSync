@@ -9,7 +9,7 @@ FinSync MUST operate strictly as a manual bookkeeping, debt calculation, and fin
 Mobile client applications MUST maintain clean, reactive architectures and standardized networking libraries. Android clients MUST use Kotlin with Jetpack Compose for UI, Kotlin Coroutines for asynchronous execution, and Retrofit for HTTP communications. Cross-platform mobile clients MUST use Flutter (Dart) with BLoC or Riverpod state management and Dio HTTP client.
 
 ### III. Backend Service Architecture
-The core backend API service MUST be built on Spring Boot 3 with Java 21, adhering to a RESTful layered architecture (Controller → Service → Repository). Security MUST be implemented using Spring Security with stateless JWT authentication. Database migrations MUST be managed via Flyway, and API documentation MUST be generated and exposed via SpringDoc OpenAPI (Swagger).
+The core backend API service MUST be built on Spring Boot 4.1.1 with Java 21, adhering to a RESTful layered architecture (Controller → Service → Repository). Security MUST be implemented using Spring Security with stateless JWT authentication. Database migrations MUST be managed via Flyway, and API documentation MUST be generated and exposed via SpringDoc OpenAPI (Swagger).
 
 ### IV. AI & Data Parsing Microservice Isolation
 AI features and notification data extraction MUST be isolated in a dedicated Python (FastAPI) microservice. This service is exclusively responsible for Notification Regex parsing algorithms (extracting structured transaction data from bank SMS and device notifications) and constructing formatted prompts for Google Gemini API and OpenAI API integrations.
@@ -24,7 +24,7 @@ All primary persistent storage MUST utilize PostgreSQL 16 (cloud instance or Doc
 
 ### Approved Stack Baseline
 - **Mobile**: Kotlin + Jetpack Compose + Coroutines + Retrofit (Android) / Dart + Flutter + BLoC/Riverpod + Dio (Cross-Platform).
-- **Backend API**: Java 21 + Spring Boot 3 + Spring Security (JWT) + Flyway + SpringDoc OpenAPI.
+- **Backend API**: Java 21 + Spring Boot 4.1.1 + Spring Security (JWT) + Flyway + SpringDoc OpenAPI.
 - **AI Microservice**: Python + FastAPI + Google Gemini API / OpenAI API.
 - **Web Admin Portal**: React.js.
 - **Database**: PostgreSQL 16 + Spring Data JPA / Hibernate ORM.
@@ -51,4 +51,4 @@ This Constitution supersedes all informal architectural practices and convention
 - **MINOR**: Addition of new core principles, technology layers, or structural constraints.
 - **PATCH**: Non-semantic clarifications, typographical corrections, and minor wording refinements.
 
-**Version**: 1.0.0 | **Ratified**: 2026-10-20 | **Last Amended**: 2026-10-20
+**Version**: 1.0.1 | **Ratified**: 2026-10-20 | **Last Amended**: 2026-10-22
