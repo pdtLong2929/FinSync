@@ -1,67 +1,40 @@
-﻿/* Keep the Markdown renderer's default appearance, as used by PA1.
-   Add only table, image, and pagination rules needed by the longer PA2 report. */
-@page {
-  size: A4;
-  margin: 15mm 14mm;
-}
-
-table {
-  width: 100%;
-  table-layout: auto;
-  border-collapse: collapse;
-}
-
-th, td {
-  padding: 6px 8px;
-  vertical-align: top;
-  word-break: normal;
-  overflow-wrap: break-word;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
+/* Mermaid is emitted inside a pre/code wrapper by Markdown PDF.
+   Reset that wrapper so its whitespace and padding cannot fill a print page. */
+pre:has(.mermaid),
+pre:has(.mermaid) > code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  white-space: normal;
+  overflow: visible;
+  line-height: normal;
 }
 
 .mermaid {
   text-align: center;
+  white-space: normal;
+  margin: 8px 0;
 }
 
 .mermaid svg {
-  max-width: 100%;
-  max-height: 240mm;
-  width: auto;
-  height: auto;
+  display: block;
+  width: auto !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: 225mm !important;
+  margin: 0 auto;
 }
 
 @media print {
-  h1, h2, h3, h4, h5, h6 {
-    break-after: avoid;
-    page-break-after: avoid;
-  }
-
-  table {
-    font-size: 12px;
-    break-inside: auto;
-    page-break-inside: auto;
-  }
-
-  thead {
-    display: table-header-group;
-  }
-
-  tr, img, .mermaid {
+  pre:has(.mermaid), .mermaid {
     break-inside: avoid;
     page-break-inside: avoid;
   }
 
-  p {
-    orphans: 2;
-    widows: 2;
-  }
-
-  p:has(> img) + p {
-    break-before: avoid;
-    page-break-before: avoid;
+  /* Keep each workflow caption with its diagram. */
+  p:has(+ pre .mermaid), p:has(+ .mermaid) {
+    break-after: avoid;
+    page-break-after: avoid;
   }
 }
