@@ -1,5 +1,4 @@
 # PA3-2026 Report — FinSync (Group 04)
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
 
 **Course:** CS300 - CSC13002 - Introduction to Software Engineering  
 **Assignment:** Project Assignment 3 (PA3-2026) — Sprint 3  
@@ -7,13 +6,8 @@
 **Project:** FinSync — Personal Finance & Group Expense Manager with AI Advisor  
 **Sprint 3 period:** `2026-10-26 to 2026-11-08` (PA2 planning target; confirm at Sprint Planning)  
 
-
-> **How to use this template:** Replace every `[TODO: ...]` with verified information. Attribution fields record actual authors, reviewers, and editors; do not copy PA2 assignments as proof that PA3 work has been completed. Duplicate the use-case specification block for **every** use case in the diagrams. Replace example diagrams and add actual screenshots before submission. Planned dates, suggested coverage, and empty evidence slots are not completion claims.
->
-> **Revision requirement:** Submit one separate `Changes.md` for PA3, containing a **Project Plan** section and a **Vision Document** section. It must describe all changes from PA2, including TA-feedback responses. This report does not replace that required file; Sections A and B receive no points without the change record.
-
 ## Table of Contents
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Le Duc Nhat`
 
 - [Team Members](#team-members)
 - [Part A — Revised Project Plan](#part-a--revised-project-plan)
@@ -29,13 +23,14 @@
 ---
 
 ## Team Members
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Le Duc Nhat`
+
 
 All members participate as Full-stack Engineers. The roles below retain the PA2 baseline; actual PA3 task ownership is recorded in Section A.4.
 
 | # | Student ID | Full Name | Email | Main Role |
 |---|------------|-----------|-------|-----------|
-| 1 | 24120087 | Phạm Định Tiểu Long | phamlongkh2006@gmail.com | Project Manager / Group Leader / Business Analyst |
+| 1 | 24120087 | Phạm Định Tiểu Long | phamlongkh2006@gmail.com | Project Manager / Group Leader |
 | 2 | 24120038 | Nguyễn Phú Đạt | nguyennphuudatt@gmail.com | UI/UX Designer & Frontend Lead |
 | 3 | 24120403 | Nguyễn Lê Đức Nhật | nldnhat182006@gmail.com | Backend Lead |
 | 4 | 24120342 | Vương Đắc Gia Khiêm | vuongkhiemvl10@gmail.com | QA Lead & DevOps |
@@ -45,8 +40,6 @@ All members participate as Full-stack Engineers. The roles below retain the PA2 
 
 ## Part A — Revised Project Plan
 > *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
-
-**Weight:** 5 points. **Version:** Second submission, revised from PA2 Part A.
 
 ### A.1. Introduction and Revision Summary
 > *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
@@ -134,8 +127,6 @@ Include document revisions, diagrams, every use-case specification and prototype
 
 ## Part B — Detailed Vision Document
 > *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
-
-**Weight:** 5 points. **Version:** Second submission, revised from PA2 Part B.
 
 ### B.1. Introduction and Revision Summary
 > *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
@@ -244,8 +235,6 @@ Expand each baseline group into individual, testable requirements. Preserve exis
 
 ## Part C — Use-Case Model
 > *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
-
-**Weight:** 10 points. Cover all functional requirements in the revised Vision Document with Mermaid diagrams embedded in Markdown.
 
 ### C.1. System Boundary and Actors
 > *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
@@ -721,17 +710,4 @@ PA3-Group04/
 └── src/                # Complete source and run instructions, excluding generated folders
 ```
 
----
 
-## References
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
-
-| Reference | Source / purpose |
-|-----------|------------------|
-| R1 | [PA3 Assignment Specification](pa3_project_assignment_specification.md) — required sections, scoring, and submission rules |
-| R2 | [FinSync Project Context](../../GEMINI.md) — product boundaries, team roles, technologies, and working conventions |
-| R3 | [PA1 Report](../PA1/report.md) — original proposal, app survey, team contract, and process |
-| R4 | [PA2 Report](../PA2/report.md) — baseline Project Plan, Vision Document, Spec Kit setup, and Sprint 3 handoff |
-| R5 | [Weekly Reports Instructions](../../WeeklyReport.md) — meeting cadence, individual Scrum updates, and retrospective questions |
-| R6 | [TODO: Actual TA feedback source and date] |
-| R7 | [TODO: Course AI usage guidelines supplied separately] |
