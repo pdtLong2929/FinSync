@@ -22,11 +22,11 @@
 
 | PA2 section | PA3 location | Change IDs or unchanged status |
 |---|---|---|
-| A.1 Introduction | A.1 Introduction and Revision Summary | [TODO] |
-| A.2 Project Overview | A.2 Project Overview | [TODO] |
-| A.3 Project Organization | A.3 Project Organization and Risk Management | [TODO] |
-| A.4.1–A.4.3 Process, Sprint Overview, and Detailed Tasks | A.4 Process, Schedule, and Sprint 3 Tasks | [TODO] |
-| A.4.4–A.4.5 Build Plan and Later Sprints | A.5 Build Plan and Later Sprints | [TODO] |
+| A.1 Introduction | A.1 Introduction and Revision Summary | PP-01 |
+| A.2 Project Overview | A.2 Project Overview | Unchanged |
+| A.3 Project Organization | A.3 Project Organization and Risk Management | PP-02 |
+| A.4.1–A.4.3 Process, Sprint Overview, and Detailed Tasks | A.4 Process, Schedule, and Sprint 3 Tasks | PP-03 |
+| A.4.4–A.4.5 Build Plan and Later Sprints | A.5 Build Plan and Later Sprints | PP-04 |
 
 ### 1.2. PP-01 — [TODO: Specific Change Title]
 > *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
