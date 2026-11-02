@@ -1,5 +1,26 @@
+# Native Android (project root)
+.gradle/
+.kotlin/
+local.properties
+captures/
+*.apk
+*.aab
+*.hprof
+*.keystore
+
+# Local review outputs and historical working notes; keep native app resources.
+/output/
+/design-evidence/
+/*.txt
+/*.md
+!/README.md
+!/FRONTEND_GUIDE.md
+!/FRONTEND_STATUS.md
+*.zip
+*.jks
+
 # ==========================================
-# FinSync Mobile - Flutter .gitignore
+# FinSync Mobile - retained cross-platform exclusions
 # ==========================================
 
 # ---- Dart/Flutter ----
