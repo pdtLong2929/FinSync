@@ -303,6 +303,22 @@ flowchart LR
 
 Each basic-flow and alternative-flow screen/state must be identifiable. Shared screens may be reused, but embed and explain the relevant screenshots with each specification. Refine any specification whose prototype cannot express its stated behavior coherently.
 
+### D.1a. Regular User / Client Use Cases and Prototype Evidence
+> *Performed by: Nguyễn Phú Đạt (24120038) | Reviewed by: Pending team review | Edited by: Pending confirmation*
+
+The Client contribution contains **12 use-case specifications (UC-CLI-01 through UC-CLI-12)** and **65 prototype evidence PNGs**, mapped to Basic, Alternative and Exception flows. Detailed specifications and all embedded figures are in the [Client catalogue](use-cases/client-use-cases.md).
+
+**Evidence source: Figma Make Prototype — Simulated UI.** These are browser prototype captures using simulated, in-memory financial data, not Android emulator screenshots. No backend integration, PostgreSQL persistence, real JWT authentication, real device behavior or native Android pixel accuracy is verified. Imported validation claims belong to the supplied archive; no browser scenario tests were rerun during this documentation integration.
+
+| Client documentation | Review entry point |
+|---|---|
+| Twelve specifications and per-UC coverage | [Client catalogue](use-cases/client-use-cases.md) |
+| Scenario-to-image mapping | [Screenshot matrix](screenshots/prototypes/client-evidence/Screenshot-Matrix.csv) |
+| Verification, provenance and limitations | [Client evidence audit](screenshots/prototypes/client-evidence/client-evidence-audit.md) |
+| Supplied prototype URL and scope caveat | [Prototype reference](use-cases/client-prototype-link.md) |
+
+All three flow categories have supplied image coverage for each Client use case. This does not certify every source-spec path or live Figma interaction. Identical final-state images for cancelled edit, cancellation of deletion and Undo do not independently prove the intermediate actions. Existing Account/Admin and other subsystem contributions retain their own ownership and evidence.
+
 ### D.2. UC-[TODO] — [TODO: Use-Case Name]
 > *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
 
@@ -424,6 +440,17 @@ PA3 permits completing all Spec Kit steps, including test generation, but does *
 | 3. Backend startup | [TODO] | [TODO] | [TODO] | [TODO] |
 | 4. Frontend startup | [TODO] | [TODO] | [TODO] | [TODO] |
 | 5. Demo data / feature walkthrough | [TODO] | [TODO] | [TODO: Synthetic accounts/data] | [TODO] |
+
+#### E.3.1. Android Frontend Reproduction Guide
+> *Performed by: Nguyễn Phú Đạt (24120038) | Reviewed by: Pending team review | Edited by: Pending confirmation*
+
+The [Android Frontend Technical Guide](frontend/frontend-guide.md) records the
+current source structure, dependency versions, Windows build/install steps,
+automatic Pixel 7 AVD startup, local feature coverage and known limitations.
+The client uses fictional in-memory data and is not connected to backend APIs,
+PostgreSQL or real authentication. This frontend contribution does not establish
+completion of Part E end-to-end integration or select the functional group for
+the team. Existing full-stack setup and integration fields below remain pending.
 
 ### E.4. Integration Results and Known Issues
 > *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
