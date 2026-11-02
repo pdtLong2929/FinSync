@@ -1,0 +1,172 @@
+{
+  "branch": "documentation",
+  "initial_status": "clean",
+  "expected_pngs": 65,
+  "imported_pngs": 65,
+  "referenced_pngs": 65,
+  "distinct_sha256": 63,
+  "coverage": {
+    "UC-CLI-01": {
+      "BF": 1,
+      "AF": 1,
+      "EF": 1
+    },
+    "UC-CLI-02": {
+      "BF": 1,
+      "AF": 3,
+      "EF": 1
+    },
+    "UC-CLI-03": {
+      "BF": 2,
+      "AF": 1,
+      "EF": 3
+    },
+    "UC-CLI-04": {
+      "BF": 3,
+      "AF": 2,
+      "EF": 2
+    },
+    "UC-CLI-05": {
+      "BF": 1,
+      "AF": 1,
+      "EF": 2
+    },
+    "UC-CLI-06": {
+      "BF": 1,
+      "AF": 2,
+      "EF": 1
+    },
+    "UC-CLI-07": {
+      "BF": 2,
+      "AF": 2,
+      "EF": 1
+    },
+    "UC-CLI-08": {
+      "BF": 1,
+      "AF": 2,
+      "EF": 1
+    },
+    "UC-CLI-09": {
+      "BF": 1,
+      "AF": 4,
+      "EF": 2
+    },
+    "UC-CLI-10": {
+      "BF": 1,
+      "AF": 2,
+      "EF": 2
+    },
+    "UC-CLI-11": {
+      "BF": 2,
+      "AF": 3,
+      "EF": 4
+    },
+    "UC-CLI-12": {
+      "BF": 2,
+      "AF": 2,
+      "EF": 2
+    }
+  },
+  "created_files": [
+    "PA/PA3/screenshots/prototypes/UC-CLI-01/UC-CLI-01_AF_01_PrivacyAndPeriod.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-01/UC-CLI-01_BF_01_Overview.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-01/UC-CLI-01_EF_01_EmptyOverview.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-02/UC-CLI-02_AF_01_EditWallet.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-02/UC-CLI-02_AF_02_ArchiveAndRestore.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-02/UC-CLI-02_AF_03_SignedWalletBalance.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-02/UC-CLI-02_BF_01_CreateWallet.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-02/UC-CLI-02_EF_01_InvalidWallet.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-03/UC-CLI-03_AF_01_ChangedTransferCancelled.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-03/UC-CLI-03_BF_01_TransferReview.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-03/UC-CLI-03_BF_02_TransferSuccess.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-03/UC-CLI-03_EF_01_SameWallet.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-03/UC-CLI-03_EF_02_InvalidTransferAmount.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-03/UC-CLI-03_EF_03_InsufficientBalance.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-04/UC-CLI-04_AF_01_AddIncome.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-04/UC-CLI-04_AF_02_KeepDraft.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-04/UC-CLI-04_BF_01_AddExpense.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-04/UC-CLI-04_BF_02_ValidExpenseForm.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-04/UC-CLI-04_BF_03_SaveSuccess.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-04/UC-CLI-04_EF_01_InvalidAmount.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-04/UC-CLI-04_EF_02_SimulatedSaveFailure.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-05/UC-CLI-05_AF_01_CombinedFilters.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-05/UC-CLI-05_BF_01_SearchHistory.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-05/UC-CLI-05_EF_01_NoResults.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-05/UC-CLI-05_EF_02_InvalidRange.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-06/UC-CLI-06_AF_01_ChangedTransactionFields.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-06/UC-CLI-06_AF_02_CancelledEdit.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-06/UC-CLI-06_BF_01_EditedTransaction.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-06/UC-CLI-06_EF_01_InvalidEdit.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-07/UC-CLI-07_AF_01_CancelDeletion.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-07/UC-CLI-07_AF_02_UndoRestoresOriginal.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-07/UC-CLI-07_BF_01_DeleteConfirmation.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-07/UC-CLI-07_BF_02_DeletedTransaction.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-07/UC-CLI-07_EF_01_UnavailableTransaction.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-08/UC-CLI-08_AF_01_OverBudget.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-08/UC-CLI-08_AF_02_BudgetDrilldown.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-08/UC-CLI-08_BF_01_BudgetStatus.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-08/UC-CLI-08_EF_01_NoBudget.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-09/UC-CLI-09_AF_01_CategoryReport.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-09/UC-CLI-09_AF_02_TrendReport.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-09/UC-CLI-09_AF_03_FilteredReport.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-09/UC-CLI-09_AF_04_CustomPeriodTrend.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-09/UC-CLI-09_BF_01_CompareReport.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-09/UC-CLI-09_EF_01_EmptyReport.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-09/UC-CLI-09_EF_02_InvalidReportDates.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-10/UC-CLI-10_AF_01_ExistingGroup.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-10/UC-CLI-10_AF_02_LocalInvitation.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-10/UC-CLI-10_BF_01_CreatedGroup.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-10/UC-CLI-10_EF_01_InvalidGroup.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-10/UC-CLI-10_EF_02_InvalidInvitation.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-11/UC-CLI-11_AF_01_ExactSplit.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-11/UC-CLI-11_AF_02_PercentageSplit.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-11/UC-CLI-11_AF_03_SharesSplit.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-11/UC-CLI-11_BF_01_EqualSplitReview.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-11/UC-CLI-11_BF_02_SharedExpenseSuccess.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-11/UC-CLI-11_EF_01_InvalidExact.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-11/UC-CLI-11_EF_02_InvalidPercentage.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-11/UC-CLI-11_EF_03_InvalidShares.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-11/UC-CLI-11_EF_04_InvalidGroupAmount.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-12/UC-CLI-12_AF_01_CancelledSettlement.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-12/UC-CLI-12_AF_02_PartialSettlement.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-12/UC-CLI-12_BF_01_DebtSummary.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-12/UC-CLI-12_BF_02_SettlementSuccess.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-12/UC-CLI-12_EF_01_InvalidSettlement.png",
+    "PA/PA3/screenshots/prototypes/UC-CLI-12/UC-CLI-12_EF_02_UnavailableDebt.png",
+    "PA/PA3/screenshots/prototypes/client-evidence/Screenshot-Matrix.csv",
+    "PA/PA3/screenshots/prototypes/client-evidence/client-evidence-audit.md",
+    "PA/PA3/screenshots/prototypes/client-evidence/integration-verification.json",
+    "PA/PA3/screenshots/prototypes/client-evidence/source-Evidence-Manifest.json",
+    "PA/PA3/screenshots/prototypes/client-evidence/source-Evidence-Report.md",
+    "PA/PA3/screenshots/prototypes/client-evidence/source-Missing-Scenarios.md",
+    "PA/PA3/screenshots/prototypes/client-evidence/source-README.md",
+    "PA/PA3/screenshots/prototypes/client-evidence/source-Screenshot-Matrix.csv",
+    "PA/PA3/screenshots/prototypes/client-evidence/source-Validation-Matrix.md",
+    "PA/PA3/use-cases/client-prototype-link.md",
+    "PA/PA3/use-cases/client-use-cases.md",
+    "PA/PA3/use-cases/uc-cli-01-view-financial-overview.md",
+    "PA/PA3/use-cases/uc-cli-02-manage-personal-wallets.md",
+    "PA/PA3/use-cases/uc-cli-03-transfer-funds-between-wallets.md",
+    "PA/PA3/use-cases/uc-cli-04-record-income-or-expense.md",
+    "PA/PA3/use-cases/uc-cli-05-search-and-filter-transactions.md",
+    "PA/PA3/use-cases/uc-cli-06-view-and-edit-transaction.md",
+    "PA/PA3/use-cases/uc-cli-07-delete-and-restore-transaction.md",
+    "PA/PA3/use-cases/uc-cli-08-view-budget-status.md",
+    "PA/PA3/use-cases/uc-cli-09-view-and-filter-financial-reports.md",
+    "PA/PA3/use-cases/uc-cli-10-create-join-and-view-groups.md",
+    "PA/PA3/use-cases/uc-cli-11-add-and-split-group-expense.md",
+    "PA/PA3/use-cases/uc-cli-12-view-and-settle-group-debts.md"
+  ],
+  "modified_files": [
+    "PA/PA3/report.md"
+  ],
+  "unchanged_existing_files_checked": 54,
+  "source_specification_sha256": "b3dbbd4176bf3eea4c932718a8d0a46c9bd8b762b0c921045d44cb749b833422",
+  "source_zip_sha256": "d0315cd475066623ea9c67fa30611ecc918ea182fc748e94481e1940cc6aaae5",
+  "embedded_pngs": 65,
+  "resolving_new_markdown_links": true,
+  "resolving_matrix_paths": true,
+  "source_specifications_preserved_except_heading_and_credits": true,
+  "created_file_count": 88,
+  "suggested_commit_message": "docs(pa3): integrate client use cases and Figma prototype evidence"
+}
