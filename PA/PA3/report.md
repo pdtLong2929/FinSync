@@ -18,7 +18,7 @@
 - [Part F — AI Usage Report and Weekly Report](#part-f--ai-usage-report-and-weekly-report)
 - [Appendix A — Individual AI Usage Notes](#appendix-a--individual-ai-usage-notes)
 - [Appendix B — Submission Checklist](#appendix-b--submission-checklist)
-- [References](#references)
+
 
 ---
 
