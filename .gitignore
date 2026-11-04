@@ -46,3 +46,14 @@ htmlcov/
 # ---- AI Assistant ----
 .gemini/
 .agents/
+
+# ---- Build Outputs ----
+target/
+build/
+dist/
+.gradle/
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/

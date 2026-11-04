@@ -2,7 +2,7 @@ version: '3.8'
 
 # =======================================================
 # FinSync - Centralized Docker Compose
-# Services: PostgreSQL (DB), Spring Boot (Backend API)
+# Services: PostgreSQL (DB), Spring Boot (Backend API), FastAPI (AI Microservice)
 # =======================================================
 
 services:
@@ -48,14 +48,31 @@ services:
       DB_PASSWORD: ${DB_PASSWORD:-ducnhat12a1}
       JWT_SECRET: ${JWT_SECRET:-404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
       JWT_EXPIRATION_MS: ${JWT_EXPIRATION_MS:-86400000}
-      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      AI_SERVICE_URL: http://ai-service:8001
     ports:
       - '8080:8080'
     networks:
       - finsync-network
 
   # -----------------------------------------------------
-  # 3. Admin Web React (Uncomment when React app is ready)
+  # 3. AI & Notification Parsing Microservice (Python FastAPI)
+  # -----------------------------------------------------
+  ai-service:
+    build:
+      context: ./src/ai-service
+      dockerfile: Dockerfile
+    container_name: finsync-ai-service
+    restart: on-failure
+    environment:
+      PORT: 8001
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+    ports:
+      - '8001:8001'
+    networks:
+      - finsync-network
+
+  # -----------------------------------------------------
+  # 4. Admin Web React (Optional / Dev profile)
   # -----------------------------------------------------
   # admin-web:
   #   build:
