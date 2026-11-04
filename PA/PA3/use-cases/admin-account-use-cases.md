@@ -277,7 +277,7 @@
 | Step | Actor action | System response / state change | Prototype screen ID |
 |:---:|---|---|:---:|
 | 1 | From User Table, Administrator identifies target user and clicks **"Lock Account"** button. | System renders modal dialog: *"Lock User Account"*, showing target's Name, Email, and a mandatory text area for **"Reason for Administrative Lock"**. | `UC-ADM-03-S01` |
-| 2 | Administrator types reason (e.g., *"Repeated fraudulent debt disputes in shared ledgers"*) and clicks **"Confirm Lock"**. | System performs client-side validation (ensures length >= 10 characters) and submits `PATCH /api/v1/admin/users/{userId}/status` with `{ "status": "LOCKED", "reason": "..." }`. | `UC-ADM-03-S02` |
+| 2 | Administrator types reason (e.g., *"Reported by multiple members for debt settlement evasion"*) and clicks **"Confirm Lock"**. | System performs client-side validation (ensures length >= 10 characters) and submits `PATCH /api/v1/admin/users/{userId}/status` with `{ "status": "LOCKED", "reason": "..." }`. | `UC-ADM-03-S02` |
 | 3 | Backend sets status to `LOCKED` in PostgreSQL, publishes revocation event to Redis Blacklist, and writes record to `admin_audit_logs`. | System closes modal, updates table status badge to red (`LOCKED`), switches button to **"Unlock"**, and displays success toast: *"Account locked successfully."* | `UC-ADM-03-S03` |
 
 ### 5.3. Alternative and Exception Flows
@@ -336,7 +336,7 @@
 |:---:|---|---|:---:|
 | 1 | Administrator navigates to **"Settings & Taxonomies"** screen. | System fetches global settings via `GET /api/v1/admin/taxonomies` and displays Category Management Table and Currency Settings Card. | `UC-ADM-04-S01` |
 | 2 | Administrator clicks **"Add Default Category"** button. | System renders modal with Name, Category Type (`EXPENSE` or `INCOME`), Icon Picker, and Color Picker. | `UC-ADM-04-S02` |
-| 3 | Administrator inputs name (e.g., *"Healthcare & Fitness"*), selects type `"EXPENSE"`, chooses heart-pulse icon, and clicks **"Save Category"**. | System validates uniqueness, sends `POST /api/v1/admin/categories`, and persists record. | `UC-ADM-04-S03` |
+| 3 | Administrator inputs name (e.g., *"Electricity"*), selects type `"EXPENSE"`, chooses category color/icon, and clicks **"Save Category"**. | System validates uniqueness, sends `POST /api/v1/admin/categories`, and persists record. | `UC-ADM-04-S03` |
 | 4 | Backend returns `201 Created` with saved category object. | System updates category table, shows success alert: *"Category added to default taxonomy"*, and auto-seeds this category for all newly registered accounts. | `UC-ADM-04-S04` |
 
 ### 6.3. Alternative and Exception Flows
