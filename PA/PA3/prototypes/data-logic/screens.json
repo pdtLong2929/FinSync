@@ -1,0 +1,1435 @@
+{
+  "version": "Compact v2.0",
+  "provenance": "Static specification wireframe variants, not live Figma/backend evidence.",
+  "cases": [
+    {
+      "n": 2,
+      "id": "UC-DL-02",
+      "title": "Record, Edit and Delete Personal Transactions",
+      "actor": "Regular User",
+      "support": "None.",
+      "goal": "Maintain income and expense records, optional receipts and correct balances without duplicate posting.",
+      "trigger": "The user selects Add transaction or opens an owned transaction.",
+      "pre": "1. User has an authorized session, or an unlocked encrypted cache after initial sign-in for the offline branch.<br>2. An owned wallet and applicable category exist.<br>3. Group records are not edited through this flow.",
+      "fr": "Income/expense capture, receipts, editing, deletion and offline pending changes.",
+      "nfr": "NFR-S4, NFR-S6, NFR-S8, NFR-R3, NFR-R5, NFR-R6",
+      "sample": [
+        "Type: Expense",
+        "Wallet: Cash / VND",
+        "Category: Food",
+        "Amount: 120,000 VND",
+        "Date: 2026-11-04",
+        "Note: Lunch"
+      ],
+      "entry": "Add expense",
+      "input": "Enter amount, wallet, category, date and note; optionally attach a receipt.",
+      "review": "Review a 120,000 VND Food expense and the selected wallet.",
+      "commit": "Validate ownership and category type; atomically record the transaction and its attachment references; update derived totals.",
+      "result": "One expense appears in history; Cash decreases by 120,000 VND and Food spending increases once.",
+      "allAlt": [
+        {
+          "id": "AF-01",
+          "a": [
+            "Income or edit",
+            "Step 2: change type or open an existing entry",
+            "1. Choose an income category or edit allowed values. 2. Recalculate affected wallet/category totals; keep the original ID when editing.",
+            "3",
+            "Only the difference changes totals."
+          ]
+        },
+        {
+          "id": "AF-02",
+          "a": [
+            "Delete / Undo",
+            "Step 2: Delete selected",
+            "1. Confirm deletion and recalculate. 2. Offer Undo for 7 seconds; valid Undo restores the same ID/values once. If expired or unavailable, return to history without recreating it.",
+            "5 / end",
+            "Deleted or restored once."
+          ]
+        },
+        {
+          "id": "AF-03",
+          "a": [
+            "Offline or receipt pending",
+            "Step 4: network/upload unavailable",
+            "1. Save an authorized personal change locally as Pending and invoke UC-DL-12 on reconnection. 2. If only the receipt fails after posting, retry the upload without another financial entry.",
+            "End / UC-DL-12",
+            "Local and server status remain distinct."
+          ]
+        },
+        {
+          "id": "AF-04",
+          "a": [
+            "Link a group movement",
+            "Step 2: money relates to a group event",
+            "1. Select the authorized source event. 2. Link the movement rather than creating another consumption entry; the user's share is counted once.",
+            "3",
+            "Cash and consumption are not duplicated."
+          ]
+        },
+        {
+          "id": "AF-05",
+          "a": [
+            "Invalid input or reference",
+            "Step 3: bad amount/date/category/receipt or ineligible wallet",
+            "1. Identify the invalid field/file or reference. 2. Retain valid input and ask for correction; reject the whole invalid write.",
+            "2",
+            "No invalid financial effect."
+          ]
+        }
+      ],
+      "screens": [
+        {
+          "id": "UC-DL-02-S01",
+          "title": "Add expense",
+          "tag": "Basic steps 1–2",
+          "fields": [
+            "Type: Expense",
+            "Wallet: Cash / VND",
+            "Category: Food",
+            "Amount: 120,000 VND"
+          ],
+          "message": "Enter amount, wallet, category, date and note; optionally attach a receipt.",
+          "action": "Review",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-02-S02",
+          "title": "Review / confirmation",
+          "tag": "Basic step 3",
+          "fields": [
+            "Type: Expense",
+            "Wallet: Cash / VND",
+            "Category: Food"
+          ],
+          "message": "Review a 120,000 VND Food expense and the selected wallet.",
+          "action": "Confirm",
+          "secondary": "Edit / cancel"
+        },
+        {
+          "id": "UC-DL-02-S03",
+          "title": "Result and details",
+          "tag": "Basic steps 4–5",
+          "fields": [
+            "Status is explicit: pending / confirmed / complete"
+          ],
+          "message": "One expense appears in history; Cash decreases by 120,000 VND and Food spending increases once.",
+          "action": "View details",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-02-S04",
+          "title": "Alternative actions",
+          "tag": "Alternative flow variants",
+          "fields": [
+            "Income or edit",
+            "Delete / Undo",
+            "Offline or receipt pending"
+          ],
+          "message": "Choose the applicable action, then review its effect before confirmation. Each alternative keeps its own permission and financial rules.",
+          "action": "Review selected action",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-02-S05",
+          "title": "Validation / changed data",
+          "tag": "Alternative flow variants",
+          "fields": [
+            "Link a group movement",
+            "Invalid input or reference"
+          ],
+          "message": "Show the affected value, permitted amount or unavailable source. Keep valid input; correct or reload before retrying. No invalid partial effect is accepted.",
+          "action": "Correct / refresh",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-02-S06",
+          "title": "Pending / recovery state",
+          "tag": "Shared state variants",
+          "fields": [
+            "Pending: awaiting confirmation or connection",
+            "Failed: show reason and a safe retry",
+            "Complete: show the acknowledged result"
+          ],
+          "message": "Display the applicable state, not all three at once. Retrying must not duplicate an already acknowledged financial effect.",
+          "action": "Inspect status / retry",
+          "secondary": "Back"
+        }
+      ],
+      "boards": [
+        {
+          "filename": "UC-DL-02-compact.png",
+          "screen_ids": [
+            "UC-DL-02-S01",
+            "UC-DL-02-S02",
+            "UC-DL-02-S03",
+            "UC-DL-02-S04",
+            "UC-DL-02-S05",
+            "UC-DL-02-S06"
+          ]
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "id": "UC-DL-05",
+      "title": "Record and Confirm Shared-Fund Contributions",
+      "actor": "Group Member",
+      "support": "Group Owner acting as fund custodian.",
+      "goal": "Record money contributed outside the app and increase the shared fund only after the custodian confirms receipt.",
+      "trigger": "A member opens the group fund and selects Contribute.",
+      "pre": "1. Both actors have online authorized group sessions.<br>2. The group fund exists and is active.<br>3. Actual payment occurs outside FinSync.",
+      "fr": "Contribution claims, custodian confirmation, fund and member-position visibility.",
+      "nfr": "NFR-S4, NFR-R3, NFR-R6, NFR-R7",
+      "sample": [
+        "Group fund: Roommates / VND",
+        "Contributor: Laura",
+        "Claim: 500,000 VND",
+        "Current confirmed fund: 1,000,000 VND"
+      ],
+      "entry": "Contribute to group fund",
+      "input": "Enter the amount/date and declare that the external contribution was made.",
+      "review": "Review a 500,000 VND contribution claim; explain that it does not increase the fund yet.",
+      "commit": "Save a pending claim; notify the Owner; the Owner opens it, verifies receipt and confirms; atomically post the fund credit.",
+      "result": "Fund balance becomes 1,500,000 VND; Laura's confirmed contribution position increases by 500,000; no expense is created.",
+      "allAlt": [
+        {
+          "id": "AF-01",
+          "a": [
+            "Pending / rejected / withdrawn",
+            "Step 4: no confirmation, rejection or contributor withdrawal",
+            "1. Keep a new claim Pending until the Owner responds. 2. On rejection store the reason; allow withdrawal only while Pending.",
+            "End",
+            "Confirmed fund remains unchanged."
+          ]
+        },
+        {
+          "id": "AF-02",
+          "a": [
+            "Invalid claim or missing rate",
+            "Step 3: invalid amount/date or foreign currency",
+            "1. Validate a positive contribution. 2. Show original amount and approved quote; if no rate exists, defer the conversion-dependent claim rather than inventing a total.",
+            "2 / 3",
+            "Only valid reviewed claims proceed."
+          ]
+        },
+        {
+          "id": "AF-03",
+          "a": [
+            "Wrong confirmer / repeated decision",
+            "Step 4: another member confirms or status already changed",
+            "1. Require the fund custodian. 2. Recheck claim status; a prior confirmation returns its existing result, a conflicting decision is rejected.",
+            "End",
+            "One receipt effect at most."
+          ]
+        },
+        {
+          "id": "AF-04",
+          "a": [
+            "History / empty fund",
+            "Step 1: inspect fund without contributing",
+            "1. Show confirmed cash and member positions separately from pending claims. 2. Show zero if empty; unused-fund return opens UC-DL-08.",
+            "End",
+            "No ledger mutation."
+          ]
+        }
+      ],
+      "screens": [
+        {
+          "id": "UC-DL-05-S01",
+          "title": "Contribute to group fund",
+          "tag": "Basic steps 1–2",
+          "fields": [
+            "Group fund: Roommates / VND",
+            "Contributor: Laura",
+            "Claim: 500,000 VND",
+            "Current confirmed fund: 1,000,000 VND"
+          ],
+          "message": "Enter the amount/date and declare that the external contribution was made.",
+          "action": "Review",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-05-S02",
+          "title": "Review / confirmation",
+          "tag": "Basic step 3",
+          "fields": [
+            "Group fund: Roommates / VND",
+            "Contributor: Laura",
+            "Claim: 500,000 VND"
+          ],
+          "message": "Review a 500,000 VND contribution claim; explain that it does not increase the fund yet.",
+          "action": "Confirm",
+          "secondary": "Edit / cancel"
+        },
+        {
+          "id": "UC-DL-05-S03",
+          "title": "Result and details",
+          "tag": "Basic steps 4–5",
+          "fields": [
+            "Status is explicit: pending / confirmed / complete"
+          ],
+          "message": "Fund balance becomes 1,500,000 VND; Laura's confirmed contribution position increases by 500,000; no expense is created.",
+          "action": "View details",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-05-S04",
+          "title": "Alternative actions",
+          "tag": "Alternative flow variants",
+          "fields": [
+            "Pending / rejected / withdrawn",
+            "Invalid claim or missing rate",
+            "Wrong confirmer / repeated decision"
+          ],
+          "message": "Choose the applicable action, then review its effect before confirmation. Each alternative keeps its own permission and financial rules.",
+          "action": "Review selected action",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-05-S05",
+          "title": "Validation / changed data",
+          "tag": "Alternative flow variants",
+          "fields": [
+            "History / empty fund"
+          ],
+          "message": "Show the affected value, permitted amount or unavailable source. Keep valid input; correct or reload before retrying. No invalid partial effect is accepted.",
+          "action": "Correct / refresh",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-05-S06",
+          "title": "Pending / recovery state",
+          "tag": "Shared state variants",
+          "fields": [
+            "Pending: awaiting confirmation or connection",
+            "Failed: show reason and a safe retry",
+            "Complete: show the acknowledged result"
+          ],
+          "message": "Display the applicable state, not all three at once. Retrying must not duplicate an already acknowledged financial effect.",
+          "action": "Inspect status / retry",
+          "secondary": "Back"
+        }
+      ],
+      "boards": [
+        {
+          "filename": "UC-DL-05-compact.png",
+          "screen_ids": [
+            "UC-DL-05-S01",
+            "UC-DL-05-S02",
+            "UC-DL-05-S03",
+            "UC-DL-05-S04",
+            "UC-DL-05-S05",
+            "UC-DL-05-S06"
+          ]
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "id": "UC-DL-06",
+      "title": "Record and Split a Group Expense",
+      "actor": "Group Member",
+      "support": "Group Owner when authorizing shared-fund spending.",
+      "goal": "Allocate a real group expense exactly, preserve the funding source and update member positions without counting consumption twice.",
+      "trigger": "An authorized member selects Add group expense.",
+      "pre": "1. Online active membership.<br>2. Group currency and participants are known.<br>3. A valid rate exists for a foreign-currency bill; sufficient fund cash exists for fund-funded spending.",
+      "fr": "Single-payer/fund-funded expense, equal/exact/percentage/weighted allocation and exact rounding.",
+      "nfr": "NFR-P5, NFR-S4, NFR-S6, NFR-R3, NFR-R8",
+      "sample": [
+        "Title: Roommates dinner",
+        "Amount: 300,001 VND",
+        "Paid by: You",
+        "Participants: You, Laura, Minh",
+        "Split: Equal"
+      ],
+      "entry": "Add group expense",
+      "input": "Enter title/date/category, payer or fund, original amount/currency and participating members; select split mode.",
+      "review": "Review You 100,001; Laura 100,000; Minh 100,000 VND. Total equals 300,001 VND.",
+      "commit": "Revalidate membership, quote, split inputs and funding; atomically post the expense, allocations and the applicable payer/fund entry.",
+      "result": "One expense appears. Member debt/fund positions update; each user's consumption is only their allocated share.",
+      "allAlt": [
+        {
+          "id": "AF-01",
+          "a": [
+            "Alternative split mode",
+            "Step 2: Exact, Percentage or Shares",
+            "1. Enter exact amounts totaling the bill, percentages totaling 100%, or positive weights. 2. Calculate final shares and distribute rounding remainders in a stable order.",
+            "3",
+            "Final shares sum exactly to the expense."
+          ]
+        },
+        {
+          "id": "AF-02",
+          "a": [
+            "Change participants / payer",
+            "Step 2: selection changes",
+            "1. Verify all selected identities belong to the group. 2. Recalculate and remove obsolete draft allocations before review.",
+            "3",
+            "No hidden shares for removed participants."
+          ]
+        },
+        {
+          "id": "AF-03",
+          "a": [
+            "Pay from shared fund",
+            "Step 2: fund selected",
+            "1. Check custodian permission and available confirmed cash. 2. Debit the fund instead of crediting an individual payer; update member fund positions once.",
+            "3",
+            "Only one funding source is used."
+          ]
+        },
+        {
+          "id": "AF-04",
+          "a": [
+            "Foreign-currency bill",
+            "Step 2: currency differs from group",
+            "1. Show original amount and rate/source/time. 2. Convert once, then split and retain the snapshot. Missing/changed quote requires a new review.",
+            "3 / 2",
+            "No silent repricing of historical shares."
+          ]
+        },
+        {
+          "id": "AF-05",
+          "a": [
+            "Invalid allocation / insufficient funds",
+            "Step 3 or 4: mismatch, no participants, bad weights or low fund cash",
+            "1. Display the difference or available amount. 2. Keep the draft and reject the entire expense until corrected.",
+            "2",
+            "No partial expense, allocation or fund debit."
+          ]
+        }
+      ],
+      "screens": [
+        {
+          "id": "UC-DL-06-S01",
+          "title": "Add group expense",
+          "tag": "Basic steps 1–2",
+          "fields": [
+            "Title: Roommates dinner",
+            "Amount: 300,001 VND",
+            "Paid by: You",
+            "Participants: You, Laura, Minh"
+          ],
+          "message": "Enter title/date/category, payer or fund, original amount/currency and participating members; select split mode.",
+          "action": "Review",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-06-S02",
+          "title": "Review / confirmation",
+          "tag": "Basic step 3",
+          "fields": [
+            "Title: Roommates dinner",
+            "Amount: 300,001 VND",
+            "Paid by: You"
+          ],
+          "message": "Review You 100,001; Laura 100,000; Minh 100,000 VND. Total equals 300,001 VND.",
+          "action": "Confirm",
+          "secondary": "Edit / cancel"
+        },
+        {
+          "id": "UC-DL-06-S03",
+          "title": "Result and details",
+          "tag": "Basic steps 4–5",
+          "fields": [
+            "Status is explicit: pending / confirmed / complete"
+          ],
+          "message": "One expense appears. Member debt/fund positions update; each user's consumption is only their allocated share.",
+          "action": "View details",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-06-S04",
+          "title": "Alternative actions",
+          "tag": "Alternative flow variants",
+          "fields": [
+            "Alternative split mode",
+            "Change participants / payer",
+            "Pay from shared fund"
+          ],
+          "message": "Choose the applicable action, then review its effect before confirmation. Each alternative keeps its own permission and financial rules.",
+          "action": "Review selected action",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-06-S05",
+          "title": "Validation / changed data",
+          "tag": "Alternative flow variants",
+          "fields": [
+            "Foreign-currency bill",
+            "Invalid allocation / insufficient funds"
+          ],
+          "message": "Show the affected value, permitted amount or unavailable source. Keep valid input; correct or reload before retrying. No invalid partial effect is accepted.",
+          "action": "Correct / refresh",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-06-S06",
+          "title": "Pending / recovery state",
+          "tag": "Shared state variants",
+          "fields": [
+            "Pending: awaiting confirmation or connection",
+            "Failed: show reason and a safe retry",
+            "Complete: show the acknowledged result"
+          ],
+          "message": "Display the applicable state, not all three at once. Retrying must not duplicate an already acknowledged financial effect.",
+          "action": "Inspect status / retry",
+          "secondary": "Back"
+        }
+      ],
+      "boards": [
+        {
+          "filename": "UC-DL-06-compact.png",
+          "screen_ids": [
+            "UC-DL-06-S01",
+            "UC-DL-06-S02",
+            "UC-DL-06-S03",
+            "UC-DL-06-S04",
+            "UC-DL-06-S05",
+            "UC-DL-06-S06"
+          ]
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "id": "UC-DL-07",
+      "title": "View Debts and Confirm a Settlement",
+      "actor": "Group Member acting as debtor",
+      "support": "Intended recipient / creditor.",
+      "goal": "Inspect simplified debts and reduce debt only after the intended recipient confirms an external payment.",
+      "trigger": "The user opens Who owes whom and selects a debt.",
+      "pre": "1. Both parties are authorized active group members online.<br>2. A positive outstanding debt exists.<br>3. The debtor pays outside FinSync before claiming payment.",
+      "fr": "Net debt summary, simplified suggestions, payment claims, partial settlement and recipient confirmation.",
+      "nfr": "NFR-P5, NFR-S4, NFR-R3, NFR-R6, NFR-R7",
+      "sample": [
+        "Payer: Laura",
+        "Recipient: You",
+        "Outstanding: 100,000 VND",
+        "Payment claim: 100,000 VND"
+      ],
+      "entry": "Group debt details",
+      "input": "Select the intended recipient, amount and date; indicate that external payment has occurred.",
+      "review": "Review the payer, recipient and claim amount; display Awaiting recipient confirmation.",
+      "commit": "Create a pending claim; notify the recipient; recipient confirms receipt after current-debt validation; atomically post settlement effects.",
+      "result": "Confirmed debt falls from 100,000 to 0 VND. The payment remains in history and is not new spending.",
+      "allAlt": [
+        {
+          "id": "AF-01",
+          "a": [
+            "Inspect / simplify / remind",
+            "Step 1: no payment submitted",
+            "1. Show transfers preserving every member's net position. 2. If requested, send an eligible deduplicated reminder; do not create a payment.",
+            "End",
+            "Debt unchanged."
+          ]
+        },
+        {
+          "id": "AF-02",
+          "a": [
+            "Partial payment",
+            "Step 2: amount is below outstanding debt",
+            "1. Review the smaller positive amount. 2. After recipient confirmation reduce only that amount: 50,000 paid against 100,000 leaves 50,000.",
+            "3",
+            "Remaining debt is retained."
+          ]
+        },
+        {
+          "id": "AF-03",
+          "a": [
+            "Pending / rejected / withdrawn",
+            "Step 4: recipient does not confirm, rejects, or debtor cancels",
+            "1. Keep pending debt unchanged. 2. Record rejection reason or cancel an unconfirmed claim; never cancel an already confirmed payment through this branch.",
+            "End",
+            "Only confirmed payments reduce debt."
+          ]
+        },
+        {
+          "id": "AF-04",
+          "a": [
+            "Wrong confirmer",
+            "Step 4: Owner or another person tries to confirm",
+            "1. Check intended recipient identity. 2. Reject confirmation by anyone else, including the Owner.",
+            "End",
+            "Claim and debt unchanged."
+          ]
+        },
+        {
+          "id": "AF-05",
+          "a": [
+            "Invalid or stale debt",
+            "Step 3 or 4: invalid/excess amount or changed debt",
+            "1. Recompute current outstanding debt. 2. Reject an excess claim and request fresh review; repeated confirmation returns the existing result.",
+            "2",
+            "No overpayment or duplicate effect."
+          ]
+        }
+      ],
+      "screens": [
+        {
+          "id": "UC-DL-07-S01",
+          "title": "Group debt details",
+          "tag": "Basic steps 1–2",
+          "fields": [
+            "Payer: Laura",
+            "Recipient: You",
+            "Outstanding: 100,000 VND",
+            "Payment claim: 100,000 VND"
+          ],
+          "message": "Select the intended recipient, amount and date; indicate that external payment has occurred.",
+          "action": "Review",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-07-S02",
+          "title": "Review / confirmation",
+          "tag": "Basic step 3",
+          "fields": [
+            "Payer: Laura",
+            "Recipient: You",
+            "Outstanding: 100,000 VND"
+          ],
+          "message": "Review the payer, recipient and claim amount; display Awaiting recipient confirmation.",
+          "action": "Confirm",
+          "secondary": "Edit / cancel"
+        },
+        {
+          "id": "UC-DL-07-S03",
+          "title": "Result and details",
+          "tag": "Basic steps 4–5",
+          "fields": [
+            "Status is explicit: pending / confirmed / complete"
+          ],
+          "message": "Confirmed debt falls from 100,000 to 0 VND. The payment remains in history and is not new spending.",
+          "action": "View details",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-07-S04",
+          "title": "Alternative actions",
+          "tag": "Alternative flow variants",
+          "fields": [
+            "Inspect / simplify / remind",
+            "Partial payment",
+            "Pending / rejected / withdrawn"
+          ],
+          "message": "Choose the applicable action, then review its effect before confirmation. Each alternative keeps its own permission and financial rules.",
+          "action": "Review selected action",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-07-S05",
+          "title": "Validation / changed data",
+          "tag": "Alternative flow variants",
+          "fields": [
+            "Wrong confirmer",
+            "Invalid or stale debt"
+          ],
+          "message": "Show the affected value, permitted amount or unavailable source. Keep valid input; correct or reload before retrying. No invalid partial effect is accepted.",
+          "action": "Correct / refresh",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-07-S06",
+          "title": "Pending / recovery state",
+          "tag": "Shared state variants",
+          "fields": [
+            "Pending: awaiting confirmation or connection",
+            "Failed: show reason and a safe retry",
+            "Complete: show the acknowledged result"
+          ],
+          "message": "Display the applicable state, not all three at once. Retrying must not duplicate an already acknowledged financial effect.",
+          "action": "Inspect status / retry",
+          "secondary": "Back"
+        }
+      ],
+      "boards": [
+        {
+          "filename": "UC-DL-07-compact.png",
+          "screen_ids": [
+            "UC-DL-07-S01",
+            "UC-DL-07-S02",
+            "UC-DL-07-S03",
+            "UC-DL-07-S04",
+            "UC-DL-07-S05",
+            "UC-DL-07-S06"
+          ]
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "id": "UC-DL-08",
+      "title": "Record Expense Refunds and Return Unused Funds",
+      "actor": "Group Member who recorded the expense / authorized Group Owner",
+      "support": "Intended recipient for an unused-fund return.",
+      "goal": "Record traceable corrections and reimbursements without deleting settled financial history.",
+      "trigger": "The user opens an original group expense and selects Record refund, or opens Return unused funds.",
+      "pre": "1. Online authorized membership.<br>2. Original confirmed expense exists for expense refunds.<br>3. Remaining refundable amount and original participants/rate are available.",
+      "fr": "Linked partial/full refunds, exact reversal, post-settlement reimbursement and confirmed fund returns.",
+      "nfr": "NFR-S4, NFR-R3, NFR-R6, NFR-R7, NFR-R8",
+      "sample": [
+        "Original dinner: 300,000 VND",
+        "Original shares: 100,000 each",
+        "Previously refunded: 0 VND",
+        "New refund: 90,000 VND"
+      ],
+      "entry": "Refund original expense",
+      "input": "Select the original expense; enter refund amount/date/reason and actual recipient of the external refund.",
+      "review": "Review a 90,000 VND refund: reverse 30,000 consumption per original participant.",
+      "commit": "Validate remaining refundable amount; atomically append a linked adjustment using original allocations and stored currency basis; retain all earlier payments.",
+      "result": "Net consumption is 210,000 VND. If already settled, reimbursement positions appear; no prior settlement is deleted.",
+      "allAlt": [
+        {
+          "id": "AF-01",
+          "a": [
+            "Full / partial / repeated refund",
+            "Step 2: refund amount chosen",
+            "1. Show unrefunded expense and per-member amounts. 2. Reverse only the selected remaining amount using the original allocation/rate basis and exact rounding.",
+            "3",
+            "Cumulative refunds never exceed original shares."
+          ]
+        },
+        {
+          "id": "AF-02",
+          "a": [
+            "Refund after settlement",
+            "Step 4: original debt was already paid",
+            "1. Retain all prior payments. 2. Show new reimbursement positions; any subsequent external payment uses UC-DL-07.",
+            "5",
+            "No settled history is erased."
+          ]
+        },
+        {
+          "id": "AF-03",
+          "a": [
+            "Refund to shared fund",
+            "Step 2: original bill was fund-paid",
+            "1. Verify the original funding source and returned money. 2. Credit the fund and reverse allocated consumption once.",
+            "3",
+            "Refund is not new income."
+          ]
+        },
+        {
+          "id": "AF-04",
+          "a": [
+            "Return unused funds",
+            "Step 1: fund return selected",
+            "1. Check cash and the member's entitlement; create a return claim. 2. Intended recipient confirms receipt; pending/rejected/withdrawn claims do not reduce confirmed cash.",
+            "5 / end",
+            "Confirmed return reduces cash and entitlement once."
+          ]
+        },
+        {
+          "id": "AF-05",
+          "a": [
+            "Invalid refund / changed position",
+            "Step 3 or 4: missing original, excess amount, missing quote or stale entitlement",
+            "1. Show the current permitted amount or missing evidence. 2. Reject the adjustment and retain a correctable draft; the Owner cannot confirm receipt for another member.",
+            "2",
+            "No unlinked or excess correction."
+          ]
+        }
+      ],
+      "screens": [
+        {
+          "id": "UC-DL-08-S01",
+          "title": "Refund original expense",
+          "tag": "Basic steps 1–2",
+          "fields": [
+            "Original dinner: 300,000 VND",
+            "Original shares: 100,000 each",
+            "Previously refunded: 0 VND",
+            "New refund: 90,000 VND"
+          ],
+          "message": "Select the original expense; enter refund amount/date/reason and actual recipient of the external refund.",
+          "action": "Review",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-08-S02",
+          "title": "Review / confirmation",
+          "tag": "Basic step 3",
+          "fields": [
+            "Original dinner: 300,000 VND",
+            "Original shares: 100,000 each",
+            "Previously refunded: 0 VND"
+          ],
+          "message": "Review a 90,000 VND refund: reverse 30,000 consumption per original participant.",
+          "action": "Confirm",
+          "secondary": "Edit / cancel"
+        },
+        {
+          "id": "UC-DL-08-S03",
+          "title": "Result and details",
+          "tag": "Basic steps 4–5",
+          "fields": [
+            "Status is explicit: pending / confirmed / complete"
+          ],
+          "message": "Net consumption is 210,000 VND. If already settled, reimbursement positions appear; no prior settlement is deleted.",
+          "action": "View details",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-08-S04",
+          "title": "Alternative actions",
+          "tag": "Alternative flow variants",
+          "fields": [
+            "Full / partial / repeated refund",
+            "Refund after settlement",
+            "Refund to shared fund"
+          ],
+          "message": "Choose the applicable action, then review its effect before confirmation. Each alternative keeps its own permission and financial rules.",
+          "action": "Review selected action",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-08-S05",
+          "title": "Validation / changed data",
+          "tag": "Alternative flow variants",
+          "fields": [
+            "Return unused funds",
+            "Invalid refund / changed position"
+          ],
+          "message": "Show the affected value, permitted amount or unavailable source. Keep valid input; correct or reload before retrying. No invalid partial effect is accepted.",
+          "action": "Correct / refresh",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-08-S06",
+          "title": "Pending / recovery state",
+          "tag": "Shared state variants",
+          "fields": [
+            "Pending: awaiting confirmation or connection",
+            "Failed: show reason and a safe retry",
+            "Complete: show the acknowledged result"
+          ],
+          "message": "Display the applicable state, not all three at once. Retrying must not duplicate an already acknowledged financial effect.",
+          "action": "Inspect status / retry",
+          "secondary": "Back"
+        }
+      ],
+      "boards": [
+        {
+          "filename": "UC-DL-08-compact.png",
+          "screen_ids": [
+            "UC-DL-08-S01",
+            "UC-DL-08-S02",
+            "UC-DL-08-S03",
+            "UC-DL-08-S04",
+            "UC-DL-08-S05",
+            "UC-DL-08-S06"
+          ]
+        }
+      ]
+    },
+    {
+      "n": 12,
+      "id": "UC-DL-12",
+      "title": "Synchronize Offline Personal Changes and Resolve Conflicts",
+      "actor": "Regular User",
+      "support": "None; connectivity detection and synchronization worker are internal.",
+      "goal": "Submit encrypted locally queued personal changes exactly once and explicitly resolve version conflicts.",
+      "trigger": "Connectivity returns or the user selects Sync now after offline capture.",
+      "pre": "1. Initial authenticated synchronization has created an account-specific encrypted cache.<br>2. Stable operation IDs, base versions and pending changes exist.<br>3. Valid online session is available for server submission.",
+      "fr": "Offline personal CRUD, durable pending queue, idempotent reconciliation, conflict resolution and receipt retry.",
+      "nfr": "NFR-P6, NFR-S3, NFR-S8, NFR-R5, NFR-R6",
+      "sample": [
+        "Pending changes: 3",
+        "Account: Current signed-in user",
+        "Last synced: 2026-11-04 09:30",
+        "Status: Connection restored"
+      ],
+      "entry": "Sync status",
+      "input": "Unlock the local account cache, inspect pending records and select Sync now.",
+      "review": "Show pending operation IDs/order and local-only labels; verify session before submission.",
+      "commit": "Submit operations with stable IDs/base versions; validate on server; acknowledge committed results; mark only acknowledged operations synchronized.",
+      "result": "Three changes synchronize once; local IDs match server records; balances refresh and pending status clears.",
+      "allAlt": [
+        {
+          "id": "AF-01",
+          "a": [
+            "Offline again / app restart",
+            "Step 4: connection or process stops",
+            "1. Keep unacknowledged operations durable. 2. Resume remaining work on reconnection; already acknowledged items stay synchronized.",
+            "4",
+            "No acknowledged local edit is lost."
+          ]
+        },
+        {
+          "id": "AF-02",
+          "a": [
+            "Expired session / account switch",
+            "Step 3: authorization unavailable or logout requested",
+            "1. Pause and request valid sign-in for the same account. 2. Before logout warn about pending edits; allow cancel-and-sync or explicit discard, then clear account-local data.",
+            "3 / end",
+            "No cross-account upload."
+          ]
+        },
+        {
+          "id": "AF-03",
+          "a": [
+            "Edit or delete conflict",
+            "Step 4: server version differs",
+            "1. Show local/server values and any tombstone. 2. Keep server, reapply against the refreshed version, or explicitly recreate a deleted entry with a new ID; never overwrite/resurrect silently.",
+            "4",
+            "Conflict remains visible until resolved."
+          ]
+        },
+        {
+          "id": "AF-04",
+          "a": [
+            "Duplicate / lost acknowledgement",
+            "Step 4: replay after uncertain response",
+            "1. Reuse the original operation identity and retrieve its outcome. 2. Acknowledge the existing result without applying it again.",
+            "4",
+            "Exactly one financial effect."
+          ]
+        },
+        {
+          "id": "AF-05",
+          "a": [
+            "Reference rejected / receipt failed",
+            "Step 4: wallet/category ineligible or upload fails",
+            "1. Mark the invalid operation Action required and retain its draft; retry only a failed receipt upload. 2. Continue independent valid records.",
+            "4",
+            "No second financial entry; partial progress is explicit."
+          ]
+        },
+        {
+          "id": "AF-06",
+          "a": [
+            "Offline group write",
+            "Step 2: user tries to change shared data",
+            "1. Show cached group data as read-only. 2. Require an online session before shared writes; do not enqueue them as personal changes.",
+            "End",
+            "No unauthorized offline group update."
+          ]
+        }
+      ],
+      "screens": [
+        {
+          "id": "UC-DL-12-S01",
+          "title": "Sync status",
+          "tag": "Basic steps 1–2",
+          "fields": [
+            "Pending changes: 3",
+            "Account: Current signed-in user",
+            "Last synced: 2026-11-04 09:30",
+            "Status: Connection restored"
+          ],
+          "message": "Unlock the local account cache, inspect pending records and select Sync now.",
+          "action": "Review",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-12-S02",
+          "title": "Review / confirmation",
+          "tag": "Basic step 3",
+          "fields": [
+            "Pending changes: 3",
+            "Account: Current signed-in user",
+            "Last synced: 2026-11-04 09:30"
+          ],
+          "message": "Show pending operation IDs/order and local-only labels; verify session before submission.",
+          "action": "Confirm",
+          "secondary": "Edit / cancel"
+        },
+        {
+          "id": "UC-DL-12-S03",
+          "title": "Result and details",
+          "tag": "Basic steps 4–5",
+          "fields": [
+            "Status is explicit: pending / confirmed / complete"
+          ],
+          "message": "Three changes synchronize once; local IDs match server records; balances refresh and pending status clears.",
+          "action": "View details",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-12-S04",
+          "title": "Alternative actions",
+          "tag": "Alternative flow variants",
+          "fields": [
+            "Offline again / app restart",
+            "Expired session / account switch",
+            "Edit or delete conflict"
+          ],
+          "message": "Choose the applicable action, then review its effect before confirmation. Each alternative keeps its own permission and financial rules.",
+          "action": "Review selected action",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-12-S05",
+          "title": "Validation / changed data",
+          "tag": "Alternative flow variants",
+          "fields": [
+            "Duplicate / lost acknowledgement",
+            "Reference rejected / receipt failed",
+            "Offline group write"
+          ],
+          "message": "Show the affected value, permitted amount or unavailable source. Keep valid input; correct or reload before retrying. No invalid partial effect is accepted.",
+          "action": "Correct / refresh",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-12-S06",
+          "title": "Pending / recovery state",
+          "tag": "Shared state variants",
+          "fields": [
+            "Pending: awaiting confirmation or connection",
+            "Failed: show reason and a safe retry",
+            "Complete: show the acknowledged result"
+          ],
+          "message": "Display the applicable state, not all three at once. Retrying must not duplicate an already acknowledged financial effect.",
+          "action": "Inspect status / retry",
+          "secondary": "Back"
+        }
+      ],
+      "boards": [
+        {
+          "filename": "UC-DL-12-compact.png",
+          "screen_ids": [
+            "UC-DL-12-S01",
+            "UC-DL-12-S02",
+            "UC-DL-12-S03",
+            "UC-DL-12-S04",
+            "UC-DL-12-S05",
+            "UC-DL-12-S06"
+          ]
+        }
+      ]
+    },
+    {
+      "n": 13,
+      "id": "UC-DL-13",
+      "title": "Generate Financial Reports on Demand or Automatically",
+      "actor": "Regular User; Deployment Scheduler for monthly runs",
+      "support": "Authorized operator monitoring or retrying a scheduled run.",
+      "goal": "Produce authorized personal/group reports with consistent totals, an explicit currency basis and optional PDF/Excel output.",
+      "trigger": "The user opens Reports, or the monthly scheduler starts a due report.",
+      "pre": "1. Valid user or scheduler authorization.<br>2. Requested data scope and period are permitted.<br>3. Conversion-dependent totals have an identified rate basis.",
+      "fr": "On-demand and monthly report aggregation, filters, private publication and PDF/Excel export.",
+      "nfr": "NFR-S4, NFR-R3, NFR-R8; DL-NFR-02 and DL-NFR-03 below.",
+      "sample": [
+        "Scope: Personal consumption",
+        "Period: October 2026",
+        "Currency: VND",
+        "Output: Screen / PDF / Excel"
+      ],
+      "entry": "Reports / Period and scope",
+      "input": "Choose personal/group scope, period, currency and output format; a scheduled run derives the closed month for each eligible user.",
+      "review": "Review the period, currency basis and source cutoff; preview the same totals used for details and export.",
+      "commit": "Aggregate the authorized snapshot; generate the report and requested artifact; record completion before publication.",
+      "result": "The user can inspect or download the report with period/currency/cutoff labels. A scheduled result is published once; the financial ledger is unchanged.",
+      "allAlt": [
+        {
+          "id": "AF-01",
+          "a": [
+            "Automatic monthly run",
+            "Step 1: scheduled trigger instead of user request",
+            "1. Select each eligible user's closed month/currency. 2. Generate and publish one authorized result; duplicate triggers reuse the same logical run.",
+            "2",
+            "No repeated monthly publication."
+          ]
+        },
+        {
+          "id": "AF-02",
+          "a": [
+            "Chart / group / export variant",
+            "Step 2: user changes view/scope/format",
+            "1. Recheck group access and apply the same filters to totals and details. 2. Export the reviewed snapshot as PDF or Excel; never expose private member wallets.",
+            "3",
+            "View and export agree."
+          ]
+        },
+        {
+          "id": "AF-03",
+          "a": [
+            "Empty data / invalid range / missing rate",
+            "Step 3: unavailable or invalid reporting inputs",
+            "1. Reject invalid ranges; show zero/empty data or growth as not applicable for a zero baseline. 2. If conversion is missing, show original-currency subtotals and incomplete status.",
+            "2 / end",
+            "No invented totals or growth."
+          ]
+        },
+        {
+          "id": "AF-04",
+          "a": [
+            "Cached data / later changes",
+            "Step 3 or 5: offline viewing or source changes",
+            "1. Label cached/pending data and its cutoff. 2. Regeneration creates an explicit revised snapshot; it does not silently rewrite a previously issued report.",
+            "3 / end",
+            "The report remains attributable to its source period."
+          ]
+        },
+        {
+          "id": "AF-05",
+          "a": [
+            "Processing / export / delivery failure",
+            "Step 4 or 5: an output stage fails",
+            "1. Preserve confirmed results and retry the failed unit without re-posting financial data. 2. Keep delivery pending, or mark failed after the retry limit; revoke access if eligibility changed.",
+            "4 / end",
+            "No false success or unauthorized download."
+          ]
+        },
+        {
+          "id": "AF-06",
+          "a": [
+            "Scheduled run interrupted / cancelled",
+            "Step 4: worker restart or operator stop",
+            "1. Resume from acknowledged work without duplicating published results, or stop new work at safe boundaries. 2. Retain completed results and expose remaining/failed counts.",
+            "4 / end",
+            "Partial completion is explicit."
+          ]
+        }
+      ],
+      "screens": [
+        {
+          "id": "UC-DL-13-S01",
+          "title": "Reports / Period and scope",
+          "tag": "Basic steps 1–2",
+          "fields": [
+            "Scope: Personal consumption",
+            "Period: October 2026",
+            "Currency: VND",
+            "Output: Screen / PDF / Excel"
+          ],
+          "message": "Choose personal/group scope, period, currency and output format; a scheduled run derives the closed month for each eligible user.",
+          "action": "Review",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-13-S02",
+          "title": "Review / confirmation",
+          "tag": "Basic step 3",
+          "fields": [
+            "Scope: Personal consumption",
+            "Period: October 2026",
+            "Currency: VND"
+          ],
+          "message": "Review the period, currency basis and source cutoff; preview the same totals used for details and export.",
+          "action": "Confirm",
+          "secondary": "Edit / cancel"
+        },
+        {
+          "id": "UC-DL-13-S03",
+          "title": "Result and details",
+          "tag": "Basic steps 4–5",
+          "fields": [
+            "Status is explicit: pending / confirmed / complete"
+          ],
+          "message": "The user can inspect or download the report with period/currency/cutoff labels. A scheduled result is published once; the financial ledger is unchanged.",
+          "action": "View details",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-13-S04",
+          "title": "Alternative actions",
+          "tag": "Alternative flow variants",
+          "fields": [
+            "Automatic monthly run",
+            "Chart / group / export variant",
+            "Empty data / invalid range / missing rate"
+          ],
+          "message": "Choose the applicable action, then review its effect before confirmation. Each alternative keeps its own permission and financial rules.",
+          "action": "Review selected action",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-13-S05",
+          "title": "Validation / changed data",
+          "tag": "Alternative flow variants",
+          "fields": [
+            "Cached data / later changes",
+            "Processing / export / delivery failure",
+            "Scheduled run interrupted / cancelled"
+          ],
+          "message": "Show the affected value, permitted amount or unavailable source. Keep valid input; correct or reload before retrying. No invalid partial effect is accepted.",
+          "action": "Correct / refresh",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-13-S06",
+          "title": "Pending / recovery state",
+          "tag": "Shared state variants",
+          "fields": [
+            "Pending: awaiting confirmation or connection",
+            "Failed: show reason and a safe retry",
+            "Complete: show the acknowledged result"
+          ],
+          "message": "Display the applicable state, not all three at once. Retrying must not duplicate an already acknowledged financial effect.",
+          "action": "Inspect status / retry",
+          "secondary": "Back"
+        }
+      ],
+      "boards": [
+        {
+          "filename": "UC-DL-13-compact.png",
+          "screen_ids": [
+            "UC-DL-13-S01",
+            "UC-DL-13-S02",
+            "UC-DL-13-S03",
+            "UC-DL-13-S04",
+            "UC-DL-13-S05",
+            "UC-DL-13-S06"
+          ]
+        }
+      ]
+    },
+    {
+      "n": 14,
+      "id": "UC-DL-14",
+      "title": "Evaluate Budget Alerts and Send Debt Reminders in Batches",
+      "actor": "Deployment Scheduler (external time trigger)",
+      "support": "Regular User receiving alerts; authorized operator retrying failed items.",
+      "goal": "Evaluate many eligible budgets/debts reliably and deliver each logical alert once without changing recorded balances.",
+      "trigger": "A scheduled sweep starts or an authorized operator resumes failed notification work.",
+      "pre": "1. Valid scheduler identity and configured recipient-local schedule.<br>2. Budget/debt data is available.<br>3. Durable checkpoints, deduplication keys and delivery state are available.",
+      "fr": "Bounded batch processing, exact threshold/debt evaluation, retry/recovery, notification deduplication and operational audit.",
+      "nfr": "NFR-S4, NFR-R3, NFR-U6; DL-NFR-02 and DL-NFR-03 below.",
+      "sample": [
+        "Job: Budget and debt sweep",
+        "Page size: 100 recipients",
+        "Budget trigger: 80% / 100%",
+        "Reminder window: recipient-local day",
+        "No money movement"
+      ],
+      "entry": "Financial batch status",
+      "input": "Authenticate the trigger; select eligible users and a stable sweep window; create or reuse the run.",
+      "review": "Claim a bounded page with a lease; expose processed/failed counts and the checkpoint, not private transaction details.",
+      "commit": "Recompute current consumption and confirmed debts; atomically insert eligible deduplicated inbox/outbox events and acknowledge the item; advance the checkpoint only after commit.",
+      "result": "Eligible users receive one logical threshold/reminder event; completed items are counted; financial balances remain unchanged.",
+      "allAlt": [
+        {
+          "id": "AF-01",
+          "a": [
+            "Nothing due / already notified",
+            "Step 2 or 4: no eligible event or existing logical alert",
+            "1. Skip the item or finish with zero recipients. 2. Do not create placeholder or duplicate messages.",
+            "4 / end",
+            "One logical alert at most."
+          ]
+        },
+        {
+          "id": "AF-02",
+          "a": [
+            "Debt settled / access revoked",
+            "Step 4 or 5: queued information became stale",
+            "1. Recheck debt and recipient rights. 2. Suppress obsolete reminders or protected content before delivery.",
+            "4",
+            "No false debt reminder or data leak."
+          ]
+        },
+        {
+          "id": "AF-03",
+          "a": [
+            "Overlapping worker / restart",
+            "Step 3 or 4: concurrent processing or worker failure",
+            "1. Resume unacknowledged work only. 2. Reject stale completion and reuse existing committed event identities.",
+            "4",
+            "No lost acknowledged item or duplicate event."
+          ]
+        },
+        {
+          "id": "AF-04",
+          "a": [
+            "Transient / permanent failure",
+            "Step 4 or 5: evaluation or delivery fails",
+            "1. Retry transient errors within a configured limit; retain the failed item after permanent/exhausted failure. 2. Continue other recipients and report Partial/Failed.",
+            "4 / end",
+            "Failure is visible and retryable, not silently dropped."
+          ]
+        },
+        {
+          "id": "AF-05",
+          "a": [
+            "Pause / cancel / invalid trigger",
+            "Step 1 or 3: invalid service identity or operator stop",
+            "1. Reject an invalid/untracked start, or stop new claims at item boundaries. 2. Keep completed events and checkpoints for an authorized resume.",
+            "End",
+            "No uncontrolled processing or ledger change."
+          ]
+        }
+      ],
+      "screens": [
+        {
+          "id": "UC-DL-14-S01",
+          "title": "Financial batch status",
+          "tag": "Basic steps 1–2",
+          "fields": [
+            "Job: Budget and debt sweep",
+            "Page size: 100 recipients",
+            "Budget trigger: 80% / 100%",
+            "Reminder window: recipient-local day"
+          ],
+          "message": "Authenticate the trigger; select eligible users and a stable sweep window; create or reuse the run.",
+          "action": "View run status",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-14-S02",
+          "title": "Due scope / progress",
+          "tag": "Basic step 3",
+          "fields": [
+            "Job: Budget and debt sweep",
+            "Page size: 100 recipients",
+            "Budget trigger: 80% / 100%"
+          ],
+          "message": "Scheduled processing starts without human confirmation. The operator sees eligible, processed and failed counts.",
+          "action": "Refresh progress",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-14-S03",
+          "title": "Result and details",
+          "tag": "Basic steps 4–5",
+          "fields": [
+            "Status is explicit: pending / confirmed / complete"
+          ],
+          "message": "Eligible users receive one logical threshold/reminder event; completed items are counted; financial balances remain unchanged.",
+          "action": "View details",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-14-S04",
+          "title": "Skipped / resumed items",
+          "tag": "Alternative flow variants",
+          "fields": [
+            "Nothing due / already notified",
+            "Debt settled / access revoked",
+            "Overlapping worker / restart"
+          ],
+          "message": "The run records why items were skipped or resumed. These outcomes follow processing conditions; they are not user-selected financial actions.",
+          "action": "View item outcomes",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-14-S05",
+          "title": "Validation / changed data",
+          "tag": "Alternative flow variants",
+          "fields": [
+            "Transient / permanent failure",
+            "Pause / cancel / invalid trigger"
+          ],
+          "message": "Show the affected value, permitted amount or unavailable source. Keep valid input; correct or reload before retrying. No invalid partial effect is accepted.",
+          "action": "Correct / refresh",
+          "secondary": "Back"
+        },
+        {
+          "id": "UC-DL-14-S06",
+          "title": "Pending / recovery state",
+          "tag": "Shared state variants",
+          "fields": [
+            "Pending: awaiting confirmation or connection",
+            "Failed: show reason and a safe retry",
+            "Complete: show the acknowledged result"
+          ],
+          "message": "Display the applicable state, not all three at once. Retrying must not duplicate an already acknowledged financial effect.",
+          "action": "Inspect status / retry",
+          "secondary": "Back"
+        }
+      ],
+      "boards": [
+        {
+          "filename": "UC-DL-14-compact.png",
+          "screen_ids": [
+            "UC-DL-14-S01",
+            "UC-DL-14-S02",
+            "UC-DL-14-S03",
+            "UC-DL-14-S04",
+            "UC-DL-14-S05",
+            "UC-DL-14-S06"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "DL-COMMON",
+      "title": "Reusable dialogs and recovery states",
+      "n": 0,
+      "screens": [
+        {
+          "id": "DL-C01",
+          "title": "Cancel or discard",
+          "tag": "Common flow C1",
+          "fields": [
+            "Draft has not been committed"
+          ],
+          "message": "Keep editing, or discard this draft. Already confirmed records are not undone by Back.",
+          "action": "Keep editing",
+          "secondary": "Discard"
+        },
+        {
+          "id": "DL-C02",
+          "title": "Session / access changed",
+          "tag": "Common flow C2",
+          "fields": [
+            "Session expired or permission revoked"
+          ],
+          "message": "Stop the protected action. Sign in again when permitted; do not expose data through stale permissions.",
+          "action": "Sign in",
+          "secondary": "Return"
+        },
+        {
+          "id": "DL-C03",
+          "title": "Input validation",
+          "tag": "Domain validation branches",
+          "fields": [
+            "Highlight invalid values and permitted range"
+          ],
+          "message": "Retain valid input and identify what must be corrected. Missing rates or sources are not replaced by invented values.",
+          "action": "Correct input",
+          "secondary": "Back"
+        },
+        {
+          "id": "DL-C04",
+          "title": "Record changed",
+          "tag": "Common flow C3",
+          "fields": [
+            "Current values differ from the reviewed values"
+          ],
+          "message": "Refresh, compare changes and confirm again. Do not silently overwrite newer values.",
+          "action": "Refresh and review",
+          "secondary": "Back"
+        },
+        {
+          "id": "DL-C05",
+          "title": "Result not yet confirmed",
+          "tag": "Common flow C4",
+          "fields": [
+            "Connection or service failure"
+          ],
+          "message": "Check the existing request outcome before retry. Show Pending or Failed until a confirmed result is known.",
+          "action": "Check status / retry",
+          "secondary": "Back"
+        },
+        {
+          "id": "DL-C06",
+          "title": "Already processed",
+          "tag": "Common flow C5",
+          "fields": [
+            "The same request has already completed"
+          ],
+          "message": "Open the existing result. Do not post another transaction, claim, report or alert for the same logical action.",
+          "action": "Open result",
+          "secondary": "Back"
+        }
+      ],
+      "boards": [
+        {
+          "filename": "DL-COMMON-compact.png",
+          "screen_ids": [
+            "DL-C01",
+            "DL-C02",
+            "DL-C03",
+            "DL-C04",
+            "DL-C05",
+            "DL-C06"
+          ]
+        }
+      ]
+    }
+  ]
+}

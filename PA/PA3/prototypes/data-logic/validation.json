@@ -1,0 +1,7 @@
+{
+  "cases": 8,
+  "prototype_states": 54,
+  "png_boards": 9,
+  "errors": [],
+  "scope": "Static document/link/prototype integrity only; no backend or browser scenario tests."
+}
