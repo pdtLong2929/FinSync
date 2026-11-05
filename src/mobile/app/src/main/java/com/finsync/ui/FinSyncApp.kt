@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import com.finsync.ui.components.metalFinish
 import com.finsync.ui.theme.MetalTokens
 import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.material3.IconButton
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -109,6 +110,7 @@ private enum class Destination(@param:StringRes val label: Int, @param:DrawableR
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FinSyncApp(dashboardState: DashboardUiState, onRetry: () -> Unit = {}, finance: FinanceViewModel = remember { FinanceViewModel() }, onAccount: (() -> Unit)? = null) {
+    val accountProfile = com.finsync.auth.LocalAccountProfile.current
     val financeState by finance.uiState.collectAsStateWithLifecycle()
     var route by rememberSaveable { mutableStateOf("") }
     var transactionOrigin by rememberSaveable { mutableStateOf("") }
@@ -199,7 +201,11 @@ fun FinSyncApp(dashboardState: DashboardUiState, onRetry: () -> Unit = {}, finan
                             Text(stringResource(R.string.app_name), style = MaterialTheme.typography.titleMedium)
                         }
                     }, actions = {
-                        if (onAccount != null) TextButton(onClick = onAccount) { Text("Account") }
+                        if (onAccount != null) IconButton(onClick = onAccount,
+                            modifier = Modifier.size(LiquidTokens.minTarget).semantics { contentDescription = "Account" }) {
+                            com.finsync.auth.UserAvatar(accountProfile?.displayName, accountProfile?.avatarPath,
+                                Modifier.size(DockTokens.medallion), compact = true)
+                        }
                     })
                 },
                 bottomBar = {

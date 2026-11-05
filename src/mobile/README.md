@@ -1,32 +1,26 @@
 # FinSync Android Frontend
 
-> *Performed by: Nguyễn Phú Đạt (24120038) | Reviewed by: Pending team review | Edited by: Pending confirmation*
+> Performed by: Nguyễn Phú Đạt (24120038). Team review pending.
 
-Updated **2026-11-02**. Kotlin, Jetpack Compose and Material 3 with the approved
-bright Liquid Metal design. Application ID: `com.finsync`.
+Updated **2026-11-05**. Kotlin, Jetpack Compose, Material3 and the approved bright
+Liquid Metal design. Application ID: `com.finsync`.
 
-**The application uses fictional, in-memory local data. It is not connected to
-backend APIs, PostgreSQL, real authentication or an AI service.** Changes update
-the current UI session; process death discards them. Prototype screenshots are
-not evidence of backend integration.
+**User account management now uses the demo backend and PostgreSQL/Redis:** real
+registration, login, profile read/update, refresh and server logout. Financial
+screens still use fictional in-memory local data; process death discards financial
+edits. No finance API, AI, real bank connection or money movement is claimed.
 
 ## Start here
 
-> *Performed by: Nguyễn Phú Đạt (24120038) | Reviewed by: Pending team review | Edited by: Pending confirmation*
-
-- [Frontend technical guide](FRONTEND_GUIDE.md): setup, automatic emulator launch,
-  build/install, architecture, dependencies, coverage and integration gaps.
-- [Frontend status](FRONTEND_STATUS.md): verification scope and integration limits.
-- [Local finance state](app/src/main/java/com/finsync/ui/FinanceViewModel.kt) and
-  [authentication boundary](app/src/main/java/com/finsync/auth/AuthRepository.kt).
+- [Account integration and backend/database setup](USER_ACCOUNT_INTEGRATION.md).
+- [Frontend technical guide](FRONTEND_GUIDE.md): build/run, emulator, code structure,
+  libraries, financial rules and remaining integration gaps.
+- [Verification/status](FRONTEND_STATUS.md): exact results, scope and limitations.
 
 ## Build and run
 
-> *Performed by: Nguyễn Phú Đạt (24120038) | Reviewed by: Pending team review | Edited by: Pending confirmation*
-
-Run PowerShell in `src/mobile`, or open this directory in Android Studio. Use the
-bundled Android Studio JDK, SDK matching compile SDK 37, and the Gradle Wrapper.
-No API URL, backend account or secret is needed for the current local workspace.
+Use PowerShell in `src/mobile`, or open this directory in Android Studio. Use the
+bundled JDK, SDK matching compile SDK37, and the checked-in Gradle Wrapper.
 
 ```powershell
 Set-Location 'C:\Users\namda\FinSync\src\mobile'
@@ -35,50 +29,73 @@ $env:ANDROID_HOME = "$env:LOCALAPPDATA\Android\Sdk"
 .\gradlew.bat :app:assembleDebug --console=plain
 ```
 
-Start/reuse `Pixel_7_2` using the automatic startup procedure in the guide. Android
-Studio does not need to stay open. Once ADB shows the emulator as `device` and
-`sys.boot_completed` is 1:
+Default debug API is `http://10.0.2.2:18080` for the prepared workstation runtime.
+For the team's Docker backend on port8080, rebuild with:
+
+```powershell
+.\gradlew.bat :app:assembleDebug '-Pfinsync.authBaseUrl=http://10.0.2.2:8080' --console=plain
+```
+
+Release has no default API URL and requires HTTPS when configured. Debug HTTP is
+limited to `10.0.2.2`, `127.0.0.1`, `localhost`; no TLS validation is bypassed.
+See the integration guide for the team's Docker/DB setup. On this already prepared
+workstation, start/stop the private API/Redis runtime with:
+
+```powershell
+.\scripts\Start-LocalAuthBackend.ps1
+# When finished; preserves database files and Redis AOF:
+.\scripts\Stop-LocalAuthBackend.ps1
+```
+
+The scripts require the prepared private runtime and built backend JAR, not included
+in Git. No credentials or binaries are bundled. The legacy database is retained;
+new demo users belong to `finsync_userdemo`, not the old `finsync_authdev` database.
+
+Start/reuse Pixel_7_2 following the guide; Android Studio need not stay open. After
+ADB reports `device` and `sys.boot_completed=1`:
 
 ```powershell
 $adb = Join-Path $env:ANDROID_HOME 'platform-tools\adb.exe'
 & $adb devices -l
-$deviceSerial = 'emulator-5554' # Replace with the actual serial from this list.
+$deviceSerial = 'emulator-5554' # Use the actual device serial.
 & $adb -s $deviceSerial install -r 'app\build\outputs\apk\debug\app-debug.apk'
 & $adb -s $deviceSerial shell am start -n com.finsync/.MainActivity
 ```
 
-Choose **Explore FinSync → Open sample workspace**. Use Overview, Wallets, Groups
-and Reports. Sign-in/register/recovery deliberately report an unavailable backend;
-there are no credentials that create a real session.
+## Account and profile
 
-## Local feature coverage
+1. **Sign up**: display name, email, password/confirmation. Backend creates the user;
+   Android shows **Account created**, then asks you to sign in.
+2. **Get started → Sign in**: authenticated identity is loaded from `/users/me`;
+   successful login opens Overview.
+3. **Overview → top-right avatar → My profile → Edit profile**: save name/phone to
+   the server. A version conflict preserves the draft and offers a confirmed reload.
+4. Photo, birthday and bio are labeled **device-only** until their APIs exist.
+   Photo Picker needs no broad media permission. Registered email is read-only.
+5. **Sign out of account → Sign out**: server revokes the current session, then
+   Android clears it. Temporary server errors are shown without false success.
 
-> *Performed by: Nguyễn Phú Đạt (24120038) | Reviewed by: Pending team review | Edited by: Pending confirmation*
+Access/refresh credentials stay in memory. The client refreshes expired access,
+serializes rotation, retries an unauthorized protected request at most once and
+requires login for an invalid/locked session. App restart requires sign-in; there
+is no remembered-login promise. Password recovery UI never claims email delivery
+because this API is still absent. Financial data remains a separate sample workspace.
 
-Wallet CRUD/archive/restore and transfers; income/expense forms, validation,
-history/search/filters, edit/delete/Undo; groups, members, Equal/Exact/Percentage/
-Shares splits and external-settlement records; interactive reports, budgets and
-manually recorded savings goals. The spending guide contains authored general
-advice. All operations are local bookkeeping; FinSync does not move real money.
+## Preserved local financial features
 
-## Checks and recorded evidence
+Wallet CRUD/archive/restore/transfers; income/expense forms, categories, validation,
+history/search/filters, edit/delete/Undo; groups/members, Equal/Exact/Percentage/Shares
+and external-settlement records; interactive reports, budgets and manually tracked
+savings goals. The spending guide contains authored general advice, not AI output.
 
-> *Performed by: Nguyễn Phú Đạt (24120038) | Reviewed by: Pending team review | Edited by: Pending confirmation*
-
-Developer commands, not results from this documentation update:
+## Checks
 
 ```powershell
 .\gradlew.bat :app:testDebugUnitTest :app:lintDebug --console=plain
-# Requires a booted emulator/device:
+# Booted emulator required. Live API tests are opt-in; see the integration guide.
 .\gradlew.bat :app:connectedDebugAndroidTest --console=plain
 ```
 
-The 2026-11-01 rollout recorded build/install success, 51 JVM tests, 25 selected
-integration UI tests, 9 secondary/auth UI tests, and a later category test 1/1 passing.
-Lint recorded 0 errors / 30 warnings / 2 hints before the final category correction.
-These were separate runs, not a claim that all repository UI tests ran together.
-See the status report for verification scope and known limitations.
-
-No build/runtime tests were repeated for this docs-only update. Older design
-reports remain historical; their test counts and approval checkpoints do not
-supersede the current guide.
+See the status report for current results and separate historical runs. Native app
+captures, APKs, private runtime state and logs are retained locally, excluded from
+source delivery. Figma/prototype images are not evidence of backend integration.

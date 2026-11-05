@@ -74,7 +74,23 @@ Các API, cùng tiền tố `/api/v1`:
 ## 7. Điều kiện hoàn thàn
 
 - [ ] BE truy cập được từ môi trường của Đạt/Khiêm; Nhật xử lý lỗi BE phát sinh.
-- [ ] Đạt hoàn thiện luồng tài khoản thật, dữ liệu lưu bền và phiên hoạt động đúng.
+- [x] Đạt hoàn thiện tích hợp Android cho 6 API tài khoản hiện có; tên/số điện thoại lưu DB, refresh và thu hồi phiên đã kiểm tra. Avatar/ngày sinh/giới thiệu vẫn cục bộ; quên mật khẩu chưa có API.
 - [ ] Khiêm kiểm tra lại các lỗi đã sửa, xác nhận không còn lỗi chặn demo trong phạm vi đã chọn.
 - [ ] Hòa hoàn thiện Spec Kit artifacts phản ánh đúng quá trình và phiên bản bàn giao.
 - [ ] Nhóm có source, hướng dẫn chạy, bằng chứng kiểm thử và video có thuyết minh để nộp.
+
+## 8. Cập nhật tích hợp Android — 05/11/2026
+
+Đạt đã nối UI Liquid Metal với Backend trên nhánh demo này, không đổi source Backend
+hoặc migration SQL. Kiểm tra cục bộ: Backend 13/13 test; Android 64/64 unit test;
+18 kiểm tra API/SQL; cả 14 ca UI có kết quả đạt qua lượt 13/14 và chạy lại 1/1 sau
+khi làm trống ô email tự điền trước ca gõ phím. Không coi đây là một lượt 14/14.
+
+Đã kiểm tra lưu hồ sơ và đọc từ phiên khác, xung đột version không ghi đè, refresh
+đồng thời, logout thu hồi phiên, và dữ liệu/blacklist vẫn giữ sau restart Backend/Redis.
+Dùng database demo/test riêng, giữ nguyên database cũ; không đưa secret, token,
+database dump hoặc binary lên Git. Chưa thay thế kiểm tra độc lập của Khiêm.
+
+Hướng dẫn chạy, giới hạn API và bằng chứng chi tiết:
+[Android User Account Integration](../../../src/mobile/USER_ACCOUNT_INTEGRATION.md),
+[Frontend Status](../../../src/mobile/FRONTEND_STATUS.md).
