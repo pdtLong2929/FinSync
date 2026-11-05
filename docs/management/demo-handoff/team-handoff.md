@@ -68,6 +68,7 @@ Các API, cùng tiền tố `/api/v1`:
 
 | Tài liệu tiếng Việt | Ai đọc và dùng làm gì |
 |---|---|
+| [DOCKER_DEMO.md](DOCKER_DEMO.md) | Cả ba: chạy BE/PostgreSQL/Redis bằng một lệnh, kiểm tra health và cấu hình LAN. |
 | [ACCOUNT_API.md](ACCOUNT_API.md) | Cả ba: cách chạy, endpoint, request/response, validation, mã lỗi và xử lý token. |
 | [ACCOUNT_PERSISTENCE.md](ACCOUNT_PERSISTENCE.md) | Hòa/Khiêm và người chạy BE: migration, repository, database và điều kiện chạy test. |
 

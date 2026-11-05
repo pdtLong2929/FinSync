@@ -8,25 +8,19 @@ Tài liệu nội bộ bằng tiếng Việt. Tên field, endpoint, mã lỗi, l
 ## 1. Cách chạy
 > *Thực hiện: Nhật | Rà soát: Chờ xác nhận*
 
-Cần Java 21, Maven, PostgreSQL 16 và Redis. Đọc [hướng dẫn database](ACCOUNT_PERSISTENCE.md) trước khi dùng database hiện có; không xóa dữ liệu hoặc tự bật baseline để né lỗi migration.
-
-Nếu dùng Docker Compose, tạo file `.env` không đưa vào Git tại thư mục gốc với `DB_PASSWORD` và `JWT_SECRET` ngẫu nhiên dài ít nhất 32 byte UTF-8. Sinh khóa bằng PowerShell:
+Chỉ cần Docker Desktop đang chạy với Linux containers và Docker Compose v2. Từ thư mục gốc repository:
 
 ```powershell
-[Convert]::ToBase64String([Security.Cryptography.RandomNumberGenerator]::GetBytes(32))
+docker compose up --build -d --wait --wait-timeout 240
 ```
 
-Chạy từ thư mục gốc:
+Không cần cài Java/Maven/PostgreSQL/Redis hoặc tự tạo secret. Compose tự sinh password database/JWT secret ngẫu nhiên ở lần đầu, giữ trong volume và dùng lại khi restart. Đọc [hướng dẫn Docker demo](DOCKER_DEMO.md) để đổi cổng, mở truy cập LAN và xử lý database từ cấu hình cũ.
 
-```powershell
-docker compose up --build -d postgres redis backend
-```
+Kiểm tra `http://localhost:8080/actuator/health` trả `{"status":"UP"}`. API mặc định chỉ mở trên localhost; Android Emulator cùng máy dùng `10.0.2.2:8080`. Muốn máy khác truy cập, đặt `API_BIND_ADDRESS=0.0.0.0` trong `.env` tại gốc và chạy lại Compose.
 
-Redis dùng AOF để lưu bền, volume riêng và chính sách không tự loại key khi thiếu bộ nhớ; Compose không công khai cổng Redis ra host. Dùng HTTPS và giới hạn truy cập mạng khi triển khai từ xa.
+Chạy Java trực tiếp chỉ dành cho người cần debug BE: cấu hình các biến trong [src/backend/.env.example](../../../src/backend/.env.example), rồi chạy `mvn spring-boot:run` từ `src/backend`. Cấu hình ứng dụng hiện hỗ trợ đọc `.env` trong working directory; không nhầm với file tùy chọn Compose tại gốc.
 
-Nếu chạy Java ngoài Docker, đưa các biến trong [.env.example](.env.example) vào môi trường của tiến trình, gồm `DB_PASSWORD`, `JWT_SECRET` và địa chỉ PostgreSQL/Redis thật. Spring Boot không tự đọc `.env`. Chạy `mvn spring-boot:run` từ `src/backend`. Lần kiểm chứng trước dùng Maven cài sẵn vì Windows Maven Wrapper lỗi khởi động trong môi trường kiểm tra.
-
-JWT mặc định hết hạn sau 900 giây; `JWT_EXPIRATION_MS` cho phép 1.000–900.000 mili giây. Không commit thông tin đăng nhập hoặc token thật.
+Xem [hướng dẫn database](ACCOUNT_PERSISTENCE.md) trước khi dùng dữ liệu cũ; không tự bật baseline hoặc xóa dữ liệu. JWT mặc định 900 giây. Không commit hoặc chia sẻ token/secret thật.
 
 ## 2. Hợp đồng để nối Android
 > *Thực hiện: Nhật | Phối hợp: Đạt | Rà soát: Chờ xác nhận*

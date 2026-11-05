@@ -3,12 +3,14 @@
 
 Tài liệu nội bộ bằng tiếng Việt, dùng cùng [hợp đồng API](ACCOUNT_API.md).
 
+Xem [hướng dẫn Docker demo](DOCKER_DEMO.md) để chạy một lệnh với database và secret tự khởi tạo. Stack mới dùng volumes riêng; không tự nhập dữ liệu từ cấu hình cũ.
+
 ## 1. Migration và chuẩn bị database
 > *Thực hiện: Nhật | Rà soát: Chờ xác nhận*
 
 Flyway quản lý schema; Hibernate chỉ kiểm tra mapping entity qua `ddl-auto=validate`. Migration V1 tạo `users`, `auth_sessions`, ràng buộc và index; không tạo sẵn tài khoản.
 
-Dùng PostgreSQL phát triển trống, cấu hình `DB_URL`, `DB_USERNAME`, `DB_PASSWORD` trước khi chạy. Spring Boot không tự đọc file môi trường. Kiểm tra tên database: Compose và `.env.example` dùng `FinSync`, còn URL mặc định trong `application.properties` tại thời điểm rà soát dùng `finsync`. Đặt DB_URL theo database thực tế, không coi hai tên là một.
+Dùng PostgreSQL phát triển trống, cấu hình `DB_URL`, `DB_USERNAME`, `DB_PASSWORD` trước khi chạy. Cấu hình ứng dụng hiện hỗ trợ đọc `.env` trong working directory; khi chạy Docker, Compose cung cấp cấu hình và secret riêng qua configtree. Kiểm tra tên database: Compose và `.env.example` dùng `FinSync`, còn URL mặc định trong `application.properties` tại thời điểm rà soát dùng `finsync`. Đặt DB_URL theo database thực tế, không coi hai tên là một.
 
 Không bật tự động baseline để né lỗi schema đã tồn tại: baseline version 1 có thể khiến Flyway bỏ qua migration này. Kiểm tra và đối chiếu schema từng được Hibernate tạo trước khi chuyển sang Flyway; không xóa dữ liệu hiện có để chạy migration cho thuận tiện.
 

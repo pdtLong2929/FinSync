@@ -1,99 +1,87 @@
-version: '3.8'
-
-# =======================================================
-# FinSync - Centralized Docker Compose
-# Services: PostgreSQL (DB), Spring Boot (Backend API)
-# =======================================================
-
+# Local/demo stack. Run: docker compose up --build -d --wait
 services:
-  # -----------------------------------------------------
-  # 1. PostgreSQL Database Service
-  # -----------------------------------------------------
+  init-secrets:
+    image: alpine:3.21
+    restart: "no"
+    volumes:
+      - demo_secrets:/secrets
+    entrypoint: ["/bin/sh", "-ec"]
+    command:
+      - |
+        umask 077
+        for key in DB_PASSWORD JWT_SECRET; do
+          if [ ! -s /secrets/$$key ]; then
+            od -An -N32 -tx1 /dev/urandom | tr -d ' \n' > /secrets/$$key
+          fi
+        done
+        chown -R 10001:10001 /secrets
+        chmod 700 /secrets
+        chmod 400 /secrets/DB_PASSWORD /secrets/JWT_SECRET
+
   postgres:
     image: postgres:16-alpine
-    container_name: finsync-postgres
     restart: unless-stopped
+    depends_on:
+      init-secrets:
+        condition: service_completed_successfully
     environment:
       POSTGRES_DB: FinSync
-      POSTGRES_USER: ${DB_USERNAME:-postgres}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD}
-    ports:
-      - '5432:5432'
+      POSTGRES_USER: finsync
+      POSTGRES_PASSWORD_FILE: /run/finsync/DB_PASSWORD
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - demo_postgres_data:/var/lib/postgresql/data
+      - demo_secrets:/run/finsync:ro
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U ${DB_USERNAME:-postgres} -d FinSync']
-      interval: 10s
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U finsync -d FinSync"]
+      interval: 5s
       timeout: 5s
-      retries: 5
-    networks:
-      - finsync-network
-
-  # -----------------------------------------------------
-  # 2. Spring Boot Backend API Service
-  # -----------------------------------------------------
-  backend:
-    build:
-      context: ./src/backend
-      dockerfile: Dockerfile
-    container_name: finsync-backend
-    restart: on-failure
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    environment:
-      SERVER_PORT: 8080
-      DB_URL: jdbc:postgresql://postgres:5432/FinSync
-      DB_USERNAME: ${DB_USERNAME:-postgres}
-      DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD}
-      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET}
-      JWT_EXPIRATION_MS: ${JWT_EXPIRATION_MS:-900000}
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
-      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
-    ports:
-      - '8080:8080'
-    networks:
-      - finsync-network
+      retries: 20
+      start_period: 10s
 
   redis:
     image: redis:7-alpine
     restart: unless-stopped
     command: ["redis-server", "--appendonly", "yes", "--maxmemory-policy", "noeviction"]
     volumes:
-      - redis_data:/data
+      - demo_redis_data:/data
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  backend:
+    build:
+      context: ./src/backend
+    restart: unless-stopped
+    depends_on:
+      init-secrets:
+        condition: service_completed_successfully
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      SPRING_CONFIG_IMPORT: configtree:/run/finsync/
+      SERVER_PORT: 8080
+      DB_URL: jdbc:postgresql://postgres:5432/FinSync
+      DB_USERNAME: finsync
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      JWT_EXPIRATION_MS: 900000
+    volumes:
+      - demo_secrets:/run/finsync:ro
+    ports:
+      - "${API_BIND_ADDRESS:-127.0.0.1}:${API_PORT:-8080}:8080"
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/actuator/health"]
       interval: 10s
       timeout: 5s
-      retries: 5
-    networks:
-      - finsync-network
+      retries: 18
+      start_period: 60s
 
-  # -----------------------------------------------------
-  # 3. Admin Web React (Uncomment when React app is ready)
-  # -----------------------------------------------------
-  # admin-web:
-  #   build:
-  #     context: ./src/admin-web
-  #     dockerfile: Dockerfile
-  #   container_name: finsync-admin-web
-  #   restart: on-failure
-  #   depends_on:
-  #     - backend
-  #   ports:
-  #     - '3000:80'
-  #   networks:
-  #     - finsync-network
-
+# Separate from the earlier postgres_data/redis_data volumes; no automatic data migration.
 volumes:
-  redis_data:
-    driver: local
-  postgres_data:
-    driver: local
-
-networks:
-  finsync-network:
-    driver: bridge
+  demo_secrets:
+  demo_postgres_data:
+  demo_redis_data:

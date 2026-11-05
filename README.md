@@ -205,24 +205,20 @@ FinSync/
 
 ### Option A: One-Click Run with Docker Compose (Recommended)
 
-To spin up the entire database and backend server with a single command:
+Chỉ cần Docker Desktop (Linux containers, Compose v2). Tại thư mục gốc:
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/pdtLong2929/FinSync.git
-   cd FinSync
-   ```
-2. Launch the services:
-   ```bash
-   docker compose up -d
-   ```
-3. Verify running containers:
-   ```bash
-   docker compose ps
-   ```
-4. Access Swagger API documentation at: `http://localhost:8080/swagger-ui.html`
+```powershell
+docker compose up --build -d --wait --wait-timeout 240
+docker compose ps -a
+```
 
----
+Compose tự build BE, tạo PostgreSQL/Redis và sinh secret ngẫu nhiên trong volume;
+không cần cài Java/Maven hay tạo `.env`. Dữ liệu/secret giữ nguyên khi chạy lại.
+Kiểm tra `http://localhost:8080/actuator/health` trả `{"status":"UP"}`.
+Chưa có Swagger UI; xem [API tài khoản](docs/management/demo-handoff/ACCOUNT_API.md).
+
+Đọc [hướng dẫn Docker tiếng Việt](docs/management/demo-handoff/DOCKER_DEMO.md)
+để đổi cổng, truy cập LAN, dừng/chạy lại và lưu ý khi dùng database cũ.
 
 ### Option B: Manual Local Setup
 
