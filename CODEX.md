@@ -1,6 +1,27 @@
 # FinSync — Project Context & Guidelines
 
-> File này cung cấp toàn bộ ngữ cảnh (context), quy chuẩn và hướng dẫn làm việc cho AI Assistant (Antigravity/Gemini) trong workspace **FinSync**. File này được tự động đọc khi mở phiên làm việc mới.
+> File này cung cấp ngữ cảnh, quy chuẩn và hướng dẫn làm việc cho AI Assistant (Codex/Gemini) trong workspace **FinSync**. Khi bắt đầu phiên mới, đọc file này và các tài liệu liên quan được dẫn bên dưới; không giả định công cụ luôn tự động nạp file.
+
+## 0. Trạng thái hiện tại và tài liệu cần đọc
+
+**Cập nhật ngữ cảnh: 04/11/2026.** Phân biệt rõ yêu cầu đồ án, prototype đang có và thiết kế đề xuất.
+
+| Nguồn | Vai trò |
+|---|---|
+| [database_design.md](database_design.md) | Thiết kế database **Final v1.0**, tiếng Việt, **22 bảng và 6 sơ đồ Mermaid**; có đầy đủ field, kiểu PostgreSQL, NULL/default, FK, ràng buộc, index, mapping JPA và thứ tự migration. Là tài liệu bàn giao BE, chưa phải migration/entity đã triển khai hay kết quả nhóm đã nghiệm thu. |
+| [FE/src/model.ts](FE/src/model.ts), [FE/src/workspace.tsx](FE/src/workspace.tsx) | Kiểu dữ liệu, ví, giao dịch, ngân sách, thành viên, chia tiền và trả nợ của prototype Figma Make. |
+| [FE/src/App.tsx](FE/src/App.tsx), [FE/src/WalletScreens.tsx](FE/src/WalletScreens.tsx), [FE/src/GroupScreens.tsx](FE/src/GroupScreens.tsx) | Màn hình và hành vi hiện có; ưu tiên source này khi khác tài liệu handoff cũ. Đọc [FE/AGENTS.md](FE/AGENTS.md) khi làm việc trong FE. |
+| [PA/PA3/use-cases/client-use-cases.md](PA/PA3/use-cases/client-use-cases.md) | 12 ca sử dụng phía người dùng; không đồng nghĩa với 12 nhóm chức năng của toàn đồ án. |
+| [PA/PA3/use-cases/admin-account-use-cases.md](PA/PA3/use-cases/admin-account-use-cases.md), [PA/PA3/use-cases/uc-ai-features.md](PA/PA3/use-cases/uc-ai-features.md) | Yêu cầu tài khoản, admin web và AI cần giữ dù source FE chưa triển khai. |
+
+- **FE hiện tại:** Prototype React + TypeScript + Vite + Tailwind CSS xuất từ Figma Make; giao diện mô phỏng mobile với bốn tab Overview, Wallets, Groups, Reports. Dữ liệu nằm trong bộ nhớ React, tải lại sẽ khởi tạo lại; chưa chứng minh tích hợp backend, PostgreSQL, JWT, AI hoặc admin web.
+- **Phạm vi toàn đồ án:** Vẫn gồm 10 nhóm chức năng và AI Financial Advisor. Không bỏ chức năng chỉ vì chưa có trong prototype; cũng không ghi nhận tính năng dự kiến là đã triển khai.
+- **Database đã đối chiếu FE:** Gộp bảng `group_expense_payments` vào `group_expenses.paid_by_member_id`. V1.0 chốt một người ứng toàn bộ hóa đơn hoặc trả hoàn toàn bằng quỹ; chưa hỗ trợ nhiều người cùng ứng hoặc trộn nguồn.
+- **Các quyết định quan trọng:** Ngân sách hiện tính chi cá nhân; chi nhóm không tự tạo giao dịch cá nhân. Chia tiền hỗ trợ đều/số tiền/phần trăm/trọng số; trả nợ hỗ trợ toàn bộ hoặc một phần. Hoàn tác xóa giao dịch có cửa sổ 7 giây trên FE. Thành viên nhập tên chưa có tài khoản được mô hình hóa bằng `group_members.user_id` tùy chọn, không mặc nhiên có quyền truy cập nhóm.
+- **Các lựa chọn đã chốt cho thiết kế v1.0:** Guest liên kết tài khoản bằng lời mời chỉ định; Owner quản lý quỹ/hoàn quỹ trong số dư; không quy đổi VND/USD; tiết kiệm là dành riêng tiền trong ví; trả nợ không cần bước người nhận duyệt riêng. Hóa đơn nhóm/trả nợ/chuyển ví đã ghi là sổ chỉ thêm. Thay đổi những lựa chọn này cần cập nhật thiết kế và migration, không coi chúng là hành vi đã triển khai trong FE.
+- **Liên kết dòng tiền cá nhân/nhóm:** personal_transactions có scope PERSONAL/GROUP_MOVEMENT, category_id tùy scope và các FK tùy chọn group_expense_id/settlement_id/group_fund_entry_id. Người dùng chủ động ghi vào ví; GROUP_MOVEMENT ảnh hưởng số dư nhưng bị loại khỏi thu/chi báo cáo, ngân sách và phần chi cá nhân của AI. Backend kiểm tra tối đa một dòng còn hiệu lực/user/nguồn; không tự nhận diện giao dịch bị nhập nhầm PERSONAL.
+- **Hợp đồng entity:** Mỗi bảng có id UUID, created_at, updated_at, version cộng các cột riêng trong tài liệu. Tiền dùng BigDecimal/numeric(19,2), enum varchar + CHECK, mọi FK RESTRICT. Các luật tổng nhiều dòng/cùng chủ/cùng nhóm do service transaction và khóa thực thi; @Version không thay thế kiểm tra đồng thời.
+- **Nguồn và kiểm chứng:** Đã đọc source FE để điều chỉnh thiết kế, chưa chạy kiểm thử ứng dụng trong lần đối chiếu này. Các báo cáo kiểm thử/ảnh trong FE là bằng chứng đi kèm, không phải kết quả vừa chạy lại. `database_design.pdf` là bản xuất riêng, không tự đồng bộ với Markdown; cần xuất lại khi muốn phát hành bản cập nhật.
 
 ---
 
@@ -44,10 +65,12 @@ Hệ thống có **2 Actor chính**:
 
 ## 3. Kiến Trúc & Công Nghệ Sử Dụng (Tech Stack)
 
+> Các thành phần bên dưới là kiến trúc sản phẩm dự kiến. Source `FE/` hiện tại là prototype web cho người dùng cuối, không phải admin web và không xác nhận mobile/backend đã hoàn thành.
+
 - **Mobile Client (Regular User):** 
   - Android Client: Kotlin / Jetpack Compose (tuân thủ Kotlin style guide, UI reactive với Composables) hoặc Flutter (Dart).
   - Tích hợp gọi API Backend qua HTTP Client với interceptor tự động gắn JWT Token.
-- **Backend API Server:** Spring Boot (Java 21), kiến trúc RESTful API phân tầng chuẩn, bảo mật Spring Security + JWT, Flyway migration. API Documentation bằng Swagger / SpringDoc OpenAPI.
+- **Backend API Server:** Spring Boot (Java 21), RESTful API phân tầng, Spring Security + JWT access token + refresh token xoay vòng, Flyway migration. Refresh token lưu hash trong PostgreSQL auth_sessions; blacklist access token theo jti trong Redis có TTL. Logout/khóa tài khoản thu hồi phiên, API kiểm user/session và blacklist; chi tiết tại mục 5.3 của database_design.md. Đây là thiết kế BE, chưa triển khai trong FE. API Documentation bằng Swagger / SpringDoc OpenAPI.
 - **AI Microservice & Data Processing:** Python (FastAPI) tích hợp Google Gemini API / OpenAI API để xử lý thuật toán phân tích chi tiêu, Notification Regex parsing algorithms và sinh kế hoạch tài chính tối ưu.
 - **Web Admin Panel (Administrator):** React.js — quản trị người dùng, quản lý danh mục thu/chi mặc định, xem thống kê hệ thống.
 - **Cơ sở dữ liệu (Database):** PostgreSQL (Cloud/Docker), ORM sử dụng Spring Data JPA / Hibernate.
@@ -70,7 +93,7 @@ Hệ thống có **2 Actor chính**:
 - **Đặc điểm kỹ thuật & nghiệp vụ:**
   - Dữ liệu được chia sẻ công khai giữa các thành viên trong cùng một nhóm được cấp phép.
   - Không dùng để quản lý tài sản cá nhân mà dùng để ghi nhận các khoản chi phát sinh chung của tập thể (ví dụ: tiền thuê phòng trọ hàng tháng, tiền vé xe, tiền ăn chung khi đi chơi).
-  - Tích hợp thuật toán tự động chia tiền (chia đều, chia theo tỷ lệ hoặc theo số tiền thực tế từng người ứng trước) và thuật toán tối ưu hóa nợ (giảm thiểu số lần chuyển khoản qua lại giữa các thành viên).
+  - Chia chi phí đều, theo số tiền cụ thể, phần trăm hoặc trọng số; phân biệt phần chi phí phải chịu với tiền ứng trước. FE hiện có một người ứng toàn bộ hóa đơn; công nợ được tính từ hóa đơn, phần chia và lịch sử trả nợ để đề xuất bù trừ giữa thành viên.
 
 ### 4.3. Sự kết hợp đồng điệu trong hệ thống
 
@@ -84,12 +107,14 @@ Khi một thành viên ghi nhận khoản chi chung cho nhóm, hệ thống sẽ
 
 **10 Nhóm chức năng (Functional Groups):**
 
-1. **Authentication & Security:** Module xác thực xử lý việc đăng ký tài khoản, đăng nhập, đăng xuất và khôi phục mật khẩu thông qua mã token mã hóa (JWT). Đảm bảo dữ liệu tài chính cá nhân và nhóm của người dùng luôn riêng tư, an toàn.
+Đây là phạm vi yêu cầu sản phẩm, không phải danh sách tính năng đã hoàn thành trong FE.
+
+1. **Authentication & Security:** Đăng ký, đăng nhập, đăng xuất, thu hồi mọi phiên và khôi phục mật khẩu. Dùng JWT access token ký RS256, refresh token ngẫu nhiên lưu hash/xoay mỗi lần refresh, blacklist Redis theo jti và phiên PostgreSQL theo sid. JWT được ký, không phải mã hóa nội dung. Blacklist không thêm bảng PostgreSQL; thiết kế vẫn có 22 bảng. Token đặt lại mật khẩu dùng một lần là luồng riêng.
 2. **Profile Management:** Cho phép người dùng xem và chỉnh sửa thông tin cá nhân, thay đổi mật khẩu, cập nhật ảnh đại diện và cấu hình đơn vị tiền tệ mặc định (VND, USD).
 3. **Wallet & Personal Account Management:** Cho phép người dùng tạo và quản lý các ví ghi sổ (tiền mặt, tài khoản ngân hàng, thẻ tín dụng) để theo dõi số dư. Các ví chỉ mang tính chất nhập liệu thủ công. Hệ thống tổng hợp tất cả số dư vào bảng điều khiển duy nhất để cung cấp cái nhìn tổng quan về tài sản ròng.
-4. **Personal Transaction Tracking:** Người dùng ghi chép nhanh chóng các khoản thu, chi cá nhân bằng cách chỉ định số tiền, danh mục, ghi chú, ngày tháng và hình ảnh hóa đơn kèm theo.
+4. **Personal Transaction Tracking:** Người dùng ghi chép nhanh chóng các khoản thu, chi cá nhân bằng cách chỉ định số tiền, danh mục, ghi chú, ngày tháng.
 5. **Group Management & Shared Wallets:** Cho phép người dùng tạo nhóm (phòng trọ, đi chơi, dự án), mời thành viên tham gia qua liên kết hoặc mã code, phân quyền Owner và Member. Mỗi nhóm có ví chung tách biệt hoàn toàn với tài chính cá nhân.
-6. **Smart Debt Split & Settlement:** Tự động phân chia các khoản chi tiêu chung (chia đều, theo tỷ lệ phần trăm hoặc số tiền cụ thể). Hiển thị bảng tổng hợp ai đang nợ ai bao nhiêu, gửi thông báo nhắc nhở thanh toán, cho phép đánh dấu "đã thanh toán" khi hoàn tất ngoài ứng dụng.
+6. **Smart Debt Split & Settlement:** Chia chi tiêu chung theo đều, tỷ lệ phần trăm, số tiền cụ thể hoặc trọng số. Hiển thị ai đang nợ ai, ghi nhận trả nợ toàn bộ/một phần sau khi thanh toán ngoài ứng dụng. Nhắc nợ qua thông báo là yêu cầu sản phẩm chưa được FE triển khai.
 7. **Budget Planning & Alerting:** Cho phép thiết lập hạn mức chi tiêu cho từng danh mục theo tuần/tháng. Kích hoạt cảnh báo trực quan khi chi tiêu tiệm cận hoặc vượt quá các ngưỡng giới hạn (80% và 100%).
 8. **Financial Reporting & Analytics:** Trực quan hóa cấu trúc dòng tiền qua biểu đồ tương tác (biểu đồ tròn, biểu đồ cột). Tổng kết báo cáo chi tiêu nhóm sau chuyến đi, hỗ trợ xuất file PDF hoặc Excel.
 9. **Savings Goal Management:** Giúp người dùng thiết lập các mục tiêu tài chính dài hạn (mua sắm, du lịch), theo dõi tiến độ hoàn thành.
@@ -103,6 +128,7 @@ Khi một thành viên ghi nhận khoản chi chung cho nhóm, hệ thống sẽ
   3. Đề xuất phân bổ ngân sách tối ưu cho từng danh mục dựa trên thu nhập, mục tiêu tiết kiệm và thói quen chi tiêu thực tế.
   4. Đánh giá tiến độ đạt mục tiêu tiết kiệm và đưa ra lời khuyên điều chỉnh nếu cần.
 - **Giá trị thực tiễn:** Chuyển đổi dữ liệu chi tiêu thô thành những định hướng tài chính chủ động, giúp người dùng không chỉ biết mình đã tiêu gì mà còn biết nên tiêu như thế nào trong tháng tới.
+- **Ranh giới dữ liệu AI:** Chỉ tính phần chi nhóm mà người dùng phải chịu, không tính toàn bộ hóa đơn, tiền ứng hoặc tiền trả nợ như chi tiêu mới. Chỉ gửi dữ liệu tổng hợp được phép đến nhà cung cấp; lưu một kết quả/người dùng/tháng, hỗ trợ phân tích cơ bản khi AI lỗi. Áp dụng tư vấn cần người dùng xác nhận. Ngân sách hiện đối chiếu chi cá nhân, nên phần phân tích nhóm phải tách rõ. Chatbot hội thoại chưa thuộc phạm vi hiện tại.
 
 ---
 
@@ -110,6 +136,7 @@ Khi một thành viên ghi nhận khoản chi chung cho nhóm, hệ thống sẽ
 
 ### 6.1. Định dạng tài liệu & Báo cáo
 - Toàn bộ tài liệu báo cáo phải viết bằng **tiếng Anh** bằng định dạng **Markdown (`.md`)**.
+- **Ngoại lệ theo yêu cầu người dùng:** `database_design.md` viết bằng **tiếng Việt**, giữ tên bảng/trường bằng tiếng Anh và Mermaid chia theo tính năng. Người dùng đã yêu cầu bản **Final v1.0** với đầy đủ field và quan hệ để bàn giao BE; tiếp tục duy trì độ chi tiết này, không tự dịch sang tiếng Anh hoặc rút về bản nháp.
 - Các sơ đồ phải ưu tiên vẽ bằng cú pháp **Mermaid syntax**.
 - **Bắt buộc có dòng phân công (Attribution Line)** ngay dưới mỗi tiêu đề section:
   ```markdown
@@ -138,18 +165,22 @@ Khi một thành viên ghi nhận khoản chi chung cho nhóm, hệ thống sẽ
 ### 6.4. Quy tắc Git & Bảo mật
 - Repository ở chế độ **Private**.
 - **Tuyệt đối không commit API keys, mật khẩu, JWT secret hay file `.env` lên GitHub.**
-- Cấu trúc thư mục chuẩn:
+- Các đường dẫn hiện có cần dùng để tìm tài liệu/source:
   ```text
   FinSync/
-  ├── src/                          # Source code (mobile, backend, admin-web)
-  ├── docs/                         # Documentation
-  │   ├── management/               # weekly-reports, meeting-notes
-  │   ├── requirements/             # vision, use cases, spec
-  │   ├── analysis-and-design/      # architecture, diagrams, UI design
-  │   └── test/                     # test plan, test cases
-  ├── screenshots/                  # Ảnh chụp ứng dụng, Jira, Git log
-  └── GEMINI.md                     # File context cho AI Assistant
+  ├── CODEX.md                      # Ngữ cảnh dự án cho AI
+  ├── database_design.md            # Thiết kế database Final v1.0 cho BE
+  ├── database_design.pdf           # Bản xuất, cần kiểm tra độ cập nhật
+  ├── FE/                          # Source prototype Figma Make
+  │   ├── src/                     # React/TypeScript và logic trong bộ nhớ
+  │   ├── docs/                    # Handoff, báo cáo prototype
+  │   ├── scripts/                 # Script kiểm thử và xuất minh chứng
+  │   └── public/                  # Tài nguyên và ảnh minh chứng
+  ├── PA/                          # Đặc tả, báo cáo PA1/PA2/PA3
+  ├── WeeklyReport.md
+  └── README.md
   ```
+- Cấu trúc `src/` và `docs/management`, `docs/requirements`, `docs/analysis-and-design`, `docs/test` là định hướng tổ chức khi triển khai sản phẩm; không giả định các thư mục đó đã tồn tại hoặc tự di chuyển file hiện tại.
 
 ### 6.5. Quy chuẩn Commit Message (Conventional Commits)
 - Bắt buộc tuân theo định dạng: `<type>(<scope>): <subject>`
@@ -171,8 +202,7 @@ Khi một thành viên ghi nhận khoản chi chung cho nhóm, hệ thống sẽ
   - Đặt tên: Class/Widget dùng PascalCase, biến/hàm dùng lowerCamelCase, tên file dùng snake_case.dart.
 - **Backend (Java / Spring Boot):**
   - Tuân thủ quy chuẩn đặt tên Java chuẩn: Class/Interface dùng PascalCase, method/variable dùng lowerCamelCase, hằng số dùng UPPER_SNAKE_CASE.
-  - Cấu trúc phân tầng chuẩn: controller $\rightarrow$ service (interface + impl) $\rightarrow$ 
-epository $\rightarrow$ model/entity + dto.
+  - Cấu trúc phân tầng chuẩn: controller → service (interface + impl) → repository → model/entity + dto.
   - Tuyệt đối không hardcode SQL, sử dụng Spring Data JPA queries hoặc JPQL.
   - Sử dụng DTO để nhận và trả dữ liệu qua API, không trả trực tiếp Database Entity ra ngoài client.
 - **AI Microservice (Python / FastAPI):**
@@ -187,8 +217,12 @@ epository $\rightarrow$ model/entity + dto.
 
 ## 7. Hướng Dẫn Dành Cho AI Assistant
 
+> **Database design (Final v1.0):** Đọc [database_design.md](database_design.md) trước khi tạo entity, migration hoặc service. Đây là thiết kế chi tiết tiếng Việt đã đối chiếu `FE` và giữ phạm vi AI/admin. “Final” là phiên bản bàn giao theo yêu cầu người dùng, không có nghĩa đã triển khai hay nhóm đã duyệt/kiểm thử. Phải đọc cả cột chung, cột riêng và luật service, không chỉ sao chép Mermaid.
+
 1. **Hiểu rõ vai trò:** Hỗ trợ nhóm thực hiện đúng các tiêu chuẩn công nghệ phần mềm của HCMUS, tuân thủ đúng định dạng của giáo viên và trợ giảng (TAs).
 2. **Bảo toàn dữ liệu:** Khi người dùng yêu cầu chỉnh sửa định dạng hoặc cấu trúc tài liệu, **luôn bảo toàn tối đa nội dung nghiệp vụ** đã có của nhóm, không tự ý rút ngắn hoặc xóa bỏ trừ khi có yêu cầu cụ thể.
 3. **Tuân thủ cấu trúc tài liệu:** Luôn đối chiếu với các file đặc tả (`pa1_2026_project_assignment_specification.md`, `WeeklyReport.md`, v.v.) trước khi đề xuất thay đổi.
 4. **Phân biệt 2 phân vùng nghiệp vụ:** Luôn phân biệt rõ giữa "Quản lý Chi tiêu Cá nhân" (dữ liệu riêng tư, ví cá nhân) và "Quản lý Chi tiêu Nhóm" (dữ liệu chia sẻ, quỹ chung) khi đề xuất thiết kế hoặc code.
 5. **Nguyên tắc bảo mật:** Không bao giờ đề xuất hardcode API keys, passwords, hoặc secrets trong source code. Luôn sử dụng environment variables.
+6. **Đối chiếu đúng nguồn:** Source FE mô tả hành vi prototype; đặc tả mô tả phạm vi sản phẩm; `database_design.md` là hợp đồng thiết kế database v1.0. Khi khác nhau, ghi rõ lựa chọn triển khai và giới hạn, không âm thầm xóa yêu cầu hay coi dữ liệu demo là thiết kế production.
+7. **Duy trì ngữ cảnh:** Khi cập nhật database, đồng bộ field, số bảng, quan hệ Mermaid, phiên bản và trạng thái triển khai trong tài liệu liên quan. Không tạo lại file ở đường dẫn cũ `docs/analysis-and-design/database_design.md`; file hiện nằm ở thư mục gốc.

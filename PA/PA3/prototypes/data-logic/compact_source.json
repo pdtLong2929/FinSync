@@ -1,0 +1,193 @@
+{
+  "cases": [
+    {
+      "n": 2,
+      "id": "UC-DL-02",
+      "title": "Record, Edit and Delete Personal Transactions",
+      "actor": "Regular User",
+      "support": "None.",
+      "goal": "Maintain income and expense records, optional receipts and correct balances without duplicate posting.",
+      "trigger": "The user selects Add transaction or opens an owned transaction.",
+      "pre": "1. User has an authorized session, or an unlocked encrypted cache after initial sign-in for the offline branch.<br>2. An owned wallet and applicable category exist.<br>3. Group records are not edited through this flow.",
+      "fr": "Income/expense capture, receipts, editing, deletion and offline pending changes.",
+      "nfr": "NFR-S4, NFR-S6, NFR-S8, NFR-R3, NFR-R5, NFR-R6",
+      "sample": [
+        "Type: Expense",
+        "Wallet: Cash / VND",
+        "Category: Food",
+        "Amount: 120,000 VND",
+        "Date: 2026-11-04",
+        "Note: Lunch"
+      ],
+      "entry": "Add expense",
+      "input": "Enter amount, wallet, category, date and note; optionally attach a receipt.",
+      "review": "Review a 120,000 VND Food expense and the selected wallet.",
+      "commit": "Validate ownership and category type; atomically record the transaction and its attachment references; update derived totals.",
+      "result": "One expense appears in history; Cash decreases by 120,000 VND and Food spending increases once."
+    },
+    {
+      "n": 5,
+      "id": "UC-DL-05",
+      "title": "Record and Confirm Shared-Fund Contributions",
+      "actor": "Group Member",
+      "support": "Group Owner acting as fund custodian.",
+      "goal": "Record money contributed outside the app and increase the shared fund only after the custodian confirms receipt.",
+      "trigger": "A member opens the group fund and selects Contribute.",
+      "pre": "1. Both actors have online authorized group sessions.<br>2. The group fund exists and is active.<br>3. Actual payment occurs outside FinSync.",
+      "fr": "Contribution claims, custodian confirmation, fund and member-position visibility.",
+      "nfr": "NFR-S4, NFR-R3, NFR-R6, NFR-R7",
+      "sample": [
+        "Group fund: Roommates / VND",
+        "Contributor: Laura",
+        "Claim: 500,000 VND",
+        "Current confirmed fund: 1,000,000 VND"
+      ],
+      "entry": "Contribute to group fund",
+      "input": "Enter the amount/date and declare that the external contribution was made.",
+      "review": "Review a 500,000 VND contribution claim; explain that it does not increase the fund yet.",
+      "commit": "Save a pending claim; notify the Owner; the Owner opens it, verifies receipt and confirms; atomically post the fund credit.",
+      "result": "Fund balance becomes 1,500,000 VND; Laura's confirmed contribution position increases by 500,000; no expense is created."
+    },
+    {
+      "n": 6,
+      "id": "UC-DL-06",
+      "title": "Record and Split a Group Expense",
+      "actor": "Group Member",
+      "support": "Group Owner when authorizing shared-fund spending.",
+      "goal": "Allocate a real group expense exactly, preserve the funding source and update member positions without counting consumption twice.",
+      "trigger": "An authorized member selects Add group expense.",
+      "pre": "1. Online active membership.<br>2. Group currency and participants are known.<br>3. A valid rate exists for a foreign-currency bill; sufficient fund cash exists for fund-funded spending.",
+      "fr": "Single-payer/fund-funded expense, equal/exact/percentage/weighted allocation and exact rounding.",
+      "nfr": "NFR-P5, NFR-S4, NFR-S6, NFR-R3, NFR-R8",
+      "sample": [
+        "Title: Roommates dinner",
+        "Amount: 300,001 VND",
+        "Paid by: You",
+        "Participants: You, Laura, Minh",
+        "Split: Equal"
+      ],
+      "entry": "Add group expense",
+      "input": "Enter title/date/category, payer or fund, original amount/currency and participating members; select split mode.",
+      "review": "Review You 100,001; Laura 100,000; Minh 100,000 VND. Total equals 300,001 VND.",
+      "commit": "Revalidate membership, quote, split inputs and funding; atomically post the expense, allocations and the applicable payer/fund entry.",
+      "result": "One expense appears. Member debt/fund positions update; each user's consumption is only their allocated share."
+    },
+    {
+      "n": 7,
+      "id": "UC-DL-07",
+      "title": "View Debts and Confirm a Settlement",
+      "actor": "Group Member acting as debtor",
+      "support": "Intended recipient / creditor.",
+      "goal": "Inspect simplified debts and reduce debt only after the intended recipient confirms an external payment.",
+      "trigger": "The user opens Who owes whom and selects a debt.",
+      "pre": "1. Both parties are authorized active group members online.<br>2. A positive outstanding debt exists.<br>3. The debtor pays outside FinSync before claiming payment.",
+      "fr": "Net debt summary, simplified suggestions, payment claims, partial settlement and recipient confirmation.",
+      "nfr": "NFR-P5, NFR-S4, NFR-R3, NFR-R6, NFR-R7",
+      "sample": [
+        "Payer: Laura",
+        "Recipient: You",
+        "Outstanding: 100,000 VND",
+        "Payment claim: 100,000 VND"
+      ],
+      "entry": "Group debt details",
+      "input": "Select the intended recipient, amount and date; indicate that external payment has occurred.",
+      "review": "Review the payer, recipient and claim amount; display Awaiting recipient confirmation.",
+      "commit": "Create a pending claim; notify the recipient; recipient confirms receipt after current-debt validation; atomically post settlement effects.",
+      "result": "Confirmed debt falls from 100,000 to 0 VND. The payment remains in history and is not new spending."
+    },
+    {
+      "n": 8,
+      "id": "UC-DL-08",
+      "title": "Record Expense Refunds and Return Unused Funds",
+      "actor": "Group Member who recorded the expense / authorized Group Owner",
+      "support": "Intended recipient for an unused-fund return.",
+      "goal": "Record traceable corrections and reimbursements without deleting settled financial history.",
+      "trigger": "The user opens an original group expense and selects Record refund, or opens Return unused funds.",
+      "pre": "1. Online authorized membership.<br>2. Original confirmed expense exists for expense refunds.<br>3. Remaining refundable amount and original participants/rate are available.",
+      "fr": "Linked partial/full refunds, exact reversal, post-settlement reimbursement and confirmed fund returns.",
+      "nfr": "NFR-S4, NFR-R3, NFR-R6, NFR-R7, NFR-R8",
+      "sample": [
+        "Original dinner: 300,000 VND",
+        "Original shares: 100,000 each",
+        "Previously refunded: 0 VND",
+        "New refund: 90,000 VND"
+      ],
+      "entry": "Refund original expense",
+      "input": "Select the original expense; enter refund amount/date/reason and actual recipient of the external refund.",
+      "review": "Review a 90,000 VND refund: reverse 30,000 consumption per original participant.",
+      "commit": "Validate remaining refundable amount; atomically append a linked adjustment using original allocations and stored currency basis; retain all earlier payments.",
+      "result": "Net consumption is 210,000 VND. If already settled, reimbursement positions appear; no prior settlement is deleted."
+    },
+    {
+      "n": 12,
+      "id": "UC-DL-12",
+      "title": "Synchronize Offline Personal Changes and Resolve Conflicts",
+      "actor": "Regular User",
+      "support": "None; connectivity detection and synchronization worker are internal.",
+      "goal": "Submit encrypted locally queued personal changes exactly once and explicitly resolve version conflicts.",
+      "trigger": "Connectivity returns or the user selects Sync now after offline capture.",
+      "pre": "1. Initial authenticated synchronization has created an account-specific encrypted cache.<br>2. Stable operation IDs, base versions and pending changes exist.<br>3. Valid online session is available for server submission.",
+      "fr": "Offline personal CRUD, durable pending queue, idempotent reconciliation, conflict resolution and receipt retry.",
+      "nfr": "NFR-P6, NFR-S3, NFR-S8, NFR-R5, NFR-R6",
+      "sample": [
+        "Pending changes: 3",
+        "Account: Current signed-in user",
+        "Last synced: 2026-11-04 09:30",
+        "Status: Connection restored"
+      ],
+      "entry": "Sync status",
+      "input": "Unlock the local account cache, inspect pending records and select Sync now.",
+      "review": "Show pending operation IDs/order and local-only labels; verify session before submission.",
+      "commit": "Submit operations with stable IDs/base versions; validate on server; acknowledge committed results; mark only acknowledged operations synchronized.",
+      "result": "Three changes synchronize once; local IDs match server records; balances refresh and pending status clears."
+    },
+    {
+      "n": 13,
+      "id": "UC-DL-13",
+      "title": "Automatically Aggregate and Publish Monthly Financial Reports",
+      "actor": "Deployment Scheduler (external time trigger)",
+      "support": "Regular User receiving a private report; authorized operator monitoring aggregate job status.",
+      "goal": "Generate one reproducible monthly report per authorized user/currency/period without changing the financial ledger.",
+      "trigger": "The deployment scheduler submits the monthly reporting trigger, or an operator retries a failed run.",
+      "pre": "1. Authenticated scheduler identity and configured business timezone.<br>2. A closed calendar period and reporting policy exist.<br>3. The job store, ledger and private report storage are available.",
+      "fr": "Automatic monthly aggregation, immutable input cutoff, deduplicated publication, private report delivery and controlled regeneration.",
+      "nfr": "NFR-S4, NFR-R3, NFR-R8; DL-NFR-02 and DL-NFR-03 below.",
+      "sample": [
+        "Period: October 2026",
+        "Scheduled: 2026-11-01 00:10 Asia/Ho_Chi_Minh",
+        "Partition: one user + currency",
+        "Run status: Queued",
+        "Cutoff: recorded by run start"
+      ],
+      "entry": "Monthly report job monitor",
+      "input": "Accept an authenticated due-time trigger; derive the previous calendar month and a stable user/currency/period/job-version key.",
+      "review": "Acquire a worker lease; freeze the input cutoff and approved rate basis; show period, scope and run identity.",
+      "commit": "Process bounded user partitions; aggregate only authorized consumption; atomically save each report snapshot and publication event; checkpoint the completed partition.",
+      "result": "One report is available per completed partition. The user opens a private, dated report; the operator sees counts only. No financial rows change."
+    },
+    {
+      "n": 14,
+      "id": "UC-DL-14",
+      "title": "Evaluate Budget Alerts and Send Debt Reminders in Batches",
+      "actor": "Deployment Scheduler (external time trigger)",
+      "support": "Regular User receiving alerts; authorized operator retrying failed items.",
+      "goal": "Evaluate many eligible budgets/debts reliably and deliver each logical alert once without changing recorded balances.",
+      "trigger": "A scheduled sweep starts or an authorized operator resumes failed notification work.",
+      "pre": "1. Valid scheduler identity and configured recipient-local schedule.<br>2. Budget/debt data is available.<br>3. Durable checkpoints, deduplication keys and delivery state are available.",
+      "fr": "Bounded batch processing, exact threshold/debt evaluation, retry/recovery, notification deduplication and operational audit.",
+      "nfr": "NFR-S4, NFR-R3, NFR-U6; DL-NFR-02 and DL-NFR-03 below.",
+      "sample": [
+        "Job: Budget and debt sweep",
+        "Page size: 100 recipients",
+        "Budget trigger: 80% / 100%",
+        "Reminder window: recipient-local day",
+        "No money movement"
+      ],
+      "entry": "Financial batch status",
+      "input": "Authenticate the trigger; select eligible users and a stable sweep window; create or reuse the run.",
+      "review": "Claim a bounded page with a lease; expose processed/failed counts and the checkpoint, not private transaction details.",
+      "commit": "Recompute current consumption and confirmed debts; atomically insert eligible deduplicated inbox/outbox events and acknowledge the item; advance the checkpoint only after commit.",
+      "result": "Eligible users receive one logical threshold/reminder event; completed items are counted; financial balances remain unchanged."
+    }
+  ]
+}
