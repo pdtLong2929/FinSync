@@ -16,6 +16,7 @@ captures/
 !/README.md
 !/FRONTEND_GUIDE.md
 !/FRONTEND_STATUS.md
+!/USER_ACCOUNT_INTEGRATION.md
 *.zip
 *.jks
 

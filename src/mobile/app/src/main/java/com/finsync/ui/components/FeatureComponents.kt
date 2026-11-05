@@ -211,7 +211,7 @@ fun ChromeTextField(
     minLines: Int = 1, supportingText: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null, isError: Boolean = false,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    enabled: Boolean = true,
+    enabled: Boolean = true, readOnly: Boolean = false, maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
     visualTransformation: androidx.compose.ui.text.input.VisualTransformation = androidx.compose.ui.text.input.VisualTransformation.None,
     keyboardActions: androidx.compose.foundation.text.KeyboardActions = androidx.compose.foundation.text.KeyboardActions.Default,
     textStyle: androidx.compose.ui.text.TextStyle = MaterialTheme.typography.bodyLarge,
@@ -221,7 +221,7 @@ fun ChromeTextField(
         focusedContainerColor = MaterialTheme.colorScheme.surfaceContainerLowest),
 ) {
     OutlinedTextField(value, onValueChange, modifier, label = label, singleLine = singleLine,
-        minLines = minLines, supportingText = supportingText, trailingIcon = trailingIcon,
+        minLines = minLines, maxLines = maxLines, readOnly = readOnly, supportingText = supportingText, trailingIcon = trailingIcon,
         isError = isError, keyboardOptions = keyboardOptions, textStyle = textStyle,
         enabled = enabled, visualTransformation = visualTransformation, keyboardActions = keyboardActions,
         shape = shape, colors = colors)

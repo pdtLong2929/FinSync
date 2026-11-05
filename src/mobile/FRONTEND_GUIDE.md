@@ -2,8 +2,8 @@
 
 > *Performed by: Nguyễn Phú Đạt (24120038) | Reviewed by: Pending team review | Edited by: Pending confirmation*
 
-Updated **2026-11-02** from the Android source/build configuration. This describes
-the implemented local client, not completion of PA3 Part E integration. The team
+Updated **2026-11-05** from the Android source/build configuration. This describes
+the client and local auth integration, not all PA3 Part E integration. The team
 must still confirm the selected Part E functional group and acceptance criteria.
 
 ## 1. Delivery boundary
@@ -12,11 +12,15 @@ must still confirm the selected Part E functional group and acceptance criteria.
 
 Kotlin/Jetpack Compose/Material 3 implement the four tabs and child screens in the
 approved bright Liquid Metal style. Finance operations use fictional **in-memory**
-state. No backend HTTP client, persistent database, real JWT authentication, remote
-invitation or personalized AI service is integrated.
+state. Registration/login now use the real Spring Boot API and PostgreSQL through
+`HttpAuthRepository` (platform HTTP/JSON, IO dispatcher, no new library). JWTs are
+memory-only. The demo branch also connects server profiles, refresh and remote
+logout through PostgreSQL/Redis. See [account integration](USER_ACCOUNT_INTEGRATION.md).
+Remote finance, invitations and personalized AI remain unconnected.
 
-`UnavailableAuthRepository` returns a not-connected result for login, registration
-and recovery. Explore FinSync opens an explicit local sample workspace; it is not
+Debug uses the local API; release defaults to `UnavailableAuthRepository` unless
+an HTTPS API URL is configured. Recovery is unsupported by the current backend.
+Explore FinSync opens an explicit local sample workspace; it is not
 an authenticated session. No real credentials are needed. Figma Make/browser
 prototype captures are separate artifacts and do not certify native execution,
 financial persistence or backend integration.
@@ -67,8 +71,10 @@ if ($LASTEXITCODE -ne 0) { throw 'Build failed; inspect the Gradle error before 
 ```
 
 Android Studio can create ignored `local.properties` with the SDK path. Do not
-commit machine paths or credentials. No API URL, `.env`, secret or backend account
-is needed by the current client. Debug APK:
+commit machine paths or credentials. The sample workspace needs no backend.
+For real authentication, see [local auth setup](README.md#local-authentication-integration).
+Debug defaults to `http://10.0.2.2:18080`; override with Gradle property
+`finsync.authBaseUrl`. Release defaults to no API and permits HTTPS only. Debug APK:
 `app/build/outputs/apk/debug/app-debug.apk`. This is a development build; production
 signing, Play Store distribution and release deployment are not configured here.
 
@@ -134,7 +140,9 @@ if ($LASTEXITCODE -ne 0) { throw 'APK installation failed.' }
 & $adb -s $deviceSerial shell am start -n com.finsync/.MainActivity
 ```
 
-1. Choose **Explore FinSync → Open sample workspace**.
+1. Choose **Explore FinSync → Open sample workspace**, or start the local backend
+   and use **Sign up** / **Get started**. Account displays the returned identity;
+   **Open sample workspace** still opens fictional finances.
 2. Use **Overview**, **Wallets**, **Groups**, **Reports** in the dock.
 3. Central Add opens personal entry outside Groups; in Groups it opens shared
    entry for the single joined group or a chooser when needed.
@@ -154,7 +162,8 @@ Source paths below are under `app/src/main/java/com/finsync/`:
 | Path | Responsibility |
 |---|---|
 | `MainActivity.kt` | Edge-to-edge host, Activity ViewModels, theme/auth entry |
-| `auth/` | Auth screens/controller and repository boundary |
+| `auth/` | Auth screens/controller, HTTP adapter, memory-only JWT/user session |
+| `auth/LocalProfile*`, `ProfileScreens.kt`, `UserAvatar.kt` | Device-only profile validation/storage, photo selection, edit/details and Overview avatar |
 | `ui/FinSyncApp.kt` | Destinations, local child-route strings, Back/origin and feedback |
 | `ui/FinanceViewModel.kt` | FinanceState, StateFlow and validated local mutations |
 | `data/` | Fictional personal/group/budget/goal fixtures |
@@ -181,7 +190,9 @@ flowchart LR
     Error --> UI
 ```
 
-This is the implemented local path; no API/database operation occurs. Navigation
+This financial-data path makes no API/database calls. Separately, auth forms call
+`AuthController → HttpAuthRepository → /api/v1/auth/register|login` and display
+the returned identity. Account creation persists in PostgreSQL. Navigation
 uses destination plus route state, not Navigation Compose or registered external
 deep links. Examples: `transaction/new`, `transaction/{id}`, `wallet/{id}`,
 `group/{id}/expense`, `budgets`, `charts`.
@@ -225,7 +236,8 @@ is declared. Chrome artwork is local decoration; controls/text/charts remain nat
 | Budgets | Weekly/monthly create/edit, on-screen 80%/100% warnings | No OS push/background alert service |
 | Goals | Target/deadline and manually recorded saved progress | No automatic wallet allocation |
 | Spending guide | Authored general advice | Not personalized AI output |
-| Authentication | Forms, validation, navigation and unavailable feedback | No successful backend login/register/reset, JWT or secure session |
+| Authentication | Real register/login, returned identity, validation, busy/error states, refresh rotation and confirmed server logout | Memory-only tokens; no recovery or remote finance |
+| User profile | GET/PATCH server name/phone/version, conflict/reload; local Photo Picker/birthday/bio | No avatar upload, email change or extra-field API |
 
 Existing whole-VND rules are preserved. Exact group allocations must sum to the
 expense; non-exact split rounding remainder goes to the payer in `splitExpense`.
@@ -243,9 +255,22 @@ ViewModels retain finance state across ordinary configuration changes. Selected
 drafts/browsing state use `rememberSaveable` where implemented; this is not a
 financial database. Process death/relaunch loses financial edits.
 
+Profile UI is separate from financial fixtures. Registration creates the database
+user and directs to sign-in; real login opens Overview. The top-right avatar opens
+**My profile → Edit profile**. Name/phone/version come from the server, override old
+device cache, and are saved through versioned PATCH. Conflict preserves the draft
+until confirmed reload. Photo/birthday/bio remain private per-UUID device preferences
+and files, explicitly labeled; they survive relaunch/sign-out but do not sync.
+No credentials are stored there. Email is read-only. Photo Picker needs no broad
+media permission; pixels are bounded/cropped/re-encoded. Save, discard, error and
+confirmed server sign-out are implemented. Recovery never claims email delivery.
+See the account integration guide for token/session/database behavior and limits.
+
 Loading/empty/error/offline variants exist, but some are preview/test parameters
 rather than live network failures. Save guards, confirmations, Undo and keyboard
-insets are local behavior. No permissions are requested in the current manifest.
+insets are local behavior. `INTERNET` is a normal install-time permission; no runtime
+prompt is needed. Main/release disallow cleartext; debug permits only the exact
+local hosts `10.0.2.2`, `127.0.0.1` and `localhost`. TLS validation is not bypassed.
 
 Navigation changes to a rail at 600dp; maximum content width is 840dp. Large fonts
 stack controls where implemented; category selection switches to two columns.
@@ -269,7 +294,14 @@ Generated reports: `app/build/reports/tests/testDebugUnitTest/index.html`,
 `app/build/reports/lint-results-debug.html`, and
 `app/build/reports/androidTests/connected/`. These outputs are not submission source.
 UI tests may recreate/replace the running Activity and use fixtures/stub callbacks;
-they do not prove production auth or persistence.
+ordinary stub tests do not prove backend integration. The opt-in
+`AuthBackendIntegrationTest` uses the real Activity/repository and live local API,
+creates disposable users, and does not modify financial records. After installing
+both APKs and starting the API, run:
+
+```powershell
+& $adb -s $deviceSerial shell am instrument -w -e liveAuth true -e class com.finsync.ui.AuthBackendIntegrationTest com.finsync.test/androidx.test.runner.AndroidJUnitRunner
+```
 
 The 2026-11-01 rollout recorded build/install success, 51/51 JVM tests, 25/25 selected
 integration UI tests, 9/9 secondary/auth UI tests and a later category test 1/1.
@@ -313,8 +345,8 @@ handling with the team. This guide does not define an approved API contract.
 
 For the selected group, connect the approved service/persistence behavior while
 preserving financial rules and UI. Implement real asynchronous loading/error/retry
-and secure sessions where required. Required networking permission/configuration
-is not present today. Acceptance must exercise UI → backend → database → UI,
+and secure sessions where required. Networking configuration is now present for
+authentication only. Remaining acceptance must exercise UI → backend → database → UI,
 including reopening to verify persistence and a relevant failure/alternative flow.
 Local ViewModel success or Figma simulation does not complete Part E.
 
@@ -322,6 +354,7 @@ Other unfinished integrations include receipts, durable/offline queues, conflict
 handling, online invitations, AI, push alerts, report export and automatic savings
 allocation. Their PA3 priority depends on the confirmed group and specification.
 
-The review copy at `FinSync-documentation/PA/PA3/frontend/frontend-guide.md` describes
-this same source snapshot. Keep both copies synchronized after future changes.
+The review copy at `FinSync-documentation/PA/PA3/frontend/frontend-guide.md` is the
+older snapshot; it was not updated or pushed during this local auth task.
+Synchronize it separately when the team approves these integration changes.
 Reviewer/editor credits remain pending until actual team review.

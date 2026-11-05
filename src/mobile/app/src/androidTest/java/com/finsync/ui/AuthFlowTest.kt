@@ -54,6 +54,7 @@ class AuthFlowTest {
         host()
         val instrumentation = androidx.test.platform.app.InstrumentationRegistry.getInstrumentation()
         for (page in listOf(AuthPage.Login, AuthPage.Register, AuthPage.ForgotPassword)) {
+            println("Hardware keyboard verification: $page")
             compose.runOnIdle { auth.open(page) }
             compose.onNodeWithText("Email address").performTouchInput { click() }
             compose.onNodeWithText("Email address").assertIsFocused()
@@ -82,7 +83,7 @@ class AuthFlowTest {
         compose.onNodeWithText("Overview").assertIsSelected()
         compose.onNodeWithText("Wallets").performClick()
         compose.onNode(hasText("Wallets") and !hasClickAction()).assertIsDisplayed()
-        compose.onNodeWithText("Overview").performClick(); compose.onNodeWithText("Account").performClick()
+        compose.onNodeWithText("Overview").performClick(); compose.onNodeWithContentDescription("Account").performClick()
         compose.onNodeWithText("Get started").assertExists()
         compose.onNodeWithText("Back").performClick()
         compose.onNodeWithText("Overview").assertIsSelected()

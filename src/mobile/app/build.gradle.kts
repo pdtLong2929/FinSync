@@ -3,6 +3,9 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 }
 
+val authBaseUrl = providers.gradleProperty("finsync.authBaseUrl").orNull
+fun quoted(value: String) = "\"${value.replace("\\", "\\\\").replace("\"", "\\\"")}\""
+
 android {
     namespace = "com.finsync"
     compileSdk = 37
@@ -15,7 +18,11 @@ android {
         versionName = "0.1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-    buildFeatures { compose = true }
+    buildFeatures { compose = true; buildConfig = true }
+    buildTypes {
+        debug { buildConfigField("String", "AUTH_BASE_URL", quoted(authBaseUrl ?: "http://10.0.2.2:18080")) }
+        release { buildConfigField("String", "AUTH_BASE_URL", quoted(authBaseUrl ?: "")) }
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17

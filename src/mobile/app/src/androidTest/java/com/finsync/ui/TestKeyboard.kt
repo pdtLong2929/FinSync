@@ -54,7 +54,8 @@ class TestKeyboard {
             // Keep both real visibility and a positive height mandatory.
             rule.waitUntil(timeoutMillis = 15_000) { imeBottom(rule) > 0 }
         } catch (failure: Throwable) {
-            captureScreen("ime-open-diagnostic", rule, nativeWindow = true)
+            // Diagnostic capture must not mask the actual IME/focus failure.
+            runCatching { captureScreen("ime-open-diagnostic", rule, nativeWindow = true) }
             val diagnostic = rule.runOnIdle {
                 val insets = androidx.core.view.ViewCompat.getRootWindowInsets(hostView)
                 "imeVisible=${insets?.isVisible(androidx.core.view.WindowInsetsCompat.Type.ime())} imeInsets=${insets?.getInsets(androidx.core.view.WindowInsetsCompat.Type.ime())} focus=${hostView.findFocus()}"
