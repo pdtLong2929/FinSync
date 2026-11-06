@@ -1181,15 +1181,127 @@ The [Android Frontend Technical Guide](frontend/frontend-guide.md) records the c
 ### E.4. Integration Results and Known Issues
 > *Performed by: Vuong Dac Gia Khiem | Reviewed by: Nguyen Le Duc Nhat | Edited by: Pham Dinh Tieu Long*
 
-**Environment / date / source revision:** Docker Compose environment on Windows 11 / macOS; tested on 2026-11-05 against commit `5af7f2d`.
+**Environment / date / source revision:** Docker Compose environment on Windows 11 / macOS; tested on 2026-11-05 against commit `5af7f2d`.  
+**Test execution platform:** Postman v11 API Test Collection & Spring Boot Test Runner against live PostgreSQL 16 container (`localhost:5432`) and Redis 7 container (`localhost:6379`).  
+**Total test cases executed:** 21 test scenarios covering positive flows, client input validation, unauthorized access, concurrency conflict, and token revocation (100% Passed: 21/21).
 
-| Scenario / UC flow | Actions and expected result | Observed result | Status | Evidence |
-|--------------------|-----------------------------|-----------------|--------|----------|
-| User Registration | Submit valid form $\rightarrow$ user created $\rightarrow$ redirect to login | HTTP 201 Created; record present in `users` | PASS | Integration log `IT-AUTH-01` |
-| Duplicate Email Check | Register existing email $\rightarrow$ error returned | HTTP 409 Conflict `{ "message": "Email already exists" }` | PASS | Integration log `IT-AUTH-02` |
-| Login & Token Issuance | Submit correct credentials $\rightarrow$ access token returned | HTTP 200 OK with valid JWT claim set | PASS | Integration log `IT-AUTH-03` |
-| Profile View & Persistence | Query profile $\rightarrow$ update name $\rightarrow$ restart backend $\rightarrow$ re-query | Display name persisted in DB across server reboot | PASS | Integration log `IT-PROF-01` |
-| Token Revocation on Logout | Call logout $\rightarrow$ call `/users/me` with old token | HTTP 401 Unauthorized; token rejected by filter | PASS | Integration log `IT-AUTH-04` |
+#### E.4.1. Comprehensive End-to-End API Test Matrix
+
+| Test Case ID | Target Feature / Endpoint | Test Objective & Input Condition | Expected HTTP Status & Payload | Observed Status | Verdict | Screenshot Evidence |
+|:---:|---|---|---|:---:|:---:|---|
+| `TC-REG-01` | `POST /api/v1/auth/register` | Register new user with valid name, email, password | `201 Created`; user profile returned, password hash omitted | 201 Created | PASS | [Figure E.1](#fig-tc-reg-01) |
+| `TC-REG-02` | `POST /api/v1/auth/register` | Register with already registered email | `409 Conflict`; `{ "error": "Email already exists" }` | 409 Conflict | PASS | [Figure E.2](#fig-tc-reg-02) |
+| `TC-REG-03` | `POST /api/v1/auth/register` | Register with invalid email syntax (`user@invalid`) | `400 Bad Request`; email validation constraint violated | 400 Bad Request | PASS | [Figure E.3](#fig-tc-reg-03) |
+| `TC-REG-04` | `POST /api/v1/auth/register` | Register with password shorter than 8 characters | `400 Bad Request`; password policy constraint violated | 400 Bad Request | PASS | [Figure E.4](#fig-tc-reg-04) |
+| `TC-REG-05` | `POST /api/v1/auth/register` | Register with blank or missing display name | `400 Bad Request`; displayName blank error | 400 Bad Request | PASS | [Figure E.5](#fig-tc-reg-05) |
+| `TC-AUTH-01` | `POST /api/v1/auth/login` | Authenticate with valid registered credentials | `200 OK`; returns signed JWT access token & refresh token | 200 OK | PASS | [Figure E.6](#fig-tc-auth-01) |
+| `TC-AUTH-02` | `POST /api/v1/auth/login` | Authenticate with non-existent email | `401 Unauthorized`; `{ "error": "Bad credentials" }` | 401 Unauthorized | PASS | [Figure E.7](#fig-tc-auth-02) |
+| `TC-AUTH-03` | `POST /api/v1/auth/login` | Authenticate with correct email but wrong password | `401 Unauthorized`; `{ "error": "Bad credentials" }` | 401 Unauthorized | PASS | [Figure E.8](#fig-tc-auth-03) |
+| `TC-AUTH-04` | `POST /api/v1/auth/login` | Submit login request with missing email field | `400 Bad Request`; missing mandatory field error | 400 Bad Request | PASS | [Figure E.9](#fig-tc-auth-04) |
+| `TC-AUTH-05` | `POST /api/v1/auth/login` | Submit login request with missing password field | `400 Bad Request`; missing mandatory field error | 400 Bad Request | PASS | [Figure E.10](#fig-tc-auth-05) |
+| `TC-PROF-01` | `GET /api/v1/users/me` | Fetch profile with valid Bearer access token | `200 OK`; returns id, email, display name, and role | 200 OK | PASS | [Figure E.11](#fig-tc-prof-01) |
+| `TC-PROF-02` | `GET /api/v1/users/me` | Fetch profile without Authorization Bearer header | `401 Unauthorized`; JWT filter rejects anonymous access | 401 Unauthorized | PASS | [Figure E.12](#fig-tc-prof-02) |
+| `TC-UPROF-01` | `PATCH /api/v1/users/me` | Update display name and phone number with valid token | `200 OK`; updated record persisted in PostgreSQL | 200 OK | PASS | [Figure E.13](#fig-tc-uprof-01) |
+| `TC-UPROF-02` | `PATCH /api/v1/users/me` | Attempt profile update without Bearer token | `401 Unauthorized`; request blocked before controller | 401 Unauthorized | PASS | [Figure E.14](#fig-tc-uprof-02) |
+| `TC-UPROF-03` | `PATCH /api/v1/users/me` | Submit empty display name string | `400 Bad Request`; validation constraint violated | 400 Bad Request | PASS | [Figure E.15](#fig-tc-uprof-03) |
+| `TC-UPROF-04` | `PATCH /api/v1/users/me` | Attempt to change read-only email or escalate role | `400 Bad Request` / Ignored; immutable security fields | 400 Bad Request | PASS | [Figure E.16](#fig-tc-uprof-04) |
+| `TC-UPROF-05` | `PATCH /api/v1/users/me` | Submit update with stale version number | `409 Conflict`; optimistic concurrency lock triggers | 409 Conflict | PASS | [Figure E.17](#fig-tc-uprof-05) |
+| `TC-REF-01` | `POST /api/v1/auth/refresh` | Exchange valid refresh token for rotated token pair | `200 OK`; new access token and rotated refresh token | 200 OK | PASS | [Figure E.18](#fig-tc-ref-01) |
+| `TC-REF-02` | `POST /api/v1/auth/refresh` | Replay already used / revoked refresh token | `409 Conflict` / `401 Unauthorized`; reuse attack blocked | 409 Conflict | PASS | [Figure E.19](#fig-tc-ref-02) |
+| `TC-LOGO-01` | `POST /api/v1/auth/logout` | Call logout with active Bearer token | `200 OK`; token `jti` pushed to Redis blacklist | 200 OK | PASS | [Figure E.20](#fig-tc-logo-01) |
+| `TC-LOGO-02` | `GET /api/v1/users/me` | Call protected endpoint using revoked token | `401 Unauthorized`; token rejected by Redis blacklist filter | 401 Unauthorized | PASS | [Figure E.21](#fig-tc-logo-02) |
+
+#### E.4.2. Visual Test Execution Evidence
+
+##### 1. User Registration Flow (`TC-REG-01` to `TC-REG-05`)
+<a id="fig-tc-reg-01"></a>
+![TC-REG-01: Register New User Success](screenshots/testcases/tc-register-new-user-success.png)
+*Figure E.1 — TC-REG-01: New User Registration returns HTTP 201 Created with persisted entity.*
+
+<a id="fig-tc-reg-02"></a>
+![TC-REG-02: Duplicate Email Conflict](screenshots/testcases/tc-register-duplicate-email.png)
+*Figure E.2 — TC-REG-02: Duplicate Email Rejection returns HTTP 409 Conflict.*
+
+<a id="fig-tc-reg-03"></a>
+![TC-REG-03: Invalid Email Format](screenshots/testcases/tc-register-invalid-email-format.png)
+*Figure E.3 — TC-REG-03: Malformed Email validation returns HTTP 400 Bad Request.*
+
+<a id="fig-tc-reg-04"></a>
+![TC-REG-04: Password Too Short](screenshots/testcases/tc-register-password-too-short.png)
+*Figure E.4 — TC-REG-04: Short password (<8 chars) returns HTTP 400 Bad Request.*
+
+<a id="fig-tc-reg-05"></a>
+![TC-REG-05: Missing Display Name](screenshots/testcases/tc-register-missing-name.png)
+*Figure E.5 — TC-REG-05: Blank name constraint returns HTTP 400 Bad Request.*
+
+##### 2. User Authentication & Login Flow (`TC-AUTH-01` to `TC-AUTH-05`)
+<a id="fig-tc-auth-01"></a>
+![TC-AUTH-01: Login Success](screenshots/testcases/tc-login-success.png)
+*Figure E.6 — TC-AUTH-01: Successful Authentication returns HTTP 200 with JWT tokens.*
+
+<a id="fig-tc-auth-02"></a>
+![TC-AUTH-02: Non-Existent Email](screenshots/testcases/tc-login-invalid-email.png)
+*Figure E.7 — TC-AUTH-02: Invalid Email returns HTTP 401 Unauthorized.*
+
+<a id="fig-tc-auth-03"></a>
+![TC-AUTH-03: Incorrect Password](screenshots/testcases/tc-login-wrong-password.png)
+*Figure E.8 — TC-AUTH-03: Incorrect Password returns HTTP 401 Unauthorized.*
+
+<a id="fig-tc-auth-04"></a>
+![TC-AUTH-04: Missing Email](screenshots/testcases/tc-login-missing-email.png)
+*Figure E.9 — TC-AUTH-04: Missing Email Field returns HTTP 400 Bad Request.*
+
+<a id="fig-tc-auth-05"></a>
+![TC-AUTH-05: Missing Password](screenshots/testcases/tc-login-missing-password.png)
+*Figure E.10 — TC-AUTH-05: Missing Password Field returns HTTP 400 Bad Request.*
+
+##### 3. Profile Retrieval Flow (`TC-PROF-01` to `TC-PROF-02`)
+<a id="fig-tc-prof-01"></a>
+![TC-PROF-01: Get Profile Success](screenshots/testcases/tc-get-profile-success.png)
+*Figure E.11 — TC-PROF-01: Profile Query with valid token returns HTTP 200 OK.*
+
+<a id="fig-tc-prof-02"></a>
+![TC-PROF-02: Missing Token](screenshots/testcases/tc-get-profile-missing-token.png)
+*Figure E.12 — TC-PROF-02: Unauthenticated Profile Query returns HTTP 401 Unauthorized.*
+
+##### 4. Profile Modification & Concurrency Flow (`TC-UPROF-01` to `TC-UPROF-05`)
+<a id="fig-tc-uprof-01"></a>
+![TC-UPROF-01: Update Profile Success](screenshots/testcases/tc-update-profile-success.png)
+*Figure E.13 — TC-UPROF-01: Successful Profile Update returns HTTP 200 OK.*
+
+<a id="fig-tc-uprof-02"></a>
+![TC-UPROF-02: Missing Token](screenshots/testcases/tc-update-profile-missing-token.png)
+*Figure E.14 — TC-UPROF-02: Unauthenticated Profile Update returns HTTP 401 Unauthorized.*
+
+<a id="fig-tc-uprof-03"></a>
+![TC-UPROF-03: Missing Name](screenshots/testcases/tc-update-profile-missing-name.png)
+*Figure E.15 — TC-UPROF-03: Blank Display Name update returns HTTP 400 Bad Request.*
+
+<a id="fig-tc-uprof-04"></a>
+![TC-UPROF-04: Unauthorized Field Change](screenshots/testcases/tc-update-profile-unauthorized-field.png)
+*Figure E.16 — TC-UPROF-04: Unauthorized modification of email/role returns HTTP 400 Bad Request.*
+
+<a id="fig-tc-uprof-05"></a>
+![TC-UPROF-05: Stale Version Conflict](screenshots/testcases/tc-update-profile-version-conflict.png)
+*Figure E.17 — TC-UPROF-05: Stale optimistic lock version update returns HTTP 409 Conflict.*
+
+##### 5. Token Refresh & Reuse Detection Flow (`TC-REF-01` to `TC-REF-02`)
+<a id="fig-tc-ref-01"></a>
+![TC-REF-01: Refresh Token Success](screenshots/testcases/tc-refresh-token-success.png)
+*Figure E.18 — TC-REF-01: Token Refresh Rotation returns HTTP 200 OK with new token pair.*
+
+<a id="fig-tc-ref-02"></a>
+![TC-REF-02: Refresh Token Reuse Conflict](screenshots/testcases/tc-refresh-token-reuse-conflict.png)
+*Figure E.19 — TC-REF-02: Refresh Token Reuse detection returns HTTP 409 Conflict.*
+
+##### 6. Logout & Session Invalidation Flow (`TC-LOGO-01` to `TC-LOGO-02`)
+<a id="fig-tc-logo-01"></a>
+![TC-LOGO-01: Logout Success](screenshots/testcases/tc-logout-success.png)
+*Figure E.20 — TC-LOGO-01: User Logout returns HTTP 200 and revokes token in Redis.*
+
+<a id="fig-tc-logo-02"></a>
+![TC-LOGO-02: Revoked Token Rejection](screenshots/testcases/tc-logout-verify-revoked.png)
+*Figure E.21 — TC-LOGO-02: Calling protected API with blacklisted token returns HTTP 401 Unauthorized.*
 
 **Known issues / follow-up tasks:**
 1. Social OAuth2 login (Google/Apple) is deferred to Sprint 4.
