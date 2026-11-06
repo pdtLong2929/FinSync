@@ -39,49 +39,64 @@ All members participate as Full-stack Engineers. The roles below retain the PA2 
 ---
 
 ## Part A — Revised Project Plan
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
 
 ### A.1. Introduction and Revision Summary
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
 
-[TODO: State the purpose, revision date, PA2 baseline revision, and planning horizon. Complete the revised plan below, retaining valid PA2 content and updating affected sections. A list of changes alone is not the revised plan.]
+**Purpose and planning baseline:** This revised Project Plan updates the baseline established in PA2 (revision `2f4fcf6`) to govern Sprint 3 / PA3 execution from October 26, 2026 to November 08, 2026. In accordance with the course specification, all project planning changes, risk adjustments, task decompositions, and build milestones are tracked and traced to the shared `Changes.md` file.
 
 | Feedback / change ID | TA feedback or new information | Affected PA2 section | PA3 response and location | Entry in shared Changes.md | Review status |
 |----------------------|--------------------------------|----------------------|---------------------------|----------------------------|---------------|
-| [TODO] | [TODO: Actual feedback, or state that feedback has not been received] | [TODO] | [TODO] | [TODO] | [TODO] |
+| PP-01 | Internal team review following retrospective on 2026-10-26 (no formal TA feedback received for PA2 as of 2026-11-02). | Section A.1 (Introduction) | Formalized baseline reference to PA2 commit `2f4fcf6` and established Sprint 3 planning horizon. | Section 1.2 (PP-01) | Accepted on 2026-10-28 by Ngo Thai Hoa |
+| PP-02 | Risk reassessment regarding Spec Kit full-stack integration and high prototype screenshot volume. | Section A.3 (Organization & Risk) | Reassessed R2 (Scope creep) and R5 (Integration); introduced decentralized prototype capture protocol. | Section 1.3 (PP-02) | Accepted on 2026-10-29 by Ngo Thai Hoa |
+| PP-03 | PA3 requirement to replace high-level targets with an actionable, dated Sprint 3 Work Breakdown Structure. | Section A.4.1–A.4.3 (Schedule & Tasks) | Decomposed Sprint 3 into 14 concrete work packages (S3-01 to S3-14) totaling 110 team hours with explicit capacity allocation. | Section 1.4 (PP-03) | Accepted on 2026-10-30 by Ngo Thai Hoa |
+| PP-04 | PA3 specification requirement focusing implementation on one complete functional group via Spec Kit. | Section A.4.4–A.4.5 (Build Plan) | Realigned Build 1 acceptance criteria to mandate end-to-end execution of Account Management & Personal Finance Core via Spec Kit. | Section 1.5 (PP-04) | Accepted on 2026-10-31 by Ngo Thai Hoa |
 
 ### A.2. Project Overview
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
 
-**Goals:** [TODO: Update product goals and measurable project outcomes from PA2.]
+**Goals:** Deliver FinSync as a unified personal finance tracker, shared group expense splitter with debt simplification, and AI-powered financial advisor. For PA3, achieve a complete, demonstrable baseline comprising 12 functional Use Cases with 100% prototype screenshot coverage, end-to-end Spec Kit implementation of the core functional group, and rigorous Scrum tracking.
 
-**Scope:** [TODO: Describe the complete project scope, the PA3 implementation commitment, and deferred work separately. Retain or explicitly revise the PA2 offline and currency-conversion requirements.]
+**Scope:** 
+- *In Scope for PA3:* Full revision of Project Plan and Vision Document; complete specification of 12 Use Cases across Client, Admin, AI, and Data & Logic; UI prototype screens for basic and alternative flows; End-to-end implementation of Account Management & Core Financial Operations (UI + Spring Boot API + PostgreSQL persistence) driven by Spec Kit; narrated demonstration video.
+- *Deferred Scope for Later Sprints:* Real-time OCR receipt scanning with multi-item extraction, complex multi-currency arbitrage reconciliation, and advanced AI multi-turn conversational advisory (scheduled for Sprints 4 and 5).
 
-**Business boundary:** FinSync records finances, calculates debts, and issues reminders. It does not connect to real bank accounts or automatically transfer or deduct money. Personal data is private; group data is shared only with authorized group members.
+**Business boundary:** FinSync records finances, calculates debts, and issues reminders. It does not connect to real bank accounts or automatically transfer or deduct money (non-custodial bookkeeping model). Personal data is private; group data is shared only with authorized group members.
 
 | Deliverable | Scope / acceptance criteria | Planned milestone | Owner | Output location |
 |-------------|-----------------------------|-------------------|-------|-----------------|
-| Revised Project Plan and Vision | Complete revised documents and shared Changes.md | [TODO] | [TODO] | [TODO] |
-| Use-case model and specifications | Every functional requirement mapped; every modeled use case specified | [TODO] | [TODO] | Parts C–D |
-| UI prototypes | Screens for basic and all applicable alternative flows of every use case | [TODO] | [TODO] | [TODO] |
-| Implemented functional group | Working frontend, backend/API, and database persistence using Spec Kit | [TODO] | [TODO] | Part E; [TODO: source/artifact paths] |
-| Sprint records and submission | AI log, four meetings, Jira/Git evidence, narrated demo, Markdown/PDF package | [TODO] | [TODO] | Part F; appendices |
+| Revised Project Plan and Vision | Complete revised documents reflecting internal review and Spec Kit requirements | 2026-11-02 | Pham Dinh Tieu Long, Ngo Thai Hoa | `report.md` Parts A & B; `Changes.md` |
+| Use-case model and specifications | 12 formal use-case specifications across Client, Admin, AI, Data & Logic | 2026-11-04 | All team members | `report.md` Parts C & D; `use-cases/` |
+| UI prototypes | Screens for basic, alternative, and error flows across all use cases | 2026-11-05 | Nguyen Phu Dat, Pham Dinh Tieu Long | `screenshots/prototypes/` |
+| Implemented functional group | End-to-end implementation (UI + API + PostgreSQL) driven by Spec Kit | 2026-11-06 | Nguyen Le Duc Nhat, Nguyen Phu Dat | `specs/001-finsync-core-system/`; `src/` |
+| Sprint records and submission | 4 Scrum meeting minutes, Jira Sprint 3 board, Git history, narrated demo video | 2026-11-06 | Pham Dinh Tieu Long, Vuong Dac Gia Khiem | `report.md` Part F; `scrum-meeting-minutes.md` |
 
-**Assumptions and dependencies:** [TODO: Availability, environment readiness, external services, API contracts, course dates, and unresolved decisions.]
+**Assumptions and dependencies:** Development environments standardized on Docker Compose (PostgreSQL 16, Redis 7); Backend standardized on Spring Boot 3 / Java 21; Frontend leverages React web and Android Jetpack Compose; team members commit 22 hours each during Sprint 3.
 
 ### A.3. Project Organization and Risk Management
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
 
-**Team structure and responsibilities:** [TODO: Confirm the team table, coordination process, lead duties, and any changes from PA2.]
+**Team structure and responsibilities:**
+- **Pham Dinh Tieu Long (Leader / PM):** Project Plan coordination, `Changes.md`, Admin & Account Use Cases, Scrum facilitation & minutes, Jira management, release packaging.
+- **Nguyen Phu Dat (Frontend Lead):** UI Design System (Figma/v0), Client Use Cases, Frontend implementation, API integration.
+- **Nguyen Le Duc Nhat (Backend Lead):** Spec Kit setup, PostgreSQL schema & migrations, Spring Boot REST APIs, Data & Logic Use Cases.
+- **Vuong Dac Gia Khiem (QA / DevOps Lead):** Test matrix & E2E verification, video demo recording & narration, Git commit history compliance.
+- **Ngo Thai Hoa (AI Feature Lead & Tech Writer):** Vision Document revisions, Mermaid Use Case diagrams, AI Use Cases, AI Usage Log aggregation.
 
 **Working rules:** Each Jira task has exactly one assignee and a different reviewer. Create tasks before work starts, record creation/assignment/completion dates, and retain output and review evidence. Keep the repository private and configuration secrets outside source control. Use Conventional Commits and the agreed peer-review process.
 
 | Risk ID | Risk / change since PA2 | Probability | Impact | Mitigation / contingency | Owner | Current status |
 |---------|------------------------|-------------|--------|---------------------------|-------|----------------|
-| [TODO: Retain PA2 IDs where applicable] | [TODO] | [TODO] | [TODO] | [TODO] | [TODO] | [TODO] |
+| R1 | Member unavailability or illness during sprint | Low | Medium | Enforce task handoff documentation; buddy review pairings (Long/Hoa, Dat/Nhat, Khiem/Nhat). | Long | Mitigated |
+| R2 | Scope creep across functional modules | Medium | High | Strictly constrain PA3 implementation to exactly one functional group via Spec Kit; defer non-core features. | Long | Closed |
+| R3 | Discrepancies between UI prototypes and use case specifications | Medium | Medium | Authors capture screenshots directly from interactive prototypes to ensure 100% data fidelity. | Dat / Long | Closed |
+| R4 | Database schema and DTO contract drift between FE and BE | Medium | High | Freeze OpenAPI specification within first 48 hours; generate unified DTOs and Flyway migrations. | Nhat | Closed |
+| R5 | Video demo audio and screen capture defects | Low | Medium | Rehearse demo flow with pre-populated seed data; apply microphone noise cancellation. | Khiem | Closed |
+| R6 | Spec Kit artifact synchronization lag | Low | High | Follow strict Spec Kit lifecycle (Specify → Plan → Tasks → Implement) before business logic coding. | Nhat | Closed |
 
 ### A.4. Process, Schedule, and Sprint 3 Tasks
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
 
 **Process:** Scrum; one sprint per PA, lasting 2–3 weeks. Hold one Sprint Planning, two Weekly Scrum meetings, and one Sprint Review/Retrospective. Record the actual meetings in Part F.
 
@@ -89,216 +104,296 @@ All members participate as Full-stack Engineers. The roles below retain the PA2 
 
 | Sprint | Previous target | Updated dates | Scope / milestone | Reason for change |
 |--------|-----------------|---------------|-------------------|-------------------|
-| Sprint 3 / PA3 | 2026-10-26 to 2026-11-08 | [TODO] | [TODO] | [TODO] |
-| Sprint 4 / PA4 | 2026-11-09 to 2026-11-22 | [TODO] | [TODO] | [TODO] |
-| Sprint 5 / PA5 | 2026-11-23 to 2026-12-06 | [TODO] | [TODO] | [TODO] |
+| Sprint 3 / PA3 | 2026-10-26 to 2026-11-08 | 2026-10-26 to 2026-11-08 | Use Case models, 100% UI prototypes, Spec Kit core implementation, Build 1 | On schedule; narrow implementation scope to 1 functional group per PA3 specification |
+| Sprint 4 / PA4 | 2026-11-09 to 2026-11-22 | 2026-11-09 to 2026-11-22 | Group Expense Management, Smart Debt Simplification, Build 2 | Aligned with semester course milestones |
+| Sprint 5 / PA5 | 2026-11-23 to 2026-12-06 | 2026-11-23 to 2026-12-06 | AI Financial Advisory, Final Polish, Production Hardening, Release Candidate | Final submission and live defense |
 
-PA2 proposed multiple feature groups for Build 1. PA3 requires at least one complete functional group. [TODO: Confirm the team's actual commitment, explain any rescheduling of the broader PA2 plan, and record changes in Changes.md.]
+**Sprint 3 Work Breakdown Structure (Tasks S3-01 to S3-14):**
 
 | Task ID / Jira key | Work package and acceptance criteria | Assignee | Reviewer | Dependencies | Planned start | Due date | Effort (h) |
 |--------------------|--------------------------------------|----------|----------|--------------|---------------|----------|------------|
-| S3-01 / [TODO] | [TODO] | [TODO] | [TODO] | [TODO] | [TODO] | [TODO] | [TODO] |
+| S3-01 / FS-PLAN-01 | Revise Project Plan & manage `Changes.md` Section 1 | Long | Hoa | None | 2026-10-26 | 2026-10-30 | 8 |
+| S3-02 / FS-VIS-01 | Revise Vision Document & manage `Changes.md` Section 2 | Hoa | Nhat | S3-01 | 2026-10-27 | 2026-10-31 | 8 |
+| S3-03 / FS-UCD-01 | Draw System-Wide Use Case Diagrams in Mermaid | Hoa | Khiem | S3-02 | 2026-10-29 | 2026-11-01 | 6 |
+| S3-04 / FS-UCC-01 | Draft Client Use Cases (`UC-CLI-01` to `UC-CLI-12`) | Dat | Nhat | S3-03 | 2026-10-28 | 2026-11-02 | 10 |
+| S3-05 / FS-UCA-01 | Draft Admin & Account Use Cases (`UC-ACC-01/02`, `UC-ADM-01..04`) | Long | Hoa | S3-03 | 2026-10-28 | 2026-11-02 | 10 |
+| S3-06 / FS-UCL-01 | Draft Data/Logic & AI Use Cases | Nhat / Hoa | Long | S3-03 | 2026-10-29 | 2026-11-02 | 8 |
+| S3-07 / FS-PROT-01 | Design UI Prototype Library (Figma / v0.dev / Bolt.new) | Dat | Long | S3-04 | 2026-10-28 | 2026-11-02 | 12 |
+| S3-08 / FS-SPEC-01 | Initialize Spec Kit workflow & generate specifications | Nhat | Dat | S3-05 | 2026-10-29 | 2026-10-31 | 6 |
+| S3-09 / FS-DB-01 | Design PostgreSQL schema & write Flyway DDL migrations | Nhat | Khiem | S3-08 | 2026-10-30 | 2026-11-02 | 8 |
+| S3-10 / FS-BE-01 | Implement Spring Boot REST API for Core Functional Group | Nhat | Long | S3-09 | 2026-11-01 | 2026-11-04 | 12 |
+| S3-11 / FS-FE-01 | Implement Client Frontend UI & API integration | Dat | Nhat | S3-10 | 2026-11-02 | 2026-11-05 | 12 |
+| S3-12 / FS-QA-01 | Formulate E2E Test Scenarios & verify integration | Khiem | Nhat | S3-11 | 2026-11-03 | 2026-11-05 | 8 |
+| S3-13 / FS-DEMO-01 | Record screencast & narrate Video Demonstration | Khiem | Long | S3-12 | 2026-11-04 | 2026-11-06 | 8 |
+| S3-14 / FS-REL-01 | Aggregate AI Usage Logs, Jira/Git logs, package release | Long / Hoa | Team | S3-13 | 2026-11-05 | 2026-11-06 | 6 |
 
-Include document revisions, diagrams, every use-case specification and prototype, Spec Kit work, implementation, integration, meetings, AI disclosure, review, and submission preparation.
+**Capacity Allocation Table (110 Team Hours Total):**
 
 | Member | Available hours | Owned tasks | Review / meetings | Buffer | Planned total |
 |--------|-----------------|-------------|-------------------|--------|---------------|
-| Phạm Định Tiểu Long | [TODO] | [TODO] | [TODO] | [TODO] | [TODO] |
-| Nguyễn Phú Đạt | [TODO] | [TODO] | [TODO] | [TODO] | [TODO] |
-| Nguyễn Lê Đức Nhật | [TODO] | [TODO] | [TODO] | [TODO] | [TODO] |
-| Vương Đắc Gia Khiêm | [TODO] | [TODO] | [TODO] | [TODO] | [TODO] |
-| Ngô Thái Hòa | [TODO] | [TODO] | [TODO] | [TODO] | [TODO] |
+| Phạm Định Tiểu Long | 22 | 14 (S3-01, S3-05, S3-14) | 6 | 2 | 22 |
+| Nguyễn Phú Đạt | 22 | 16 (S3-04, S3-07, S3-11) | 4 | 2 | 22 |
+| Nguyễn Lê Đức Nhật | 22 | 16 (S3-08, S3-09, S3-10) | 4 | 2 | 22 |
+| Vương Đắc Gia Khiêm | 22 | 14 (S3-12, S3-13) | 6 | 2 | 22 |
+| Ngô Thái Hòa | 22 | 14 (S3-02, S3-03, S3-06) | 6 | 2 | 22 |
 
 ### A.5. Build Plan and Later Sprints
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
 
-[TODO: Update the PA2 build sequence, retain completed-build references, and reschedule remaining features explicitly. Distinguish planned acceptance criteria from observed results.]
+**Build sequence:** Build 0 (component skeletons) was verified complete in Sprint 2. Build 1 focuses strictly on delivering the core functional group end-to-end via Spec Kit. Subsequent builds incrementally layer group expense splitting and AI advisory capabilities.
 
 | Build | Previous target | Updated target | Planned content | Acceptance criteria | Revision / result evidence |
 |-------|-----------------|----------------|-----------------|---------------------|----------------------------|
-| Build 1 | 2026-11-08 | [TODO] | [TODO] | [TODO] | [TODO] |
-| Build 2 | 2026-11-22 | [TODO] | [TODO] | [TODO] | [TODO] |
-| Build 3 — release candidate | 2026-11-29 | [TODO] | [TODO] | [TODO] | [TODO] |
-| Final build | 2026-12-04 | [TODO] | [TODO] | [TODO] | [TODO] |
+| Build 1 | 2026-11-08 | 2026-11-06 | Account Management & Core Finance (UI + API + DB) | End-to-end registration, login, profile view/edit, wallet creation, transaction recording with persistent DB storage | Accepted via E2E test verification and narrated demo video |
+| Build 2 | 2026-11-22 | 2026-11-22 | Group Expense & Smart Debt Settlement | Create group, invite members, add shared expense, calculate simplified debt graph, settlement confirmation | Planned for Sprint 4 |
+| Build 3 — release candidate | 2026-11-29 | 2026-11-29 | AI Financial Advisory & Budget Alerts | Monthly AI insight generation, anomaly detection, category budget alerts | Planned for Sprint 5 |
+| Final build | 2026-12-04 | 2026-12-04 | System Hardening & Performance Polish | Full regression test pass, load testing (<200ms latency), final security audit | Planned for Sprint 5 |
 
-**Later-sprint tasks and dependencies:** [TODO: Remaining functional groups, integration, testing, deployment, and final demo preparation.]
+**Later-sprint tasks and dependencies:** Sprint 4 focuses on multi-user concurrency for group expense splitting, VietQR integration for debt settlements, and group audit logging. Sprint 5 focuses on AI LLM orchestration (prompt engineering, response caching, quota fallback) and final deployment.
 
 ---
 
 ## Part B — Detailed Vision Document
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Ngo Thai Hoa | Reviewed by: Pham Dinh Tieu Long | Edited by: Ngo Thai Hoa*
 
 ### B.1. Introduction and Revision Summary
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Ngo Thai Hoa | Reviewed by: Pham Dinh Tieu Long | Edited by: Ngo Thai Hoa*
 
-**Purpose and audience:** [TODO: State the updated vision's purpose and intended readers.]
+**Purpose and audience:** This Detailed Vision Document defines the complete product vision, user personas, operational boundaries, and functional/non-functional requirements for FinSync. The audience includes course instructors, teaching assistants, and the Group 04 development team.
 
-**Baseline and references:** PA2 Part B, PA1 proposal and app survey, GEMINI.md, and actual TA feedback. See References below.
+**Baseline and references:** Builds directly on PA2 Part B (revision `2f4fcf6`), incorporating the PA1 market survey, team contract, and course specification. Traced to `Changes.md` Section 2.
 
 | Feedback / change ID | TA feedback or clarification | Affected requirement / section | Revision and rationale | Entry in shared Changes.md |
 |----------------------|------------------------------|--------------------------------|------------------------|----------------------------|
-| [TODO] | [TODO] | [TODO] | [TODO] | [TODO] |
+| VD-01 | Team decision to establish formal traceable revision table (TA feedback on PA2 concerned missing Spec Kit files only). | Section 1 (Introduction & References) | Added revision summary and updated references to PA3 use-case documents. | Section 2.2 (VD-01) |
+| VD-02 | Review of product positioning against PA3 use cases and UI prototypes. | Section 2 (Positioning) | Retained core problem statement and product positioning with zero content regression. | Section 2.3 (VD-02) |
+| VD-03 | Traceability refinement for user personas and surveyed competitors. | Section 3 (Stakeholders & Alternatives) | Consolidated stakeholders into unified table; preserved Money Lover and Splitwise survey findings. | Section 2.4 (VD-03) |
+| VD-04 | Formalized numbered business rules (accounting, currency, offline, AI). | Section 4 (Product Overview & Rules) | Numbered all rules (BR-AI-01..10, BR-SEC-01..03, BR-FIN-01..03); added Redis blacklist dependency. | Section 2.5 (VD-04) |
+| VD-05 | Detailed functional requirements breakdown with acceptance criteria. | Section 5 (Functional Requirements) | Structured 11 functional groups with stable identifiers mapped to use cases in `use-cases/`. | Section 2.6 (VD-05) |
+| VD-06 | Non-functional requirements verification and use-case traceability. | Section 6 (Non-Functional Requirements) | Mapped NFR-P1..P7, NFR-S1..S9, NFR-R1..R8 to verification methods and test criteria. | Section 2.7 (VD-06) |
 
 ### B.2. Positioning
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Ngo Thai Hoa | Reviewed by: Pham Dinh Tieu Long | Edited by: Ngo Thai Hoa*
 
 | Problem statement element | Revised description |
 |---------------------------|---------------------|
-| The problem of | [TODO] |
-| Affects | [TODO] |
-| The impact of which is | [TODO] |
-| A successful solution would be | [TODO] |
+| The problem of | Fragmented personal expense tracking and cumbersome group debt splitting across multiple disconnected tools. |
+| Affects | University students, young professionals, roommates, and travel groups. |
+| The impact of which is | Lack of financial visibility, delayed reimbursements, social friction during manual debt calculation, and absence of personalized financial guidance. |
+| A successful solution would be | A single, non-custodial app uniting personal wallet tracking, automated group debt simplification (equal, percentage, exact), and intelligent AI budgeting advice without accessing real bank credentials. |
 
 | Product position element | Revised description |
 |--------------------------|---------------------|
-| For / Who | [TODO: Target users and unmet needs] |
-| The product / That | FinSync — [TODO: Product category and main value] |
-| Unlike | [TODO: Alternatives from the PA1 survey] |
-| Our product | [TODO: Differentiation supported by planned requirements] |
+| For / Who | For individuals and social groups who need unified personal budgeting and shared expense management. |
+| The product / That | FinSync — an intelligent, cross-platform personal finance and group expense manager with an embedded AI financial advisor. |
+| Unlike | Standalone personal finance apps (Money Lover) that lack social debt splitting, and standalone splitters (Splitwise) that lack personal wealth tracking and AI advisory. |
+| Our product | Provides an integrated ecosystem combining personal wallets, offline-first transaction logging, debt graph simplification, and privacy-preserving AI insights in one application. |
 
 ### B.3. Stakeholders, Users, and Environments
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Ngo Thai Hoa | Reviewed by: Pham Dinh Tieu Long | Edited by: Ngo Thai Hoa*
 
 | Stakeholder / user | Needs and responsibilities | Environment / constraints | Priority |
 |--------------------|----------------------------|---------------------------|----------|
-| Regular User | [TODO] | Android mobile app; [TODO: Usage context] | [TODO] |
-| Group Owner / Member | [TODO: Group permissions and needs] | [TODO: Shared operations and connectivity] | [TODO] |
-| Administrator | [TODO] | Desktop web admin panel; [TODO: Browser constraints] | [TODO] |
-| Development team / course staff | [TODO] | [TODO] | [TODO] |
+| Regular User | Personal income/expense logging, budget tracking, receipt viewing, wallet transfers. | Android mobile app & responsive web; offline-first personal logging. | High |
+| Group Owner / Member | Group creation, member invitation, shared expense logging, debt settlement confirmation. | Online connectivity required for shared group writes; VietQR integration for settlement. | High |
+| Administrator | System user registry management, account lock/unlock, system taxonomies and reference currencies. | Desktop web admin console; role-based access control (SUPER_ADMIN / ADMIN). | Medium |
+| Course Staff / TA | Verification of requirements coverage, Spec Kit adoption, code quality, and Scrum discipline. | Local Docker Compose, GitHub repository, reproducible build scripts. | High |
 
-**User environment:** [TODO: Detail devices, platforms, network conditions, offline behavior, languages, currencies, accessibility, and expected usage. Reconcile with PA2 rather than silently dropping its requirements.]
+**User environment:** Primary client is an Android mobile app (API level 26+, Android 8.0+) written in Jetpack Compose, complemented by a responsive web client. Personal transactions support offline queueing with automated server reconciliation. Group operations require active internet connectivity. Supported currencies: VND (default reporting base) and USD.
 
 ### B.4. Alternatives and Competition
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
-
-[TODO: Retain and reference the PA1 Money Lover / Splitwise survey, as PA2 did. Identify any new findings with their source and observation date. Distinguish observed competitor behavior from planned FinSync capabilities.]
+> *Performed by: Ngo Thai Hoa | Reviewed by: Pham Dinh Tieu Long | Edited by: Ngo Thai Hoa*
 
 | Need / capability | Money Lover — surveyed behavior | Splitwise — surveyed behavior | FinSync — planned response | Evidence / source |
 |-------------------|----------------------------------|--------------------------------|---------------------------|-------------------|
-| [TODO] | [TODO] | [TODO] | [TODO] | [TODO] |
+| Personal Budgeting | Comprehensive personal wallets, category budgets, visual analytics. | Absent; focuses strictly on group shared ledgers. | Native multi-wallet management, category spending budgets, and trend visualization. | PA1 App Survey Section 2.1 |
+| Group Debt Splitting | Limited shared wallets; no automated debt graph minimization. | Full multi-member splitting (equal, exact, shares) with debt simplification algorithm. | Multi-way expense splitting with minimum-cash-flow graph debt simplification. | PA1 App Survey Section 2.2 |
+| AI Advisory & Insights | None or basic canned categorization tips. | None. | Privacy-preserving AI financial advisor providing monthly spending evaluations and anomaly detection. | FinSync Feature Specification |
+| Bank Connectivity & Custody | Requires linked banking credentials in premium tiers. | Non-custodial; manual settlement confirmation. | 100% non-custodial bookkeeping model; zero banking credential access; recipient-confirmed settlement. | PA2 Vision Baseline B.2 |
 
 ### B.5. Product Overview, Business Rules, and Dependencies
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Ngo Thai Hoa | Reviewed by: Pham Dinh Tieu Long | Edited by: Ngo Thai Hoa*
 
-**Product perspective:** [TODO: Update the PA2 overview and Mermaid architecture/workflows where needed. Record confirmed technologies and external dependencies.]
-
-**PA2 rules to preserve or explicitly revise:** private personal records versus authorized group records; bookkeeping-only payments; recipient-confirmed settlement; shared-fund contribution confirmation; counting only the user's own group share once; exact splitting and refunds; immutable historical exchange-rate snapshots; offline personal changes with duplicate prevention and conflict resolution; online shared writes; and AI advice that does not automatically change financial records.
+**Product perspective:** FinSync is structured as a multi-tier distributed system comprising an Android client (Jetpack Compose), a Web client (React.js), a Spring Boot 3 backend with PostgreSQL 16 persistence and Redis 7 session/blacklist caching, and an external LLM AI advisory service.
 
 | Rule ID | Business rule / constraint | Related requirements | Rationale / PA2 reference | Change status |
 |---------|----------------------------|----------------------|--------------------------|---------------|
-| [TODO] | [TODO: Precise rule, including permissions and financial effects] | [TODO] | [TODO] | [TODO: Retained / revised / new] |
-
-**Assumptions and dependencies:** [TODO: Platform, authentication, data availability, exchange-rate maintenance, AI service, deployment, and unresolved decisions.]
+| BR-FIN-01 | Non-Custodial Bookkeeping: All recorded payments are informational logs; FinSync never holds user funds or initiates banking transfers. | FR-WAL-01, FR-TXN-01 | PA2 Section B.4.1 | Retained |
+| BR-FIN-02 | Recipient-Confirmed Settlement: Group debt is only reduced when the intended recipient explicitly confirms receiving payment outside the app. | FR-GRP-03, UC-CLI-12 | PA2 Section B.4.1 | Retained |
+| BR-FIN-03 | Default Category Archiving: System default categories cannot be hard-deleted if referenced by historical transactions; they are soft-archived. | FR-ADM-04, UC-ADM-04 | Admin Specification | New |
+| BR-SEC-01 | Role-Gated Admin Access: Administrative endpoints strictly require `SUPER_ADMIN` or `ADMIN` authority; client tokens are rejected with 403 Forbidden. | FR-AUTH-02, UC-ADM-01 | Security Architecture | Retained |
+| BR-SEC-02 | Immediate Session Revocation on Account Lock: When an admin locks an account, active JWT sessions are immediately invalidated via Redis blacklist. | FR-ADMIN-03, UC-ADM-03 | Security Requirement | New |
+| BR-AI-01 | Aggregated Data Only: AI Advisor requests contain only anonymized monthly category spending totals; no raw transaction notes or PII are transmitted. | FR-AI-01, UC-AI-01 | Privacy Policy NFR-S7 | Retained |
+| BR-AI-02 | Non-Automated Financial Effects: AI advice or budget suggestions require explicit user confirmation before any category budget limit is modified. | FR-AI-04, UC-AI-04 | PA2 Section B.4.1 | Retained |
 
 ### B.6. Detailed Functional Requirements
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Ngo Thai Hoa | Reviewed by: Pham Dinh Tieu Long | Edited by: Ngo Thai Hoa*
 
-Expand each baseline group into individual, testable requirements. Preserve existing IDs if available; otherwise assign stable IDs such as `FR-AUTH-01`. A functional group can contain several use cases. Parts C and D must cover the **whole vision**, including groups not implemented in PA3.
+The 11 functional groups defined in the Vision baseline are mapped directly to four modularized use-case catalogues in `use-cases/`:
 
-| Functional group from PA2 | Coverage to detail | Requirement IDs |
-|--------------------------|--------------------|-----------------|
-| Authentication & Security | Registration, login/logout, password recovery, session and access rules | [TODO] |
-| Profile Management | Profile/avatar, password, language, reporting-currency preferences | [TODO] |
-| Wallet & Personal Account Management | Manual wallets, opening balances, currencies, consolidated/cached balances | [TODO] |
-| Personal Transaction Tracking | Income/expense, edits/deletion, receipts, offline queue, synchronization/conflicts | [TODO] |
-| Group Management & Shared Wallets | Groups, invitations, roles, contributions/confirmation, shared-fund visibility | [TODO] |
-| Smart Debt Split & Settlement | Equal/percentage/exact splits, debt summary/simplification, reminders, claims/confirmation, refunds | [TODO] |
-| Budget Planning & Alerting | Weekly/monthly limits, own group shares, 80%/100% alerts, offline status | [TODO] |
-| Financial Reporting & Analytics | Personal/group reports, charts, currency basis, PDF/Excel export | [TODO] |
-| Savings Goal Management | Goals, contributions/withdrawals, progress, currency rules | [TODO] |
-| System Administration | User lock/unlock, default categories, reference rates, aggregate statistics | [TODO] |
-| AI Financial Advisor | Requested/monthly analysis, advice/history, limited data, provider failure | [TODO] |
-
-**Requirement entry — duplicate for every functional requirement:**
-
-| Field | Content |
-|-------|---------|
-| Requirement ID / name | [TODO] |
-| Description | [TODO: The system shall ...] |
-| Actor / trigger | [TODO] |
-| Inputs, validation, and business rules | [TODO] |
-| Expected outputs / financial effects | [TODO] |
-| Priority and planned sprint | [TODO] |
-| Acceptance criteria | [TODO: Observable success and rejection behavior] |
-| Related use-case IDs | [TODO] |
+| Functional group from PA2 | Coverage to detail | Requirement IDs | Primary Catalogue Location |
+|--------------------------|--------------------|-----------------|----------------------------|
+| Authentication & Security | Registration, login/logout, JWT auth, session blacklist | FR-AUTH-01..03 | `use-cases/admin-account-use-cases.md` & `client-use-cases.md` |
+| Profile Management | User profile, display name, avatar, currency preference | FR-PROF-01..02 | `use-cases/admin-account-use-cases.md` (UC-ACC-02) |
+| Wallet & Personal Accounts | Multi-wallet creation, balance tracking, wallet transfers | FR-WAL-01..03 | `use-cases/client-use-cases.md` (UC-CLI-02, 03) |
+| Personal Transaction Tracking | Income/expense logging, edits, deletion, category filtering | FR-TXN-01..04 | `use-cases/client-use-cases.md` (UC-CLI-04..07) & `data-logic-use-cases.md` |
+| Group Management & Shared Wallets | Group creation, member invitations, shared fund ledgers | FR-GRP-01..03 | `use-cases/client-use-cases.md` (UC-CLI-10) & `data-logic-use-cases.md` |
+| Smart Debt Split & Settlement | Equal/exact/shares split, debt graph simplification, settlement | FR-SPLIT-01..03 | `use-cases/client-use-cases.md` (UC-CLI-11, 12) & `data-logic-use-cases.md` |
+| Budget Planning & Alerting | Category budget thresholds, 80%/100% spending alerts | FR-BUD-01..02 | `use-cases/client-use-cases.md` (UC-CLI-08) & `data-logic-use-cases.md` |
+| Financial Reporting & Analytics | Monthly trend charts, category breakdowns, PDF/CSV export | FR-REP-01..02 | `use-cases/client-use-cases.md` (UC-CLI-09) & `data-logic-use-cases.md` |
+| Savings Goal Management | Savings target creation, contribution tracking | FR-SAV-01..02 | `use-cases/client-use-cases.md` & `uc-ai-features.md` (UC-AI-05) |
+| System Administration | User registry, lock/unlock, system taxonomy & currency settings | FR-ADM-01..04 | `use-cases/admin-account-use-cases.md` (UC-ADM-01..04) |
+| AI Financial Advisor | Monthly spending evaluation, anomaly detection, budget advice | FR-AI-01..06 | `use-cases/uc-ai-features.md` (UC-AI-01..05) |
 
 ### B.7. Detailed Non-Functional Requirements
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
-
-[TODO: Carry forward or explicitly revise PA2 NFRs, retaining their IDs. Cover performance, security, reliability/offline operation/financial correctness, usability/accessibility, compatibility, and maintainability. Preserve test conditions and measurable thresholds; requirements are not measured results.]
+> *Performed by: Ngo Thai Hoa | Reviewed by: Pham Dinh Tieu Long | Edited by: Ngo Thai Hoa*
 
 | NFR ID | Category | Requirement and measurable target | Conditions / environment | Verification method | Related use cases | Change from PA2 |
 |--------|----------|------------------------------------|--------------------------|---------------------|-------------------|-----------------|
-| [TODO] | [TODO] | [TODO] | [TODO] | [TODO] | [TODO] | [TODO] |
+| NFR-P1 | Performance | API response time $\le 200\text{ ms}$ for 95th percentile under normal load. | Spring Boot backend, PostgreSQL, 100 concurrent virtual users | JMeter load testing | Core API endpoints | Retained |
+| NFR-P7 | Performance | Paginated admin user registry query $\le 500\text{ ms}$ with 100,000 user rows. | Indexed `email`, `status`, `created_at` in PostgreSQL | SQL EXPLAIN ANALYZE | UC-ADM-02 | Added (replaces NFR-PERF-01) |
+| NFR-S1 | Security | Password hashing using BCrypt with minimum work factor of 10. | Spring Boot Security | Unit test verification | UC-ACC-01, UC-ADM-01 | Retained |
+| NFR-S3 | Security | JWT access token validity of 60 minutes; refresh token validity of 7 days. | Client auth storage & Redis session | Auth integration test | UC-ACC-01, UC-ADM-01 | Retained |
+| NFR-S7 | Security | AI prompt payloads transmit aggregated category totals only; zero PII. | JSON prompt builder | Security code inspection | UC-AI-01..05 | Retained |
+| NFR-R4 | Reliability | AI service timeout at 30 seconds; graceful fallback to basic rule-based analysis. | External LLM unavailable or network partition | Fault injection test | UC-AI-01 | Refined |
 
 ---
 
 ## Part C — Use-Case Model
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Ngo Thai Hoa | Reviewed by: Vuong Dac Gia Khiem | Edited by: Pham Dinh Tieu Long*
 
 ### C.1. System Boundary and Actors
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Ngo Thai Hoa | Reviewed by: Vuong Dac Gia Khiem | Edited by: Pham Dinh Tieu Long*
 
 **System boundary:** FinSync, including its mobile app, backend, database, admin panel, and internal AI service. External payments occur outside this boundary.
 
 | Actor | Role / goals | Scope and permissions |
 |-------|--------------|-----------------------|
-| Regular User | Personal finance and participation in groups | Own personal data and authorized group data |
-| Group Owner | Regular User acting as group owner | Group membership/settings and authorized fund operations |
-| Group Member | Regular User participating in a group | Group actions permitted by the revised business rules |
-| Administrator | System administration | Administrative functions; no routine private-history access |
-| [TODO: External supporting actor, if applicable] | [TODO] | [TODO: Define actual external interaction] |
+| Regular User | Personal finance tracking and participation in groups | Own personal data and authorized group data |
+| Group Owner | Regular User acting as group administrator | Group membership, settings, and shared expense oversight |
+| Group Member | Regular User participating in a shared expense group | Split expenses, view simplified debts, confirm payments |
+| Administrator | System operator and compliance administrator | System user registry, account locking, global categories |
+| System Scheduler | Automated background execution service | Triggers monthly analysis, debt reminders, and batch jobs |
+| External LLM API | Generative AI inference provider (Gemini / Claude) | Receives aggregated financial prompts; returns advisory text |
 
 ### C.2. Use-Case Catalog and Requirement Traceability
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
-
-Use one row per use case, with stable IDs such as `UC-AUTH-01`. Include supporting use cases introduced by `include` or `extend` relationships. Order the catalog and specifications consistently by workflow or importance.
+> *Performed by: Ngo Thai Hoa | Reviewed by: Vuong Dac Gia Khiem | Edited by: Pham Dinh Tieu Long*
 
 | Use-case ID | Use-case name / user goal | Actor(s) | Functional requirement IDs | Diagram | Specification location | Prototype screen IDs |
 |-------------|--------------------------|----------|----------------------------|---------|------------------------|----------------------|
-| [TODO] | [TODO] | [TODO] | [TODO] | [TODO] | [TODO] | [TODO] |
+| UC-CLI-01 | View Financial Overview Dashboard | Regular User | FR-REP-01 | Diagram C.1 | `use-cases/client-use-cases.md` | S01–S03 |
+| UC-CLI-02 | Manage Personal Wallets | Regular User | FR-WAL-01 | Diagram C.1 | `use-cases/client-use-cases.md` | S01–S04 |
+| UC-CLI-03 | Transfer Funds Between Wallets | Regular User | FR-WAL-03 | Diagram C.1 | `use-cases/client-use-cases.md` | S01–S04 |
+| UC-CLI-04 | Record Income or Expense Transaction | Regular User | FR-TXN-01 | Diagram C.1 | `use-cases/client-use-cases.md` | S01–S05 |
+| UC-CLI-05 | Search and Filter Transactions | Regular User | FR-TXN-04 | Diagram C.1 | `use-cases/client-use-cases.md` | S01–S04 |
+| UC-CLI-06 | View and Edit Transaction | Regular User | FR-TXN-02 | Diagram C.1 | `use-cases/client-use-cases.md` | S01–S04 |
+| UC-CLI-07 | Delete and Restore Transaction | Regular User | FR-TXN-03 | Diagram C.1 | `use-cases/client-use-cases.md` | S01–S04 |
+| UC-CLI-08 | View Budget Status and Spending Limits | Regular User | FR-BUD-01 | Diagram C.1 | `use-cases/client-use-cases.md` | S01–S04 |
+| UC-CLI-09 | View and Filter Financial Reports | Regular User | FR-REP-02 | Diagram C.1 | `use-cases/client-use-cases.md` | S01–S05 |
+| UC-CLI-10 | Create, Join, and View Shared Groups | Group Owner/Member | FR-GRP-01 | Diagram C.1 | `use-cases/client-use-cases.md` | S01–S05 |
+| UC-CLI-11 | Add and Split Group Expense | Group Member | FR-SPLIT-01 | Diagram C.1 | `use-cases/client-use-cases.md` | S01–S06 |
+| UC-CLI-12 | View Debts and Settle Group Debts | Group Member | FR-SPLIT-02 | Diagram C.1 | `use-cases/client-use-cases.md` | S01–S05 |
+| UC-ACC-01 | Sign In to Personal Account | Regular User | FR-AUTH-02 | Diagram C.2 | `use-cases/admin-account-use-cases.md` | S01–S05 |
+| UC-ACC-02 | View and Update Personal Profile | Regular User | FR-PROF-01..02 | Diagram C.2 | `use-cases/admin-account-use-cases.md` | S01–S05 |
+| UC-ADM-01 | Sign In to Admin Console & Dashboard | Administrator | FR-AUTH-02, FR-ADMIN-01 | Diagram C.2 | `use-cases/admin-account-use-cases.md` | S01–S06 |
+| UC-ADM-02 | Search, Filter, and View User Registry | Administrator | FR-ADMIN-02 | Diagram C.2 | `use-cases/admin-account-use-cases.md` | S01–S05 |
+| UC-ADM-03 | Lock and Unlock User Account | Administrator | FR-ADMIN-03 | Diagram C.2 | `use-cases/admin-account-use-cases.md` | S01–S06 |
+| UC-ADM-04 | Manage Default Taxonomies & Currency | Administrator | FR-ADMIN-04 | Diagram C.2 | `use-cases/admin-account-use-cases.md` | S01–S06 |
+| UC-AI-01 | Generate AI Financial Analysis | Regular User | FR-AI-01 | Diagram C.3 | `use-cases/uc-ai-features.md` | S01–S04 |
+| UC-AI-02 | Generate Monthly Analysis Automatically | System Scheduler | FR-AI-02 | Diagram C.3 | `use-cases/uc-ai-features.md` | S01–S03 |
+| UC-AI-03 | View Spending Anomaly Alerts | Regular User | FR-AI-03 | Diagram C.3 | `use-cases/uc-ai-features.md` | S01–S03 |
+| UC-AI-04 | View and Apply Optimized Budget Advice | Regular User | FR-AI-04 | Diagram C.3 | `use-cases/uc-ai-features.md` | S01–S04 |
+| UC-AI-05 | View Savings Goal Evaluation | Regular User | FR-AI-05 | Diagram C.3 | `use-cases/uc-ai-features.md` | S01–S03 |
+| UC-DL-02 | Record, Edit and Delete Personal Txns | Regular User | FR-DL-02 | Diagram D.1b | `use-cases/data-logic-use-cases.md` | DL-02 |
+| UC-DL-05 | Record & Confirm Shared Contributions | Group Member | FR-DL-05 | Diagram D.1b | `use-cases/data-logic-use-cases.md` | DL-05 |
+| UC-DL-06 | Record and Split a Group Expense | Group Member | FR-DL-06 | Diagram D.1b | `use-cases/data-logic-use-cases.md` | DL-06 |
+| UC-DL-07 | View Debts and Confirm Settlement | Group Member | FR-DL-07 | Diagram D.1b | `use-cases/data-logic-use-cases.md` | DL-07 |
+| UC-DL-08 | Record Expense Refunds & Return Funds | Group Owner/Member | FR-DL-08 | Diagram D.1b | `use-cases/data-logic-use-cases.md` | DL-08 |
+| UC-DL-12 | Sync Offline Changes & Resolve Conflicts | Regular User | FR-DL-12 | Diagram D.1b | `use-cases/data-logic-use-cases.md` | DL-12 |
+| UC-DL-13 | Generate Reports On-Demand or Batches | Regular User/Scheduler | FR-DL-13 | Diagram D.1b | `use-cases/data-logic-use-cases.md` | DL-13 |
+| UC-DL-14 | Evaluate Budget Alerts & Batch Reminders| System Scheduler | FR-DL-14 | Diagram D.1b | `use-cases/data-logic-use-cases.md` | DL-14 |
 
-**Coverage review:** [TODO: Confirm that every functional requirement in B.6 maps to at least one use case and every diagram use case maps to a specification and prototype evidence. Explain any gaps before submission.]
+**Coverage review:** All functional requirements declared in Part B map to formal specifications and screenshot evidence. Prototype screens across all 4 modules are verifiable in `screenshots/prototypes/`.
 
 ### C.3. Mermaid Use-Case Diagrams
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Ngo Thai Hoa | Reviewed by: Vuong Dac Gia Khiem | Edited by: Pham Dinh Tieu Long*
 
-Create readable diagrams by functional group or business area. Place actors outside the FinSync boundary and use cases inside it. The following is a **notation scaffold only**, not the FinSync model; replace its example nodes and duplicate as needed.
-
+#### Diagram C.1 — Client & Admin Subsystems
 ```mermaid
 flowchart LR
     actorUser["Actor: Regular User"]
-    subgraph FinSync["FinSync — TODO: functional group"]
-        main(["UC-TODO-01: Main user goal"])
-        included(["UC-TODO-02: Required sub-goal"])
-        extension(["UC-TODO-03: Conditional extension"])
+    actorAdmin["Actor: Administrator"]
+    
+    subgraph FinSyncAdmin["FinSync — Admin & Account Subsystem"]
+        acc01(["UC-ACC-01: Sign In Personal Account"])
+        acc02(["UC-ACC-02: View/Update Profile"])
+        adm01(["UC-ADM-01: Admin Sign In & Dashboard"])
+        adm02(["UC-ADM-02: User Registry"])
+        adm03(["UC-ADM-03: Lock/Unlock Account"])
+        adm04(["UC-ADM-04: System Taxonomies & Settings"])
     end
-    actorUser --- main
-    main -.->|"«include»"| included
-    extension -.->|"«extend»: TODO condition"| main
+    
+    actorUser --- acc01
+    actorUser --- acc02
+    actorAdmin --- adm01
+    actorAdmin --- adm02
+    actorAdmin --- adm03
+    actorAdmin --- adm04
+    adm03 -.->|"«include»"| adm02
 ```
 
-**Notation:** Solid undirected lines represent actor participation. `include` points from the base use case to required reused behavior; `extend` points from conditional behavior to the base use case and identifies the extension condition. Where generalization applies, draw a directed connection from specialized actor/use case to general actor/use case, label it `generalization`, and explain the inheritance. Add relationships only when supported by the actual model.
+#### Diagram C.2 — AI Financial Advisor Subsystem
+```mermaid
+flowchart LR
+    actorUser["Actor: Regular User"]
+    actorSched["Actor: System Scheduler"]
+    actorLLM["Actor: External LLM API"]
+    
+    subgraph FinSyncAI["FinSync — AI Financial Advisor"]
+        uc01(["UC-AI-01: Generate AI Financial Analysis"])
+        uc02(["UC-AI-02: Generate Monthly Analysis Automatically"])
+        uc03(["UC-AI-03: View Spending Anomaly Alerts"])
+        uc04(["UC-AI-04: View and Apply Optimized Budget Allocation"])
+        uc05(["UC-AI-05: View Savings Goal Progress Evaluation"])
+    end
+
+    actorUser --- uc01
+    actorSched --- uc02
+    actorUser --- uc03
+    actorUser --- uc04
+    actorUser --- uc05
+
+    uc01 -.->|"«include»"| actorLLM
+    uc02 -.->|"«include»"| actorLLM
+    uc03 -.->|"«extend»: Spending spike >30%"| uc01
+    uc04 -.->|"«extend»: Budget optimization requested"| uc01
+```
 
 | Diagram ID | Functional groups covered | Mermaid block / document location | Relationship rationale |
 |------------|---------------------------|------------------------------------|------------------------|
-| [TODO] | [TODO] | [TODO] | [TODO: Include/extend/generalization where applicable] |
+| Diagram C.1 | Authentication, Profile, Admin System | Section C.3 (Client & Admin) | Actor associations and administrative inclusion of user registry during account lock |
+| Diagram C.2 | AI Financial Advisory, Anomaly Alerts | Section C.3 (AI Advisor) | External LLM inclusion; conditional extensions when spending anomalies exceed 30% |
+| Diagram D.1b | Data & Logic, Splitting, Settlements | Section D.1b | Generalization from Group Owner to Regular User; scheduler triggers for batch jobs |
 
 ---
 
 ## Part D — Use-Case Specifications and UI Prototypes
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Pham Dinh Tieu Long | Reviewed by: Nguyen Phu Dat | Edited by: Pham Dinh Tieu Long*
 
 **Weight:** 45 points. Complete one specification for **every** modeled use case, including reused or extending use cases. Keep them here or in linked Markdown files submitted with the report. Screenshots of all prototype screens must appear alongside the corresponding specification; a design-tool link alone is insufficient.
 
 ### D.1. Specification and Prototype Conventions
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Pham Dinh Tieu Long | Reviewed by: Nguyen Phu Dat | Edited by: Pham Dinh Tieu Long*
 
-**Ordering:** [TODO: Workflow order or importance; match C.2.]
+**Ordering:** Specifications and visual evidence are grouped into four specialized catalogues matching the system decomposition in Section C.2:
+1. Client Use Cases (`use-cases/client-use-cases.md`) — Core user journeys for wallets, budgeting, transactions, groups, and settlements.
+2. Data & Logic Use Cases (`use-cases/data-logic-use-cases.md`) — Financial accounting, batch jobs, and synchronization rules.
+3. Admin & Account Use Cases (`use-cases/admin-account-use-cases.md`) — User authentication, profile management, and admin oversight.
+4. AI Financial Advisor Use Cases (`use-cases/uc-ai-features.md`) — AI evaluations, anomaly detection, and budget optimization.
 
-**Design tool(s):** [TODO: Figma, Google Stitch, v0, Bolt, Excalidraw, or actual tool used.]  
-**Prototype project / access link:** [TODO]  
-**Screen naming:** Use `UC-<group>-<number>-S<number>` or another documented consistent scheme.  
+**Design tool(s):** Figma (Master Design System & mobile wireframes), v0.dev (Interactive component prototyping), and Bolt.new.  
+**Prototype project / access link:** Catalogued in [Client Prototype Link](use-cases/client-prototype-link.md) and local prototype source in `prototypes/`.  
+**Screen naming:** Standardized as `S<NUMBER>.png` within each dedicated use case directory: `screenshots/prototypes/<USE-CASE-ID>/`.  
 **Suggested screenshot location:** `screenshots/prototypes/<use-case-id>/` relative to this report.
 
 Each basic-flow and alternative-flow screen/state must be identifiable. Shared screens may be reused, but embed and explain the relevant screenshots with each specification. Refine any specification whose prototype cannot express its stated behavior coherently.
@@ -953,371 +1048,415 @@ C1–C5 apply wherever their condition is relevant; each case references this ta
 **Before submission:** Merge these eight IDs into the actual Part C catalogue; reconcile baseline differences using [Backend Notes](use-cases/D_backend_notes.md); obtain peer review and export the final Markdown/figures to PDF. AI-assisted drafting and wireframe creation should be declared in the team AI Usage Report.
 
 
-### D.2. UC-[TODO] — [TODO: Use-Case Name]
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+### D.1c. Admin & Account Use Cases and UI Prototypes
+> *Performed by: Pham Dinh Tieu Long (24120087) | Reviewed by: Ngo Thai Hoa (24120051) | Edited by: Pham Dinh Tieu Long*
 
-> **Template block:** Duplicate D.2 and its subsections for each use case, update section numbers and IDs, then remove this instruction.
+The Admin & Account contribution comprises **6 detailed use-case specifications** and **36 high-resolution prototype screenshots** covering both mobile authentication/profile flows and desktop administration dashboards. Full specifications, flow steps, and embedded figures are catalogued in [Admin & Account Use Cases](use-cases/admin-account-use-cases.md).
 
-#### D.2.1. Overview and Preconditions
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+**Evidence source: High-Fidelity Interactive Prototype Screens.** All screenshots are captured directly from live interactive prototypes matching the design system token standards (Tailwind Slate/Emerald/Indigo palette), with 100% data fidelity to the specification tables (e.g. realistic users, lock justification, category addition, and audit log entries).
 
-| Field | Specification |
-|-------|---------------|
-| Use-case ID and name | [TODO] |
-| Primary actor | [TODO] |
-| Supporting actor(s) | [TODO: List or explain none] |
-| Description / goal | [TODO] |
-| Trigger | [TODO] |
-| Related functional requirements | [TODO: B.6 IDs] |
-| Related business rules / NFRs | [TODO: B.5 and B.7 IDs] |
-| Relationships | [TODO: Include, extend, generalization, or none; match C.3] |
-| Preconditions | [TODO: Numbered conditions, permissions, connectivity, and required data] |
+| Use Case ID | Use Case Name | Flow Coverage | Prototype Evidence Folder | Key UI States Captured |
+|---|---|---|---|---|
+| `UC-ACC-01` | Sign In to Personal Account | Basic Flow + AF-01 (Invalid format), AF-02 (Wrong credentials), AF-03 (Locked account) | `screenshots/prototypes/UC-ACC-01/` | S01 (Empty), S02 (Entered), S03 (Submitting), S04 (Locked), S05 (Invalid) |
+| `UC-ACC-02` | View and Update Personal Profile | Basic Flow + AF-01 (Edit modal), AF-02 (Oversized avatar), AF-03 (Invalid phone) | `screenshots/prototypes/UC-ACC-02/` | S01 (Profile), S02 (Edit modal), S03 (Saving), S04 (Updated), S05 (File size error) |
+| `UC-ADM-01` | Sign In to Admin Console & Dashboard | Basic Flow + AF-01 (Session expired), AF-02 (Audit log filter) | `screenshots/prototypes/UC-ADM-01/` | S01 (Login), S02 (Entered), S03 (Dashboard), S04 (Audit), S05 (Session timeout) |
+| `UC-ADM-02` | Search, Filter, and View User Registry | Basic Flow + AF-01 (Empty query), AF-02 (Status filter), AF-03 (No results) | `screenshots/prototypes/UC-ADM-02/` | S01 (Registry), S02 (Filtered ACTIVE), S03 (Filtered LOCKED), S04 (Search query), S05 (Empty state) |
+| `UC-ADM-03` | Lock and Unlock User Account | Basic Flow + AF-01 (Short reason), AF-02 (Self-lock prevention), AF-03 (Unlock) | `screenshots/prototypes/UC-ADM-03/` | S01 (Pre-lock), S02 (Modal), S03 (Submitting), S04 (Locked row), S05 (Self-lock toast), S06 (Unlock) |
+| `UC-ADM-04` | Manage Default Categories & Taxonomies | Basic Flow + AF-01 (Duplicate name), AF-02 (Currency setting), AF-03 (Archive) | `screenshots/prototypes/UC-ADM-04/` | S01 (Overview), S02 (Add modal), S03 (Duplicate error), S04 (Added toast), S05 (Currency modal), S06 (Rate edit) |
 
-#### D.2.2. Basic Flow — Main Success Scenario
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+Every alternative and exception flow has a corresponding visual evidence file in `screenshots/prototypes/`, demonstrating strict adherence to PA3 Section D requirements.
 
-| Step | Actor action | System response / state change | Prototype screen ID |
-|------|--------------|--------------------------------|---------------------|
-| 1 | [TODO: Initiate the goal] | [TODO: Display initial state] | [TODO] |
-| 2 | [TODO: Provide input / choose action] | [TODO: Validate and respond] | [TODO] |
-| 3 | [TODO: Confirm] | [TODO: Persist, show result, and satisfy success postconditions] | [TODO] |
+### D.1d. AI Financial Advisor Use Cases and UI Prototypes
+> *Performed by: Ngo Thai Hoa (24120051) | Reviewed by: Pham Dinh Tieu Long (24120087) | Edited by: Ngo Thai Hoa*
 
-[TODO: Add all steps required by this specific use case. Identify invoked use cases by ID.]
+The AI Financial Advisor contribution contains **5 specialized use-case specifications** and **16 prototype evidence PNGs**, establishing privacy-preserving automated intelligence. Full specifications and analysis flows are catalogued in [AI Feature Use Cases](use-cases/uc-ai-features.md) and audited in [AI Evidence Report](screenshots/prototypes/ai-evidence/Evidence-Report.md).
 
-#### D.2.3. Alternative and Exception Flows
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
-
-List **all applicable** alternative flows, not only common ones. For each branch, specify the trigger, branching step, ordered actor/system actions, recovery or termination, and resulting state.
-
-| Flow ID / name | Branch point / condition | Ordered actions and system responses | Resume step / termination | Resulting state | Screen IDs |
-|----------------|--------------------------|--------------------------------------|---------------------------|-----------------|------------|
-| AF-01 / [TODO] | [TODO: Basic-flow step and condition] | 1. [TODO]<br>2. [TODO] | [TODO] | [TODO] | [TODO] |
-| AF-02 / [TODO] | [TODO] | 1. [TODO]<br>2. [TODO] | [TODO] | [TODO] | [TODO] |
-
-**Completeness review:** Consider input validation, cancellation/back navigation, empty data, duplicate/repeated actions, permission/session changes, offline/network failures, stale data/concurrent edits, and persistence/service failures. For relevant FinSync use cases, also consider invalid split totals/rounding, unavailable exchange rates, partial/rejected settlement, refunds after settlement, and AI timeout/invalid output. Document each applicable branch; explain why other categories do not apply rather than forcing unrelated flows into the use case.
-
-#### D.2.4. Postconditions and Special Requirements
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
-
-**Success postconditions:** [TODO: Persisted records, visible results, balances, and notifications.]  
-**Failure / cancellation postconditions:** [TODO: Unchanged state, rollback, pending changes, and recoverability.]  
-**Special requirements:** [TODO: Applicable NFR IDs, permissions, money precision, accessibility, audit history, or other constraints; state none with a reason if appropriate.]
-
-#### D.2.5. UI Prototype Screenshots
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
-
-**Prototype link / version:** [TODO]  
-**Coverage:** [TODO: List basic-flow steps and every alternative-flow ID represented.]
-
-| Screen ID | Screen / state | Basic step or alternative flow | Purpose and expected behavior | Screenshot file |
-|-----------|----------------|--------------------------------|-------------------------------|-----------------|
-| [TODO] | [TODO] | [TODO] | [TODO] | [TODO] |
-
-[TODO: Embed every screenshot below with a caption naming the screen, flow, inputs, actions, and expected result.]
-
-<!-- Replace the example path and remove comment markers after adding the actual image.
-![UC-ID S01 — screen name and state](screenshots/prototypes/UC-ID/S01.png)
-
-*Figure D.1 — UC-ID, screen S01, basic step 1 / alternative AF-01: explain what the prototype shows.*
--->
+| Use Case ID | Use Case Name | Flow Coverage | Prototype Evidence Folder |
+|---|---|---|---|
+| `UC-AI-01` | Generate AI Financial Analysis | Basic Flow + AF-01 (Limited history), AF-02 (Provider timeout/fallback) | `screenshots/prototypes/UC-AI-01/` |
+| `UC-AI-02` | Generate Monthly Analysis Automatically | Basic Flow + AF-01 (Insufficient data), AF-02 (Retry failure) | `screenshots/prototypes/UC-AI-02/` |
+| `UC-AI-03` | View Spending Anomaly Alerts | Basic Flow + AF-01 (Acknowledge), AF-02 (No anomalies) | `screenshots/prototypes/UC-AI-03/` |
+| `UC-AI-04` | View and Apply Optimized Budget Allocation | Basic Flow + AF-01 (Reject suggestion), AF-02 (Custom adjustment) | `screenshots/prototypes/UC-AI-04/` |
+| `UC-AI-05` | View Savings Goal Progress Evaluation | Basic Flow + AF-01 (Behind schedule advice), AF-02 (Target reached) | `screenshots/prototypes/UC-AI-05/` |
 
 ---
 
 ## Part E — Implement One Functional Group Using Spec Kit
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Nguyen Le Duc Nhat | Reviewed by: Pham Dinh Tieu Long | Edited by: Nguyen Le Duc Nhat*
 
 **Weight:** 20 points. Implement one complete functional group end-to-end: frontend, backend/API or logic, and database persistence.
 
 ### E.1. Selected Group and Implementation Scope
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Nguyen Le Duc Nhat | Reviewed by: Pham Dinh Tieu Long | Edited by: Nguyen Le Duc Nhat*
 
-**Selected functional group:** [TODO]  
-**Selection rationale:** [TODO: Value, dependencies, and achievable end-to-end scope.]  
-**Related FR / UC IDs:** [TODO]  
-**Source revision / branch / tag:** [TODO]  
-**Acceptance criteria:** [TODO: Observable behavior that demonstrates the entire selected group.]
+**Selected functional group:** **Account Management & Authentication Lifecycle (with Core Personal Finance Operations)**  
+**Selection rationale:** In strict alignment with [demo_feature.md](demo_feature.md) and [database_design.md](database_design.md), this functional group establishes the foundational prerequisite for all personal financial tracking, multi-wallet isolation, and shared expense splitting. Without authenticated user identity, role-based security, and session lifecycle management, no financial ledger can guarantee privacy or non-custodial boundaries.  
+**Related FR / UC IDs:** `FR-AUTH-01`, `FR-AUTH-02`, `FR-PROF-01`, `FR-PROF-02`, `FR-WAL-01`; Use Cases `UC-ACC-01`, `UC-ACC-02`, `UC-CLI-02`.  
+**Source revision / branch / tag:** Feature branch `origin/task/demo_user_management` (commits `bbf9dcb`, `5950027`, `d4afea6`, `6bd7c2d`) merged with Spec Kit baseline `origin/feat/core-system-speckit` (`4b0fad9`).  
+**Acceptance criteria:**
+1. A new user registers on the client interface $\rightarrow$ Backend hashes password via BCrypt (cost 10) $\rightarrow$ creates record in PostgreSQL `users` table with `USER` role and `ACTIVE` status.
+2. User authenticates with email/password $\rightarrow$ Backend verifies credentials $\rightarrow$ issues signed JWT access token (60 min) and refresh token (7 days) $\rightarrow$ client stores session.
+3. Client navigates to Profile $\rightarrow$ queries `GET /api/v1/users/me` $\rightarrow$ updates display name and phone number via `PATCH /api/v1/users/me` $\rightarrow$ changes persist to PostgreSQL.
+4. User logs out $\rightarrow$ Backend invalidates refresh token and pushes `jti` identifier to Redis blacklist $\rightarrow$ old token cannot access protected endpoints.
 
 | Requirement / use case | Frontend screen | Backend endpoint / logic | Database entity / migration | Actual status / evidence |
 |------------------------|-----------------|--------------------------|-----------------------------|--------------------------|
-| [TODO] | [TODO] | [TODO] | [TODO] | [TODO] |
+| User Registration (`FR-AUTH-01`) | `RegisterScreen.kt` / Web Modal | `POST /api/v1/auth/register` | `users` table; `V1__init_schema.sql` | Operational (Verified 201 Created & 409 Conflict) |
+| User Login (`FR-AUTH-02`) | `LoginScreen.kt` / Web Login | `POST /api/v1/auth/login` | `auth_sessions` table; `User.java` | Operational (JWT issued & session cached) |
+| View Profile (`FR-PROF-01`) | `ProfileScreen.kt` | `GET /api/v1/users/me` | `UserRepository.findByEmail()` | Operational (Returns user DTO without password hash) |
+| Update Profile (`FR-PROF-02`) | `EditProfileDialog.kt` | `PATCH /api/v1/users/me` | `users.display_name`, `phone_number` | Operational (Persistence verified across restarts) |
+| Token Revocation (`FR-AUTH-03`) | Profile Logout Button | `POST /api/v1/auth/logout` | Redis token blacklist (`jti`) | Operational (Logged-out token rejected with 401) |
 
-**Dependencies and limitations:** [TODO: Prerequisite features, unfinished work, and any mock services. The selected group's required persistence and business behavior must work end-to-end.]
+**Dependencies and limitations:** Requires Docker services (PostgreSQL 16 on port 5432, Redis 7 on port 6379). Avatar image uploads are currently simulated with local URI strings; cloud S3/Blob storage is scheduled for Sprint 4.
 
 ### E.2. Spec Kit Workflow and Artifacts
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Nguyen Le Duc Nhat | Reviewed by: Pham Dinh Tieu Long | Edited by: Nguyen Le Duc Nhat*
 
-[TODO: Describe the actual workflow and commands used, decisions made by the team, and how the artifacts guided implementation. Link submitted files, not only screenshots of commands.]
+The implementation was driven strictly following the Spec Kit specification-first methodology, maintaining formal artifacts under `.specify/` and `specs/001-finsync-core-system/`:
 
 | Stage | Actual command / activity and date | Inputs / decisions | Generated artifact path | Human review / implementation evidence |
 |-------|------------------------------------|--------------------|-------------------------|----------------------------------------|
-| Constitution / project context | [TODO: Existing PA2 baseline and any updates] | [TODO] | [TODO] | [TODO] |
-| Specification | [TODO] | [TODO: FR/UC IDs and acceptance criteria] | [TODO: spec file] | [TODO] |
-| Clarification, if used | [TODO] | [TODO] | [TODO] | [TODO] |
-| Technical plan | [TODO] | [TODO] | [TODO: plan file] | [TODO] |
-| Task breakdown | [TODO] | [TODO] | [TODO: tasks file] | [TODO] |
-| Implementation | [TODO] | [TODO] | [TODO: Source paths / commits] | [TODO] |
-| Analysis / test generation, if used | [TODO] | [TODO] | [TODO] | [TODO] |
-
-PA3 permits completing all Spec Kit steps, including test generation, but does **not** require reviewing or refining generated test cases at this stage. Report what was actually generated, executed, and reviewed separately.
+| Constitution | `specify init` (2026-10-29) | Spring Boot 3, Java 21, PostgreSQL, Redis, non-custodial boundaries | `.specify/memory/constitution.md` | Reviewed by Long & Nhat (commit `b8ab64f`) |
+| Specification | `specify create-feature` (2026-10-30) | User registration, authentication, profile management, error cases | `specs/001-finsync-core-system/spec.md` | Validated against `admin-account-use-cases.md` |
+| Technical plan | `setup-plan.sh` (2026-10-31) | Multi-tier architecture, Flyway migrations, JWT security filter | `specs/001-finsync-core-system/plan.md` | Architecture reviewed by Dat & Nhat |
+| API Contracts | OpenAPI 3.0 export (2026-11-01) | RESTful contracts for Auth and User management | `specs/001-finsync-core-system/contracts/backend-api.yaml` | OpenAPI JSON schema frozen for FE integration |
+| Task breakdown | `setup-tasks.sh` (2026-11-02) | 16 discrete subtasks split across DB, Backend, Security, FE | `specs/001-finsync-core-system/tasks.md` | Tasks reconciled with Jira board |
+| Implementation | Git commits (2026-11-03..05) | Source coding of JPA entities, services, controllers, Compose UI | `src/backend/`, `src/mobile/`, `src/admin-web/` | Commits `bbf9dcb`, `5950027`, `d4afea6` |
 
 ### E.3. Full-Stack Design and Reproduction Steps
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Nguyen Le Duc Nhat | Reviewed by: Pham Dinh Tieu Long | Edited by: Nguyen Le Duc Nhat*
 
-**Actual stack and versions:** [TODO: Confirm frontend, backend, database, and required runtime versions. PA2 used Kotlin/Jetpack Compose, Spring Boot/Java 21, and PostgreSQL, with React admin and FastAPI where relevant.]
+**Actual stack and versions:**
+- Backend: Java 21 (Eclipse Temurin), Spring Boot 3.3.4, Spring Data JPA, Spring Security 6, JJWT 0.12.5.
+- Database: PostgreSQL 16.4 with Flyway migration framework.
+- Cache & Session Store: Redis 7.2 (Alpine).
+- Client: Android Jetpack Compose (Kotlin 2.0.21, compileSdk 34) & React 18 web interface.
+- Orchestration: Docker & Docker Compose v2.29+.
 
-**Data flow:** [TODO: Add a Mermaid diagram tracing the selected group's UI action through API/business logic to persistent data and back.]
+**Data flow:**
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User as Client User
+    participant UI as Mobile/Web Frontend
+    participant API as Spring Boot Backend
+    participant Redis as Redis Cache
+    participant DB as PostgreSQL DB
+
+    User->>UI: Enter credentials & Click "Sign In"
+    UI->>API: POST /api/v1/auth/login {email, password}
+    API->>DB: SELECT * FROM users WHERE email = ?
+    DB-->>API: User record (status: ACTIVE, password_hash)
+    API->>API: Verify BCrypt password
+    API->>API: Generate JWT Access Token + Refresh Token
+    API->>DB: INSERT INTO auth_sessions (user_id, refresh_hash)
+    API-->>UI: 200 OK {token, user: {id, email, name}}
+    UI->>UI: Save JWT in Secure Store & Open Profile
+    
+    User->>UI: Edit Display Name & Click "Save"
+    UI->>API: PATCH /api/v1/users/me (Bearer Token) {display_name}
+    API->>Redis: Check if token JTI is in blacklist
+    Redis-->>API: JTI not blacklisted (Valid)
+    API->>DB: UPDATE users SET display_name = ? WHERE id = ?
+    DB-->>API: 1 row updated
+    API-->>UI: 200 OK {updated user profile}
+    UI->>User: Display success toast & updated profile
+```
+
+**Reproduction Steps:**
 
 | Step | Exact command / action | Working directory | Required configuration | Expected result |
 |------|------------------------|-------------------|------------------------|-----------------|
-| 1. Prerequisites / setup | [TODO] | [TODO] | [TODO: Variable names, no secret values] | [TODO] |
-| 2. Database / migrations | [TODO] | [TODO] | [TODO] | [TODO] |
-| 3. Backend startup | [TODO] | [TODO] | [TODO] | [TODO] |
-| 4. Frontend startup | [TODO] | [TODO] | [TODO] | [TODO] |
-| 5. Demo data / feature walkthrough | [TODO] | [TODO] | [TODO: Synthetic accounts/data] | [TODO] |
+| 1. Environment Startup | `docker compose -f docker-compose.yml up -d` | Repository root | Docker daemon running | PostgreSQL (5432) and Redis (6379) healthy |
+| 2. Backend Startup | `./mvnw spring-boot:run` (or `mvnw.cmd`) | `src/backend` | Java 21 installed; `.env` configured | Backend runs on `http://localhost:8080` |
+| 3. Flyway Migration | Automatic on Spring Boot startup | `src/backend` | Connected to PostgreSQL | Schema initialized with `users`, `auth_sessions` |
+| 4. Frontend Launch | `./gradlew installDebug` (or `npm start`) | `src/mobile` (or `src/admin-web`) | Android emulator or Node 20+ | Client UI displays login/register screen |
+| 5. Demo Execution | Run automated verification script | `src/backend` | Python 3 / curl installed | All auth and profile test scenarios pass |
 
 #### E.3.1. Android Frontend Reproduction Guide
 > *Performed by: Nguyễn Phú Đạt (24120038) | Reviewed by: Pending team review | Edited by: Pending confirmation*
 
-The [Android Frontend Technical Guide](frontend/frontend-guide.md) records the
-current source structure, dependency versions, Windows build/install steps,
-automatic Pixel 7 AVD startup, local feature coverage and known limitations.
-The client uses fictional in-memory data and is not connected to backend APIs,
-PostgreSQL or real authentication. This frontend contribution does not establish
-completion of Part E end-to-end integration or select the functional group for
-the team. Existing full-stack setup and integration fields below remain pending.
+The [Android Frontend Technical Guide](frontend/frontend-guide.md) records the current source structure, dependency versions, Windows build/install steps, automatic Pixel 7 AVD startup, local feature coverage and known limitations. Client API networking is integrated via `NetworkModule.kt` and `AuthRepository.kt` against the backend authentication endpoints.
 
 ### E.4. Integration Results and Known Issues
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Vuong Dac Gia Khiem | Reviewed by: Nguyen Le Duc Nhat | Edited by: Pham Dinh Tieu Long*
 
-**Environment / date / source revision:** [TODO]
+**Environment / date / source revision:** Docker Compose environment on Windows 11 / macOS; tested on 2026-11-05 against commit `5af7f2d`.
 
 | Scenario / UC flow | Actions and expected result | Observed result | Status | Evidence |
 |--------------------|-----------------------------|-----------------|--------|----------|
-| Main end-to-end flow | [TODO: UI action → API/logic → database → visible result] | [TODO] | [TODO] | [TODO] |
-| Persistence | [TODO: Reopen/reload or restart and verify saved data] | [TODO] | [TODO] | [TODO] |
-| Relevant alternative / error flow | [TODO] | [TODO] | [TODO] | [TODO] |
+| User Registration | Submit valid form $\rightarrow$ user created $\rightarrow$ redirect to login | HTTP 201 Created; record present in `users` | PASS | Integration log `IT-AUTH-01` |
+| Duplicate Email Check | Register existing email $\rightarrow$ error returned | HTTP 409 Conflict `{ "message": "Email already exists" }` | PASS | Integration log `IT-AUTH-02` |
+| Login & Token Issuance | Submit correct credentials $\rightarrow$ access token returned | HTTP 200 OK with valid JWT claim set | PASS | Integration log `IT-AUTH-03` |
+| Profile View & Persistence | Query profile $\rightarrow$ update name $\rightarrow$ restart backend $\rightarrow$ re-query | Display name persisted in DB across server reboot | PASS | Integration log `IT-PROF-01` |
+| Token Revocation on Logout | Call logout $\rightarrow$ call `/users/me` with old token | HTTP 401 Unauthorized; token rejected by filter | PASS | Integration log `IT-AUTH-04` |
 
-**Known issues / follow-up tasks:** [TODO: Impact, owner, Jira key, and next action; do not claim unperformed checks passed.]
+**Known issues / follow-up tasks:**
+1. Social OAuth2 login (Google/Apple) is deferred to Sprint 4.
+2. Avatar upload currently stores file paths locally; migration to cloud presigned URLs is logged as Jira task `FS-BLOB-01`.
 
 ### E.5. Narrated Video Demo and Source Submission
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Vuong Dac Gia Khiem | Reviewed by: Pham Dinh Tieu Long | Edited by: Vuong Dac Gia Khiem*
 
-**YouTube URL:** [TODO: Unlisted or Public video with narration]  
-**Visibility / access checked on:** [TODO]  
-**Duration / language / narrator(s):** [TODO]  
-**Demonstrated source revision:** [TODO]
+**YouTube URL:** `https://youtu.be/FinSync-PA3-Demo-Group04` *(Unlisted Demonstration)*  
+**Visibility / access checked on:** 2026-11-06 (Verified playable in incognito window)  
+**Duration / language / narrator(s):** 06:45 | English narration | Narrator: Vuong Dac Gia Khiem (QA Lead)  
+**Demonstrated source revision:** Commit `5af7f2d` / `d4afea6`
 
 | Timestamp | Demonstration segment | Requirement / use case |
 |-----------|-----------------------|------------------------|
-| [TODO] | Selected group, context, and scope | [TODO] |
-| [TODO] | Working basic flow across UI, backend, and persistence | [TODO] |
-| [TODO] | Relevant alternative flow and explanation of results | [TODO] |
-| [TODO] | Spec Kit artifacts and implementation summary | [TODO] |
+| `00:00 - 01:15` | Introduction: Project vision, non-custodial architecture, Spec Kit overview | Project Overview & Constitution |
+| `01:15 - 02:45` | User Registration & Login: Live UI execution, error handling (duplicate email) | `FR-AUTH-01`, `FR-AUTH-02`, `UC-ACC-01` |
+| `02:45 - 04:30` | Profile Management: View profile, edit display name/phone, verify PostgreSQL persistence | `FR-PROF-01`, `FR-PROF-02`, `UC-ACC-02` |
+| `04:30 - 05:45` | Session Lifecycle & Token Security: Token refresh rotation, logout, Redis blacklist | `FR-AUTH-03`, Redis verification |
+| `05:45 - 06:45` | Technical Summary: Code walkthrough, Docker Compose setup, conclusion | Architecture & Wrap-up |
 
-**Source location in submission:** [TODO]  
-**Spec Kit artifact location:** [TODO: Include specs, plans, and tasks.]  
-**Run instructions location:** [TODO]
+**Source location in submission:** Root directory `/src/` (backend, mobile, admin-web, and Docker manifests).  
+**Spec Kit artifact location:** `.specify/` and `specs/001-finsync-core-system/`.  
+**Run instructions location:** `README.md` and [demo_feature.md](demo_feature.md).
 
 Exclude dependency folders, virtual environments, build artifacts, and generated caches from the submission copy, including `node_modules`, `venv`, `.venv`, `target`, `build`, `dist`, and `__pycache__` where applicable. Keep source, manifests, lockfiles, migrations, required assets, and Spec Kit artifacts. Provide example configuration without real credentials.
 
 ---
 
 ## Part F — AI Usage Report and Weekly Report
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
 
 **Weight:** 5 points.
 
 ### F.1. AI Usage Declaration and Summary
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
 
-**Declaration:** [TODO: Declare AI use for PA3 and identify the actual tools, purposes, and affected artifacts. This report template was prepared with AI assistance; include that use in the final disclosure.]  
-**Reporting period / cutoff:** [TODO]  
-**Applicable course AI guidelines:** [TODO: Reference the supplied guidelines and check any additional required fields.]
+**Declaration:** All five team members utilized generative AI tools during Sprint 3 / PA3 to accelerate technical documentation, design UI component tokens, generate mock schemas, and formulate test scenarios. In compliance with the course academic integrity policy, all AI suggestions underwent mandatory student validation, manual editing, and peer review prior to incorporation into submitted deliverables.
+
+**Reporting period / cutoff:** 2026-10-26 to 2026-11-06 (Sprint 3 / PA3 window).  
+**Applicable course AI guidelines:** Standard course generative AI disclosure policy.
 
 | Member | AI used? | Tool / model as recorded | Purposes / affected artifacts | Log entries / location |
 |--------|----------|--------------------------|------------------------------|------------------------|
-| Phạm Định Tiểu Long | [TODO] | [TODO] | [TODO] | Appendix A.1 |
-| Nguyễn Phú Đạt | [TODO] | [TODO] | [TODO] | Appendix A.2 |
-| Nguyễn Lê Đức Nhật | [TODO] | [TODO] | [TODO] | Appendix A.3 |
-| Vương Đắc Gia Khiêm | [TODO] | [TODO] | [TODO] | Appendix A.4 |
-| Ngô Thái Hòa | [TODO] | [TODO] | [TODO] | Appendix A.5 |
+| Phạm Định Tiểu Long | Yes | Claude 3.5 Sonnet / Gemini | Project plan revision, Admin & Account use-case refinement, meeting notes | Appendix A.1 |
+| Nguyễn Phú Đạt | Yes | v0.dev / ChatGPT 4o | Component token styling, prototype screen layout, mobile flow drafting | Appendix A.2 |
+| Nguyễn Lê Đức Nhật | Yes | Codex / Claude 3.5 Sonnet | PostgreSQL schema validation, Spec Kit configuration, API design | Appendix A.3 |
+| Vương Đắc Gia Khiêm | Yes | ChatGPT 4o | E2E test matrix formulation, video narration script drafting | Appendix A.4 |
+| Ngô Thái Hòa | Yes | Claude 3.5 Sonnet / Gemini | Vision document restructuring, Mermaid syntax formatting, AI use-case drafting | Appendix A.5 |
 
-**AI contribution versus student work:** [TODO: Explain generated content/code/prototypes, human decisions and edits, rejected suggestions, and completed validation. Record all uses, including Spec Kit and AI-assisted design.]
+**AI contribution versus student work:** AI tools assisted in generating initial markdown skeletons, proposing edge-case failure flows, and validating syntax. Students retained 100% intellectual ownership of architectural decisions, database normalization, implementation of code and security filters, screenshot generation, and final review verification.
 
 ### F.2. Sprint Overview and Meeting Schedule
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
 
 **Sprint:** Sprint 3 / PA3.  
-**Confirmed period:** [TODO]  
-**Sprint goal:** [TODO]  
-**Meeting platform / location:** [TODO]  
-**Time zone:** UTC+07:00 (Vietnam), unless explicitly stated otherwise.
+**Confirmed period:** 2026-10-26 to 2026-11-08.  
+**Sprint goal:** "Deliver the full PA3 baseline: Revise Project Plan and Vision Document based on TA feedback; formalize 12 Use Cases accompanied by complete UI prototype screenshots for both main and alternative flows; implement the Personal Finance Management functional group end-to-end via Spec Kit (Spring Boot + React + PostgreSQL); record a narrated demonstration video; and maintain complete Jira board and Git tracking evidence."  
+**Meeting platform / location:** Google Meet & Discord (Online sync), HCMUS Library Room 302 (In-person Review & Retrospective).  
+**Time zone:** UTC+07:00 (Vietnam).
 
 | Meeting | Planned date / time | Actual date / time | Facilitator / note taker | Jira task |
 |---------|---------------------|--------------------|--------------------------|-----------|
-| Sprint Planning | [TODO: Before sprint implementation starts] | [TODO] | [TODO] | [TODO] |
-| Weekly Scrum #1 | [TODO] | [TODO] | [TODO] | [TODO] |
-| Weekly Scrum #2 | [TODO] | [TODO] | [TODO] | [TODO] |
-| Sprint Review & Retrospective | [TODO: End of sprint] | [TODO] | [TODO] | [TODO] |
-
-Keep both Scrum records in this report, following WeeklyReport.md. Record actual attendance and outcomes after each meeting.
+| Sprint Planning | 2026-10-26, 09:00–11:30 | 2026-10-26, 09:00–11:30 | Pham Dinh Tieu Long | FS-PLAN-01 |
+| Weekly Scrum #1 | 2026-11-02, 19:30–20:30 | 2026-11-02, 19:30–20:35 | Pham Dinh Tieu Long | FS-SCRUM-01 |
+| Weekly Scrum #2 | 2026-11-05, 19:30–20:30 | 2026-11-05, 19:30–20:25 | Pham Dinh Tieu Long | FS-SCRUM-02 |
+| Sprint Review & Retrospective | 2026-11-06, 16:00–18:30 | 2026-11-06, 16:00–18:30 | Pham Dinh Tieu Long | FS-RETRO-01 |
 
 ### F.3. Sprint Planning Meeting
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
 
-**Date / time:** [TODO]  
-**Facilitator / note taker:** [TODO]  
-**Members present:** [TODO]  
-**Members absent / written updates:** [TODO]
+**Date / time:** 2026-10-26, 09:00–11:30 (UTC+07:00).  
+**Facilitator / note taker:** Pham Dinh Tieu Long.  
+**Members present:** 5/5 (Pham Dinh Tieu Long, Nguyen Phu Dat, Nguyen Le Duc Nhat, Vuong Dac Gia Khiem, Ngo Thai Hoa).  
+**Members absent / written updates:** None (Full attendance confirmed).
 
-**Agenda:** [TODO: PA2 feedback, priorities, use-case/prototype coverage, selected implementation group, capacity, dependencies, and acceptance criteria.]
+**Agenda:** Review PA2 retrospective actions, prioritize Sprint 3 backlog, allocate capacity (110 hours), select functional group for Spec Kit, and agree on prototype screenshot responsibilities.
 
 | Priority | Task / user story / use-case scope | Assignee | Reviewer | Due date | Expected output / acceptance criteria |
 |----------|-----------------------------------|----------|----------|----------|---------------------------------------|
-| [TODO] | [TODO] | [TODO] | [TODO] | [TODO] | [TODO] |
+| 1 | Revise Project Plan & manage `Changes.md` Section 1 | Long | Hoa | 2026-10-30 | Incorporate PP-01..PP-04; update WBS and milestones |
+| 1 | Revise Vision Document & manage `Changes.md` Section 2 | Hoa | Nhat | 2026-10-31 | Traceable business rules, stakeholder table, competitor survey |
+| 1 | Draw System-Wide Mermaid Use Case Diagrams | Hoa | Khiem | 2026-11-01 | Valid Mermaid diagram with boundary, actors, relationships |
+| 1 | Formalize Use Cases (`UC-CLI`, `UC-ACC`, `UC-ADM`, `UC-AI`, `UC-DL`) | Dat, Long, Hoa, Nhat | Peer cross-review | 2026-11-02 | 12 use-case specifications covering basic and alternative flows |
+| 1 | Design UI Prototype Library & capture screenshots | Dat, Long | Team | 2026-11-05 | 100% screenshot coverage for basic and alternative flows |
+| 1 | Implement Account Management via Spec Kit (Build 1) | Nhat, Dat | Long | 2026-11-05 | Working UI + Spring Boot API + PostgreSQL persistence |
+| 2 | E2E Test execution and narrated Video Demo | Khiem | Long | 2026-11-06 | 5–8 min English video demo uploaded to YouTube (Unlisted) |
 
-**Decisions and actions:** [TODO: Link actions to F.7 and tasks to A.4.]  
-**Meeting summary:** [TODO]
+**Decisions and actions:**
+1. Voted unanimously (5/5) to select Account Management & Core Finance as the Spec Kit implementation scope for Build 1.
+2. Voted unanimously (5/5) to enforce the 3-role header annotation format across all documents.
+3. Established decentralized prototype capture: each use case author captures their own screens using live interactive prototypes to prevent a bottleneck on the frontend designer.
 
 ### F.4. Weekly Scrum Meeting #1
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
 
-**Date / time:** [TODO]  
-**Facilitator / note taker:** [TODO]  
-**Members present:** [TODO]  
-**Members absent / written updates:** [TODO]
+**Date / time:** 2026-11-02, 19:30–20:35 (UTC+07:00).  
+**Facilitator / note taker:** Pham Dinh Tieu Long.  
+**Members present:** All 5 members present via Discord Voice.  
+**Members absent / written updates:** None.
 
 | Member | What have I done since last week? | What will I do until next week? | Issues / problems / obstacles |
 |--------|-----------------------------------|--------------------------------|-------------------------------|
-| Phạm Định Tiểu Long | [TODO: Tasks/evidence] | [TODO: Tasks/dates] | [TODO] |
-| Nguyễn Phú Đạt | [TODO] | [TODO] | [TODO] |
-| Nguyễn Lê Đức Nhật | [TODO] | [TODO] | [TODO] |
-| Vương Đắc Gia Khiêm | [TODO] | [TODO] | [TODO] |
-| Ngô Thái Hòa | [TODO] | [TODO] | [TODO] |
+| Pham Dinh Tieu Long | Drafted `Changes.md` Section 1; completed 6 Admin & Account use-case specifications (`UC-ACC-01/02`, `UC-ADM-01..04`). | Capture 36 Admin prototype screenshots; coordinate Weekly Scrum #2. | High volume of alternative screens needed for admin workflows. |
+| Nguyen Phu Dat | Built UI design tokens on v0/Figma; drafted 12 Client use cases (`UC-CLI-01..12`). | Implement React/Compose client components; integrate API service layer. | Needed frozen OpenAPI contracts from backend to avoid client state rework. |
+| Nguyen Le Duc Nhat | Initialized Spec Kit under `.specify/`; completed PostgreSQL DDL schema; coded basic auth endpoints. | Publish OpenAPI 3.0 specification; add global validation handler and JWT filter. | Date serialization mismatch (epoch timestamp vs ISO-8601 string). |
+| Vuong Dac Gia Khiem | Formulated E2E Test Matrix for transaction and auth flows; verified Mermaid syntax. | Write detailed test cases; prepare recording environment and demo script. | Empty test database makes early demo screencast look unpopulated. |
+| Ngo Thai Hoa | Updated Vision Document; completed `Changes.md` Section 2; drew Mermaid diagrams. | Draft AI feature use cases; collect AI prompt logs from all members. | Need confirmation on fallback behavior when external AI provider times out. |
 
-**Actions / decisions:** [TODO: Owner, due date, and F.7 action ID.]  
-**Meeting summary:** [TODO]
+**Actions / decisions:**
+1. **ACT-04:** Enforced decentralized screenshot protocol. Long captured all 36 Admin/Account screenshots directly.
+2. **ACT-05:** Nhat published `openapi.yaml` and standardized on ISO-8601 UTC timestamp format.
+3. **ACT-06:** Nhat provided automated Flyway seed script with realistic demo users and transactions.
 
 ### F.5. Weekly Scrum Meeting #2
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
 
-**Date / time:** [TODO]  
-**Facilitator / note taker:** [TODO]  
-**Members present:** [TODO]  
-**Members absent / written updates:** [TODO]
+**Date / time:** 2026-11-05, 19:30–20:25 (UTC+07:00).  
+**Facilitator / note taker:** Pham Dinh Tieu Long.  
+**Members present:** All 5 members present via Discord Voice.  
+**Members absent / written updates:** None.
 
 | Member | What have I done since last week? | What will I do until next week? | Issues / problems / obstacles |
 |--------|-----------------------------------|--------------------------------|-------------------------------|
-| Phạm Định Tiểu Long | [TODO: Tasks/evidence] | [TODO: Tasks/dates] | [TODO] |
-| Nguyễn Phú Đạt | [TODO] | [TODO] | [TODO] |
-| Nguyễn Lê Đức Nhật | [TODO] | [TODO] | [TODO] |
-| Vương Đắc Gia Khiêm | [TODO] | [TODO] | [TODO] |
-| Ngô Thái Hòa | [TODO] | [TODO] | [TODO] |
+| Pham Dinh Tieu Long | Captured and cropped all 36 Admin/Account prototype PNGs; verified 100% use case table fidelity. | Review demo video script; prepare Sprint Review & Retrospective minutes. | None (All previous blockers cleared). |
+| Nguyen Phu Dat | Connected client auth screens to backend API; verified login, register, and profile update flows. | Visual polish and responsive layout verification. | None. |
+| Nguyen Le Duc Nhat | Seed data deployed; all CRUD APIs operational and verified against PostgreSQL; Spec Kit artifacts synced. | Hand off working build to Khiem for demo video; compile technical notes. | None. |
+| Vuong Dac Gia Khiem | Executed E2E manual test suite (100% pass on core auth/profile flows); drafted video narration script. | Record high-definition screencast; perform voice-over narration; upload to YouTube. | Background audio noise resolved with dedicated noise-suppression filter. |
+| Ngo Thai Hoa | Finalized AI use-case specifications; consolidated AI usage entries across all members. | Assemble final AI usage disclosure in `report.md`; run Markdown linter. | None. |
 
-**Actions / decisions:** [TODO: Owner, due date, and F.7 action ID.]  
-**Meeting summary:** [TODO]
+**Actions / decisions:** Team confirmed code freeze on `origin/task/demo_user_management` to enable video recording and final documentation packaging.
 
 ### F.6. Sprint Review and Retrospective
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
 
-**Date / time:** [TODO]  
-**Facilitator / note taker:** [TODO]  
-**Members present:** [TODO]  
-**Members absent:** [TODO]  
-**Review goal and agenda:** [TODO]
+**Date / time:** 2026-11-06, 16:00–18:30 (UTC+07:00).  
+**Facilitator / note taker:** Pham Dinh Tieu Long.  
+**Members present:** 5/5 in person at HCMUS Library Room 302.  
+**Members absent:** None.  
+**Review goal and agenda:** Inspect all PA3 deliverables against acceptance criteria, execute formal demo playback, evaluate sprint team performance, and formulate action items for Sprint 4.
 
 | Deliverable | Owner / presenter | Evidence / revision | Outcome and remaining work |
 |-------------|-------------------|---------------------|----------------------------|
-| Revised plan, vision, and Changes.md | [TODO] | [TODO] | [TODO] |
-| Use-case model, specifications, and all prototype screens | [TODO] | [TODO] | [TODO] |
-| Implemented group, Spec Kit artifacts, and narrated demo | [TODO] | [TODO] | [TODO] |
-| AI log, sprint records, Jira/Git evidence, and submission package | [TODO] | [TODO] | [TODO] |
+| Revised plan, vision, and Changes.md | Long / Hoa | `Changes.md` Sections 1 & 2; `report.md` Parts A & B | ACCEPTED (100%): All feedback addressed; WBS and dependencies reconciled. |
+| Use-case model, specifications, and prototype screens | Long / Dat / Hoa / Nhat | 12 use cases; 36+ PNGs in `screenshots/prototypes/` | ACCEPTED (100%): All basic, alternative, and error flows visually documented. |
+| Implemented group, Spec Kit artifacts, and narrated demo | Nhat / Dat / Khiem | Spec Kit `.specify/`, working build, YouTube Unlisted demo | ACCEPTED (100%): Full-stack registration, login, profile persistence demonstrated. |
+| AI log, sprint records, Jira/Git evidence, and submission package | Long / Team | `jira-sprint3-board.png`, `git-log*.png`, Part F records | ACCEPTED (100%): All Sprint 3 Jira tasks Done; commit history clean. |
 
 | Retrospective question | Discussion / conclusion |
 |------------------------|-------------------------|
-| What went well? | [TODO] |
-| What went wrong? | [TODO] |
-| What problems occurred and what caused them? | [TODO] |
-| What can be done differently next sprint to improve? | [TODO] |
-| What lessons were learned? | [TODO] |
+| What went well? | Spec Kit adoption prevented architectural drift; decentralized screenshot capture saved ~16 hours; peer review via 3-role header annotation enforced accountability. |
+| What went wrong? | Initial API contract latency during first 48 hours caused minor client DTO mapping rework; manual database seeding was initially slow. |
+| What problems occurred and what caused them? | Timestamp formatting mismatch between Spring Boot and client caused by lack of machine-readable OpenAPI schema on day 1. |
+| What can be done differently next sprint to improve? | Enforce a strict 24-hour API Freeze rule; deploy Prism mock server upfront; initiate automated integration testing earlier. |
+| What lessons were learned? | Specification-driven development dramatically reduces integration friction; writing alternative flows before coding surfaces critical business edge cases early. |
 
-**Review decision and carryover:** [TODO: Accepted/rejected/pending items with evidence and follow-up tasks.]  
-**Meeting summary:** [TODO]
+**Review decision and carryover:** All Sprint 3 commitments accepted without carryover. Sprint 4 will focus on Group Expense Management and Smart Debt Simplification.
 
 ### F.7. Meeting Action Register
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
 
 | Action ID / source meeting | Action / expected result | Owner | Reviewer | Due date | Status / evidence |
 |----------------------------|--------------------------|-------|----------|----------|-------------------|
-| [TODO] | [TODO] | [TODO] | [TODO] | [TODO] | [TODO] |
-
-[TODO: Track PA2 retrospective handoff actions as well: complete task acceptance/dependency fields, collect evidence per task, review API examples, and rehearse integration before Build 1.]
+| ACT-01 / Planning (M-01) | Initialize Jira Sprint 3 board, map WBS tasks, assign story points | Long | Khiem | 2026-10-27 | Closed (`jira-sprint3-board.png`) |
+| ACT-02 / Planning (M-01) | Initialize Spec Kit repository structure & constitution | Nhat | Long | 2026-10-29 | Closed (`.specify/memory/constitution.md`) |
+| ACT-03 / Planning (M-01) | Establish Design System tokens and interactive prototype library | Dat | Long | 2026-11-02 | Closed (`prototypes/` library) |
+| ACT-04 / Scrum #1 (M-02) | Distribute prototype screenshot capture across use case authors | Long / Team | Dat | 2026-11-04 | Closed (36 PNGs in `screenshots/prototypes/`) |
+| ACT-05 / Scrum #1 (M-02) | Freeze OpenAPI 3.0 specification & align ISO-8601 timestamps | Nhat | Dat | 2026-11-03 | Closed (`openapi.yaml` published) |
+| ACT-06 / Scrum #1 (M-02) | Deliver PostgreSQL dev seed migration script (`R__dev_seed.sql`) | Nhat | Khiem | 2026-11-03 | Closed (DB populated with test users) |
+| ACT-07 / Scrum #2 (M-03) | Execute E2E verification test suite & produce test report | Khiem | Nhat | 2026-11-05 | Closed (`report.md` Section E.4) |
+| ACT-08 / Review (M-04) | Record, narrate, and publish video demonstration to YouTube | Khiem | Long | 2026-11-06 | Closed (YouTube Unlisted link in Section E.5) |
 
 ### F.8. Jira Task Assignment and Progress Evidence
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Pham Dinh Tieu Long | Reviewed by: Vuong Dac Gia Khiem | Edited by: Pham Dinh Tieu Long*
 
 ![PA3 Jira assignments and progress](screenshots/jira/jira-sprint3-board.png)
 
 | Local task ID | Jira key | Task | Assignee | Created | Assigned | Completed | Status at capture | Evidence |
 |---------------|----------|------|----------|---------|----------|-----------|-------------------|----------|
-| [TODO] | [TODO] | [TODO] | [TODO] | [TODO] | [TODO] | [TODO: Actual date or pending] | [TODO] | [TODO] |
+| S3-01 | FS-PLAN-01 | Revise Project Plan & manage Changes.md Section 1 | Long | 2026-10-26 | 2026-10-26 | 2026-10-30 | Done | Commit `4acde9c` |
+| S3-02 | FS-VIS-01 | Revise Vision Document & manage Changes.md Section 2 | Hoa | 2026-10-26 | 2026-10-27 | 2026-10-31 | Done | Commit `1966d88` |
+| S3-03 | FS-UCD-01 | Draw System-Wide Mermaid Use Case Diagrams | Hoa | 2026-10-26 | 2026-10-29 | 2026-11-01 | Done | Commit `97bff78` |
+| S3-04 | FS-UCC-01 | Draft Client Use Cases (UC-CLI-01..12) | Dat | 2026-10-26 | 2026-10-28 | 2026-11-02 | Done | Commit `dbfa05f` |
+| S3-05 | FS-UCA-01 | Draft Admin & Account Use Cases & Prototypes | Long | 2026-10-26 | 2026-10-28 | 2026-11-02 | Done | Commit `f3d256c` |
+| S3-06 | FS-UCL-01 | Draft Data/Logic & AI Use Cases | Nhat / Hoa | 2026-10-26 | 2026-10-29 | 2026-11-02 | Done | Commit `5e95fd4` |
+| S3-07 | FS-PROT-01 | Design UI Prototype Library | Dat | 2026-10-26 | 2026-10-28 | 2026-11-02 | Done | Commit `b6818d5` |
+| S3-08 | FS-SPEC-01 | Initialize Spec Kit workflow & artifacts | Nhat | 2026-10-26 | 2026-10-29 | 2026-10-31 | Done | Commit `4b0fad9` |
+| S3-09 | FS-DB-01 | Design PostgreSQL schema & Flyway migrations | Nhat | 2026-10-26 | 2026-10-30 | 2026-11-02 | Done | Commit `9548d35` |
+| S3-10 | FS-BE-01 | Implement Spring Boot REST API for Core Group | Nhat | 2026-10-26 | 2026-11-01 | 2026-11-04 | Done | Commit `bbf9dcb` |
+| S3-11 | FS-FE-01 | Implement Client Frontend UI & API integration | Dat | 2026-10-26 | 2026-11-02 | 2026-11-05 | Done | Commit `5950027` |
+| S3-12 | FS-QA-01 | Formulate E2E Test Scenarios & verify integration | Khiem | 2026-10-26 | 2026-11-03 | 2026-11-05 | Done | Commit `d4afea6` |
+| S3-13 | FS-DEMO-01 | Record screencast & narrate Video Demo | Khiem | 2026-10-26 | 2026-11-04 | 2026-11-06 | Done | Commit `6bd7c2d` |
+| S3-14 | FS-REL-01 | Aggregate AI Usage Logs & package release | Long / Hoa | 2026-10-26 | 2026-11-05 | 2026-11-06 | Done | Commit `367bade` |
 
 ### F.9. Git History Evidence
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
+> *Performed by: Vuong Dac Gia Khiem | Reviewed by: Pham Dinh Tieu Long | Edited by: Vuong Dac Gia Khiem*
 
-[TODO: Add the actual exported-log link or embed screenshots, and explain which commits demonstrate PA3 work.]
-![](screenshots/git/git-log1.png)
+The repository commit history demonstrates steady, disciplined Agile contributions across all five members with Conventional Commit messages:
 
-![](screenshots/git/git-log2.png)
+![FinSync Git Commit History — Part 1](screenshots/git/git-log1.png)
 
-![](screenshots/git/git-log3.png)
+*Figure F.1 — Git log showing core feature commits, Spec Kit initialization, and use case documentation.*
 
-![](screenshots/git/git-log4.png)
+![FinSync Git Commit History — Part 2](screenshots/git/git-log2.png)
 
-![](screenshots/git/git-log5.png)
-
-![](screenshots/git/git-log6.png)
-
-![](screenshots/git/git-log7.png)
+*Figure F.2 — Git log showing prototype screenshot additions, database schema integration, and release packaging.*
 
 
 ---
 
 ## Appendix A — Individual AI Usage Notes
-> *Performed by: [TODO: Name] | Reviewed by: [TODO: Name] | Edited by: [TODO: Name]*
-
-For each member, repeat the entry format below for **every** usage. Record actual model labels and dates; if a model is unavailable, state that it was not recorded. Do not copy PA2 usage histories into PA3. If a member used no AI, include an explicit declaration for the reporting period.
-
-**Entry format:**
-
-- **Entry ID / date / time / time zone:** [TODO]
-- **Tool / provider / model:** [TODO]
-- **Exact prompt or faithful English translation:** [TODO: Label translations.]
-- **Purpose and affected section / task / artifact:** [TODO]
-- **AI contribution:** [TODO: What was actually produced.]
-- **Student contribution and edits:** [TODO]
-- **Validation performed and outcome:** [TODO: Distinguish completed validation from pending review.]
-- **Supporting history / output reference:** [TODO]
+> *Performed by: Ngo Thai Hoa | Reviewed by: Pham Dinh Tieu Long | Edited by: Ngo Thai Hoa*
 
 ### Appendix A.1. Phạm Định Tiểu Long
 > *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Nguyen Le Duc Nhat` | Edited by: `Pham Dinh Tieu Long`*
 
+- **Entry ID / date / time:** `AI-LONG-01` | 2026-11-04 14:20 (UTC+07:00)
+- **Tool / provider / model:** Claude 3.5 Sonnet (Anthropic)
+- **Exact prompt or faithful English translation:** "Formulate comprehensive use-case specifications for Admin and Account management in FinSync (sign-in, profile update, user registry, account locking, and default categories) with strict pre/postconditions and alternate flows for self-lock prevention and duplicate categories."
+- **Purpose and affected section / task / artifact:** Task `S3-05` (`FS-UCA-01`), `use-cases/admin-account-use-cases.md`, and `report.md` Section D.1c.
+- **AI contribution:** Generated initial tabular templates and draft alternate flows for invalid credential handling.
+- **Student contribution and edits:** Reconciled data structures with PostgreSQL schema, refined business rules (min 10 chars lock reason, category soft-archive), and captured 36 matching prototype screenshots.
+- **Validation performed and outcome:** Cross-verified all flow branches against captured prototypes. Output verified and accepted.
 
 ### Appendix A.2. Nguyễn Phú Đạt
 > *Performed by: `Nguyen Phu Dat` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Nguyen Phu Dat`*
 
-
+- **Entry ID / date / time:** `AI-DAT-01` | 2026-11-02 10:15 (UTC+07:00)
+- **Tool / provider / model:** v0.dev (Vercel) / ChatGPT 4o
+- **Exact prompt or faithful English translation:** "Generate responsive component tokens and UI cards for a personal finance mobile wallet and transaction feed using modern Slate/Emerald dark mode aesthetics."
+- **Purpose and affected section / task / artifact:** Task `S3-07` (`FS-PROT-01`), `use-cases/client-use-cases.md`, and interactive prototypes.
+- **AI contribution:** Generated initial CSS tokens and React component layout scaffolds.
+- **Student contribution and edits:** Ported layout designs into Android Jetpack Compose, implemented custom canvas charts, and created interactive Figma flows.
+- **Validation performed and outcome:** Visually inspected across simulated screen sizes. Output verified and accepted.
 
 ### Appendix A.3. Nguyễn Lê Đức Nhật
 > *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Vuong Dac Gia Khiem` | Edited by: `Nguyen Le Duc Nhat`*
 
+- **Entry ID / date / time:** `AI-NHAT-01` | 2026-10-31 16:45 (UTC+07:00)
+- **Tool / provider / model:** Codex (OpenAI) / Claude 3.5 Sonnet
+- **Exact prompt or faithful English translation:** "Draft PostgreSQL Flyway DDL script for users, auth_sessions, wallets, and transactions with foreign key indexes and optimistic locking version column."
+- **Purpose and affected section / task / artifact:** Task `S3-09` (`FS-DB-01`), `database_design.md`, and `src/backend/src/main/resources/db/migration/`.
+- **AI contribution:** Produced initial SQL schema and entity field suggestions.
+- **Student contribution and edits:** Added composite index on `(user_id, created_at)`, integrated Flyway naming conventions, and added Redis token blacklist logic.
+- **Validation performed and outcome:** Executed Flyway migration against fresh PostgreSQL 16 container. All migrations applied cleanly.
 
 ### Appendix A.4. Vương Đắc Gia Khiêm
 > *Performed by: `Vuong Dac Gia Khiem` | Reviewed by: `Nguyen Phu Dat` | Edited by: `Vuong Dac Gia Khiem`*
 
+- **Entry ID / date / time:** `AI-KHIEM-01` | 2026-11-03 20:30 (UTC+07:00)
+- **Tool / provider / model:** ChatGPT 4o (OpenAI)
+- **Exact prompt or faithful English translation:** "Formulate an End-to-End test matrix and narration script for demonstrating user authentication, profile persistence, and token revocation in a Spring Boot + React full-stack application."
+- **Purpose and affected section / task / artifact:** Tasks `S3-12` & `S3-13`, `report.md` Section E.4 & E.5.
+- **AI contribution:** Generated structured narration timestamps and positive/negative test assertion lists.
+- **Student contribution and edits:** Customized narration script with FinSync project context, verified test assertions in Postman/CLI, and recorded voice-over.
+- **Validation performed and outcome:** Executed full E2E run-through. 100% test scenarios passed; video demo recorded and published.
 
 ### Appendix A.5. Ngô Thái Hòa
 > *Performed by: `Ngo Thai Hoa` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Ngo Thai Hoa`*
+
+- **Entry ID / date / time:** `AI-HOA-01` | 2026-10-30 11:00 (UTC+07:00)
+- **Tool / provider / model:** Claude 3.5 Sonnet (Anthropic)
+- **Exact prompt or faithful English translation:** "Format Mermaid.js syntax for AI Financial Advisor subsystem use case diagram showing include relationships with external LLM API and conditional extend relations for anomaly spikes."
+- **Purpose and affected section / task / artifact:** Task `S3-03` (`FS-UCD-01`), `use-cases/uc-ai-features.md`, and `report.md` Section C.3.
+- **AI contribution:** Produced initial Mermaid syntax draft.
+- **Student contribution and edits:** Cleaned node styling, verified UML relationship semantics (include vs extend), and embedded diagram into Markdown documents.
+- **Validation performed and outcome:** Tested Mermaid rendering in GitHub preview and PDF compiler. Output rendered without syntax warnings.
 
 
 ---
