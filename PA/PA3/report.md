@@ -318,7 +318,58 @@ The 11 functional groups defined in the Vision baseline are mapped directly to f
 ### C.3. Mermaid Use-Case Diagrams
 > *Performed by: Ngo Thai Hoa | Reviewed by: Vuong Dac Gia Khiem | Edited by: Pham Dinh Tieu Long*
 
-#### Diagram C.1 — Client & Admin Subsystems
+To systematically cover all functional requirements (FRs) defined in the Vision Document while maintaining visual clarity, the use-case model is partitioned into three formal Mermaid diagrams:
+1. **Diagram C.1 — Client Personal & Group Finance Subsystem** (Core user journeys, multi-wallet isolation, transaction ledger, category budgets, group expense splitting, and debt settlements).
+2. **Diagram C.2 — Admin Governance & Account Lifecycle Subsystem** (Authentication session management, profile synchronization, administrative user directory, and account locking).
+3. **Diagram C.3 — AI Financial Advisor & Analytics Subsystem** (AI-driven financial health analysis, automated monthly evaluation, anomaly spike detection, and budget optimization).
+
+#### Diagram C.1 — Client Personal & Group Finance Subsystem
+```mermaid
+flowchart LR
+    actorUser["Actor: Regular User"]
+    actorMember["Actor: Group Member"]
+    actorOwner["Actor: Group Owner"]
+
+    actorMember -->|"generalization"| actorUser
+    actorOwner -->|"generalization"| actorMember
+
+    subgraph FinSyncClient["FinSync — Client Personal & Group Finance Subsystem"]
+        cli01(["UC-CLI-01: View Financial Overview Dashboard"])
+        cli02(["UC-CLI-02: Manage Personal Wallets"])
+        cli03(["UC-CLI-03: Transfer Funds Between Wallets"])
+        cli04(["UC-CLI-04: Record Income or Expense Transaction"])
+        cli05(["UC-CLI-05: Search and Filter Transactions"])
+        cli06(["UC-CLI-06: View and Edit Transaction"])
+        cli07(["UC-CLI-07: Delete and Restore Transaction"])
+        cli08(["UC-CLI-08: View Budget Status and Limits"])
+        cli09(["UC-CLI-09: View Financial Reports"])
+        cli10(["UC-CLI-10: Create, Join & View Shared Groups"])
+        cli11(["UC-CLI-11: Add and Split Group Expense"])
+        cli12(["UC-CLI-12: View Debts and Settle Debts"])
+    end
+
+    actorUser --- cli01
+    actorUser --- cli02
+    actorUser --- cli03
+    actorUser --- cli04
+    actorUser --- cli05
+    actorUser --- cli06
+    actorUser --- cli07
+    actorUser --- cli08
+    actorUser --- cli09
+    actorMember --- cli10
+    actorMember --- cli11
+    actorMember --- cli12
+    actorOwner --- cli10
+
+    cli03 -.->|"«include»"| cli02
+    cli11 -.->|"«include»"| cli04
+    cli12 -.->|"«include»"| cli03
+    cli08 -.->|"«extend»: Spending >80%"| cli04
+    cli07 -.->|"«extend»: Undo within 7s"| cli06
+```
+
+#### Diagram C.2 — Admin Governance & Account Lifecycle Subsystem
 ```mermaid
 flowchart LR
     actorUser["Actor: Regular User"]
@@ -326,11 +377,11 @@ flowchart LR
     
     subgraph FinSyncAdmin["FinSync — Admin & Account Subsystem"]
         acc01(["UC-ACC-01: Sign In Personal Account"])
-        acc02(["UC-ACC-02: View/Update Profile"])
-        adm01(["UC-ADM-01: Admin Sign In & Dashboard"])
-        adm02(["UC-ADM-02: User Registry"])
-        adm03(["UC-ADM-03: Lock/Unlock Account"])
-        adm04(["UC-ADM-04: System Taxonomies & Settings"])
+        acc02(["UC-ACC-02: View and Update Profile"])
+        adm01(["UC-ADM-01: Admin Sign In & Dashboard Overview"])
+        adm02(["UC-ADM-02: User Registry Search & Filter"])
+        adm03(["UC-ADM-03: Lock and Unlock User Account"])
+        adm04(["UC-ADM-04: System Taxonomies & Currency Settings"])
     end
     
     actorUser --- acc01
@@ -339,10 +390,12 @@ flowchart LR
     actorAdmin --- adm02
     actorAdmin --- adm03
     actorAdmin --- adm04
+
     adm03 -.->|"«include»"| adm02
+    acc02 -.->|"«extend»: Password change requested"| acc01
 ```
 
-#### Diagram C.2 — AI Financial Advisor Subsystem
+#### Diagram C.3 — AI Financial Advisor Subsystem
 ```mermaid
 flowchart LR
     actorUser["Actor: Regular User"]
@@ -371,9 +424,10 @@ flowchart LR
 
 | Diagram ID | Functional groups covered | Mermaid block / document location | Relationship rationale |
 |------------|---------------------------|------------------------------------|------------------------|
-| Diagram C.1 | Authentication, Profile, Admin System | Section C.3 (Client & Admin) | Actor associations and administrative inclusion of user registry during account lock |
-| Diagram C.2 | AI Financial Advisory, Anomaly Alerts | Section C.3 (AI Advisor) | External LLM inclusion; conditional extensions when spending anomalies exceed 30% |
-| Diagram D.1b | Data & Logic, Splitting, Settlements | Section D.1b | Generalization from Group Owner to Regular User; scheduler triggers for batch jobs |
+| Diagram C.1 | Wallets, Transactions, Budgets, Groups, Debt Splitting | Section C.3 (Client Subsystem) | Actor generalization (`Group Owner` $\rightarrow$ `Group Member` $\rightarrow$ `Regular User`); inclusion of wallet validation in transfers; inclusion of transaction ledger in group splits; conditional extension when budget limit exceeds 80%. |
+| Diagram C.2 | Authentication, Profile, Admin System | Section C.3 (Admin Subsystem) | Actor associations and administrative inclusion of user registry during account lock; conditional extension for credential re-verification. |
+| Diagram C.3 | AI Financial Advisory, Anomaly Alerts | Section C.3 (AI Advisor) | External LLM inclusion; conditional extensions when spending anomalies exceed 30% threshold. |
+| Diagram D.1b | Data & Logic, Splitting, Settlements | Section D.1b | Generalization from Group Owner to Regular User; scheduler triggers for automated monthly batches and reminders. |
 
 ---
 
