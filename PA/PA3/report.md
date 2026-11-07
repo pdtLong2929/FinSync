@@ -1153,6 +1153,15 @@ The AI Financial Advisor contribution contains **5 specialized use-case specific
 3. Client navigates to Profile $\rightarrow$ queries `GET /api/v1/users/me` $\rightarrow$ updates display name, phone number, and extended profile fields (including birthdate and bio; email displayed as immutable account identifier) via `PATCH /api/v1/users/me` $\rightarrow$ changes persist to PostgreSQL.
 4. User logs out $\rightarrow$ Backend invalidates refresh token and pushes `jti` identifier to Redis blacklist $\rightarrow$ old token cannot access protected endpoints.
 
+> [!NOTE]
+> **Specification & Implementation Alignment Note (Prototype vs. Demo Implementation):**  
+> In the initial UI Prototype wireframes for `UC-ACC-02` (documented in [admin-account-use-cases.md](use-cases/admin-account-use-cases.md)), the interface primarily illustrated the minimal core editable fields (**Display Name**, **Phone Number**, and **Avatar**) to maintain a clean interaction model during early wireframing.  
+> During full-stack engineering and mobile UI delivery (demonstrated in the video demo), the team enriched the profile management flow to production readiness by incorporating:
+> - **Extended Editable Attributes:** **Date of Birth (`dob`)** and **Personal Bio (`bio`)**, enabling users to maintain richer personal identity details.
+> - **Read-Only Account Identifier:** **Email Address**, displayed explicitly within the profile screen as a verified, immutable account identifier (non-editable by the user for security and authentication consistency).
+> 
+> Both the database schema (`users` table) and the REST endpoint (`PATCH /api/v1/users/me`) fully support these attributes while strictly preserving all authentication, validation, and session boundaries.
+
 | Requirement / use case | Frontend screen | Backend endpoint / logic | Database entity / migration | Actual status / evidence |
 |------------------------|-----------------|--------------------------|-----------------------------|--------------------------|
 | User Registration (`FR-AUTH-01`) | `RegisterScreen.kt` / Web Modal | `POST /api/v1/auth/register` | `users` table; `V1__init_schema.sql` | Operational (Verified 201 Created & 409 Conflict) |
@@ -1373,7 +1382,7 @@ The [Android Frontend Technical Guide](frontend/frontend-guide.md) records the c
 |-----------|-----------------------|------------------------|
 | `00:00 - 01:15` | Introduction: Project vision, non-custodial architecture, Spec Kit overview | Project Overview & Constitution |
 | `01:15 - 02:45` | User Registration & Login: Live UI execution, error handling (duplicate email) | `FR-AUTH-01`, `FR-AUTH-02`, `UC-ACC-01` |
-| `02:45 - 04:30` | Profile Management: View profile, edit display name/phone, verify PostgreSQL persistence | `FR-PROF-01`, `FR-PROF-02`, `UC-ACC-02` |
+| `02:45 - 04:30` | Profile Management: View profile, edit core & extended fields (Display Name, Phone, Date of Birth, Bio with read-only Email identifier), verify PostgreSQL persistence | `FR-PROF-01`, `FR-PROF-02`, `UC-ACC-02` |
 | `04:30 - 05:45` | Session Lifecycle & Token Security: Token refresh rotation, logout, Redis blacklist | `FR-AUTH-03`, Redis verification |
 | `05:45 - 06:45` | Technical Summary: Code walkthrough, Docker Compose setup, conclusion | Architecture & Wrap-up |
 

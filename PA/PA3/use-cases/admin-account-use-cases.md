@@ -135,6 +135,10 @@
 | `UC-ACC-02-S04` | Change Password Modal | AF-01 / AF-02 | Secure form with password strength indicator and validation error states. | `screenshots/prototypes/UC-ACC-02/S04.png` |
 | `UC-ACC-02-S05` | File Size Warning Dialog | AF-03 | Warning alert for oversized file selections. | `screenshots/prototypes/UC-ACC-02/S05.png` |
 
+> [!NOTE]
+> **Prototype Design vs. Production Implementation Note:**  
+> The wireframe prototype screenshot for `UC-ACC-02-S02` captures the initial UX design focusing on core editable fields (**Display Name**, **Phone Number**, and **Avatar**) for high clarity. During end-to-end full-stack implementation and mobile delivery (Sprint 3 demo), the profile editing interface was naturally enriched to include **Date of Birth (`dob`)** and **Bio (`bio`)** as editable profile attributes, while presenting **Email** as a read-only account identifier. All these attributes are fully supported by the underlying API (`PATCH /api/v1/users/me`) and persisted in PostgreSQL.
+
 ---
 
 ## 3. UC-ADM-01 — Admin Portal Login & Role-Based Authorization
