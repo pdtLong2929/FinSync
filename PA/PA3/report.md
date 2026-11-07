@@ -1364,8 +1364,8 @@ The [Android Frontend Technical Guide](frontend/frontend-guide.md) records the c
 ### E.5. Narrated Video Demo and Source Submission
 > *Performed by: Vuong Dac Gia Khiem | Reviewed by: Pham Dinh Tieu Long | Edited by: Vuong Dac Gia Khiem*
 
-**YouTube URL:** `https://youtu.be/FinSync-PA3-Demo-Group04` *(Unlisted Demonstration)*  
-**Visibility / access checked on:** 2026-11-06 (Verified playable in incognito window)  
+**YouTube URL:** [https://youtu.be/_VUbM5RJWPE](https://youtu.be/_VUbM5RJWPE) *(Unlisted Demonstration)*  
+**Visibility / access checked on:** 2026-11-07 (Verified playable in incognito window)  
 **Duration / language / narrator(s):** 06:45 | English narration | Narrator: Vuong Dac Gia Khiem (QA Lead)  
 **Demonstrated source revision:** Commit `5af7f2d` / `d4afea6`
 
