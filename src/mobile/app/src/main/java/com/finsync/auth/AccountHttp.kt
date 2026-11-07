@@ -10,6 +10,8 @@ import java.net.HttpURLConnection
 import java.net.SocketTimeoutException
 import java.net.URI
 import java.net.URL
+import android.util.Log
+import com.finsync.BuildConfig
 
 internal class AccountReply(val status: Int, val body: JSONObject) {
     override fun toString() = "AccountReply(status=$status, body=<redacted>)"
@@ -52,6 +54,7 @@ internal class AccountHttp(baseUrl: String, allowLocalHttp: Boolean) {
                 connection.outputStream.use { it.write(payload.toString().toByteArray(Charsets.UTF_8)) }
             }
             val status = connection.responseCode
+            if (BuildConfig.DEBUG) Log.d("FinSyncAuth", "$method $path: HTTP $status")
             currentCoroutineContext().ensureActive()
             val stream = if (status in 200..299) connection.inputStream else connection.errorStream
             // Avoid readNBytes: the client supports API26.
@@ -62,9 +65,18 @@ internal class AccountHttp(baseUrl: String, allowLocalHttp: Boolean) {
             AccountReply(status, if (length == 0) JSONObject() else JSONObject(String(buffer, 0, length, Charsets.UTF_8)))
         } catch (cancelled: kotlinx.coroutines.CancellationException) { throw cancelled }
         catch (failed: AccountApiException) { throw failed }
-        catch (_: SocketTimeoutException) { throw AccountApiException(AuthFailure.Unavailable) }
-        catch (_: IOException) { throw AccountApiException(AuthFailure.Offline) }
-        catch (_: Exception) { throw AccountApiException(AuthFailure.Unavailable) }
+        catch (_: SocketTimeoutException) {
+            if (BuildConfig.DEBUG) Log.w("FinSyncAuth", "$method $path: timeout (check local permission, host and API port)")
+            throw AccountApiException(AuthFailure.Unavailable)
+        }
+        catch (_: IOException) {
+            if (BuildConfig.DEBUG) Log.w("FinSyncAuth", "$method $path: connection failed")
+            throw AccountApiException(AuthFailure.Offline)
+        }
+        catch (_: Exception) {
+            if (BuildConfig.DEBUG) Log.w("FinSyncAuth", "$method $path: invalid or unavailable response")
+            throw AccountApiException(AuthFailure.Unavailable)
+        }
         finally { connection.disconnect() }
     }
 }

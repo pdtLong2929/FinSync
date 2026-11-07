@@ -33,6 +33,11 @@ Default debug API is **`http://10.0.2.2:8080`**, matching the team's Docker back
 and prepared workstation script. Android Studio **Sync Now → Run (debug)** uses
 this URL automatically; no Gradle property is required for the normal demo.
 After pulling updates, rebuild/install the app; an old APK does not update with Git.
+On Android 17 / API37, the debug app asks for Nearby devices / local network
+permission when signing in or registering against `10.0.2.2`. Allow it to reach
+the host's Docker API. If denied, use **Open app permissions**, allow access and
+submit again. This permission is declared only in the debug manifest; public
+HTTPS release deployments do not request it.
 Only if the backend publishes a different port, override it explicitly, for example:
 
 ```powershell

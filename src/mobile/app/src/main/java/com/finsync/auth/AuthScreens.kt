@@ -196,9 +196,19 @@ private fun AuthForm(state: AuthUiState, controller: AuthController) {
         if (dirty || state.busy) pending = target else { autofill?.cancel(); controller.open(target) }
     }
     LaunchedEffect(state.failure) { if (state.failure != null) autofill?.cancel() }
-    val submit = { email = email.trim(); controller.submit(email, password, confirmation, displayName) }
+    val backendAccess = rememberLocalBackendAccess {
+        if (!state.busy) { email = email.trim(); controller.submit(email, password, confirmation, displayName) }
+    }
+    val submit = {
+        if (recovery) controller.submit(email.trim(), password, confirmation, displayName)
+        else backendAccess.submit()
+    }
     val action: @Composable () -> Unit = {
         Column(verticalArrangement = Arrangement.spacedBy(Space.small)) {
+            if (backendAccess.denied && !recovery) {
+                ErrorText("Allow Nearby devices / local network access to connect to the demo backend on your computer. Then try again.")
+                TextButton(onClick = backendAccess.openSettings) { Text("Open app permissions") }
+            }
             if (state.errors.any) ErrorText("Check the highlighted fields.")
             state.failure?.let { ErrorText(when (it) {
                 AuthFailure.NotConnected -> "Account access isn't available yet. You can explore FinSync without an account."

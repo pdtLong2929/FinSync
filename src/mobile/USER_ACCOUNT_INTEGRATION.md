@@ -8,6 +8,35 @@ financial calculations were not rewritten for the Android integration.
 
 ## Implemented end to end
 
+### Android17 local-demo permission and diagnostics
+
+API37 emulators enforce local-network permission for this target37 app. Debug
+builds declare `ACCESS_LOCAL_NETWORK` and ask at login/registration submission
+against `10.0.2.2`; the request continues only after approval. Denial preserves
+the form and offers app permission settings; submit again after granting access.
+The permission is not declared by release builds and is not requested for public
+HTTPS endpoints. Android16 and older keep their existing connection behavior.
+
+An empty `docker compose logs --since 2m --tail 100 backend` result does not prove
+that the API received the request: the time window may be empty, and successful
+requests are not necessarily access-logged. Check service/port with
+`docker compose ps -a` and `curl.exe -i http://localhost:8080/actuator/health`.
+For the debug Android client, select **FinSyncAuth** in Android Studio Logcat
+or run `adb logcat -s FinSyncAuth`, then press Create account once. Logs report
+only fixed endpoint names, HTTP status or a connection/timeout category; no
+passwords, tokens, user input, response bodies or exception messages are logged.
+
+Verification of this correction (2026-11-07): debug APK and test APK build, 65/65
+JVM tests and lint (0 errors, 31 warnings, 2 hints) passed. Merged manifests confirm
+the permission is present in debug and absent in release. API36 AuthFlow tests:
+4/6 passed; 2 failed waiting for positive software-keyboard insets (IME reported
+visible with height0). The actual-Activity keyboard check also timed out. The
+emulator then became offline, blocking the live account rerun. These failures are
+not claimed as passes or attributed conclusively to the environment. API37's
+native grant/deny dialog has not been exercised: the existing AVD is API36.
+Host checks returned health401 and empty login400/VALIDATION_ERROR, illustrating
+that a protected/missing health route alone cannot diagnose the account API.
+
 | UI action | Real API | Persistent result |
 |---|---|---|
 | Register | POST `/api/v1/auth/register` | PostgreSQL user + BCrypt password hash; then sign in |

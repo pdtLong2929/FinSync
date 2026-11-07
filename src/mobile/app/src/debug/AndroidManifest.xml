@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Android 17 gates the emulator's connection to the host's Docker API. -->
+    <uses-permission android:name="android.permission.ACCESS_LOCAL_NETWORK" />
     <application android:networkSecurityConfig="@xml/auth_debug_network_security" />
 </manifest>
