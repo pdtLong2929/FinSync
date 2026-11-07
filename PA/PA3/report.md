@@ -39,10 +39,10 @@ All members participate as Full-stack Engineers. The roles below retain the PA2 
 ---
 
 ## Part A — Revised Project Plan
-> *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
+> *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Pham Dinh Tieu Long`*
 
 ### A.1. Introduction and Revision Summary
-> *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
+> *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Pham Dinh Tieu Long`*
 
 **Purpose and planning baseline:** This revised Project Plan updates the baseline established in PA2 (revision `2f4fcf6`) to govern Sprint 3 / PA3 execution from October 26, 2026 to November 08, 2026. In accordance with the course specification, all project planning changes, risk adjustments, task decompositions, and build milestones are tracked and traced to the shared `Changes.md` file.
 
@@ -54,7 +54,7 @@ All members participate as Full-stack Engineers. The roles below retain the PA2 
 | PP-04 | PA3 specification requirement focusing implementation on one complete functional group via Spec Kit. | Section A.4.4–A.4.5 (Build Plan) | Realigned Build 1 acceptance criteria to mandate end-to-end execution of Account Management & Personal Finance Core via Spec Kit. | Section 1.5 (PP-04) | Accepted on 2026-10-31 by Ngo Thai Hoa |
 
 ### A.2. Project Overview
-> *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
+> *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Pham Dinh Tieu Long`*
 
 **Goals:** Deliver FinSync as a unified personal finance tracker, shared group expense splitter with debt simplification, and AI-powered financial advisor. For PA3, achieve a complete, demonstrable baseline comprising 12 functional Use Cases with 100% prototype screenshot coverage, end-to-end Spec Kit implementation of the core functional group, and rigorous Scrum tracking.
 
@@ -75,7 +75,7 @@ All members participate as Full-stack Engineers. The roles below retain the PA2 
 **Assumptions and dependencies:** Development environments standardized on Docker Compose (PostgreSQL 16, Redis 7); Backend standardized on Spring Boot 3 / Java 21; Frontend leverages React web and Android Jetpack Compose; team members commit 22 hours each during Sprint 3.
 
 ### A.3. Project Organization and Risk Management
-> *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
+> *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Pham Dinh Tieu Long`*
 
 **Team structure and responsibilities:**
 - **Pham Dinh Tieu Long (Leader / PM):** Project Plan coordination, `Changes.md`, Admin & Account Use Cases, Scrum facilitation & minutes, Jira management, release packaging.
@@ -96,7 +96,7 @@ All members participate as Full-stack Engineers. The roles below retain the PA2 
 | R6 | Spec Kit artifact synchronization lag | Low | High | Follow strict Spec Kit lifecycle (Specify → Plan → Tasks → Implement) before business logic coding. | Nhat | Closed |
 
 ### A.4. Process, Schedule, and Sprint 3 Tasks
-> *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
+> *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Pham Dinh Tieu Long`*
 
 **Process:** Scrum; one sprint per PA, lasting 2–3 weeks. Hold one Sprint Planning, two Weekly Scrum meetings, and one Sprint Review/Retrospective. Record the actual meetings in Part F.
 
@@ -138,7 +138,7 @@ All members participate as Full-stack Engineers. The roles below retain the PA2 
 | Ngô Thái Hòa | 22 | 14 (S3-02, S3-03, S3-06) | 6 | 2 | 22 |
 
 ### A.5. Build Plan and Later Sprints
-> *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
+> *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Pham Dinh Tieu Long`*
 
 **Build sequence:** Build 0 (component skeletons) was verified complete in Sprint 2. Build 1 focuses strictly on delivering the core functional group end-to-end via Spec Kit. Subsequent builds incrementally layer group expense splitting and AI advisory capabilities.
 
@@ -154,10 +154,10 @@ All members participate as Full-stack Engineers. The roles below retain the PA2 
 ---
 
 ## Part B — Detailed Vision Document
-> *Performed by: Ngo Thai Hoa | Reviewed by: Pham Dinh Tieu Long | Edited by: Ngo Thai Hoa*
+> *Performed by: `Ngo Thai Hoa` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Ngo Thai Hoa`*
 
 ### B.1. Introduction and Revision Summary
-> *Performed by: Ngo Thai Hoa | Reviewed by: Pham Dinh Tieu Long | Edited by: Ngo Thai Hoa*
+> *Performed by: `Ngo Thai Hoa` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Ngo Thai Hoa`*
 
 **Purpose and audience:** This Detailed Vision Document defines the complete product vision, user personas, operational boundaries, and functional/non-functional requirements for FinSync. The audience includes course instructors, teaching assistants, and the Group 04 development team.
 
@@ -173,7 +173,7 @@ All members participate as Full-stack Engineers. The roles below retain the PA2 
 | VD-06 | Non-functional requirements verification and use-case traceability. | Section 6 (Non-Functional Requirements) | Mapped NFR-P1..P7, NFR-S1..S9, NFR-R1..R8 to verification methods and test criteria. | Section 2.7 (VD-06) |
 
 ### B.2. Positioning
-> *Performed by: Ngo Thai Hoa | Reviewed by: Pham Dinh Tieu Long | Edited by: Ngo Thai Hoa*
+> *Performed by: `Ngo Thai Hoa` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Ngo Thai Hoa`*
 
 | Problem statement element | Revised description |
 |---------------------------|---------------------|
@@ -190,7 +190,7 @@ All members participate as Full-stack Engineers. The roles below retain the PA2 
 | Our product | Provides an integrated ecosystem combining personal wallets, offline-first transaction logging, debt graph simplification, and privacy-preserving AI insights in one application. |
 
 ### B.3. Stakeholders, Users, and Environments
-> *Performed by: Ngo Thai Hoa | Reviewed by: Pham Dinh Tieu Long | Edited by: Ngo Thai Hoa*
+> *Performed by: `Ngo Thai Hoa` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Ngo Thai Hoa`*
 
 | Stakeholder / user | Needs and responsibilities | Environment / constraints | Priority |
 |--------------------|----------------------------|---------------------------|----------|
@@ -202,7 +202,7 @@ All members participate as Full-stack Engineers. The roles below retain the PA2 
 **User environment:** Primary client is an Android mobile app (API level 26+, Android 8.0+) written in Jetpack Compose, complemented by a responsive web client. Personal transactions support offline queueing with automated server reconciliation. Group operations require active internet connectivity. Supported currencies: VND (default reporting base) and USD.
 
 ### B.4. Alternatives and Competition
-> *Performed by: Ngo Thai Hoa | Reviewed by: Pham Dinh Tieu Long | Edited by: Ngo Thai Hoa*
+> *Performed by: `Ngo Thai Hoa` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Ngo Thai Hoa`*
 
 | Need / capability | Money Lover — surveyed behavior | Splitwise — surveyed behavior | FinSync — planned response | Evidence / source |
 |-------------------|----------------------------------|--------------------------------|---------------------------|-------------------|
@@ -212,7 +212,7 @@ All members participate as Full-stack Engineers. The roles below retain the PA2 
 | Bank Connectivity & Custody | Requires linked banking credentials in premium tiers. | Non-custodial; manual settlement confirmation. | 100% non-custodial bookkeeping model; zero banking credential access; recipient-confirmed settlement. | PA2 Vision Baseline B.2 |
 
 ### B.5. Product Overview, Business Rules, and Dependencies
-> *Performed by: Ngo Thai Hoa | Reviewed by: Pham Dinh Tieu Long | Edited by: Ngo Thai Hoa*
+> *Performed by: `Ngo Thai Hoa` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Ngo Thai Hoa`*
 
 **Product perspective:** FinSync is structured as a multi-tier distributed system comprising an Android client (Jetpack Compose), a Web client (React.js), a Spring Boot 3 backend with PostgreSQL 16 persistence and Redis 7 session/blacklist caching, and an external LLM AI advisory service.
 
@@ -227,7 +227,7 @@ All members participate as Full-stack Engineers. The roles below retain the PA2 
 | BR-AI-02 | Non-Automated Financial Effects: AI advice or budget suggestions require explicit user confirmation before any category budget limit is modified. | FR-AI-04, UC-AI-04 | PA2 Section B.4.1 | Retained |
 
 ### B.6. Detailed Functional Requirements
-> *Performed by: Ngo Thai Hoa | Reviewed by: Pham Dinh Tieu Long | Edited by: Ngo Thai Hoa*
+> *Performed by: `Ngo Thai Hoa` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Ngo Thai Hoa`*
 
 The 11 functional groups defined in the Vision baseline are mapped directly to four modularized use-case catalogues in `use-cases/`:
 
@@ -246,7 +246,7 @@ The 11 functional groups defined in the Vision baseline are mapped directly to f
 | AI Financial Advisor | Monthly spending evaluation, anomaly detection, budget advice | FR-AI-01..06 | `use-cases/uc-ai-features.md` (UC-AI-01..05) |
 
 ### B.7. Detailed Non-Functional Requirements
-> *Performed by: Ngo Thai Hoa | Reviewed by: Pham Dinh Tieu Long | Edited by: Ngo Thai Hoa*
+> *Performed by: `Ngo Thai Hoa` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Ngo Thai Hoa`*
 
 | NFR ID | Category | Requirement and measurable target | Conditions / environment | Verification method | Related use cases | Change from PA2 |
 |--------|----------|------------------------------------|--------------------------|---------------------|-------------------|-----------------|
@@ -260,10 +260,10 @@ The 11 functional groups defined in the Vision baseline are mapped directly to f
 ---
 
 ## Part C — Use-Case Model
-> *Performed by: Ngo Thai Hoa | Reviewed by: Vuong Dac Gia Khiem | Edited by: Pham Dinh Tieu Long*
+> *Performed by: `Ngo Thai Hoa` | Reviewed by: `Vuong Dac Gia Khiem` | Edited by: `Pham Dinh Tieu Long`*
 
 ### C.1. System Boundary and Actors
-> *Performed by: Ngo Thai Hoa | Reviewed by: Vuong Dac Gia Khiem | Edited by: Pham Dinh Tieu Long*
+> *Performed by: `Ngo Thai Hoa` | Reviewed by: `Vuong Dac Gia Khiem` | Edited by: `Pham Dinh Tieu Long`*
 
 **System boundary:** FinSync, including its mobile app, backend, database, admin panel, and internal AI service. External payments occur outside this boundary.
 
@@ -277,7 +277,7 @@ The 11 functional groups defined in the Vision baseline are mapped directly to f
 | External LLM API | Generative AI inference provider (Gemini / Claude) | Receives aggregated financial prompts; returns advisory text |
 
 ### C.2. Use-Case Catalog and Requirement Traceability
-> *Performed by: Ngo Thai Hoa | Reviewed by: Vuong Dac Gia Khiem | Edited by: Pham Dinh Tieu Long*
+> *Performed by: `Ngo Thai Hoa` | Reviewed by: `Vuong Dac Gia Khiem` | Edited by: `Pham Dinh Tieu Long`*
 
 | Use-case ID | Use-case name / user goal | Actor(s) | Functional requirement IDs | Diagram | Specification location | Prototype screen IDs |
 |-------------|--------------------------|----------|----------------------------|---------|------------------------|----------------------|
@@ -316,7 +316,7 @@ The 11 functional groups defined in the Vision baseline are mapped directly to f
 **Coverage review:** All functional requirements declared in Part B map to formal specifications and screenshot evidence. Prototype screens across all 4 modules are verifiable in `screenshots/prototypes/`.
 
 ### C.3. Mermaid Use-Case Diagrams
-> *Performed by: Ngo Thai Hoa | Reviewed by: Vuong Dac Gia Khiem | Edited by: Pham Dinh Tieu Long*
+> *Performed by: `Ngo Thai Hoa` | Reviewed by: `Vuong Dac Gia Khiem` | Edited by: `Pham Dinh Tieu Long`*
 
 To systematically cover all functional requirements (FRs) defined in the Vision Document while maintaining visual clarity, the use-case model is partitioned into three formal Mermaid diagrams:
 1. **Diagram C.1 — Client Personal & Group Finance Subsystem** (Core user journeys, multi-wallet isolation, transaction ledger, category budgets, group expense splitting, and debt settlements).
@@ -432,12 +432,12 @@ flowchart LR
 ---
 
 ## Part D — Use-Case Specifications and UI Prototypes
-> *Performed by: Pham Dinh Tieu Long | Reviewed by: Nguyen Phu Dat | Edited by: Pham Dinh Tieu Long*
+> *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Nguyen Phu Dat` | Edited by: `Pham Dinh Tieu Long`*
 
 **Weight:** 45 points. Complete one specification for **every** modeled use case, including reused or extending use cases. Keep them here or in linked Markdown files submitted with the report. Screenshots of all prototype screens must appear alongside the corresponding specification; a design-tool link alone is insufficient.
 
 ### D.1. Specification and Prototype Conventions
-> *Performed by: Pham Dinh Tieu Long | Reviewed by: Nguyen Phu Dat | Edited by: Pham Dinh Tieu Long*
+> *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Nguyen Phu Dat` | Edited by: `Pham Dinh Tieu Long`*
 
 **Ordering:** Specifications and visual evidence are grouped into four specialized catalogues matching the system decomposition in Section C.2:
 1. Client Use Cases (`use-cases/client-use-cases.md`) — Core user journeys for wallets, budgeting, transactions, groups, and settlements.
@@ -453,7 +453,7 @@ flowchart LR
 Each basic-flow and alternative-flow screen/state must be identifiable. Shared screens may be reused, but embed and explain the relevant screenshots with each specification. Refine any specification whose prototype cannot express its stated behavior coherently.
 
 ### D.1a. Regular User / Client Use Cases and Prototype Evidence
-> *Performed by: Nguyễn Phú Đạt (24120038) | Reviewed by: Pending team review | Edited by: Pending confirmation*
+> *Performed by: `Nguyễn Phú Đạt` (24120038) | Reviewed by: Pending team review | Edited by: Pending confirmation*
 
 The Client contribution contains **12 use-case specifications (UC-CLI-01 through UC-CLI-12)** and **65 prototype evidence PNGs**, mapped to Basic, Alternative and Exception flows. Detailed specifications and all embedded figures are in the [Client catalogue](use-cases/client-use-cases.md).
 
@@ -1103,7 +1103,7 @@ C1–C5 apply wherever their condition is relevant; each case references this ta
 
 
 ### D.1c. Admin & Account Use Cases and UI Prototypes
-> *Performed by: Pham Dinh Tieu Long (24120087) | Reviewed by: Ngo Thai Hoa (24120051) | Edited by: Pham Dinh Tieu Long*
+> *Performed by: `Pham Dinh Tieu Long` (24120087) | Reviewed by: `Ngo Thai Hoa` (24120051) | Edited by: `Pham Dinh Tieu Long`*
 
 The Admin & Account contribution comprises **6 detailed use-case specifications** and **36 high-resolution prototype screenshots** covering both mobile authentication/profile flows and desktop administration dashboards. Full specifications, flow steps, and embedded figures are catalogued in [Admin & Account Use Cases](use-cases/admin-account-use-cases.md).
 
@@ -1121,7 +1121,7 @@ The Admin & Account contribution comprises **6 detailed use-case specifications*
 Every alternative and exception flow has a corresponding visual evidence file in `screenshots/prototypes/`, demonstrating strict adherence to PA3 Section D requirements.
 
 ### D.1d. AI Financial Advisor Use Cases and UI Prototypes
-> *Performed by: Ngo Thai Hoa (24120051) | Reviewed by: Pham Dinh Tieu Long (24120087) | Edited by: Ngo Thai Hoa*
+> *Performed by: `Ngo Thai Hoa` (24120051) | Reviewed by: `Pham Dinh Tieu Long` (24120087) | Edited by: `Ngo Thai Hoa`*
 
 The AI Financial Advisor contribution contains **5 specialized use-case specifications** and **16 prototype evidence PNGs**, establishing privacy-preserving automated intelligence. Full specifications and analysis flows are catalogued in [AI Feature Use Cases](use-cases/uc-ai-features.md) and audited in [AI Evidence Report](screenshots/prototypes/ai-evidence/Evidence-Report.md).
 
@@ -1136,12 +1136,12 @@ The AI Financial Advisor contribution contains **5 specialized use-case specific
 ---
 
 ## Part E — Implement One Functional Group Using Spec Kit
-> *Performed by: Nguyen Le Duc Nhat | Reviewed by: Pham Dinh Tieu Long | Edited by: Nguyen Le Duc Nhat*
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Le Duc Nhat`*
 
 **Weight:** 20 points. Implement one complete functional group end-to-end: frontend, backend/API or logic, and database persistence.
 
 ### E.1. Selected Group and Implementation Scope
-> *Performed by: Nguyen Le Duc Nhat | Reviewed by: Pham Dinh Tieu Long | Edited by: Nguyen Le Duc Nhat*
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Le Duc Nhat`*
 
 **Selected functional group:** **Account Management & Authentication Lifecycle (with Core Personal Finance Operations)**  
 **Selection rationale:** In strict alignment with [demo_feature.md](demo_feature.md) and [database_design.md](database_design.md), this functional group establishes the foundational prerequisite for all personal financial tracking, multi-wallet isolation, and shared expense splitting. Without authenticated user identity, role-based security, and session lifecycle management, no financial ledger can guarantee privacy or non-custodial boundaries.  
@@ -1164,7 +1164,7 @@ The AI Financial Advisor contribution contains **5 specialized use-case specific
 **Dependencies and limitations:** Requires Docker services (PostgreSQL 16 on port 5432, Redis 7 on port 6379). Avatar image uploads are currently simulated with local URI strings; cloud S3/Blob storage is scheduled for Sprint 4.
 
 ### E.2. Spec Kit Workflow and Artifacts
-> *Performed by: Nguyen Le Duc Nhat | Reviewed by: Pham Dinh Tieu Long | Edited by: Nguyen Le Duc Nhat*
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Le Duc Nhat`*
 
 The implementation was driven strictly following the Spec Kit specification-first methodology, maintaining formal artifacts under `.specify/` and `specs/001-finsync-core-system/`:
 
@@ -1178,7 +1178,7 @@ The implementation was driven strictly following the Spec Kit specification-firs
 | Implementation | Git commits (2026-11-03..05) | Source coding of JPA entities, services, controllers, Compose UI | `src/backend/`, `src/mobile/`, `src/admin-web/` | Commits `bbf9dcb`, `5950027`, `d4afea6` |
 
 ### E.3. Full-Stack Design and Reproduction Steps
-> *Performed by: Nguyen Le Duc Nhat | Reviewed by: Pham Dinh Tieu Long | Edited by: Nguyen Le Duc Nhat*
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Le Duc Nhat`*
 
 **Actual stack and versions:**
 - Backend: Java 21 (Eclipse Temurin), Spring Boot 3.3.4, Spring Data JPA, Spring Security 6, JJWT 0.12.5.
@@ -1228,12 +1228,12 @@ sequenceDiagram
 | 5. Demo Execution | Run automated verification script | `src/backend` | Python 3 / curl installed | All auth and profile test scenarios pass |
 
 #### E.3.1. Android Frontend Reproduction Guide
-> *Performed by: Nguyễn Phú Đạt (24120038) | Reviewed by: Pending team review | Edited by: Pending confirmation*
+> *Performed by: `Nguyễn Phú Đạt` (24120038) | Reviewed by: Pending team review | Edited by: Pending confirmation*
 
 The [Android Frontend Technical Guide](frontend/frontend-guide.md) records the current source structure, dependency versions, Windows build/install steps, automatic Pixel 7 AVD startup, local feature coverage and known limitations. Client API networking is integrated via `NetworkModule.kt` and `AuthRepository.kt` against the backend authentication endpoints.
 
 ### E.4. Integration Results and Known Issues
-> *Performed by: Vuong Dac Gia Khiem | Reviewed by: Nguyen Le Duc Nhat | Edited by: Pham Dinh Tieu Long*
+> *Performed by: `Vuong Dac Gia Khiem` | Reviewed by: `Nguyen Le Duc Nhat` | Edited by: `Pham Dinh Tieu Long`*
 
 **Environment / date / source revision:** Docker Compose environment on Windows 11 / macOS; tested on 2026-11-05 against commit `5af7f2d`.  
 **Test execution platform:** Postman v11 API Test Collection & Spring Boot Test Runner against live PostgreSQL 16 container (`localhost:5432`) and Redis 7 container (`localhost:6379`).  
@@ -1362,7 +1362,7 @@ The [Android Frontend Technical Guide](frontend/frontend-guide.md) records the c
 2. Avatar upload currently stores file paths locally; migration to cloud presigned URLs is logged as Jira task `FS-BLOB-01`.
 
 ### E.5. Narrated Video Demo and Source Submission
-> *Performed by: Vuong Dac Gia Khiem | Reviewed by: Pham Dinh Tieu Long | Edited by: Vuong Dac Gia Khiem*
+> *Performed by: `Vuong Dac Gia Khiem` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Vuong Dac Gia Khiem`*
 
 **YouTube URL:** `https://youtu.be/FinSync-PA3-Demo-Group04` *(Unlisted Demonstration)*  
 **Visibility / access checked on:** 2026-11-06 (Verified playable in incognito window)  
@@ -1386,12 +1386,12 @@ Exclude dependency folders, virtual environments, build artifacts, and generated
 ---
 
 ## Part F — AI Usage Report and Weekly Report
-> *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
+> *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Pham Dinh Tieu Long`*
 
 **Weight:** 5 points.
 
 ### F.1. AI Usage Declaration and Summary
-> *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
+> *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Pham Dinh Tieu Long`*
 
 **Declaration:** All five team members utilized generative AI tools during Sprint 3 / PA3 to accelerate technical documentation, design UI component tokens, generate mock schemas, and formulate test scenarios. In compliance with the course academic integrity policy, all AI suggestions underwent mandatory student validation, manual editing, and peer review prior to incorporation into submitted deliverables.
 
@@ -1402,14 +1402,14 @@ Exclude dependency folders, virtual environments, build artifacts, and generated
 |--------|----------|--------------------------|------------------------------|------------------------|
 | Phạm Định Tiểu Long | Yes | Claude 3.5 Sonnet / Gemini | Project plan revision, Admin & Account use-case refinement, meeting notes | Appendix A.1 |
 | Nguyễn Phú Đạt | Yes | v0.dev / ChatGPT 4o | Component token styling, prototype screen layout, mobile flow drafting | Appendix A.2 |
-| Nguyễn Lê Đức Nhật | Yes | Codex / Claude 3.5 Sonnet | PostgreSQL schema validation, Spec Kit configuration, API design | Appendix A.3 |
+| Nguyễn Lê Đức Nhật | Yes | GPT-6 Astra / OpenAI (student-reported) | Data & Logic use cases, account-demo backend, integration planning, Docker setup and handoff documentation | Appendix A.3 (draft log; timestamps pending verification) |
 | Vương Đắc Gia Khiêm | Yes | ChatGPT 4o | E2E test matrix formulation, video narration script drafting | Appendix A.4 |
 | Ngô Thái Hòa | Yes | Claude 3.5 Sonnet / Gemini | Vision document restructuring, Mermaid syntax formatting, AI use-case drafting | Appendix A.5 |
 
-**AI contribution versus student work:** AI tools assisted in generating initial markdown skeletons, proposing edge-case failure flows, and validating syntax. Students retained 100% intellectual ownership of architectural decisions, database normalization, implementation of code and security filters, screenshot generation, and final review verification.
+**AI contribution versus student work:** Contributions are detailed per member in Appendix A. For Nguyen Le Duc Nhat, AI assistance included document drafting, backend and security code generation, static wireframes, Docker configuration, and automated test execution. The student supplied requirements, made scope and responsibility decisions, and reported preparing the runtime environment. Independent review and validation should be recorded only where actually performed; students remain responsible for understanding and checking submitted work.
 
 ### F.2. Sprint Overview and Meeting Schedule
-> *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
+> *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Pham Dinh Tieu Long`*
 
 **Sprint:** Sprint 3 / PA3.  
 **Confirmed period:** 2026-10-26 to 2026-11-08.  
@@ -1425,7 +1425,7 @@ Exclude dependency folders, virtual environments, build artifacts, and generated
 | Sprint Review & Retrospective | 2026-11-06, 16:00–18:30 | 2026-11-06, 16:00–18:30 | Pham Dinh Tieu Long | FS-RETRO-01 |
 
 ### F.3. Sprint Planning Meeting
-> *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
+> *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Pham Dinh Tieu Long`*
 
 **Date / time:** 2026-10-26, 09:00–11:30 (UTC+07:00).  
 **Facilitator / note taker:** Pham Dinh Tieu Long.  
@@ -1450,7 +1450,7 @@ Exclude dependency folders, virtual environments, build artifacts, and generated
 3. Established decentralized prototype capture: each use case author captures their own screens using live interactive prototypes to prevent a bottleneck on the frontend designer.
 
 ### F.4. Weekly Scrum Meeting #1
-> *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
+> *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Pham Dinh Tieu Long`*
 
 **Date / time:** 2026-11-02, 19:30–20:35 (UTC+07:00).  
 **Facilitator / note taker:** Pham Dinh Tieu Long.  
@@ -1471,7 +1471,7 @@ Exclude dependency folders, virtual environments, build artifacts, and generated
 3. **ACT-06:** Nhat provided automated Flyway seed script with realistic demo users and transactions.
 
 ### F.5. Weekly Scrum Meeting #2
-> *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
+> *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Pham Dinh Tieu Long`*
 
 **Date / time:** 2026-11-05, 19:30–20:25 (UTC+07:00).  
 **Facilitator / note taker:** Pham Dinh Tieu Long.  
@@ -1489,7 +1489,7 @@ Exclude dependency folders, virtual environments, build artifacts, and generated
 **Actions / decisions:** Team confirmed code freeze on `origin/task/demo_user_management` to enable video recording and final documentation packaging.
 
 ### F.6. Sprint Review and Retrospective
-> *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
+> *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Pham Dinh Tieu Long`*
 
 **Date / time:** 2026-11-06, 16:00–18:30 (UTC+07:00).  
 **Facilitator / note taker:** Pham Dinh Tieu Long.  
@@ -1515,7 +1515,7 @@ Exclude dependency folders, virtual environments, build artifacts, and generated
 **Review decision and carryover:** All Sprint 3 commitments accepted without carryover. Sprint 4 will focus on Group Expense Management and Smart Debt Simplification.
 
 ### F.7. Meeting Action Register
-> *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
+> *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Pham Dinh Tieu Long`*
 
 | Action ID / source meeting | Action / expected result | Owner | Reviewer | Due date | Status / evidence |
 |----------------------------|--------------------------|-------|----------|----------|-------------------|
@@ -1529,7 +1529,7 @@ Exclude dependency folders, virtual environments, build artifacts, and generated
 | ACT-08 / Review (M-04) | Record, narrate, and publish video demonstration to YouTube | Khiem | Long | 2026-11-06 | Closed (YouTube Unlisted link in Section E.5) |
 
 ### F.8. Jira Task Assignment and Progress Evidence
-> *Performed by: Pham Dinh Tieu Long | Reviewed by: Vuong Dac Gia Khiem | Edited by: Pham Dinh Tieu Long*
+> *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Vuong Dac Gia Khiem` | Edited by: `Pham Dinh Tieu Long`*
 
 ![PA3 Jira assignments and progress](screenshots/jira/jira-sprint3-board.png)
 
@@ -1551,7 +1551,7 @@ Exclude dependency folders, virtual environments, build artifacts, and generated
 | S3-14 | FS-REL-01 | Aggregate AI Usage Logs & package release | Long / Hoa | 2026-10-26 | 2026-11-05 | 2026-11-06 | Done | Commit `367bade` |
 
 ### F.9. Git History Evidence
-> *Performed by: Vuong Dac Gia Khiem | Reviewed by: Pham Dinh Tieu Long | Edited by: Vuong Dac Gia Khiem*
+> *Performed by: `Vuong Dac Gia Khiem` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Vuong Dac Gia Khiem`*
 
 The repository commit history demonstrates steady, disciplined Agile contributions across all five members with Conventional Commit messages:
 
@@ -1563,11 +1563,16 @@ The repository commit history demonstrates steady, disciplined Agile contributio
 
 *Figure F.2 — Git log showing prototype screenshot additions, database schema integration, and release packaging.*
 
+![FinSync Git Commit History — Part 3](screenshots/git/git-log3.png)
+
+![FinSync Git Commit History — Part 4](screenshots/git/git-log4.png)
+
+![FinSync Git Commit History — Part 5](screenshots/git/git-log5.png)
 
 ---
 
 ## Appendix A — Individual AI Usage Notes
-> *Performed by: Ngo Thai Hoa | Reviewed by: Pham Dinh Tieu Long | Edited by: Ngo Thai Hoa*
+> *Performed by: `Ngo Thai Hoa` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Ngo Thai Hoa`*
 
 ### Appendix A.1. Phạm Định Tiểu Long
 > *Performed by: `Pham Dinh Tieu Long` | Reviewed by: `Nguyen Le Duc Nhat` | Edited by: `Pham Dinh Tieu Long`*
@@ -1603,65 +1608,124 @@ The repository commit history demonstrates steady, disciplined Agile contributio
 - **Prompt 15:** Claude 3.5 Sonnet, Anthropic, accessed 10:00 on 06/11/2026, prompt: “Create a pre-submission packaging checklist for PA3 covering Markdown/PDF files, removal of node_modules/target/venv folders, and ZIP directory structure.”; used for release packaging and Section F; requested AI contribution: release packaging checklist; student contribution: verified Git working tree cleanliness, checked PDF rendering, verified zero broken prototype image links, and verified final package `PA3-Group04.zip`.
 
 ### Appendix A.2. Nguyễn Phú Đạt
-> *Performed by: `Nguyen Phu Dat` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Nguyen Phu Dat`*
 
-- **Entry ID / date / time:** `AI-DAT-01` | 2026-11-02 10:15 (UTC+07:00)
-- **Tool / provider / model:** v0.dev (Vercel) / ChatGPT 4o
-- **Exact prompt or faithful English translation:** "Generate responsive component tokens and UI cards for a personal finance mobile wallet and transaction feed using modern Slate/Emerald dark mode aesthetics."
-- **Purpose and affected section / task / artifact:** Task `S3-07` (`FS-PROT-01`), `use-cases/client-use-cases.md`, and interactive prototypes.
-- **AI contribution:** Generated initial CSS tokens and React component layout scaffolds.
-- **Student contribution and edits:** Ported layout designs into Android Jetpack Compose, implemented custom canvas charts, and created interactive Figma flows.
-- **Validation performed and outcome:** Visually inspected across simulated screen sizes. Output verified and accepted.
+> *Performed by: `Nguyen Phu Dat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Phu Dat`*
+
+- **Prompt 1:** Codex, OpenAI, accessed 16:59 on 26/10/2026, paraphrased prompt: “I am continuing the FinSync Android Dashboard redesign. Help me review the existing `src/mobile` implementation and identify improvements that follow the Metallic UI direction without breaking current functionality or navigation.”; used for Dashboard UI refinement; requested AI contribution: review of the existing UI structure and assistance with targeted design improvements; independent student work and validation to confirm: inspect the affected Kotlin files, review the layout on the Android emulator, and verify that existing functions remain available.
+
+- **Prompt 2:** Codex, OpenAI, accessed 18:56 on 26/10/2026, paraphrased prompt: “I want to improve the lower section of my Dashboard, particularly the Add Expense button, bottom navigation bar, and background. Suggest suitable Liquid Chrome styling, softer pastel colors, and better visual hierarchy while keeping the controls readable and accessible.”; used for Dashboard bottom-section redesign; requested AI contribution: UI styling suggestions and implementation assistance for Material 3 components; independent student work and validation to confirm: evaluate contrast, navigation clarity, button usability, and the visual appearance on Pixel 7.
+
+- **Prompt 3:** Codex, OpenAI, accessed 12:22 on 27/10/2026, paraphrased prompt: “I have been refining the FinSync Liquid Chrome interface. Help me review the remaining screens, forms, and dialogs for inconsistent spacing, typography, navigation behavior, responsiveness, and keyboard handling. Focus on confirmed problems rather than redesigning everything again.”; used for final mobile UI/UX quality assurance; requested AI contribution: a structured UI review, identification of possible defects, and testing assistance; independent student work and validation to confirm: inspect reported issues, reproduce relevant UI problems, review test results, and ensure approved designs remain consistent.
+
+- **Prompt 4:** Codex, OpenAI, accessed 15:12 on 28/10/2026, paraphrased prompt: “While testing the Android application’s input fields using my computer keyboard, I can enter only `123@` and cannot continue typing the email address. Help me investigate the input or keyboard handling issue and determine how to verify a fix before moving to the next task.”; used for authentication form debugging; requested AI contribution: analysis of text-input behavior and potential keyboard-handling fixes; independent student work and validation to confirm: reproduce the issue, test complete email input, and verify normal keyboard behavior in the application.
+
+- **Prompt 5:** Codex, OpenAI, accessed 08:25 on 30/10/2026, paraphrased prompt: “For the FinSync Reports interface, I prefer displaying two small chart previews directly on the main screen instead of relying only on a Charts & Analytics menu entry. Help me evaluate a layout where users can tap each preview to view details and select different chart types.”; used for Reports navigation and chart presentation; requested AI contribution: layout recommendations and assistance with interactive chart previews; independent student work and validation to confirm: inspect chart placement, test preview navigation, and verify that the interface remains understandable.
+
+- **Prompt 6:** Codex, OpenAI, accessed 17:17 on 30/10/2026, paraphrased prompt: “I am improving the Add Expense workflow in FinSync. Help me check the VND amount input, Expense/Income selection, category icons, wallet selection, validation rules, and save-button behavior. Support the necessary UI adjustments and recommend appropriate tests.”; used for Add Expense feature refinement; requested AI contribution: UI implementation assistance, validation recommendations, and test support; independent student work and validation to confirm: test amount formatting, category selection, invalid inputs, successful saving, and updates to related transaction data.
+
+- **Prompt 7:** Codex, OpenAI, accessed 17:25 on 30/10/2026, paraphrased prompt: “I am working on Transaction History for FinSync. Help me refine the transaction list, search and filtering options, transaction details, editing, deletion confirmation, and Undo behavior. I also want to check that transaction changes remain consistent with Overview and Reports.”; used for Transaction History feature completion; requested AI contribution: implementation assistance for transaction interactions and suggestions for state handling; independent student work and validation to confirm: test search, filters, edit/delete operations, Undo behavior, and consistency between related screens.
+
+- **Prompt 8:** Codex, OpenAI, accessed 17:57 on 30/10/2026, paraphrased prompt: “For the FinSync Groups feature, help me review the expense-splitting calculations and user interface. I need to support equal splitting, fixed amounts, percentages, and shares, while clearly displaying debts and settlement status. Suggest useful validation cases, including rounding differences in VND.”; used for group expense management; requested AI contribution: support for splitting logic, UI behavior, and calculation test cases; independent student work and validation to confirm: manually calculate example splits, verify total amounts, check rounding, and review settlement state changes.
+
+- **Prompt 9:** Codex, OpenAI, accessed 18:28 on 30/10/2026, paraphrased prompt: “I want to enhance the FinSync Reports screen using Donut, Bar, Line, Stacked Bar, Calendar Heatmap, and Budget Progress visualizations. Help me review suitable chart types, time filters, category filters, and interactive behavior while keeping the screen organized and consistent with transaction data.”; used for financial Reports enhancement; requested AI contribution: chart implementation support, layout recommendations, and data-aggregation test suggestions; independent student work and validation to confirm: compare displayed totals with transaction data, check filter behavior, and test the chart interactions.
+
+- **Prompt 10:** Codex, OpenAI, accessed 21:00 on 01/11/2026, paraphrased prompt: “My Android emulator is no longer being detected by ADB during the PA3 screenshot workflow. Help me diagnose the SDK, ADB, and Pixel 7 emulator configuration so I can restore testing and collect real screenshots of the FinSync application.”; used for Android testing and PA3 evidence preparation; requested AI contribution: environment troubleshooting steps and assistance restoring the emulator workflow; independent student work and validation to confirm: check `adb devices`, launch the application, inspect actual emulator screenshots, and verify saved evidence files.
+
+- **Prompt 11:** Codex, OpenAI, accessed 16:08 on 02/11/2026, paraphrased prompt: “I am preparing the FinSync Frontend documentation. Help me organize the build and run instructions, source-code structure, libraries, implemented features, and known limitations. The documentation must clearly distinguish the current local-data prototype from backend-connected functionality.”; used for Frontend technical documentation; requested AI contribution: documentation drafting and organization assistance; independent student work and validation to confirm: compare the instructions with the actual Android project, verify commands and dependencies, and correct unsupported implementation claims.
+
+- **Prompt 12:** Codex, OpenAI, accessed 20:54 on 04/11/2026, paraphrased prompt: “I have a working Android UI and want to understand how it should communicate with the team’s Spring Boot backend. Explain the data-fetching flow, API integration points, and which parts of the existing interface would need to be connected.”; used for planning Android–backend integration; requested AI contribution: explanation of frontend/backend communication and possible integration approaches; independent student work and validation to confirm: inspect the available backend endpoints, compare API contracts, and distinguish proposed connections from tested connections.
+
+- **Prompt 13:** Codex, OpenAI, accessed 23:47 on 04/11/2026, paraphrased prompt: “I want to extend the FinSync Android application with proper Login, Register, Forgot Password, and User Profile screens instead of treating authentication as a visual prototype. Help me review the screen structure and interaction flow, including avatar, profile information, and an account entry point in the top-right corner of Overview.”; used for authentication and profile UI development; requested AI contribution: UI development assistance and suggestions for authentication navigation; independent student work and validation to confirm: inspect each screen, test form behavior, verify navigation, and separately identify functions still dependent on backend APIs.
+
+- **Prompt 14:** Codex, OpenAI, accessed 11:32 on 05/11/2026, paraphrased prompt: “The team has informed me that the backend branch may now be available on GitHub. Help me check the branch and API implementation, review what is required to connect the new account-management UI with the backend and database, and plan integration testing on the demo branch.”; used for user-management integration; requested AI contribution: repository inspection, API integration assistance, and test recommendations; independent student work and validation to confirm: review Git changes, test registration and login against the available backend, verify database interactions, and check the intended demo branch.
+
+- **Prompt 15:** Codex, OpenAI, accessed 09:50 on 07/11/2026, paraphrased prompt: “My teammate and I may be starting the FinSync backend using different commands. Help me compare the local backend startup process with the Docker-based workflow and identify configuration differences that could explain inconsistent authentication results.”; used for backend environment troubleshooting; requested AI contribution: comparison of startup commands, backend configuration, ports, and possible environment differences; independent student work and validation to confirm: inspect local and Docker configurations, compare API connectivity, and reproduce the reported issue before concluding its cause.
 
 ### Appendix A.3. Nguyễn Lê Đức Nhật
-> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Vuong Dac Gia Khiem` | Edited by: `Nguyen Le Duc Nhat`*
+> *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Le Duc Nhat`*
 
-- **Entry ID / date / time:** `AI-NHAT-01` | 2026-10-31 16:45 (UTC+07:00)
-- **Tool / provider / model:** Codex (OpenAI) / Claude 3.5 Sonnet
-- **Exact prompt or faithful English translation:** "Draft PostgreSQL Flyway DDL script for users, auth_sessions, wallets, and transactions with foreign key indexes and optimistic locking version column."
-- **Purpose and affected section / task / artifact:** Task `S3-09` (`FS-DB-01`), `database_design.md`, and `src/backend/src/main/resources/db/migration/`.
-- **AI contribution:** Produced initial SQL schema and entity field suggestions.
-- **Student contribution and edits:** Added composite index on `(user_id, created_at)`, integrated Flyway naming conventions, and added Redis token blacklist logic.
-- **Validation performed and outcome:** Executed Flyway migration against fresh PostgreSQL 16 container. All migrations applied cleanly.
+- **Prompt 1:** GPT-6 Astra, OpenAI, accessed 8:30 on 26/10/2026, prompt (reconstructed summary): “Read the PA3 assignment specification and report template, then identify the scope and required structure of my Data & Logic use-case contribution.”; used to request assistance for Part D (Use-Case Specification); requested AI contribution: analysis of requirements and relevant backend workflows; student contribution: provided the project documents and confirmed the assigned Data & Logic scope.
+
+- **Prompt 2:** GPT-6 Astra, OpenAI, accessed 9:45 on 26/10/2026, prompt (reconstructed summary): “Draft the Data & Logic use-case specifications using the report template, including actors, preconditions, basic flows, alternative flows, postconditions, and special requirements.”; used to request assistance for Part D; requested AI contribution: structured drafting for personal transactions and shared financial operations; student contribution: requested the report-template format and confirmed the contributor name.
+
+- **Prompt 3:** GPT-6 Astra, OpenAI, accessed 16:00 on 26/10/2026, prompt (reconstructed summary): “Review the Data & Logic specifications against the leader's requirement to cover complex financial processing, automatic reporting, data synchronization, and batch jobs.”; used to request assistance for Part D; requested AI contribution: coverage analysis and refinement of backend scenarios; student contribution: supplied the leader's requirement and requested a final coverage review.
+
+- **Prompt 4:** GPT-6 Astra, OpenAI, accessed 13:15 on 28/10/2026, prompt (reconstructed summary): “Clarify the alternative and exception flows for group expense splitting, contribution confirmation, debt settlement, and refunds, including their effects on balances and reports.”; used to request assistance for Part D; requested AI contribution: explanation and drafting of financial rules, confirmation states, and duplicate-processing scenarios; student contribution: requested explanations of the functions and their relationships for team communication.
+
+- **Prompt 5:** GPT-6 Astra, OpenAI, accessed 14:25 on 29/10/2026, prompt (reconstructed summary): “Shorten the Data & Logic document while preserving the required use-case structure. Consolidate overlapping cases and move detailed backend implementation notes into an appendix.”; used to request assistance for Part D; requested AI contribution: consolidation into eight core use cases and separation of technical notes; student contribution: questioned the excessive length and authorized the narrower document structure.
+
+- **Prompt 6:** GPT-6 Astra, OpenAI, accessed 16:45 on 29/10/2026, prompt (reconstructed summary): “Prepare labeled wireframes for the Data & Logic use cases, reuse common exception dialogs, and verify document links and prototype references.”; used to request assistance for Part D prototype evidence; requested AI contribution: static wireframe generation and document-integrity checks as part of the documentation task; student contribution: requested a shorter handoff document and directed placement in the team's use-case folder.
+
+- **Prompt 7:** GPT-6 Astra, OpenAI, accessed 20:30 on 29/10/2026, prompt (reconstructed summary): “Explain the PA3 implementation and video-demo requirements, and assess a demo scope covering registration, login, and user-profile updates.”; used to request assistance for Part E (Functional Group Implementation); requested AI contribution: interpretation of assignment requirements and a proposed end-to-end account-management scope; student contribution: selected registration, login, and profile updates as the intended demo features.
+
+- **Prompt 8:** GPT-6 Astra, OpenAI, accessed 9:45 on 01/11/2026, prompt (reconstructed summary): “Create a Vietnamese guide explaining the implementation order for Backend, Frontend integration, testing, and Spec Kit coordination.”; used to request assistance for Part E planning; requested AI contribution: a phased roadmap and explanation of Spec Kit artifacts; student contribution: clarified that another member owned Spec Kit and requested a workflow supporting separate responsibilities.
+
+- **Prompt 9:** GPT-6 Astra, OpenAI, accessed 16:45 on 01/11/2026, prompt (reconstructed summary): “Read Agent.md and prepare plan.md with the technical design and API contract. Assign Hoa to Spec Kit, Nhat to Backend, Dat to Frontend, and Khiem to Testing.”; used to request assistance for Part E technical planning; requested AI contribution: repository analysis, API contracts, integration dependencies, and handoff criteria; student contribution: provided the responsibility allocation and authorized preparation of the technical plan.
+
+- **Prompt 10:** GPT-6 Astra, OpenAI, accessed 10:30 on 02/11/2026, prompt (reconstructed summary): “Implement only the entity and enum packages needed for the account-management demo, including User, AuthSession, shared persistence fields, and their relationships.”; used to request assistance for Part E backend implementation; requested AI contribution: JPA entities, enums, UUID identifiers, timestamps, optimistic versioning, and compilation checks; student contribution: limited implementation to demo functionality and requested incremental development before APIs.
+
+- **Prompt 11:** GPT-6 Astra, OpenAI, accessed 9:45 on 03/11/2026, prompt (reconstructed summary): “Continue with Flyway migrations and repositories for users and authentication sessions, including constraints, indexes, locking queries, and PostgreSQL integration tests.”; used to request assistance for Part E persistence; requested AI contribution: migration and repository code, configuration changes, and execution of persistence tests; student contribution: authorized the next backend stage; independent review of the generated implementation remains to be confirmed.
+
+- **Prompt 12:** GPT-6 Astra, OpenAI, accessed 16:25 on 03/11/2026, prompt (reconstructed summary): “Implement registration, JWT authentication, refresh-token rotation, logout with a Redis blacklist, and profile viewing and updating. Add consistent API errors and integration tests.”; used to request assistance for Part E backend functionality; requested AI contribution: controllers, DTOs, services, security configuration, Redis integration, and automated HTTP API tests; student contribution: specified the authentication features, authorized implementation, and later reported configuring and running the demo environment.
+
+- **Prompt 13:** GPT-6 Astra, OpenAI, accessed 20:25 on 04/11/2026, prompt (reconstructed summary): “Create a shared Vietnamese handoff explaining what I completed and what Hoa, Dat, and Khiem should do next. Translate the API and persistence handoff documents into Vietnamese.”; used to request assistance for Part E team integration and documentation; requested AI contribution: responsibility summaries, integration and testing instructions, and document translation; student contribution: provided team assignments, reorganized the handoff files, and requested filename and link corrections.
+
+- **Prompt 14:** GPT-6 Astra, OpenAI, accessed 6:30 on 04/11/2026*, prompt (reconstructed summary): “Complete Docker setup so teammates can start Backend, PostgreSQL, and Redis with one Compose command. Generate secrets automatically, preserve data across restarts, and verify the account APIs.”; used to request assistance for Part E deployment and demo preparation; requested AI contribution: Dockerfile/Compose changes, secret initialization, health checks, Vietnamese instructions, and container-based verification; student contribution: requested a reproducible teammate setup and clarification of the startup command and commit message.
 
 ### Appendix A.4. Vương Đắc Gia Khiêm
-> *Performed by: `Vuong Dac Gia Khiem` | Reviewed by: `Nguyen Phu Dat` | Edited by: `Vuong Dac Gia Khiem`*
 
-- **Entry ID / date / time:** `AI-KHIEM-01` | 2026-11-03 20:30 (UTC+07:00)
-- **Tool / provider / model:** ChatGPT 4o (OpenAI)
-- **Exact prompt or faithful English translation:** "Formulate an End-to-End test matrix and narration script for demonstrating user authentication, profile persistence, and token revocation in a Spring Boot + React full-stack application."
-- **Purpose and affected section / task / artifact:** Tasks `S3-12` & `S3-13`, `report.md` Section E.4 & E.5.
-- **AI contribution:** Generated structured narration timestamps and positive/negative test assertion lists.
-- **Student contribution and edits:** Customized narration script with FinSync project context, verified test assertions in Postman/CLI, and recorded voice-over.
-- **Validation performed and outcome:** Executed full E2E run-through. 100% test scenarios passed; video demo recorded and published.
+> *Performed by: `Vuong Dac Gia Khiem` | Reviewed by: `Ngo Thai Hoa` | Edited by: `Vuong Dac Gia Khiem`*
+
+- **Prompt 1:** ChatGPT (GPT-6), OpenAI, accessed 9:15 on 31/10/2026, prompt: “Please take a look at our team's project repository, analyze each task, and identify which ones can be completed now versus those that need to wait. Additionally, provide guidance on how to approach each task and explain the reasoning behind that specific approach"; used to understand the assigned QA/DevOps responsibilities in the FinSync project and identify dependencies between tasks; requested AI contribution: analyze the assigned tasks, classify them by readiness, identify dependencies, and suggest an appropriate implementation order; independent student work and validation to confirm: review the GitHub repository, compare the recommendations with Jira assignments, and confirm task priorities with the team.
+
+- **Prompt 2:** ChatGPT (GPT-6), OpenAI, accessed 10:30 31/10/2026, prompt: “Based on Jira, have all the tasks we just discussed been covered, or is anything missing? Once that’s settled, please outline the order in which the tasks should be completed, and then walk me through how to carry out the first one”; used to verify whether the Jira board covers all assigned QA/DevOps tasks; requested AI contribution: compare Jira tasks with the assigned responsibilities, identify missing tasks, and recommend an execution sequence; independent student work and validation to confirm: check task ownership and status directly in Jira, prioritizing Performed by and Edited by tasks while postponing review tasks dependent on other members.
+
+- **Prompt 3:** ChatGPT (GPT-6), OpenAI, accessed 19:31 31/10/2026, prompt: “As Nhat mentioned in the group, Hoa, Dat, and I will be handling the aforementioned tasks within the `task/demo_user_management` branch. I would like you to review the four files, as they currently appear in VS Code—and help outline a plan for my contributions to the project, including any necessary modifications to these files to align with our testing strategy.”; used to align QA activities with the updated PA3 Account Management implementation and team handoff.; requested AI contribution: analyze plan.pdf, ACCOUNT_API.md, ACCOUNT_PERSISTENCE.md, and team-handoff.md; recommend a safe Git update procedure and identify QA documents requiring revision.; independent student work and validation to confirm: back up uncommitted files, update the local Git branch, inspect the available controllers, and align the testing scope with the six documented Account Management APIs.
+
+- **Prompt 4:** ChatGPT (GPT-6), OpenAI, accessed 12:49 1/11/2026, prompt: “I am working on the `demo_user_management` branch and have the backend fully up and running, but the registration and login features are not working.”; used to investigate why Android authentication failed while the corresponding Backend APIs worked through Postman.; requested AI guide inspection of Android Logcat, Network Inspector, API Base URL, Android Manifest, HTTP permissions, and network security configuration.; independent student work and validation to confirm: compare Postman and Android behavior, confirm Backend connectivity from the Emulator, and identify that the application initially used an incorrect host port before further investigation.
+
+- **Prompt 5:** ChatGPT (GPT-6), OpenAI, accessed 14:55 1/11/2026, prompt: “I need to compare my two devices with Dat’s.”; used to investigate inconsistent Android behavior between the QA environment and the Android developer's machine.; requested AI contribution: propose a comparison checklist for Git branches, commits, uncommitted changes, Docker port mappings, API URLs, Android configurations, and Emulator request results.; independent student work and validation to confirm: inspect the local environment and compare findings with the Android developer. Avoid assuming identical behavior solely because both machines use the same Git branch.
+
+- **Prompt 6:** ChatGPT (GPT-6), OpenAI, accessed 16:45 1/11/2026, prompt: “Caused by: org.postgresql.util.PSQLException: FATAL: password authentication failed for user 'postgres'.”; used to identify why the Spring Boot Backend repeatedly restarted despite PostgreSQL and Redis being healthy.; requested AI contribution: interpret Spring Boot, Flyway, and PostgreSQL error logs, explain the database authentication failure, and suggest a non-destructive recovery procedure.; independent student work and validation to confirm: inspect Backend logs, reconcile the local PostgreSQL credentials with Docker environment settings, and verify that the Backend starts and responds to HTTP requests.
+
+- **Prompt 7:** ChatGPT (GPT-6), OpenAI, accessed 20:22 3/11/2026, prompt: “I’m stuck at step 4: preparing the test data, could you help me create it?”; used to prepare reusable sample data for functional, integration, and End-to-End testing.; requested AI contribution: generate structured test data for users, authentication, wallets, transactions, group expenses, debt settlements, budgets, savings goals, analytics, and AI advice.; independent student work and validation to confirm: review the generated test-data.md, verify expected calculations, and check whether each data field matches the project requirements before using it.
+
+- **Prompt 8:** ChatGPT (GPT-6), OpenAI, accessed 21:39 3/11/2026, prompt: “I encountered an error at step 6.1.”; used to resolve environment configuration errors preventing Docker Compose from starting correctly.; requested AI contribution: explain missing DB_PASSWORD and JWT_SECRET environment variables and provide instructions for configuring .env and checking Docker services.; independent student work and validation to confirm: generate local development secrets, inspect Docker Compose configuration, and verify service status while avoiding exposure of credentials or unnecessary database deletion.
+
+- **Prompt 9:** ChatGPT (GPT-6), OpenAI, accessed 7:59 4/11/2026, prompt: “Regarding the remaining API test cases in Part 1, I’ve noticed that some overlap with the 6 API tests we already covered; you only need to test the specific ones explicitly requested in the file.”; used to reduce redundant testing and focus on requirements explicitly documented in the team's API specification.; requested AI contribution: select relevant negative and security test cases, including duplicate emails, invalid input, incorrect credentials, unauthorized requests, profile version conflicts, refresh token reuse, and logout token revocation.; independent student work and validation to confirm: compare proposed cases with the API contract, avoid repeating completed tests, and distinguish executable local tests from tests requiring dedicated infrastructure or Backend coordination.
+
+- **Prompt 10:** ChatGPT (GPT-6), OpenAI, accessed 12:30 4/11/2026, prompt: “Is the video demo recording process the same as it is for Android? I’d like to handle both at once.”; used to coordinate Android E2E testing with the required product demonstration video.; requested AI contribution: recommend a shared workflow for verifying and recording registration, login, profile retrieval, profile updates, session management, and logout.; independent student work and validation to confirm: separate QA evidence from presentation footage, verify that demonstrated functions work with the real Backend, and avoid presenting unfinished features as completed.
+
+- **Prompt 11:** ChatGPT (GPT-6), OpenAI, accessed 14:30 5/11/2026, prompt: “At step 3.3, I encounter a 500 error even when sending the correct token.”; used to investigate an HTTP 500 response while accessing the protected GET /api/v1/users/me endpoint.; requested AI contribution: explained how to verify Bearer Token configuration, inspect response details, and investigate Spring Boot exceptions through Docker logs.; independent student work and validation to confirm: reviewed Postman request configuration and subsequently obtained an HTTP 200 OK response containing the authenticated user's profile.
+
+- **Prompt 12:** ChatGPT (GPT-6), OpenAI, accessed 10:29 6/11/2026, prompt: “Shared AndroidManifest.xml, debug/AndroidManifest.xml, and auth_debug_network_security.xml for examination.”; used to verify whether Android network permissions or cleartext HTTP restrictions prevented requests to the local Backend.; requested AI contribution: explained android.permission.INTERNET, usesCleartextTraffic, networkSecurityConfig, and debug-specific network security policies.; independent student work and validation to confirm: inspected Android Manifest configurations and confirmed that the declared debug network security policy permitted HTTP traffic to 10.0.2.2.
+
+- **Prompt 13:** ChatGPT (GPT-6), OpenAI, accessed 13:34 6/11/2026, prompt: “Shared AccountHttp.kt exception handling code and Logcat output containing java.net.SocketTimeoutException: failed to connect to /10.0.2.2 (port 8080) after 9999ms.”; used to identify the underlying exception causing Android Registration to fail without a meaningful HTTP response.; requested AI contribution: analyzed exception mapping through AuthFailure.Unavailable, suggested temporary Log.e() instrumentation, and explained TCP connection timeout behavior in Android's HTTP client.; independent student work and validation to confirm: inspected Kotlin exception handlers, added temporary diagnostic logging, reproduced the Register failure, and identified a connection timeout in Logcat. Further investigation was required to establish a permanent solution.
 
 ### Appendix A.5. Ngô Thái Hòa
-> *Performed by: `Ngo Thai Hoa` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Ngo Thai Hoa`*
+> *Performed by: `Ngo Thai Hoa` | Reviewed by: `Vuong Dac Gia Khiem` | Edited by: `Ngo Thai Hoa`*
 
-- **Entry ID / date / time:** `AI-HOA-01` | 2026-10-30 11:00 (UTC+07:00)
-- **Tool / provider / model:** Claude 3.5 Sonnet (Anthropic)
-- **Exact prompt or faithful English translation:** "Format Mermaid.js syntax for AI Financial Advisor subsystem use case diagram showing include relationships with external LLM API and conditional extend relations for anomaly spikes."
-- **Purpose and affected section / task / artifact:** Task `S3-03` (`FS-UCD-01`), `use-cases/uc-ai-features.md`, and `report.md` Section C.3.
-- **AI contribution:** Produced initial Mermaid syntax draft.
-- **Student contribution and edits:** Cleaned node styling, verified UML relationship semantics (include vs extend), and embedded diagram into Markdown documents.
-- **Validation performed and outcome:** Tested Mermaid rendering in GitHub preview and PDF compiler. Output rendered without syntax warnings.
+- **Prompt 1:** Gemini (gemini-2.5-pro), Google, accessed 06:15 on 10/10/2026, prompt: “I want to install GitHub Spec Kit for my personal project on macOS. The required components are uv, VS Code, Gemini CLI, and specify-cli. I installed specify-cli, but when checking, VS Code status shows 'not found'. What is the cause, and in which directory on macOS should I install specify-cli?”, used to request assistance for environment troubleshooting and PATH configuration; requested AI contribution: diagnostic analysis of macOS PATH resolution and CLI installation best practices; independent student work and validation to confirm: manually installed VS Code CLI binary into PATH via Command Palette and verified system execution using `code --version`.
+
+- **Prompt 2:** Gemini (gemini-2.5-pro), Google, accessed 06:25 on 21/10/2026, prompt: “Does installing via uv have global availability similar to npm?”, used to request assistance for package management concepts; requested AI contribution: comparative analysis between `uv tool install` and `npm install -g` regarding execution scope, isolation, and binary pathing; independent student work and validation to confirm: verified global executable linkage in `~/.local/bin` while confirming isolated tool virtual environments under `~/.local/share/uv/tools/`.
+
+- **Prompt 3:** Gemini (gemini-2.5-pro), Google, accessed 06:28 on 10/10/2026, prompt: “I ran `uv tool list` and `npm list -g --depth=0` which showed `gemini-cli v0.2.5` and `specify-cli v1.2.1.dev0` under uv, but `zsh: command not found: npm`. What should I do next?”, used to request assistance for CLI environment resolution; requested AI contribution: environment diagnostic interpretation and configuration steps for Zsh shell PATH integration; independent student work and validation to confirm: exported `~/.local/bin` to `$PATH` in `~/.zshrc` and verified execution of isolated Python binaries without Node.js dependencies.
+
+- **Prompt 4:** Gemini (gemini-2.5-pro), Google, accessed 06:37 on 10/10/2026, prompt: “Which script type should be used for GitHub Spec Kit when integrating with Gemini CLI?”, used to request assistance for software engineering workflow design; requested AI contribution: architectural recommendation on script runtime selection (Shell/Bash vs Python) for CLI pipeline orchestration; independent student work and validation to confirm: selected Shell/Bash as the primary script engine for zero-dependency POSIX pipeline execution across macOS developer workstations.
+
+- **Prompt 5:** Gemini (gemini-2.5-pro), Google, accessed 06:50 on 10/10/2026, prompt: “How should a 5-member team collaborate using GitHub Spec Kit? Is it mandatory to use the same AI tool?”, used to request assistance for Agile team management and AI-assisted workflow strategy; requested AI contribution: team collaboration framework covering Git branching, task distribution, AI model consistency standards, and PR review protocols; independent student work and validation to confirm: established Spec Lead roles, feature branch conventions (`feature/*`), and shared repository specification files while enabling flexible individual AI tool usage.
+
+- **Prompt 6:** Claude (Sonnet 5.5), Anthropic, accessed 09:30 on 13/10/2026, prompt: “Is the software architecture above easy to extend? I want to add some AI and machine learning features later to improve the quality of the product and include it in my CV when applying for jobs. I am building it using spec-driven development (SDD) with GitHub Spec Kit.”, used to assess the extensibility of the proposed architecture, identify machine learning features worth adding, and align the development process with Spec Kit;
+
+- **Prompt 7:** Claude (Sonnet 5.5), Anthropic, accessed 09:44 on 13/10/2026, prompt: “Is this process (constitution → specify → clarify → plan → tasks → analyze → implement) repeated for many features, or are all features described at once and the process carried out only a single time?”, used to clarify the methodology of spec-driven development, in particular the scope and iteration of each Spec Kit cycle;
+
+- **Prompt 8:** Claude (Sonnet 5.5), Anthropic, accessed 09:57 on 13/10/2026, prompt: “Please write a sample of the process for 000.”, used to produce a worked example of the full Spec Kit workflow (constitution, specify, clarify, plan, tasks, analyze, implement) for the foundation specification of the project;
+
+- **Prompt 9:** ChatGPT (GPT-6), OpenAI, accessed 07:14 on 21/10/2026, prompt: “Investigate a Gemini CLI session that has been running the GitHub Spec Kit `/speckit.plan` command for approximately 50 minutes without producing new output. Recommend safe diagnostic steps, explain when to interrupt the process, and describe how to check whether partial plan artifacts have already been generated without losing existing project work.”, used to troubleshoot stalled AI-agent execution and preserve partially generated project artifacts;
+
+- **Prompt 10:** ChatGPT (GPT-6), OpenAI, accessed 07:33 on 21/10/2026, prompt: “Analyze the following Gemini CLI error: HTTP 429, `Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests`, with a limit of 20 requests for the `gemini-3-flash` model and a server-recommended retry delay of approximately 8 hours and 34 minutes. Explain the meaning of the error, how free-tier quotas and retry delays affect agent execution, and what troubleshooting options are available.”, used to interpret API quota errors and understand their effects on AI coding workflows;
+
+- **Prompt 11:** ChatGPT (GPT-6), OpenAI, accessed 07:41 on 21/10/2026, prompt: “Evaluate whether GitHub Spec Kit supports Google Antigravity as an alternative to Gemini CLI in Visual Studio Code when Google account authentication is unavailable or unsuccessful. Explain the integration requirements, authentication differences, installation and configuration steps, supported workflow commands, and the considerations involved in continuing an existing Spec Kit project without recreating its specifications or implementation artifacts.”, used to assess compatibility between AI coding environments and determine a practical migration strategy for an existing software project.
 
 
 ---
-
-**Suggested submission layout — create and adjust when packaging:**
-
-```text
-PA3-Group04/
-├── report.md
-├── report.pdf
-├── Changes.md
-├── Changes.pdf
-├── screenshots/
-│   ├── prototypes/
-│   ├── jira/
-│   └── git/
-├── use-cases/          # If specifications are split into separate Markdown/PDF files
-├── spec-kit/           # Submitted specs, plans, tasks, and related artifacts
-
-```
