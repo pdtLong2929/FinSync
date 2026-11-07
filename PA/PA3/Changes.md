@@ -7,8 +7,6 @@
 **PA3 revision:** [PA3 report](report.md), revision: `Sprint 3 Working Draft`  
 **Last updated:** 2026-11-02
 
-> **Template instructions — remove before submission:** Use this single file for all PA3 revision records. Complete the two document sections below and duplicate change-entry blocks as needed. Record actual changes, including additions, removals, corrections, and updated planning information. Distinguish TA feedback from team-initiated changes; do not invent feedback. Use section names and IDs rather than page numbers alone. Replace all TODOs and record the actual performer, reviewer, and editor immediately after each section header. If a section is unchanged, state that explicitly in its coverage table. Export the completed file to PDF along with the other submitted Markdown documents.
-
 ## 1. Project Plan Changes
 > *Performed by: Pham Dinh Tieu Long | Reviewed by: Ngo Thai Hoa | Edited by: Pham Dinh Tieu Long*
 
