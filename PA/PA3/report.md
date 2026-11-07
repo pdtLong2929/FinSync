@@ -4,7 +4,7 @@
 **Assignment:** Project Assignment 3 (PA3-2026) — Sprint 3  
 **Group:** Group 04  
 **Project:** FinSync — Personal Finance & Group Expense Manager with AI Advisor  
-**Sprint 3 period:** `2026-10-26 to 2026-11-08` (PA2 planning target; confirm at Sprint Planning)  
+**Sprint 3 period:** `2026-10-26 to 2026-11-08`
 
 ## Table of Contents
 > *Performed by: `Nguyen Le Duc Nhat` | Reviewed by: `Pham Dinh Tieu Long` | Edited by: `Nguyen Le Duc Nhat`

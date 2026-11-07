@@ -1,0 +1,5 @@
+# Created at 2026-11-05T06:31:28.048
+Boot Manifest-JAR contains absolute paths in classpath 'D:\FinSync\FinSync\src\backend\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+
