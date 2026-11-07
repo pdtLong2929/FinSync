@@ -2,7 +2,7 @@
 
 > *Performed by: Nguyễn Phú Đạt (24120038) | Reviewed by: Pending team review | Edited by: Pending confirmation*
 
-Updated **2026-11-05** from the Android source/build configuration. This describes
+Updated **2026-11-07** from the Android source/build configuration. This describes
 the client and local auth integration, not all PA3 Part E integration. The team
 must still confirm the selected Part E functional group and acceptance criteria.
 
@@ -73,7 +73,8 @@ if ($LASTEXITCODE -ne 0) { throw 'Build failed; inspect the Gradle error before 
 Android Studio can create ignored `local.properties` with the SDK path. Do not
 commit machine paths or credentials. The sample workspace needs no backend.
 For real authentication, see [local auth setup](README.md#local-authentication-integration).
-Debug defaults to `http://10.0.2.2:18080`; override with Gradle property
+Debug defaults to `http://10.0.2.2:8080`, matching Docker and the workstation script;
+Android Studio Sync/Run uses it without extra arguments. Override with Gradle property
 `finsync.authBaseUrl`. Release defaults to no API and permits HTTPS only. Debug APK:
 `app/build/outputs/apk/debug/app-debug.apk`. This is a development build; production
 signing, Play Store distribution and release deployment are not configured here.

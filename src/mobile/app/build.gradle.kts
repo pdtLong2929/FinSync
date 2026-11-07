@@ -20,7 +20,8 @@ android {
     }
     buildFeatures { compose = true; buildConfig = true }
     buildTypes {
-        debug { buildConfigField("String", "AUTH_BASE_URL", quoted(authBaseUrl ?: "http://10.0.2.2:18080")) }
+        // Match the demo Docker API when launched directly from Android Studio.
+        debug { buildConfigField("String", "AUTH_BASE_URL", quoted(authBaseUrl ?: "http://10.0.2.2:8080")) }
         release { buildConfigField("String", "AUTH_BASE_URL", quoted(authBaseUrl ?: "")) }
     }
     compileOptions {

@@ -1,6 +1,6 @@
 # User account integration — demo branch
 
-Updated 2026-11-05. Android: Nguyễn Phú Đạt; team review pending.
+Updated 2026-11-07. Android: Nguyễn Phú Đạt; team review pending.
 
 Branch: `task/demo_user_management`. Backend contract/migration imported from
 `6bd7c2d3229172d65ce7a45b961bb52810a92501`. Backend source, schema definitions and
@@ -69,7 +69,7 @@ From the repository root, with Docker Compose available and a private `.env`:
 docker compose up --build -d postgres redis backend
 Set-Location src/mobile
 $env:JAVA_HOME = 'C:\Program Files\Android\Android Studio\jbr'
-.\gradlew.bat :app:assembleDebug '-Pfinsync.authBaseUrl=http://10.0.2.2:8080' --console=plain
+.\gradlew.bat :app:assembleDebug --console=plain
 ```
 
 The URL is the server origin without `/api/v1`; the adapter adds the API path.
@@ -86,7 +86,9 @@ binary/cluster at `tmp/auth-runtime-20261104`, preserving the old `finsync_authd
 database. The new migration is applied to **finsync_userdemo**; **finsync_userdemo_test**
 is separate. Old users are not automatically copied to this new demo database.
 
-- API: `127.0.0.1:18080`; emulator default: `10.0.2.2:18080`.
+- API: `127.0.0.1:8080`; emulator default: `http://10.0.2.2:8080`, matching Docker.
+  The workstation script restarts only its verified owned legacy18080 backend on
+  port8080, rejecting a busy target port without stopping unrelated services.
 - PostgreSQL: `127.0.0.1:55432`; Redis: `127.0.0.1:56379`, password protected.
 - Runtime-only Redis 7.4.11 Windows/Cygwin port: [source release](https://github.com/redis-windows/redis-windows/releases/tag/7.4.11),
   SHA256 `835999942bbef27e2b01f4a36955522cf19fff6511e67bbfe3fee322f6586705`.

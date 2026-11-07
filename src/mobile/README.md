@@ -2,7 +2,7 @@
 
 > Performed by: Nguyễn Phú Đạt (24120038). Team review pending.
 
-Updated **2026-11-05**. Kotlin, Jetpack Compose, Material3 and the approved bright
+Updated **2026-11-07**. Kotlin, Jetpack Compose, Material3 and the approved bright
 Liquid Metal design. Application ID: `com.finsync`.
 
 **User account management now uses the demo backend and PostgreSQL/Redis:** real
@@ -29,15 +29,20 @@ $env:ANDROID_HOME = "$env:LOCALAPPDATA\Android\Sdk"
 .\gradlew.bat :app:assembleDebug --console=plain
 ```
 
-Default debug API is `http://10.0.2.2:18080` for the prepared workstation runtime.
-For the team's Docker backend on port8080, rebuild with:
+Default debug API is **`http://10.0.2.2:8080`**, matching the team's Docker backend
+and prepared workstation script. Android Studio **Sync Now → Run (debug)** uses
+this URL automatically; no Gradle property is required for the normal demo.
+After pulling updates, rebuild/install the app; an old APK does not update with Git.
+Only if the backend publishes a different port, override it explicitly, for example:
 
 ```powershell
-.\gradlew.bat :app:assembleDebug '-Pfinsync.authBaseUrl=http://10.0.2.2:8080' --console=plain
+.\gradlew.bat :app:assembleDebug '-Pfinsync.authBaseUrl=http://10.0.2.2:8081' --console=plain
 ```
 
 Release has no default API URL and requires HTTPS when configured. Debug HTTP is
 limited to `10.0.2.2`, `127.0.0.1`, `localhost`; no TLS validation is bypassed.
+An existing `finsync.authBaseUrl` in project/user Gradle properties or a command-line
+`-P` still overrides the default; remove a stale override to use port8080.
 See the integration guide for the team's Docker/DB setup. On this already prepared
 workstation, start/stop the private API/Redis runtime with:
 

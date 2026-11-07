@@ -50,11 +50,17 @@ try {
     } while (!$redisReady -and (Get-Date) -lt $redisDeadline)
     if (!$redisReady) { throw 'Dedicated Redis did not pass its authenticated readiness check.' }
 } finally { $env:REDISCLI_AUTH = $previousRedisAuth }
-if (!(Get-OwnedProcess $pidFile $jar)) {
-    if (Get-NetTCPConnection -State Listen -LocalPort 18080 -ErrorAction SilentlyContinue) { throw 'Port18080 belongs to another process; nothing stopped.' }
+$ownedServer = Get-OwnedProcess $pidFile $jar
+if ($ownedServer -and (Get-NetTCPConnection -State Listen -LocalPort 18080 -ErrorAction SilentlyContinue | Where-Object OwningProcess -EQ $ownedServer.ProcessId)) {
+    if (Get-NetTCPConnection -State Listen -LocalPort 8080 -ErrorAction SilentlyContinue) { throw 'Port8080 is busy; the existing server was left running.' }
+    Stop-Process -Id $ownedServer.ProcessId
+    $ownedServer = $null
+}
+if (!$ownedServer) {
+    if (Get-NetTCPConnection -State Listen -LocalPort 8080 -ErrorAction SilentlyContinue) { throw 'Port8080 belongs to another process; nothing stopped.' }
     $values = @{
         DB_URL='jdbc:postgresql://127.0.0.1:55432/finsync_userdemo'; DB_USERNAME='finsync_authdev'; DB_PASSWORD=$settings.dbPassword
-        JWT_SECRET=$settings.jwtSecret; SERVER_PORT='18080'; SERVER_ADDRESS='127.0.0.1'
+        JWT_SECRET=$settings.jwtSecret; SERVER_PORT='8080'; SERVER_ADDRESS='127.0.0.1'
         REDIS_HOST='127.0.0.1'; REDIS_PORT='56379'; REDIS_PASSWORD=$settings.redisPassword; SPRING_DATA_REDIS_DATABASE='0'
     }
     $previous = @{}
@@ -73,10 +79,10 @@ if (!(Get-OwnedProcess $pidFile $jar)) {
 $ready = $false
 $deadline = (Get-Date).AddSeconds(90)
 do {
-    try { Invoke-WebRequest 'http://127.0.0.1:18080/api/v1/auth/login' -Method Post -ContentType 'application/json' -Body '{}' -TimeoutSec 2 | Out-Null }
+    try { Invoke-WebRequest 'http://127.0.0.1:8080/api/v1/auth/login' -Method Post -ContentType 'application/json' -Body '{}' -TimeoutSec 2 | Out-Null }
     catch { if ($_.Exception.Response -and [int]$_.Exception.Response.StatusCode -eq 400) { $ready = $true } }
     if (!$ready) { Start-Sleep -Seconds 2 }
 } while (!$ready -and (Get-Date) -lt $deadline)
 if (!$ready) { throw 'Backend readiness failed; inspect private runtime logs.' }
-Write-Output 'User demo ready: API localhost:18080, PostgreSQL localhost:55432/finsync_userdemo, Redis localhost:56379.'
-Write-Output 'Android emulator uses http://10.0.2.2:18080. Financial screens remain local.'
+Write-Output 'User demo ready: API localhost:8080, PostgreSQL localhost:55432/finsync_userdemo, Redis localhost:56379.'
+Write-Output 'Android emulator uses http://10.0.2.2:8080. Financial screens remain local.'

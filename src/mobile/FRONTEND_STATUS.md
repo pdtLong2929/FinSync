@@ -2,7 +2,7 @@
 
 > *Performed by: Nguyễn Phú Đạt (24120038) | Reviewed by: Pending team review | Edited by: Pending confirmation*
 
-Updated: 2026-11-05. Working branch: `task/demo_user_management`.
+Updated: 2026-11-07. Working branch: `task/demo_user_management`.
 
 ## Scope
 
@@ -20,6 +20,26 @@ Financial API persistence, invitations, AI and payments remain unconnected.
 Process death loses local financial edits. This delivery is ready for
 team source review subject to the checks below; it does not certify Part E
 end-to-end completion or select the team's functional group.
+
+## Default Docker endpoint correction — 2026-11-07
+
+Debug builds now default to `http://10.0.2.2:8080`, matching the Docker demo after
+Android Studio Sync/Run with no command-line flags. Explicit `finsync.authBaseUrl`
+overrides remain supported; existing user/project properties take precedence.
+Release still has an empty default URL and requires HTTPS when configured.
+
+The prepared workstation startup script also uses port8080. It migrates only its
+verified owned old18080 process and rejects a busy target port. SQL/schema/UI and
+financial logic were not changed. README/integration/build instructions agree.
+
+- Debug APK build and 64/64 JVM tests: PASS. Lint: 0 errors / 30 warnings / 2 hints.
+- Generated debug BuildConfig verified at8080 after a no-override build; explicit
+  alternate18080 override separately verified. Release BuildConfig remained empty.
+- PowerShell syntax and actual legacy18080→8080 startup migration: PASS. Only8080
+  remained listening; QA login and authenticated profile both200, same DB user.
+- Logs: `output/docker-url-build.txt`, `output/docker-url-override-check.txt`;
+  private runtime `url8080-check.json`. Existing UI/API regression results below
+  are historical and were not rerun for this configuration-only correction.
 
 ## User account integration — 2026-11-05
 
