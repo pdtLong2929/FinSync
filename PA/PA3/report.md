@@ -1565,9 +1565,11 @@ The repository commit history demonstrates steady, disciplined Agile contributio
 
 ![FinSync Git Commit History — Part 3](screenshots/git/git-log3.png)
 
+*Figure F.3 — Git log showing mobile account API integration, profile management, and local backend connectivity fixes.*
+
 ![FinSync Git Commit History — Part 4](screenshots/git/git-log4.png)
 
-![FinSync Git Commit History — Part 5](screenshots/git/git-log5.png)
+*Figure F.4 — Git log showing report updates, use case diagrams, and E2E test evidence integration.*
 
 ---
 
