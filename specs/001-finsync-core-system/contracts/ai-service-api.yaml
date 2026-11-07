@@ -1,0 +1,111 @@
+openapi: 3.0.3
+info:
+  title: FinSync AI & Notification Parsing Microservice
+  description: Isolated Python FastAPI microservice for bank notification regex parsing and Google Gemini API advisory integrations per Constitution IV.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8001/api/v1
+    description: AI Microservice
+
+paths:
+  /parse-notification:
+    post:
+      summary: Parse pasted SMS or notification text into a structured transaction draft
+      description: Strictly user-initiated (no background listeners). Uses regex for Vietnamese banking SMS with LLM fallback. Never logs credentials.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [rawText]
+              properties:
+                rawText:
+                  type: string
+                  example: "TK 0123456789 tai VCB -50,000VND vao 04/11/2026. ND: Pho bo 24"
+      responses:
+        '200':
+          description: Structured transaction draft
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  amount: { type: number, example: 50000.0 }
+                  direction: { type: string, enum: [INCOME, EXPENSE] }
+                  currency: { type: string, example: VND }
+                  suggestedCategory: { type: string, example: Dining Out }
+                  counterparty: { type: string, example: Pho bo 24 }
+                  transactionDate: { type: string, format: date-time }
+        '422':
+          description: Non-financial text or unparseable payload
+
+  /analyze-anomalies:
+    post:
+      summary: Detect category spending spikes (>40% deviation from 3-month rolling average)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [currentMonthSpend, threeMonthAverage]
+              properties:
+                currentMonthSpend:
+                  type: object
+                  additionalProperties: { type: number }
+                threeMonthAverage:
+                  type: object
+                  additionalProperties: { type: number }
+      responses:
+        '200':
+          description: Identified anomalies
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  anomalies:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        category: { type: string }
+                        percentageIncrease: { type: number }
+                        message: { type: string }
+
+  /budget-advice:
+    post:
+      summary: Generate budget reallocation recommendations aligned with user savings goals
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [savingsGoal, monthlyIncome, currentBudgets]
+              properties:
+                savingsGoal:
+                  type: object
+                  properties:
+                    targetAmount: { type: number }
+                    deadlineMonths: { type: integer }
+                monthlyIncome: { type: number }
+                currentBudgets:
+                  type: object
+                  additionalProperties: { type: number }
+      responses:
+        '200':
+          description: Recommended budget allocations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  recommendedBudgets:
+                    type: object
+                    additionalProperties: { type: number }
+                  advisoryNotes:
+                    type: array
+                    items: { type: string }
