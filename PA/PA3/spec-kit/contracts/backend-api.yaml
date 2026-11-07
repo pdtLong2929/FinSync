@@ -1,0 +1,337 @@
+openapi: 3.0.3
+info:
+  title: FinSync Backend REST API
+  description: Core backend service API for personal finance tracking, group expense splitting, and platform administration. Built on Spring Boot 4.1.1 with Java 21.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Local development server
+
+paths:
+  /auth/register:
+    post:
+      summary: Register a new user account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password, displayName]
+              properties:
+                email: { type: string, format: email }
+                password: { type: string, minLength: 8 }
+                displayName: { type: string }
+      responses:
+        '201':
+          description: User created successfully
+        '400':
+          description: Validation error or email already in use
+
+  /auth/login:
+    post:
+      summary: Authenticate user and receive JWT token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email: { type: string }
+                password: { type: string }
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token: { type: string }
+                  tokenType: { type: string, example: Bearer }
+                  expiresIn: { type: integer, example: 86400 }
+
+  /wallets:
+    get:
+      summary: List user wallets and calculate aggregate Net Worth
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  netWorth: { type: number, format: double }
+                  wallets:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Wallet'
+    post:
+      summary: Create a new wallet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, type, currency]
+              properties:
+                name: { type: string }
+                type: { type: string, enum: [CASH, BANK, CREDIT] }
+                currency: { type: string, example: VND }
+                initialBalance: { type: number, default: 0.0 }
+      responses:
+        '201':
+          description: Wallet created
+
+  /wallets/{id}:
+    delete:
+      summary: Delete or archive a wallet
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Wallet archived (if had transactions) or deleted
+
+  /transactions:
+    get:
+      summary: Query transactions with pagination and date filter
+      parameters:
+        - name: page
+          in: query
+          schema: { type: integer, default: 0 }
+        - name: size
+          in: query
+          schema: { type: integer, default: 20 }
+        - name: walletId
+          in: query
+          schema: { type: string, format: uuid }
+        - name: categoryId
+          in: query
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: List of transactions
+    post:
+      summary: Record a new income, expense, or wallet transfer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionCreateRequest'
+      responses:
+        '201':
+          description: Transaction created and balance updated
+
+  /budgets:
+    get:
+      summary: Get all category budgets and threshold statuses
+      responses:
+        '200':
+          description: Budgets with current utilization percentages
+    post:
+      summary: Set a category budget threshold
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [categoryId, targetLimit, period]
+              properties:
+                categoryId: { type: string, format: uuid }
+                targetLimit: { type: number }
+                period: { type: string, enum: [WEEKLY, MONTHLY] }
+      responses:
+        '201':
+          description: Budget created
+
+  /ledgers:
+    get:
+      summary: List user shared ledgers
+      responses:
+        '200':
+          description: List of group ledgers
+    post:
+      summary: Create a shared group ledger
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, currency]
+              properties:
+                name: { type: string }
+                currency: { type: string, example: VND }
+      responses:
+        '201':
+          description: Ledger created
+
+  /ledgers/{id}/expenses:
+    post:
+      summary: Log a group expense with single payer and split shares
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupExpenseCreateRequest'
+      responses:
+        '201':
+          description: Group expense logged and member net balances updated
+
+  /ledgers/{id}/settlement-plan:
+    get:
+      summary: Compute optimized debt simplification transfers (SC-002)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transfers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        fromUserId: { type: string, format: uuid }
+                        fromUserName: { type: string }
+                        toUserId: { type: string, format: uuid }
+                        toUserName: { type: string }
+                        amount: { type: number }
+
+  /ledgers/{id}/settlements:
+    post:
+      summary: Record a manual external settlement transfer
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [payeeId, amount]
+              properties:
+                payeeId: { type: string, format: uuid }
+                amount: { type: number }
+      responses:
+        '201':
+          description: Settlement submitted in PENDING status
+
+  /ledgers/{id}/settlements/{settlementId}/confirm:
+    put:
+      summary: Payee confirms manual payment receipt
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: settlementId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Settlement confirmed and net balances cleared
+
+  /ledgers/{id}/settlements/{settlementId}/resolve:
+    put:
+      summary: Ledger Owner overrides disputed or inactive settlement
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+        - name: settlementId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [decision, reason]
+              properties:
+                decision: { type: string, enum: [CONFIRM, VOID] }
+                reason: { type: string }
+      responses:
+        '200':
+          description: Settlement resolved by owner override
+
+  /admin/users/{userId}/lock:
+    put:
+      summary: Admin locks user account and invalidates sessions
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Account locked
+
+components:
+  schemas:
+    Wallet:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        type: { type: string, enum: [CASH, BANK, CREDIT] }
+        currency: { type: string }
+        balance: { type: number }
+        status: { type: string, enum: [ACTIVE, ARCHIVED] }
+
+    TransactionCreateRequest:
+      type: object
+      required: [walletId, categoryId, amount, direction, transactionDate]
+      properties:
+        walletId: { type: string, format: uuid }
+        destinationWalletId: { type: string, format: uuid }
+        categoryId: { type: string, format: uuid }
+        amount: { type: number }
+        direction: { type: string, enum: [INCOME, EXPENSE, TRANSFER] }
+        transactionDate: { type: string, format: date-time }
+        note: { type: string }
+        receiptImageUrl: { type: string }
+
+    GroupExpenseCreateRequest:
+      type: object
+      required: [payerUserId, totalAmount, description, splitStrategy, splits]
+      properties:
+        payerUserId: { type: string, format: uuid }
+        totalAmount: { type: number }
+        description: { type: string }
+        splitStrategy: { type: string, enum: [EQUAL, EXACT, PERCENTAGE] }
+        splits:
+          type: array
+          items:
+            type: object
+            required: [debtorUserId, amount]
+            properties:
+              debtorUserId: { type: string, format: uuid }
+              amount: { type: number }
