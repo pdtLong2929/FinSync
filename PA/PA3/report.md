@@ -1150,7 +1150,7 @@ The AI Financial Advisor contribution contains **5 specialized use-case specific
 **Acceptance criteria:**
 1. A new user registers on the client interface $\rightarrow$ Backend hashes password via BCrypt (cost 10) $\rightarrow$ creates record in PostgreSQL `users` table with `USER` role and `ACTIVE` status.
 2. User authenticates with email/password $\rightarrow$ Backend verifies credentials $\rightarrow$ issues signed JWT access token (60 min) and refresh token (7 days) $\rightarrow$ client stores session.
-3. Client navigates to Profile $\rightarrow$ queries `GET /api/v1/users/me` $\rightarrow$ updates display name and phone number via `PATCH /api/v1/users/me` $\rightarrow$ changes persist to PostgreSQL.
+3. Client navigates to Profile $\rightarrow$ queries `GET /api/v1/users/me` $\rightarrow$ updates display name, phone number, and extended profile fields (including birthdate and bio; email displayed as immutable account identifier) via `PATCH /api/v1/users/me` $\rightarrow$ changes persist to PostgreSQL.
 4. User logs out $\rightarrow$ Backend invalidates refresh token and pushes `jti` identifier to Redis blacklist $\rightarrow$ old token cannot access protected endpoints.
 
 | Requirement / use case | Frontend screen | Backend endpoint / logic | Database entity / migration | Actual status / evidence |
@@ -1158,7 +1158,7 @@ The AI Financial Advisor contribution contains **5 specialized use-case specific
 | User Registration (`FR-AUTH-01`) | `RegisterScreen.kt` / Web Modal | `POST /api/v1/auth/register` | `users` table; `V1__init_schema.sql` | Operational (Verified 201 Created & 409 Conflict) |
 | User Login (`FR-AUTH-02`) | `LoginScreen.kt` / Web Login | `POST /api/v1/auth/login` | `auth_sessions` table; `User.java` | Operational (JWT issued & session cached) |
 | View Profile (`FR-PROF-01`) | `ProfileScreen.kt` | `GET /api/v1/users/me` | `UserRepository.findByEmail()` | Operational (Returns user DTO without password hash) |
-| Update Profile (`FR-PROF-02`) | `EditProfileDialog.kt` | `PATCH /api/v1/users/me` | `users.display_name`, `phone_number` | Operational (Persistence verified across restarts) |
+| Update Profile (`FR-PROF-02`) | `EditProfileDialog.kt` | `PATCH /api/v1/users/me` | `users.display_name`, `phone_number`, `bio`, `dob` | Operational (Persistence verified across restarts) |
 | Token Revocation (`FR-AUTH-03`) | Profile Logout Button | `POST /api/v1/auth/logout` | Redis token blacklist (`jti`) | Operational (Logged-out token rejected with 401) |
 
 **Dependencies and limitations:** Requires Docker services (PostgreSQL 16 on port 5432, Redis 7 on port 6379). Avatar image uploads are currently simulated with local URI strings; cloud S3/Blob storage is scheduled for Sprint 4.

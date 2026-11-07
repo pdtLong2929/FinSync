@@ -90,7 +90,7 @@
 | **Use-case ID and name** | `UC-ACC-02`: Manage User Profile & Credentials |
 | **Primary actor** | Regular User |
 | **Supporting actor(s)** | Image Upload Storage (Cloudinary/S3), PostgreSQL DB |
-| **Description / goal** | Enables authenticated users to update their profile information (display name, avatar image, phone number), change login password, and select default reporting currency (VND / USD). |
+| **Description / goal** | Enables authenticated users to update their profile information (core fields: display name, avatar image, phone number, along with extended profile attributes: date of birth and personal bio; email is retained as immutable account identifier), change login password, and select default reporting currency (VND / USD). |
 | **Trigger** | User navigates to the "Profile & Settings" tab from the mobile bottom navigation bar. |
 | **Related functional requirements** | `FR-PROF-01` (User Profile Management), `FR-PROF-02` (Default Currency Selection) |
 | **Related business rules / NFRs** | `BR-FIN-02` (Changing reporting currency recalculates aggregated net-worth displays without altering historical ledger entries) |
@@ -103,7 +103,7 @@
 | Step | Actor action | System response / state change | Prototype screen ID |
 |:---:|---|---|:---:|
 | 1 | User navigates to **"Profile Settings"** screen. | System loads user data via `GET /api/v1/users/me` and displays current avatar, display name, email, reporting currency, and change password link. | `UC-ACC-02-S01` |
-| 2 | User edits display name (e.g., from *"Long Pham"* to *"Pham Dinh Tieu Long"*), selects default currency as `"VND"`, and taps avatar to choose a new photo. | System previews selected avatar locally and validates display name (non-empty, <= 50 characters). | `UC-ACC-02-S02` |
+| 2 | User edits profile fields (display name, phone number, date of birth, bio; while email remains verified read-only), selects default currency as `"VND"`, and taps avatar to choose a new photo. | System previews selected avatar locally and validates editable fields (display name non-empty, <= 50 characters; valid phone and date format). | `UC-ACC-02-S02` |
 | 3 | User taps **"Save Changes"**. | System sends `PUT /api/v1/users/me` with multipart form data (avatar binary + JSON metadata). | `UC-ACC-02-S03` |
 | 4 | Backend updates database record, uploads image, and responds with `200 OK` and updated profile payload. | System updates local profile cache and shows success toast: *"Profile updated successfully."* | `UC-ACC-02-S01` |
 
