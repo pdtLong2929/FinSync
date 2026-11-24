@@ -39,16 +39,19 @@ import com.finsync.ui.dashboard.formatVnd
     val option: @Composable (String, Modifier) -> Unit = { label, modifier ->
         val active = selected == label
         Box(modifier.clip(MaterialTheme.shapes.large)
-            .then(if(active) Modifier.liquidSelected(action=true) else Modifier.liquidGlass(MaterialTheme.shapes.large, androidx.compose.ui.unit.Dp(0f)))
+            .then(if(active) Modifier.liquidGlass(MaterialTheme.shapes.large) else Modifier)
             .selectable(active, role = Role.Tab, onClick = { onSelect(label) })
             .heightIn(min = LiquidTokens.minTarget).padding(Space.small), contentAlignment = Alignment.Center) {
             Text(label, style = MaterialTheme.typography.labelMedium,
-                color = if(active) DockTokens.onAction else MaterialTheme.colorScheme.onSurfaceVariant)
+                color = if(active) LiquidTokens.heroDeep else MaterialTheme.colorScheme.onSurfaceVariant,
+                fontWeight = if(active) androidx.compose.ui.text.font.FontWeight.Bold else androidx.compose.ui.text.font.FontWeight.Medium)
         }
     }
-    if(large) Column(Modifier.fillMaxWidth().selectableGroup(), verticalArrangement = Arrangement.spacedBy(Space.small)) {
+    val tray = Modifier.fillMaxWidth().clip(LiquidSurfaceTokens.insetShape).background(LiquidSurfaceTokens.inset)
+        .padding(Space.small).selectableGroup()
+    if(large) Column(tray, verticalArrangement = Arrangement.spacedBy(Space.small)) {
         options.forEach { option(it, Modifier.fillMaxWidth()) }
-    } else Row(Modifier.fillMaxWidth().selectableGroup(), horizontalArrangement = Arrangement.spacedBy(Space.small)) {
+    } else Row(tray, horizontalArrangement = Arrangement.spacedBy(Space.small)) {
         options.forEach { option(it, Modifier.weight(1f)) }
     }
 }

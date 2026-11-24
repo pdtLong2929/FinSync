@@ -8,7 +8,8 @@ data class GroupMember(val id: String, val name: String, val active: Boolean = t
 data class ExpenseGroup(val id: String, val name: String, val type: String, val description: String,
     val members: List<GroupMember>, val owner: String = "me", val invite: String = "SYNC88", val joined: Boolean = true)
 data class GroupExpense(val id: String, val groupId: String, val title: String, val amount: Long,
-    val payer: String, val shares: Map<String, Long>, val date: LocalDate, val category: String)
+    val payer: String, val shares: Map<String, Long>, val date: LocalDate, val category: String,
+    val splitMode: SplitMode? = null, val splitInputs: Map<String, String> = emptyMap())
 data class Settlement(val id: String, val groupId: String, val from: String, val to: String,
     val amount: Long, val date: LocalDate)
 data class Debt(val from: String, val to: String, val amount: Long)

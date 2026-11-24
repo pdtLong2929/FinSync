@@ -2,6 +2,7 @@ package com.finsync.ui.components
 
 import androidx.compose.runtime.*
 import androidx.compose.foundation.background
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.ui.Modifier
@@ -39,8 +40,8 @@ fun categoryIconResource(icon: CategoryIcon): Int = when(icon) {
         else -> LiquidTokens.lilacTile
     }
     Box(Modifier.size(MetalTokens.badge).liquidGlass(MaterialTheme.shapes.small,androidx.compose.ui.unit.Dp(1f),color), contentAlignment = Alignment.Center) {
-        Icon(painterResource(categoryIconResource(category?.icon ?: CategoryIcon.Other)),
-            contentDescription = "$name category", tint = LiquidTokens.ink,
-            modifier = Modifier.semantics { stateDescription = "${category?.icon ?: CategoryIcon.Other} · ${category?.color ?: CategoryColor.Lavender}" })
+        Image(painterResource(categoryIconResource(category?.icon ?: CategoryIcon.Other)),
+            contentDescription = "$name category",
+            modifier = Modifier.size(MaterialIconTokens.objectSize).semantics { stateDescription = "${category?.icon ?: CategoryIcon.Other} · ${category?.color ?: CategoryColor.Lavender}" })
     }
 }

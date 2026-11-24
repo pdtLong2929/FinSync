@@ -1,6 +1,7 @@
 package com.finsync.ui.dashboard
 
 import com.finsync.ui.components.LiquidSurfaceTokens
+import com.finsync.ui.components.liquidGlass
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.BorderStroke
@@ -43,7 +44,7 @@ internal fun OverviewTrend(points: List<Pair<String, Long>>, hidden: Boolean, on
             }
         }
     }
-    Column(Modifier.fillMaxWidth().padding(horizontal = Space.small), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+    Column(Modifier.fillMaxWidth().liquidGlass().padding(horizontal = Space.medium, vertical = Space.small), verticalArrangement = Arrangement.spacedBy(Space.small)) {
         Text("Spending", style=MaterialTheme.typography.labelLarge, color=MaterialTheme.colorScheme.onSurfaceVariant)
         if (points.isEmpty() || points.all { it.second == 0L }) Text("No expenses this month")
         else if (hidden) Text("Amounts hidden")

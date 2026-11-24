@@ -6,6 +6,41 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class GroupFinanceTest {
+    @Test fun retryingSavedExpenseUsesItsStableIdWithoutAddingAnotherEntry() {
+        val vm = FinanceViewModel()
+        val date = com.finsync.data.DemoFixtures.today.toString()
+        fun save(amount: String) = vm.addGroupExpense("home", "Groceries", amount, "me", date, "Food",
+            listOf("me", "linh"), SplitMode.Equal, emptyMap(), "request-one")
+        assertNull(save("90001"))
+        val after = vm.uiState.value
+        assertNull(save("90001"))
+        assertEquals(after, vm.uiState.value)
+        assertNotNull(save("80000"))
+        assertEquals(after, vm.uiState.value)
+    }
+
+    @Test fun retryingCompletedSettlementIsSuccessfulWithoutReducingDebtAgain() {
+        val vm = FinanceViewModel()
+        val date = com.finsync.data.DemoFixtures.today.toString()
+        assertNull(vm.recordSettlement("home", "linh", "me", "100000", date, "payment-one"))
+        val after = vm.uiState.value
+        assertNull(vm.recordSettlement("home", "linh", "me", "100000", date, "payment-one"))
+        assertEquals(after, vm.uiState.value)
+        assertNotNull(vm.recordSettlement("home", "linh", "me", "90000", date, "payment-one"))
+        assertEquals(after, vm.uiState.value)
+    }
+    @Test fun editingGroupMetadataPreservesExpenseAndSettlementHistory() {
+        val vm = FinanceViewModel()
+        val before = vm.uiState.value
+        assertNotNull(vm.editGroup("home", "", "HOME", ""))
+        assertNotNull(vm.editGroup("home", "Weekend trip", "HOME", ""))
+        assertEquals(before, vm.uiState.value)
+        assertNull(vm.editGroup("home", "Our household", "HOME", "Shared bills"))
+        assertEquals("Our household", vm.uiState.value.groups.first().name)
+        assertEquals(before.groupExpenses, vm.uiState.value.groupExpenses)
+        assertEquals(before.settlements, vm.uiState.value.settlements)
+        assertEquals(before.entries, vm.uiState.value.entries)
+    }
     @Test fun invalidSharedDetailsAndSettlementsNeverMutateLedgers() {
         val vm = FinanceViewModel()
         val before = vm.uiState.value

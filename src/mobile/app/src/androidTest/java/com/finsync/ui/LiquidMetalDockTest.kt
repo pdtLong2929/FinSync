@@ -15,6 +15,8 @@ import com.finsync.ui.theme.FinSyncTheme
 import org.junit.Rule
 import org.junit.Test
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
+import org.junit.Assert.assertEquals
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.semantics.SemanticsActions
 
@@ -34,6 +36,9 @@ class LiquidMetalDockTest {
         host(large)
         for (tab in listOf("Overview", "Wallets", "Groups", "Reports")) {
             compose.onNodeWithTag("chrome-tab-$tab").assertIsDisplayed().performClick().assertIsSelected()
+            val target = compose.onNodeWithTag("chrome-tab-$tab").getUnclippedBoundsInRoot()
+            assertTrue("$tab touch width", (target.right - target.left).value >= 48f)
+            assertTrue("$tab touch height", (target.bottom - target.top).value >= 48f)
             for(other in listOf("Overview", "Wallets", "Groups", "Reports").filter { it != tab })
                 compose.onNodeWithTag("chrome-tab-$other").assertIsNotSelected().assertIsDisplayed()
             compose.onNodeWithContentDescription(if(tab == "Groups") "Add group expense" else "Add expense").assertIsDisplayed()
@@ -43,6 +48,7 @@ class LiquidMetalDockTest {
                         val results = mutableListOf<TextLayoutResult>()
                         action(results)
                         assertFalse("$label navigation label must fit fully", results.single().hasVisualOverflow)
+                        assertEquals("$label should stay on one line", 1, results.single().lineCount)
                     }
             }
             captureScreen("liquid-metal-f-${tab.lowercase()}-${if(large) "large" else "normal"}", compose, nativeWindow = true)

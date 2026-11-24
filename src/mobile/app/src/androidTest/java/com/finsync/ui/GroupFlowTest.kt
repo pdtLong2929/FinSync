@@ -68,6 +68,7 @@ class GroupFlowTest {
         } }
         compose.onNodeWithText("Amount (VND)").performTextReplacement("1")
         compose.onNodeWithText("Remaining after this payment:", substring = true).assertIsDisplayed()
+        keyboard.close(compose)
         compose.onNodeWithText("Review settlement").performClick()
         compose.waitUntil(5_000) {
             runCatching { compose.onNodeWithText("Confirm partial payment?").assertIsDisplayed() }.isSuccess

@@ -54,11 +54,20 @@ class AuthFlowTest {
         host()
         val instrumentation = androidx.test.platform.app.InstrumentationRegistry.getInstrumentation()
         for (page in listOf(AuthPage.Login, AuthPage.Register, AuthPage.ForgotPassword)) {
+            println("Hardware keyboard verification: $page")
             compose.runOnIdle { auth.open(page) }
             compose.onNodeWithText("Email address").performTouchInput { click() }
             compose.onNodeWithText("Email address").assertIsFocused()
             // Compose focus can precede Android attaching the editable input connection.
             keyboard.awaitOpen(compose)
+            // Gboard may already be visible while Android still has a dummy input
+            // connection. Real key injection must wait for the editor, not a timer.
+            compose.waitUntil(5_000) { compose.runOnIdle {
+                val input = compose.activity.getSystemService(android.view.inputmethod.InputMethodManager::class.java)
+                compose.activity.window.decorView.hasWindowFocus() && input.isAcceptingText
+            } }
+            compose.onNodeWithText("Email address").assertIsFocused()
+            instrumentation.waitForIdleSync()
             // Real Android key events, not Compose's synthetic text replacement.
             instrumentation.sendStringSync("123@")
             compose.waitUntil(5_000) {
@@ -82,7 +91,7 @@ class AuthFlowTest {
         compose.onNodeWithText("Overview").assertIsSelected()
         compose.onNodeWithText("Wallets").performClick()
         compose.onNode(hasText("Wallets") and !hasClickAction()).assertIsDisplayed()
-        compose.onNodeWithText("Overview").performClick(); compose.onNodeWithText("Account").performClick()
+        compose.onNodeWithText("Overview").performClick(); compose.onNodeWithContentDescription("Account").performClick()
         compose.onNodeWithText("Get started").assertExists()
         compose.onNodeWithText("Back").performClick()
         compose.onNodeWithText("Overview").assertIsSelected()
