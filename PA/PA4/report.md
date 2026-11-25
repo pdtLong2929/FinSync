@@ -188,108 +188,150 @@ flowchart TD
 ### C.1. C4 Model Level 2 — Container Diagram
 > *Performed by: Nguyen Le Duc Nhat (24120403) | Reviewed by: Nguyen Phu Dat (24120038) | Edited by: Nguyen Le Duc Nhat (24120403)*
 
+The Container Diagram below reflects **100% of the active runtime containers** defined in `docker-compose.yml` and `src/` for Build 2. Planned PA5 subsystems (React Web Admin Portal and FastAPI/Gemini AI Advisory Service) are intentionally excluded from this diagram until implemented, ensuring strict code-to-architecture conformance.
+
 ```mermaid
 flowchart TD
-    subgraph ClientTier["Client Application Tier"]
-        AndroidApp["Android Mobile App<br/>[Kotlin / Jetpack Compose]<br/>Personal finance UI, offline cache, expense forms"]
-        AdminWeb["Admin Web Dashboard<br/>[React 18 / TypeScript / TailwindCSS]<br/>System monitoring, user & audit governance"]
+    subgraph ClientTier["Client Tier (Android Device / Emulator)"]
+        AndroidApp["Android Mobile App<br/>[Kotlin / Jetpack Compose / Material 3]<br/>Auth, Group Expenses, Fund & Debt Settlement UI"]
     end
 
-    subgraph ServerTier["Backend Application Tier"]
-        ApiServer["Spring Boot REST API Server<br/>[Java 21 / Spring Boot 3.3.x]<br/>Authentication, business rules, debt engine, AI routing"]
+    subgraph ComposeHost["Docker Compose Runtime (docker-compose.yml)"]
+        InitSecrets["Secret Bootstrap Container (init-secrets)<br/>[alpine:3.21 — One-shot]<br/>Generates DB_PASSWORD & JWT_SECRET into demo_secrets"]
+
+        ApiServer["Spring Boot REST API Server (backend)<br/>[Java 21 / Spring Boot 4.1.1 / Spring Security]<br/>Auth, Group Expense, Split Engine, Debt Simplification"]
+
+        PostgresDB[("PostgreSQL Database (postgres)<br/>[postgres:16-alpine — DB: FinSync]<br/>ACID persistence + Flyway V1..V3 migrations")]
+
+        RedisCache[("Redis Token Blacklist Store (redis)<br/>[redis:7-alpine — AOF + noeviction]<br/>JWT jti revocation denylist")]
     end
 
-    subgraph DataTier["Data Persistence & Caching Tier"]
-        PostgresDB[("PostgreSQL Database<br/>[PostgreSQL 16]<br/>ACID relational persistence for users, wallets, ledgers")]
-        RedisCache[("Redis In-Memory Cache<br/>[Redis 7.2 Alpine]<br/>Token blacklist, rate-limiting, session cache")]
-    end
-
-    subgraph CloudTier["External Cloud Services"]
-        ExtGemini["Google Gemini AI API<br/>[HTTPS / REST]"]
-        ExtGoogle["Google OAuth2 Provider<br/>[HTTPS / REST]"]
-    end
-
-    AndroidApp -->|"HTTPS / REST (JSON)<br/>Port 8080"| ApiServer
-    AdminWeb -->|"HTTPS / REST (JSON)<br/>Port 8080"| ApiServer
-
-    ApiServer -->|"JDBC / TCP (SQL)<br/>Port 5432"| PostgresDB
-    ApiServer -->|"Redis Protocol (RESP)<br/>Port 6379"| RedisCache
-
-    ApiServer -->|"HTTPS / JSON"| ExtGemini
-    ApiServer -->|"HTTPS / JSON"| ExtGoogle
+    AndroidApp -->|"HTTP / REST (JSON + Bearer JWT)<br/>Port 8080 (10.0.2.2:8080 on Emulator)"| ApiServer
+    InitSecrets -.->|"Mounts read-only secrets<br/>/run/finsync/*"| ApiServer
+    InitSecrets -.->|"Mounts read-only DB_PASSWORD<br/>/run/finsync/DB_PASSWORD"| PostgresDB
+    ApiServer -->|"JDBC / TCP (SQL + PESSIMISTIC_WRITE)<br/>Port 5432"| PostgresDB
+    ApiServer -->|"RESP / TCP (Spring Data Redis)<br/>Port 6379"| RedisCache
 ```
 
 ### C.2. Container Catalog, Responsibilities, and Communication Protocols
 > *Performed by: Nguyen Le Duc Nhat (24120403) | Reviewed by: Nguyen Phu Dat (24120038) | Edited by: Nguyen Le Duc Nhat (24120403)*
 
-| Container Name | Technology & Framework | Core Responsibilities | Protocols & Network Ports |
+| Container Name | Technology & Version | Core Responsibilities | Protocols, Ports & Storage |
 | :--- | :--- | :--- | :--- |
-| **Android Mobile App** | Kotlin, Jetpack Compose, Retrofit 2 | Renders user UI, manages local encrypted state, captures transactions. | Outbound HTTPS/JSON to API Server (`8080`). |
-| **Admin Web Dashboard** | React 18, Vite, TypeScript | Administrative user management, system metrics visualization. | Outbound HTTPS/JSON to API Server (`8080`). |
-| **Spring Boot API Server** | Java 21, Spring Boot 3.3.x, Spring Data JPA | Enforces business rules, JWT auth filter, debt simplification engine. | Inbound `8080`; outbound TCP `5432` & `6379`. |
-| **PostgreSQL Database** | PostgreSQL 16 (Docker container) | Relational persistence, schema integrity, Flyway version control. | Inbound TCP `5432` from API Server container. |
-| **Redis Cache** | Redis 7.2 (Docker container) | High-speed JWT revocation blacklist, temporary rate limit tokens. | Inbound RESP `6379` from API Server container. |
+| **Android Mobile App** | Kotlin, Jetpack Compose, Material 3, Coroutines (`src/mobile/`) | Renders user screens for registration/login, group creation, guest & invitation workflows, 4-mode expense splitting, shared fund tracking, and simplified debt settlement. | Outbound HTTP/REST JSON with Bearer JWT to port `8080` (`10.0.2.2:8080` on Android emulator). |
+| **Spring Boot REST API Server (`backend`)** | Java 21 LTS, Spring Boot `4.1.1`, Spring Security (JOSE/Nimbus JWT), Spring Data JPA, Flyway (`src/backend/`) | Validates stateless JWTs and active session state, executes Flyway migrations at boot, enforces group permissions and `PESSIMISTIC_WRITE` locks, runs `ExpenseSplitCalculator` and `DebtSimplificationEngine`. | Inbound `127.0.0.1:8080->8080/tcp` (Spring MVC); outbound JDBC `5432/tcp` and RESP `6379/tcp`. |
+| **PostgreSQL Database (`postgres`)** | `postgres:16-alpine` (Database `FinSync`, user `finsync`) | Stores all persistent Build 1 & Build 2 relational tables (`users`, `auth_sessions`, `categories`, `groups`, `group_members`, `group_invitations`, `group_wallets`, `group_fund_entries`, `group_expenses`, `group_expense_splits`, `settlements`). | Inbound TCP `5432` inside Docker Compose network; persisted on `demo_postgres_data` volume. |
+| **Redis Token Blacklist Store (`redis`)** | `redis:7-alpine` (`--appendonly yes --maxmemory-policy noeviction`) | Stores revoked JWT `jti` keys (`auth:deny:access:{jti}`) with TTL until token expiry; `noeviction` guarantees security denylist entries are never evicted under memory pressure. | Inbound RESP TCP `6379` inside Docker Compose network; persisted on `demo_redis_data` volume. |
+| **Secret Bootstrap Container (`init-secrets`)** | `alpine:3.21` (one-shot init service) | Generates 256-bit random `DB_PASSWORD` and `JWT_SECRET` files (`chmod 400`, UID `10001`) into shared volume `demo_secrets` before `postgres` and `backend` start. | Shared read-only mount `/run/finsync/` (`demo_secrets` volume); exits upon completion (`restart: "no"`). |
+
+**Inter-Container Communication & Fail-Closed Boundaries:**
+* **Client -> API Server:** Stateless HTTP/JSON over port `8080` with `Authorization: Bearer <accessToken>` on all endpoints except `/api/v1/auth/{register,login,refresh}` and `/actuator/health`.
+* **API Server -> PostgreSQL:** Transactional JDBC over port `5432` with `spring.jpa.open-in-view=false`, `spring.jpa.hibernate.ddl-auto=validate`, and `SELECT ... FOR UPDATE` (`PESSIMISTIC_WRITE`) locks on `users` and `groups` rows during mutating operations.
+* **API Server -> Redis:** Synchronous `StringRedisTemplate` checks on `JwtAuthenticationFilter` (`2s` timeout). If Redis is unavailable, protected endpoints fail closed with HTTP `503 AUTH_SERVICE_UNAVAILABLE` rather than bypassing revocation checks.
 
 ### C.3. C4 Model Level 3 — Backend Component Diagram (Spring Boot Server)
 > *Performed by: Nguyen Le Duc Nhat (24120403) | Reviewed by: Ngo Thai Hoa (24120051) | Edited by: Nguyen Le Duc Nhat (24120403)*
 
 ```mermaid
 flowchart TD
-    subgraph SpringBootApp["Spring Boot API Server (Port 8080)"]
-        subgraph SecurityLayer["Security & Filter Layer"]
-            JwtFilter["JwtAuthenticationFilter<br/>[Validates Bearer token & checks Redis blacklist]"]
-            SecConfig["SecurityConfiguration<br/>[RBAC URL authorization & CORS]"]
+    subgraph SpringBootApp["Spring Boot REST API Server (com.finsync — Port 8080)"]
+        subgraph SecurityErrorLayer["Security & Error Handling Layer"]
+            SecConfig["SecurityConfig<br/>[Stateless FilterChain & BCrypt]"]
+            JwtFilter["JwtAuthenticationFilter<br/>[Bearer JWT + SessionPrincipal]"]
+            TokenSvc["JwtTokens & SessionValidator<br/>[HS256 verify + DB session check]"]
+            Blacklist["TokenBlacklist<br/>[Redis jti denylist]"]
+            ExHandler["ApiExceptionHandler & ApiErrorWriter<br/>[400/401/403/404/409/422 JSON]"]
         end
 
-        subgraph ControllerLayer["REST Controller Layer"]
-            AuthController["AuthController<br/>[/api/v1/auth]"]
-            UserController["UserController<br/>[/api/v1/users]"]
-            WalletController["WalletController<br/>[/api/v1/wallets]"]
-            TxController["TransactionController<br/>[/api/v1/transactions]"]
-            GroupController["GroupExpenseController<br/>[/api/v1/groups]"]
+        subgraph ControllerLayer["REST Controller Layer (/api/v1)"]
+            AuthCtrl["AuthController & UserController<br/>[/auth/*, /users/me]"]
+            CatCtrl["CategoryController<br/>[/categories]"]
+            GrpCtrl["GroupController<br/>[/groups, /members, /invitations]"]
+            FundCtrl["GroupFundController<br/>[/groups/{id}/fund]"]
+            ExpCtrl["GroupExpenseController<br/>[/groups/{id}/expenses]"]
+            SettleCtrl["DebtSettlementController<br/>[/groups/{id}/debts, /settlements]"]
         end
 
-        subgraph ServiceLayer["Business Service & Logic Layer"]
-            AuthService["AuthService<br/>[Token generation, hashing]"]
-            UserService["UserService<br/>[Profile update, bio]"]
-            WalletService["WalletService<br/>[Multi-currency balance]"]
-            TxService["TransactionService<br/>[Ledger processing]"]
-            DebtEngine["DebtSimplificationEngine<br/>[Minimum transaction graph algorithm]"]
-            BlacklistService["TokenBlacklistService<br/>[Redis token invalidation]"]
+        subgraph ServiceLayer["Business Service & Domain Engine Layer"]
+            AccSvc["AccountServiceImpl<br/>[Auth, profile, sessions]"]
+            GrpSvc["GroupServiceImpl<br/>[Group, guest, invite, owner]"]
+            FundSvc["GroupFundServiceImpl<br/>[Pool contrib & refund]"]
+            ExpSvc["GroupExpenseServiceImpl<br/>[MEMBERS & GROUP_FUND bills]"]
+            SettleSvc["DebtSettlementServiceImpl<br/>[Balances & settlements]"]
+            AccessSup["GroupAccessSupport<br/>[Locks, role & net-balance calc]"]
+            SplitCalc["ExpenseSplitCalculator<br/>[4-mode minor-unit splitter]"]
+            DebtEngine["DebtSimplificationEngine<br/>[O(V log V) two-heap optimizer]"]
         end
 
-        subgraph RepositoryLayer["Data Access & Repository Layer"]
-            UserRepo["UserRepository<br/>[Spring Data JPA]"]
-            WalletRepo["WalletRepository<br/>[Spring Data JPA]"]
-            TxRepo["TransactionRepository<br/>[Spring Data JPA]"]
-            GroupRepo["GroupRepository<br/>[Spring Data JPA]"]
+        subgraph RepositoryLayer["Data Access Layer (Spring Data JPA)"]
+            AccRepos["UserRepository & AuthSessionRepository"]
+            CatRepo["CategoryRepository"]
+            GrpRepos["ExpenseGroupRepository (PESSIMISTIC_WRITE)<br/>GroupMemberRepository, GroupInvitationRepository"]
+            FundRepos["GroupWalletRepository<br/>GroupFundEntryRepository"]
+            ExpRepos["GroupExpenseRepository<br/>GroupExpenseSplitRepository"]
+            SettleRepo["SettlementRepository"]
         end
     end
 
-    JwtFilter --> AuthController
-    JwtFilter --> UserController
-    JwtFilter --> WalletController
-    JwtFilter --> TxController
-    JwtFilter --> GroupController
+    JwtFilter --> TokenSvc
+    JwtFilter --> Blacklist
+    SecConfig --> JwtFilter
+    JwtFilter --> AuthCtrl
+    JwtFilter --> CatCtrl
+    JwtFilter --> GrpCtrl
+    JwtFilter --> FundCtrl
+    JwtFilter --> ExpCtrl
+    JwtFilter --> SettleCtrl
 
-    AuthController --> AuthService
-    UserController --> UserService
-    WalletController --> WalletService
-    TxController --> TxService
-    GroupController --> DebtEngine
+    AuthCtrl --> AccSvc
+    GrpCtrl --> GrpSvc
+    FundCtrl --> FundSvc
+    ExpCtrl --> ExpSvc
+    SettleCtrl --> SettleSvc
 
-    AuthService --> UserRepo
-    AuthService --> BlacklistService
-    UserService --> UserRepo
-    WalletService --> WalletRepo
-    TxService --> TxRepo
-    DebtEngine --> GroupRepo
+    GrpSvc --> AccessSup
+    FundSvc --> AccessSup
+    ExpSvc --> AccessSup
+    ExpSvc --> SplitCalc
+    SettleSvc --> AccessSup
+    SettleSvc --> DebtEngine
+
+    AccSvc --> AccRepos
+    CatCtrl --> CatRepo
+    GrpSvc --> GrpRepos
+    GrpSvc --> FundRepos
+    FundSvc --> FundRepos
+    ExpSvc --> ExpRepos
+    ExpSvc --> FundRepos
+    ExpSvc --> CatRepo
+    SettleSvc --> SettleRepo
+    AccessSup --> GrpRepos
+    AccessSup --> ExpRepos
+    AccessSup --> SettleRepo
 ```
 
 ### C.4. Backend Component Catalog and Internal Interplay
 > *Performed by: Nguyen Le Duc Nhat (24120403) | Reviewed by: Ngo Thai Hoa (24120051) | Edited by: Nguyen Le Duc Nhat (24120403)*
 
-<!-- TODO: [Nhat] Describe each backend component's responsibility and its exact correspondence with Java classes in /src/backend/. -->
+Every component in the C4 Level 3 Backend Diagram maps directly to Java classes inside `src/backend/src/main/java/com/finsync/`:
+
+| Layer | Component Class(es) | Package | Responsibility & Internal Interplay |
+| :--- | :--- | :--- | :--- |
+| **Security & Error** | `SecurityConfig`, `JwtAuthenticationFilter`, `JwtTokens`, `SessionValidator`, `TokenBlacklist` | `config`, `security` | Configures stateless security (`SessionCreationPolicy.STATELESS`), extracts and verifies Bearer JWTs, checks Redis `auth:deny:access:{jti}` blacklist, verifies active `User` and non-revoked `AuthSession`, and populates `SessionPrincipal`. |
+| **Security & Error** | `ApiException`, `ApiExceptionHandler`, `ApiErrorWriter` | `exception` | Translates domain exceptions (`400`, `401`, `403`, `404`, `409`, `422`), Bean Validation errors (`MethodArgumentNotValidException`), and PostgreSQL constraint violations (`uk_*`) into `ErrorBody(code, message, fieldErrors, traceId)` with `Cache-Control: no-store`. |
+| **Controller** | `AuthController`, `UserController` | `controller` | Exposes PA3 registration, login, token refresh, logout, and `/users/me` profile endpoints delegating to `AccountService`. |
+| **Controller** | `CategoryController`, `GroupController`, `GroupFundController`, `GroupExpenseController`, `DebtSettlementController` | `controller` | Exposes Build 2 REST endpoints under `/api/v1/categories` and `/api/v1/groups/**`, validating request DTOs (`@Valid`) and passing `SessionPrincipal` to service interfaces. |
+| **Service & Engine** | `GroupServiceImpl`, `GroupFundServiceImpl`, `GroupExpenseServiceImpl`, `DebtSettlementServiceImpl` | `service.impl` | Enforces transactional boundaries (`@Transactional`), acquires group locks, checks `IdempotencySupport` (`requestId` + SHA-256 `requestHash`), validates `MoneyValidation` (`VND` scale `0`, `USD` scale `<= 2`), and persists append-only records. |
+| **Service & Engine** | `GroupAccessSupport`, `MoneyValidation`, `IdempotencySupport` | `service.impl` | Shared helpers verifying `UserStatus.ACTIVE`, `GroupMemberRole.OWNER` / `ACTIVE` membership, non-archived status, pessimistic group row lock (`findByIdForUpdate`), and ledger net-balance derivation (`paid - split + settledPaid - settledReceived`). |
+| **Service & Engine** | `ExpenseSplitCalculator` | `service.impl` | Pure deterministic cost splitter operating in integer minor units (`long`) across `EQUAL`, `EXACT`, `PERCENTAGE`, and `SHARES` with largest-remainder + ascending `splitOrder` tie-breaking (`sum(splits) == expense.amount`). |
+| **Service & Engine** | `DebtSimplificationEngine` | `service.impl` | Pure $O(V \log V)$ greedy two-heap (`PriorityQueue` max-creditor / max-debtor) optimizer computing minimal direct transfers without storing stale debt graph rows. |
+| **Repository** | `UserRepository`, `AuthSessionRepository`, `CategoryRepository`, `ExpenseGroupRepository`, `GroupMemberRepository`, `GroupInvitationRepository`, `GroupWalletRepository`, `GroupFundEntryRepository`, `GroupExpenseRepository`, `GroupExpenseSplitRepository`, `SettlementRepository` | `repository` | Spring Data JPA interfaces executing typed JPQL queries against PostgreSQL 16 (`ddl-auto=validate`). `ExpenseGroupRepository.findByIdForUpdate` acquires `LockModeType.PESSIMISTIC_WRITE` before concurrent group mutations. |
+
+**End-to-End Request Interplay (Example — Recording a Shared Expense & Viewing Simplified Debts):**
+1. **Ingress & Authentication:** `JwtAuthenticationFilter` verifies the JWT via `JwtTokens`, checks `TokenBlacklist` in Redis, validates the PostgreSQL session via `SessionValidator`, and binds `SessionPrincipal` before dispatching to `GroupExpenseController`.
+2. **Locking & Idempotency:** `GroupExpenseServiceImpl` acquires a `PESSIMISTIC_WRITE` lock on the target `ExpenseGroup` row via `GroupAccessSupport.lockGroup(groupId)`, validates active membership and non-archived state, computes a canonical SHA-256 `requestHash` via `IdempotencySupport`, and checks `GroupExpenseRepository.findByRequestId`.
+3. **Deterministic Split & Atomic Write:** `ExpenseSplitCalculator` computes exact minor-unit shares (`GroupExpenseSplit` rows). If `fundingSource == GROUP_FUND`, `GroupExpenseServiceImpl` verifies sufficient computed fund balance (`GroupFundEntryRepository.computeBalanceByWalletId`) and atomically inserts the linked `GroupFundEntry` (`type = EXPENSE`) in the same transaction.
+4. **Debt Minimization:** On `GET /api/v1/groups/{groupId}/debts`, `DebtSettlementServiceImpl` derives per-member net balances from `MEMBERS`-funded expenses and `CONFIRMED` settlements, passes them to `DebtSimplificationEngine.simplify(...)`, and returns the simplified transfer plan alongside the raw-vs-simplified reduction percentage.
 
 ### C.5. C4 Model Level 3 — Frontend Component Diagram (Android Jetpack Compose)
 > *Performed by: Nguyen Phu Dat (24120038) | Reviewed by: Nguyen Le Duc Nhat (24120403) | Edited by: Nguyen Phu Dat (24120038)*
@@ -344,9 +386,10 @@ flowchart TD
 > *Performed by: Nguyen Le Duc Nhat (24120403) | Reviewed by: Pham Dinh Tieu Long (24120087) | Edited by: Nguyen Le Duc Nhat (24120403)*
 
 To guarantee zero grading penalty under PA4 Specification Warning (*"Any inconsistency between the documented architecture and the source code will result in a grade penalty"*):
-* 100% of Controllers, Services, and Repositories in C4 Level 3 map to physical `.java` files in `src/backend/src/main/java/com/finsync/`.
-* 100% of UI screens, ViewModels, and Repositories map to physical `.kt` files in `src/mobile/app/src/main/java/com/finsync/`.
-* No phantom components (e.g., Apache Kafka, microservices) exist on diagrams without concrete implementations.
+* **100% Container Traceability:** All 5 containers in `C.1`/`C.2` correspond directly to `src/mobile/`, `src/backend/`, and services `init-secrets`, `backend`, `postgres`, and `redis` in `docker-compose.yml`.
+* **100% Backend Component Traceability:** All 7 controllers (`AuthController`, `UserController`, `CategoryController`, `GroupController`, `GroupFundController`, `GroupExpenseController`, `DebtSettlementController`), 10 service/engine classes (`AccountServiceImpl`, `GroupServiceImpl`, `GroupFundServiceImpl`, `GroupExpenseServiceImpl`, `DebtSettlementServiceImpl`, `GroupAccessSupport`, `ExpenseSplitCalculator`, `DebtSimplificationEngine`, `MoneyValidation`, `IdempotencySupport`), and 11 repositories map 1-to-1 to `.java` files in `src/backend/src/main/java/com/finsync/`.
+* **100% Schema Traceability:** All 11 active relational tables (`users`, `auth_sessions`, `categories`, `groups`, `group_members`, `group_invitations`, `group_wallets`, `group_fund_entries`, `group_expenses`, `group_expense_splits`, `settlements`) are created deterministically by Flyway migrations `V1`–`V3` and validated on startup via `spring.jpa.hibernate.ddl-auto=validate`.
+* **Zero Phantom Components:** Planned PA5 modules (React Admin Web, FastAPI AI Advisory Service, Kafka, S3) are excluded from C4 L2/L3 runtime diagrams until implemented.
 
 ---
 
@@ -439,7 +482,15 @@ The 2 functional groups were delivered following the rigorous 4-stage Spec Kit l
 ### E.3. Database Persistence & Flyway Migrations
 > *Performed by: Nguyen Le Duc Nhat (24120403) | Reviewed by: Vuong Dac Gia Khiem (24120342) | Edited by: Nguyen Le Duc Nhat (24120403)*
 
-<!-- TODO: [Nhat] Document database migration files (e.g., V2__xxx.sql, V3__xxx.sql), table DDLs, foreign keys, and indexes. -->
+Database DDL and default taxonomy seeding are managed exclusively through versioned Flyway SQL scripts in `src/backend/src/main/resources/db/migration/`, verified against Hibernate (`spring.jpa.hibernate.ddl-auto=validate`):
+
+| Migration Script | Tables / Seeds Created | Key Integrity & Concurrency Constraints |
+| :--- | :--- | :--- |
+| `V1__create_account_tables.sql` *(PA3)* | `users`, `auth_sessions` | `UNIQUE(email)`, `UNIQUE(refresh_token_hash)`, `ON DELETE RESTRICT` FK, lock-state `CHECK` constraints. |
+| `V2__create_group_expense_tables.sql` *(PA4)* | `categories`, `groups`, `group_members`, `group_invitations`, `group_wallets`, `group_fund_entries`, `group_expenses`, `group_expense_splits`, `settlements` | All FKs `ON DELETE RESTRICT ON UPDATE RESTRICT`; `NUMERIC(19,2)` monetary columns; `UNIQUE(request_id)` idempotency on `group_fund_entries`, `group_expenses`, `settlements`; partial unique index `uk_group_members_active_owner` (`WHERE role = 'OWNER' AND status = 'ACTIVE'`); `CHECK` invariants linking `funding_source` to `paid_by_member_id` and `type` to `member_id`/`expense_id`. |
+| `V3__seed_default_categories.sql` *(PA4)* | 8 default `EXPENSE` categories & 3 default `INCOME` categories | Deterministic UUIDs with `ON CONFLICT DO NOTHING` for idempotent repeatable startup across environments. |
+
+All 9 Build 2 tables inherit the 4 standard `BaseEntity` audit/optimistic-lock columns (`id UUID`, `created_at TIMESTAMPTZ`, `updated_at TIMESTAMPTZ`, `version BIGINT`) and store monetary values in `NUMERIC(19,2)` (`BigDecimal`).
 
 ### E.4. Automated Spec Kit Tests & Postman E2E Test Suite
 > *Performed by: Vuong Dac Gia Khiem (24120342) | Reviewed by: Nguyen Le Duc Nhat (24120403) | Edited by: Vuong Dac Gia Khiem (24120342)*
