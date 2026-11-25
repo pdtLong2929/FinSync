@@ -418,23 +418,23 @@ flowchart TD
 ### E.1. Selected Functional Groups and Scope Rationale
 > *Performed by: Nguyen Le Duc Nhat (24120403) | Reviewed by: Pham Dinh Tieu Long (24120087) | Edited by: Nguyen Le Duc Nhat (24120403)*
 
-* **Functional Group 1:** `[Selected Group 1 Name — to be finalized at Sprint Planning]`
-  * *Scope:* Full-stack Android UI + Spring Boot REST API + PostgreSQL schema.
-  * *Related FR / UC IDs:* `FR-xxx`, `UC-xxx`.
-* **Functional Group 2:** `[Selected Group 2 Name — to be finalized at Sprint Planning]`
-  * *Scope:* Full-stack Android UI + Spring Boot REST API + PostgreSQL schema.
-  * *Related FR / UC IDs:* `FR-xxx`, `UC-xxx`.
+* **Functional Group 1:** **Group Expense Management** (Shared Groups, Guest Members, Targeted Invitations, Group Fund, and 4-Mode Expense Splitting)
+  * *Scope:* Full-stack Android Jetpack Compose UI + Spring Boot REST API + PostgreSQL schema (`V2` & `V3` Flyway migrations).
+  * *Related FR / UC IDs:* `FR-G01`–`FR-G08`, `FR-G12`–`FR-G14`, `UC-CLI-10`, `UC-CLI-11`.
+* **Functional Group 2:** **Smart Debt Simplification** (Dynamic Net Balance Engine, Greedy Two-Heap Debt Minimization, and Immutable Manual Settlements)
+  * *Scope:* Full-stack Android Jetpack Compose UI + Spring Boot REST API (`DebtSimplificationEngine`, `DebtSettlementService`) + PostgreSQL schema.
+  * *Related FR / UC IDs:* `FR-G08`–`FR-G14`, `UC-CLI-12`.
 
-<!-- TODO: [Nhat & Team] Fill in the exact functional groups chosen at Sprint Planning meeting and provide selection rationale. -->
+All Spec Kit specification, planning, data model, OpenAPI contract, and task artifacts for Build 2 reside in [specs/002-group-expense-debt-simplification/](../../specs/002-group-expense-debt-simplification/spec.md).
 
 ### E.2. Spec Kit Specification-Driven Development (SDD) Workflow
 > *Performed by: Nguyen Le Duc Nhat (24120403) | Reviewed by: Ngo Thai Hoa (24120051) | Edited by: Nguyen Le Duc Nhat (24120403)*
 
 The 2 functional groups were delivered following the rigorous 4-stage Spec Kit lifecycle:
-1. **Specify:** Authored functional user stories and acceptance criteria in `specs/[folder]/spec.md`.
-2. **Plan:** Defined architectural contracts, database schemas, and API definitions in `contracts/backend-api.yaml`.
-3. **Tasks:** Decomposed work into atomic technical tasks in `tasks.md`.
-4. **Implement:** Executed backend Java logic, database Flyway migrations, and Android Kotlin UI screens.
+1. **Specify:** Authored prioritized user stories (`US1`–`US4`), edge cases, and functional requirements (`FR-G01`–`FR-G14`) in `specs/002-group-expense-debt-simplification/spec.md`.
+2. **Plan:** Defined layered Spring Boot architecture, Flyway `V2`/`V3` data model, concurrency locks, and OpenAPI 3.0.3 definitions in `specs/002-group-expense-debt-simplification/plan.md`, `data-model.md`, and `contracts/backend-api.yaml`.
+3. **Tasks:** Decomposed work into 30 atomic technical tasks (`T001`–`T030`) and end-to-end verification walkthroughs in `specs/002-group-expense-debt-simplification/tasks.md` and `quickstart.md`.
+4. **Implement:** Executed backend Java logic, PostgreSQL Flyway migrations, unit/integration tests, and Android Jetpack Compose integration.
 
 ### E.3. Database Persistence & Flyway Migrations
 > *Performed by: Nguyen Le Duc Nhat (24120403) | Reviewed by: Vuong Dac Gia Khiem (24120342) | Edited by: Nguyen Le Duc Nhat (24120403)*

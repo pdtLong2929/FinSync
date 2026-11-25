@@ -1,0 +1,977 @@
+openapi: 3.0.3
+info:
+  title: FinSync Backend REST API — Build 2 (Group Expense Management & Smart Debt Simplification)
+  description: >
+    OpenAPI 3.0.3 specification for FinSync Sprint 4 / PA4 (Build 2), extending the PA3 Account & JWT
+    Authentication baseline with Group Expense Management (groups, guest members, invitations, shared
+    group fund, and 4-mode expense splitting) and Smart Debt Simplification (dynamic net balance
+    calculation, O(V log V) greedy two-heap debt minimization, and immutable manual settlements).
+    Performed by: Nguyen Le Duc Nhat (24120403) | Reviewed by: Ngo Thai Hoa (24120051) | Edited by: Nguyen Le Duc Nhat (24120403).
+  version: 2.0.0
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Local Docker / Spring Boot development server
+
+security:
+  - bearerAuth: []
+
+tags:
+  - name: Categories
+    description: System-managed expense and income categories
+  - name: Groups
+    description: Shared expense groups, membership lifecycle, ownership, and invitations
+  - name: GroupFund
+    description: Shared group wallet and append-only fund contributions/refunds
+  - name: GroupExpenses
+    description: Group expense logging and deterministic 4-mode cost splitting
+  - name: DebtSettlement
+    description: Net balance calculation, smart debt simplification, and manual settlements
+
+paths:
+  /categories:
+    get:
+      tags: [Categories]
+      summary: List active system categories
+      parameters:
+        - name: type
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/CategoryType'
+      responses:
+        '200':
+          description: List of non-archived categories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CategoryResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /groups:
+    get:
+      tags: [Groups]
+      summary: List groups where the authenticated user is an active member
+      parameters:
+        - name: includeArchived
+          in: query
+          required: false
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: User's group summaries including caller net balance and fund balance
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GroupSummaryResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      tags: [Groups]
+      summary: Create a new shared expense group (atomic group, OWNER member, and GroupWallet)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGroupRequest'
+      responses:
+        '201':
+          description: Group created atomically
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupDetailResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /groups/{groupId}:
+    parameters:
+      - $ref: '#/components/parameters/GroupId'
+    get:
+      tags: [Groups]
+      summary: Get full group details, active/left members, and shared fund balance
+      responses:
+        '200':
+          description: Group detail payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupDetailResponse'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      tags: [Groups]
+      summary: Update group metadata (OWNER only; currency immutable once financial entries exist)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateGroupRequest'
+      responses:
+        '200':
+          description: Group updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupDetailResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+
+  /groups/{groupId}/archive:
+    parameters:
+      - $ref: '#/components/parameters/GroupId'
+    post:
+      tags: [Groups]
+      summary: Archive a group (OWNER only; renders group read-only)
+      responses:
+        '200':
+          description: Group archived
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupDetailResponse'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+
+  /groups/{groupId}/unarchive:
+    parameters:
+      - $ref: '#/components/parameters/GroupId'
+    post:
+      tags: [Groups]
+      summary: Restore an archived group (OWNER only)
+      responses:
+        '200':
+          description: Group unarchived
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupDetailResponse'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+
+  /groups/{groupId}/members:
+    parameters:
+      - $ref: '#/components/parameters/GroupId'
+    get:
+      tags: [Groups]
+      summary: List group members (active and historical left members)
+      responses:
+        '200':
+          description: Member list ordered by memberOrder
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GroupMemberResponse'
+    post:
+      tags: [Groups]
+      summary: Add an unlinked guest member by display name (OWNER only, max 50 active members)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddGuestMemberRequest'
+      responses:
+        '201':
+          description: Guest member added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupMemberResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+
+  /groups/{groupId}/members/{memberId}:
+    parameters:
+      - $ref: '#/components/parameters/GroupId'
+      - $ref: '#/components/parameters/MemberId'
+    delete:
+      tags: [Groups]
+      summary: Remove an active member (OWNER only; marks LEFT iff net balance == 0)
+      responses:
+        '200':
+          description: Member marked LEFT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupMemberResponse'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+
+  /groups/{groupId}/members/leave:
+    parameters:
+      - $ref: '#/components/parameters/GroupId'
+    post:
+      tags: [Groups]
+      summary: Leave the group voluntarily (requires net balance == 0; OWNER must transfer ownership first)
+      responses:
+        '200':
+          description: Caller marked LEFT
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupMemberResponse'
+        '409':
+          $ref: '#/components/responses/Conflict'
+
+  /groups/{groupId}/transfer-ownership:
+    parameters:
+      - $ref: '#/components/parameters/GroupId'
+    post:
+      tags: [Groups]
+      summary: Transfer OWNER role to another active registered member (OWNER only)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferOwnershipRequest'
+      responses:
+        '200':
+          description: Ownership transferred atomically
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupDetailResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+
+  /groups/{groupId}/invitations:
+    parameters:
+      - $ref: '#/components/parameters/GroupId'
+    get:
+      tags: [Groups]
+      summary: List invitations for the group (OWNER only)
+      responses:
+        '200':
+          description: List of invitations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GroupInvitationResponse'
+    post:
+      tags: [Groups]
+      summary: Create a general or guest-targeted invitation token (OWNER only)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInvitationRequest'
+      responses:
+        '201':
+          description: Invitation created (raw token returned once)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateInvitationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+
+  /groups/{groupId}/invitations/{invitationId}:
+    parameters:
+      - $ref: '#/components/parameters/GroupId'
+      - name: invitationId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    delete:
+      tags: [Groups]
+      summary: Revoke an active invitation (OWNER only)
+      responses:
+        '200':
+          description: Invitation revoked
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupInvitationResponse'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /groups/invitations/accept:
+    post:
+      tags: [Groups]
+      summary: Redeem an invitation token to join a group or claim a guest member identity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcceptInvitationRequest'
+      responses:
+        '200':
+          description: Joined group or linked to target guest member
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupDetailResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+
+  /groups/{groupId}/fund:
+    parameters:
+      - $ref: '#/components/parameters/GroupId'
+    get:
+      tags: [GroupFund]
+      summary: Get shared group wallet summary, computed balance, and append-only entries
+      responses:
+        '200':
+          description: Group fund overview and ledger entries
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupFundOverviewResponse'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /groups/{groupId}/fund/entries:
+    parameters:
+      - $ref: '#/components/parameters/GroupId'
+    post:
+      tags: [GroupFund]
+      summary: Record a shared fund CONTRIBUTION or REFUND (OWNER only, idempotent via requestId)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFundEntryRequest'
+      responses:
+        '201':
+          description: Fund entry recorded (or existing idempotent entry returned with 200/201)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupFundEntryResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  /groups/{groupId}/expenses:
+    parameters:
+      - $ref: '#/components/parameters/GroupId'
+    get:
+      tags: [GroupExpenses]
+      summary: List group expenses ordered by expenseDate DESC, createdAt DESC
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+        - name: size
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+      responses:
+        '200':
+          description: Paginated group expenses with split details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupExpensePageResponse'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      tags: [GroupExpenses]
+      summary: Record an append-only group expense with deterministic 4-mode splitting
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGroupExpenseRequest'
+      responses:
+        '201':
+          description: Group expense and splits persisted atomically
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupExpenseResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  /groups/{groupId}/expenses/{expenseId}:
+    parameters:
+      - $ref: '#/components/parameters/GroupId'
+      - name: expenseId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      tags: [GroupExpenses]
+      summary: Get single group expense detail and per-member split breakdown
+      responses:
+        '200':
+          description: Group expense detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupExpenseResponse'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /groups/{groupId}/debts:
+    parameters:
+      - $ref: '#/components/parameters/GroupId'
+    get:
+      tags: [DebtSettlement]
+      summary: Compute member net balances and minimal simplified transfer plan
+      responses:
+        '200':
+          description: Net balances, simplified transfers, and optimization metrics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupDebtSummaryResponse'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /groups/{groupId}/settlements:
+    parameters:
+      - $ref: '#/components/parameters/GroupId'
+    get:
+      tags: [DebtSettlement]
+      summary: List confirmed manual settlements ordered by settlementDate DESC, createdAt DESC
+      responses:
+        '200':
+          description: List of settlements
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SettlementResponse'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      tags: [DebtSettlement]
+      summary: Record a full or partial manual external settlement (status = CONFIRMED, idempotent via requestId)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSettlementRequest'
+      responses:
+        '201':
+          description: Settlement recorded and net balances updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettlementResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    GroupId:
+      name: groupId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    MemberId:
+      name: memberId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+
+  responses:
+    BadRequest:
+      description: Validation error (malformed payload, invalid currency scale, or invalid split inputs)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing, invalid, expired, or blacklisted JWT access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Authenticated caller lacks required group membership or OWNER role
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Target group, member, invitation, or expense not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Conflict:
+      description: State or idempotency conflict (archived group, non-zero balance removal, 50-member limit, duplicate requestId with mismatched payload)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnprocessableEntity:
+      description: Domain invariant rejected (insufficient group fund balance or settlement exceeds settleable debt)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+  schemas:
+    ErrorResponse:
+      type: object
+      required: [code, message, fieldErrors, traceId]
+      properties:
+        code:
+          type: string
+          example: VALIDATION_ERROR
+        message:
+          type: string
+          example: Invalid request
+        fieldErrors:
+          type: object
+          additionalProperties:
+            type: string
+        traceId:
+          type: string
+          format: uuid
+
+    CurrencyCode:
+      type: string
+      enum: [VND, USD]
+
+    CategoryType:
+      type: string
+      enum: [INCOME, EXPENSE]
+
+    GroupMemberRole:
+      type: string
+      enum: [OWNER, MEMBER]
+
+    GroupMemberStatus:
+      type: string
+      enum: [ACTIVE, LEFT]
+
+    GroupFundEntryType:
+      type: string
+      enum: [CONTRIBUTION, REFUND, EXPENSE]
+
+    FundingSource:
+      type: string
+      enum: [MEMBERS, GROUP_FUND]
+
+    SplitMode:
+      type: string
+      enum: [EQUAL, EXACT, PERCENTAGE, SHARES]
+
+    SettlementStatus:
+      type: string
+      enum: [CONFIRMED]
+
+    CategoryResponse:
+      type: object
+      required: [id, name, type, iconKey, colorKey]
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        type: { $ref: '#/components/schemas/CategoryType' }
+        iconKey: { type: string }
+        colorKey: { type: string }
+        archivedAt: { type: string, format: date-time, nullable: true }
+
+    CreateGroupRequest:
+      type: object
+      required: [name, currencyCode]
+      properties:
+        name: { type: string, minLength: 1, maxLength: 100 }
+        description: { type: string, maxLength: 1000, nullable: true }
+        currencyCode: { $ref: '#/components/schemas/CurrencyCode' }
+        fundName: { type: string, minLength: 1, maxLength: 100, nullable: true }
+        guestMemberNames:
+          type: array
+          maxItems: 49
+          items:
+            type: string
+            minLength: 1
+            maxLength: 100
+
+    UpdateGroupRequest:
+      type: object
+      properties:
+        name: { type: string, minLength: 1, maxLength: 100 }
+        description: { type: string, maxLength: 1000, nullable: true }
+        currencyCode: { $ref: '#/components/schemas/CurrencyCode' }
+
+    GroupSummaryResponse:
+      type: object
+      required: [id, name, currencyCode, archived, activeMemberCount, callerMemberId, callerRole, callerNetBalance, fundBalance, createdAt]
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        description: { type: string, nullable: true }
+        currencyCode: { $ref: '#/components/schemas/CurrencyCode' }
+        archived: { type: boolean }
+        archivedAt: { type: string, format: date-time, nullable: true }
+        activeMemberCount: { type: integer }
+        callerMemberId: { type: string, format: uuid }
+        callerRole: { $ref: '#/components/schemas/GroupMemberRole' }
+        callerNetBalance: { type: string, example: "150000.00" }
+        fundBalance: { type: string, example: "500000.00" }
+        createdAt: { type: string, format: date-time }
+
+    GroupMemberResponse:
+      type: object
+      required: [id, displayName, role, status, guest, memberOrder, netBalance, joinedAt]
+      properties:
+        id: { type: string, format: uuid }
+        userId: { type: string, format: uuid, nullable: true }
+        displayName: { type: string }
+        role: { $ref: '#/components/schemas/GroupMemberRole' }
+        status: { $ref: '#/components/schemas/GroupMemberStatus' }
+        guest: { type: boolean }
+        memberOrder: { type: integer }
+        netBalance: { type: string, example: "-50000.00" }
+        joinedAt: { type: string, format: date-time }
+        leftAt: { type: string, format: date-time, nullable: true }
+
+    GroupDetailResponse:
+      type: object
+      required: [id, name, currencyCode, archived, version, walletId, walletName, fundBalance, members, createdAt]
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        description: { type: string, nullable: true }
+        currencyCode: { $ref: '#/components/schemas/CurrencyCode' }
+        archived: { type: boolean }
+        archivedAt: { type: string, format: date-time, nullable: true }
+        version: { type: integer, format: int64 }
+        walletId: { type: string, format: uuid }
+        walletName: { type: string }
+        fundBalance: { type: string, example: "500000.00" }
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupMemberResponse'
+        createdAt: { type: string, format: date-time }
+
+    AddGuestMemberRequest:
+      type: object
+      required: [displayName]
+      properties:
+        displayName: { type: string, minLength: 1, maxLength: 100 }
+
+    TransferOwnershipRequest:
+      type: object
+      required: [newOwnerMemberId]
+      properties:
+        newOwnerMemberId: { type: string, format: uuid }
+
+    CreateInvitationRequest:
+      type: object
+      properties:
+        targetMemberId: { type: string, format: uuid, nullable: true }
+        maxUses: { type: integer, minimum: 1, maximum: 50, default: 1 }
+        expiresInHours: { type: integer, minimum: 1, maximum: 720, default: 72 }
+
+    CreateInvitationResponse:
+      type: object
+      required: [invitation, token]
+      properties:
+        invitation:
+          $ref: '#/components/schemas/GroupInvitationResponse'
+        token:
+          type: string
+          description: Raw invitation token returned once upon creation
+
+    GroupInvitationResponse:
+      type: object
+      required: [id, groupId, createdByMemberId, maxUses, useCount, expiresAt, active]
+      properties:
+        id: { type: string, format: uuid }
+        groupId: { type: string, format: uuid }
+        createdByMemberId: { type: string, format: uuid }
+        targetMemberId: { type: string, format: uuid, nullable: true }
+        maxUses: { type: integer }
+        useCount: { type: integer }
+        expiresAt: { type: string, format: date-time }
+        revokedAt: { type: string, format: date-time, nullable: true }
+        active: { type: boolean }
+
+    AcceptInvitationRequest:
+      type: object
+      required: [token]
+      properties:
+        token: { type: string, minLength: 8, maxLength: 128 }
+
+    CreateFundEntryRequest:
+      type: object
+      required: [requestId, type, memberId, amount, entryDate]
+      properties:
+        requestId: { type: string, format: uuid }
+        type:
+          type: string
+          enum: [CONTRIBUTION, REFUND]
+        memberId: { type: string, format: uuid }
+        amount: { type: number, exclusiveMinimum: 0 }
+        entryDate: { type: string, format: date }
+        note: { type: string, maxLength: 2000, nullable: true }
+
+    GroupFundEntryResponse:
+      type: object
+      required: [id, groupWalletId, type, amount, entryDate, recordedByMemberId, requestId, createdAt]
+      properties:
+        id: { type: string, format: uuid }
+        groupWalletId: { type: string, format: uuid }
+        memberId: { type: string, format: uuid, nullable: true }
+        memberDisplayName: { type: string, nullable: true }
+        expenseId: { type: string, format: uuid, nullable: true }
+        recordedByMemberId: { type: string, format: uuid }
+        type: { $ref: '#/components/schemas/GroupFundEntryType' }
+        amount: { type: string, example: "200000.00" }
+        entryDate: { type: string, format: date }
+        note: { type: string, nullable: true }
+        requestId: { type: string, format: uuid }
+        createdAt: { type: string, format: date-time }
+
+    GroupFundOverviewResponse:
+      type: object
+      required: [walletId, groupId, walletName, currencyCode, balance, entries]
+      properties:
+        walletId: { type: string, format: uuid }
+        groupId: { type: string, format: uuid }
+        walletName: { type: string }
+        currencyCode: { $ref: '#/components/schemas/CurrencyCode' }
+        balance: { type: string, example: "500000.00" }
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupFundEntryResponse'
+
+    GroupExpenseSplitInput:
+      type: object
+      required: [memberId]
+      properties:
+        memberId: { type: string, format: uuid }
+        inputValue:
+          type: number
+          nullable: true
+          description: Null for EQUAL; exact amount for EXACT; 0..100 for PERCENTAGE; integer >= 1 for SHARES
+
+    CreateGroupExpenseRequest:
+      type: object
+      required: [requestId, categoryId, title, amount, expenseDate, fundingSource, splitMode, splits]
+      properties:
+        requestId: { type: string, format: uuid }
+        categoryId: { type: string, format: uuid }
+        paidByMemberId:
+          type: string
+          format: uuid
+          nullable: true
+          description: Required when fundingSource = MEMBERS; must be null when fundingSource = GROUP_FUND
+        title: { type: string, minLength: 1, maxLength: 200 }
+        note: { type: string, maxLength: 2000, nullable: true }
+        amount: { type: number, exclusiveMinimum: 0 }
+        expenseDate: { type: string, format: date }
+        fundingSource: { $ref: '#/components/schemas/FundingSource' }
+        splitMode: { $ref: '#/components/schemas/SplitMode' }
+        splits:
+          type: array
+          minItems: 1
+          maxItems: 50
+          items:
+            $ref: '#/components/schemas/GroupExpenseSplitInput'
+
+    GroupExpenseSplitResponse:
+      type: object
+      required: [id, memberId, memberDisplayName, amount, splitOrder]
+      properties:
+        id: { type: string, format: uuid }
+        memberId: { type: string, format: uuid }
+        memberDisplayName: { type: string }
+        amount: { type: string, example: "33334.00" }
+        inputValue: { type: string, nullable: true }
+        splitOrder: { type: integer }
+
+    GroupExpenseResponse:
+      type: object
+      required: [id, groupId, categoryId, categoryName, createdByMemberId, title, amount, currencyCode, expenseDate, fundingSource, splitMode, splits, requestId, createdAt]
+      properties:
+        id: { type: string, format: uuid }
+        groupId: { type: string, format: uuid }
+        categoryId: { type: string, format: uuid }
+        categoryName: { type: string }
+        createdByMemberId: { type: string, format: uuid }
+        paidByMemberId: { type: string, format: uuid, nullable: true }
+        paidByDisplayName: { type: string, nullable: true }
+        title: { type: string }
+        note: { type: string, nullable: true }
+        amount: { type: string, example: "100000.00" }
+        currencyCode: { $ref: '#/components/schemas/CurrencyCode' }
+        expenseDate: { type: string, format: date }
+        fundingSource: { $ref: '#/components/schemas/FundingSource' }
+        splitMode: { $ref: '#/components/schemas/SplitMode' }
+        splits:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupExpenseSplitResponse'
+        requestId: { type: string, format: uuid }
+        createdAt: { type: string, format: date-time }
+
+    GroupExpensePageResponse:
+      type: object
+      required: [content, page, size, totalElements, totalPages]
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupExpenseResponse'
+        page: { type: integer }
+        size: { type: integer }
+        totalElements: { type: integer, format: int64 }
+        totalPages: { type: integer }
+
+    MemberBalanceItem:
+      type: object
+      required: [memberId, displayName, status, guest, netBalance]
+      properties:
+        memberId: { type: string, format: uuid }
+        displayName: { type: string }
+        status: { $ref: '#/components/schemas/GroupMemberStatus' }
+        guest: { type: boolean }
+        netBalance: { type: string, example: "-100000.00" }
+
+    SimplifiedTransferItem:
+      type: object
+      required: [fromMemberId, fromDisplayName, toMemberId, toDisplayName, amount]
+      properties:
+        fromMemberId: { type: string, format: uuid }
+        fromDisplayName: { type: string }
+        toMemberId: { type: string, format: uuid }
+        toDisplayName: { type: string }
+        amount: { type: string, example: "100000.00" }
+
+    GroupDebtSummaryResponse:
+      type: object
+      required: [groupId, currencyCode, memberBalances, simplifiedTransfers, rawPairwiseTransferCount, simplifiedTransferCount, reductionPercentage]
+      properties:
+        groupId: { type: string, format: uuid }
+        currencyCode: { $ref: '#/components/schemas/CurrencyCode' }
+        memberBalances:
+          type: array
+          items:
+            $ref: '#/components/schemas/MemberBalanceItem'
+        simplifiedTransfers:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimplifiedTransferItem'
+        rawPairwiseTransferCount: { type: integer }
+        simplifiedTransferCount: { type: integer }
+        reductionPercentage: { type: number, format: double, example: 40.0 }
+
+    CreateSettlementRequest:
+      type: object
+      required: [requestId, payerMemberId, receiverMemberId, amount, settlementDate]
+      properties:
+        requestId: { type: string, format: uuid }
+        payerMemberId: { type: string, format: uuid }
+        receiverMemberId: { type: string, format: uuid }
+        amount: { type: number, exclusiveMinimum: 0 }
+        settlementDate: { type: string, format: date }
+        note: { type: string, maxLength: 2000, nullable: true }
+
+    SettlementResponse:
+      type: object
+      required: [id, groupId, payerMemberId, payerDisplayName, receiverMemberId, receiverDisplayName, recordedByMemberId, amount, currencyCode, settlementDate, status, requestId, createdAt]
+      properties:
+        id: { type: string, format: uuid }
+        groupId: { type: string, format: uuid }
+        payerMemberId: { type: string, format: uuid }
+        payerDisplayName: { type: string }
+        receiverMemberId: { type: string, format: uuid }
+        receiverDisplayName: { type: string }
+        recordedByMemberId: { type: string, format: uuid }
+        amount: { type: string, example: "100000.00" }
+        currencyCode: { $ref: '#/components/schemas/CurrencyCode' }
+        settlementDate: { type: string, format: date }
+        note: { type: string, nullable: true }
+        status: { $ref: '#/components/schemas/SettlementStatus' }
+        requestId: { type: string, format: uuid }
+        createdAt: { type: string, format: date-time }
