@@ -92,7 +92,7 @@ private fun DashboardContent(
     val hiddenLabel = stringResource(R.string.balance_hidden)
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(start = Space.medium, end = Space.medium, top = Space.large, bottom = Space.fabClearance),
+        contentPadding = PaddingValues(start = Space.medium, end = Space.medium, top = Space.small, bottom = Space.fabClearance),
         verticalArrangement = Arrangement.spacedBy(Space.small),
     ) {
         if (state.isOffline) item("offline") {
@@ -228,10 +228,10 @@ private fun DashboardQuickTools(onHistory: () -> Unit, onBudgets: () -> Unit, on
                 shape = LiquidTokens.rowShape,
                 colors = ButtonDefaults.textButtonColors(containerColor = Color.Transparent, contentColor = LiquidTokens.ink)) {
                 if (stacked) {
-                    Icon(painterResource(icons[index]), null)
+                    SculptedIcon(icons[index])
                     Text(stringResource(labels[index]), Modifier.padding(start = Space.medium))
                 } else Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(Space.small)) {
-                    Icon(painterResource(icons[index]), null)
+                    SculptedIcon(icons[index])
                     Text(stringResource(labels[index]), style = MaterialTheme.typography.labelLarge)
                 }
             }

@@ -45,16 +45,7 @@ fun WalletListScreen(state: FinanceState, hidden: Boolean, onPrivacy: () -> Unit
     FeaturePage("Wallets", compact = true, listState = listState, headerAction = {
         IconButton(onClick = onCreate, modifier=Modifier.liquidGlass(MaterialTheme.shapes.medium,4.dp)) { Icon(painterResource(R.drawable.ic_add), "Create wallet") }
     }) {
-        item { LiquidMetalSurface(Modifier.fillMaxWidth().heightIn(min = com.finsync.ui.theme.SoftFinanceTokens.walletHeroHeight), refined = true) {
-            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Space.small)) {
-                Icon(painterResource(R.drawable.ic_wallet), null, tint = LiquidTokens.violet)
-                Column(Modifier.weight(1f)) {
-                    Text("Personal net worth", style = MaterialTheme.typography.labelSmall)
-                    Text(if(hidden) "Hidden" else formatVnd(personalNetWorth(state.wallets, state.entries)), style = MaterialTheme.typography.headlineSmall)
-                }
-                IconButton(modifier = Modifier.clip(androidx.compose.foundation.shape.CircleShape).border(DockTokens.edge, LiquidTokens.pearl, androidx.compose.foundation.shape.CircleShape).pastelMetal(LiquidTokens.pearl), onClick = onPrivacy) { Icon(painterResource(R.drawable.ic_visibility), if(hidden) "Show amounts" else "Hide amounts") }
-            }
-        } }
+        item { WalletBalanceHero(personalNetWorth(state.wallets, state.entries), hidden, onPrivacy) }
         item { Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
             ChoiceChips(listOf("Active", "All"), filter, { filter = it })
             if(state.wallets.size <= 4) TextButton(onClick = {
@@ -78,7 +69,7 @@ fun WalletListScreen(state: FinanceState, hidden: Boolean, onPrivacy: () -> Unit
         item { Text("Quick actions", style = MaterialTheme.typography.titleMedium) }
         item { Row(Modifier.fillMaxWidth().height(IntrinsicSize.Min), horizontalArrangement = Arrangement.spacedBy(Space.small)) {
             val labels = listOf("Transfer between wallets", "Create wallet", "Manage wallets")
-            val symbols = listOf("↔", "+", "✎")
+            val icons = listOf(R.drawable.ic_transfer, R.drawable.ic_add, R.drawable.ic_profile_edit)
             val actions = listOf(onTransfer, onCreate, { state.wallets.firstOrNull()?.let { onOpen(it.id) }; Unit })
             labels.indices.forEach { index ->
                 TextButton(onClick = actions[index], enabled = index != 2 || state.wallets.isNotEmpty(),
@@ -86,7 +77,10 @@ fun WalletListScreen(state: FinanceState, hidden: Boolean, onPrivacy: () -> Unit
                     shape = LiquidTokens.rowShape,
                     colors = ButtonDefaults.textButtonColors(containerColor = androidx.compose.ui.graphics.Color.Transparent, contentColor = LiquidTokens.violet)) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(Space.small)) {
-                        Text(symbols[index], style = MaterialTheme.typography.titleLarge)
+                        Box(Modifier.size(LiquidTokens.iconSize).clip(LiquidSurfaceTokens.insetShape)
+                            .pastelMetal(if(index == 0) LiquidTokens.cyanTile else LiquidTokens.lilacTile), contentAlignment = Alignment.Center) {
+                            Icon(painterResource(icons[index]), null, Modifier.size(DockTokens.quickActionIcon))
+                        }
                         Text(labels[index], style = MaterialTheme.typography.labelSmall, textAlign = androidx.compose.ui.text.style.TextAlign.Center)
                     }
                 }
@@ -106,7 +100,7 @@ fun WalletDetailsScreen(wallet: Wallet, entries: List<LedgerEntry>, hidden: Bool
     var confirmArchive by remember { mutableStateOf(false) }
     FeaturePage(wallet.name, onBack) {
         item { LiquidMetalSurface(Modifier.fillMaxWidth(), refined = true) {
-            Icon(painterResource(R.drawable.ic_wallet), null, tint = LiquidTokens.violet)
+            SculptedIcon(R.drawable.ic_wallet)
             Text("${wallet.type.label} · VND")
             Text(if (wallet.type == WalletType.CREDIT_CARD) "Outstanding debt" else "Wallet balance")
             Text(if (hidden) "Hidden" else formatVnd(walletBalance(wallet, entries)), style = MaterialTheme.typography.headlineMedium)
@@ -193,7 +187,12 @@ private fun WalletProductCard(wallet: Wallet, amount: String, onOpen: () -> Unit
             val stacked = androidx.compose.ui.platform.LocalDensity.current.fontScale > LiquidTokens.largeFont || maxWidth < LiquidTokens.transactionCompact
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Space.small)) {
                 Surface(shape = MaterialTheme.shapes.small, color = tint) {
-                    Icon(painterResource(R.drawable.ic_wallet), null, Modifier.padding(Space.small), tint = if(wallet.type == WalletType.CASH || wallet.type == WalletType.E_WALLET) LiquidTokens.incomeLight else LiquidTokens.violet)
+                    androidx.compose.foundation.Image(painterResource(when(wallet.type) {
+                        WalletType.CASH -> R.drawable.art_cash
+                        WalletType.BANK_ACCOUNT -> R.drawable.art_bank
+                        WalletType.CREDIT_CARD -> R.drawable.art_credit
+                        WalletType.E_WALLET -> R.drawable.art_wallet
+                    }), null, Modifier.padding(MaterialIconTokens.frameInset).size(MaterialIconTokens.objectSize))
                 }
                 Column(Modifier.weight(1f)) {
                     Text(wallet.name, style = MaterialTheme.typography.titleSmall)

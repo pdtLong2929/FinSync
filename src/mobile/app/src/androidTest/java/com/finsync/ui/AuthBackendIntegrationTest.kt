@@ -45,7 +45,12 @@ class AuthBackendIntegrationTest {
     }
     private fun input(label: String, value: String) {
         compose.onNode(hasScrollToIndexAction()).performScrollToNode(hasText(label))
-        compose.onNodeWithText(label).performTextReplacement(value)
+        compose.waitForIdle()
+        // These API/profile checks don't assert IME behavior (covered by AuthFlowTest).
+        // SetText avoids a focus-driven lazy-item detach during native IME animation.
+        compose.onNodeWithText(label).performSemanticsAction(androidx.compose.ui.semantics.SemanticsActions.SetText) {
+            it(androidx.compose.ui.text.AnnotatedString(value))
+        }
     }
     private fun await(predicate: () -> Boolean) = compose.waitUntil(20_000) { predicate() }
 

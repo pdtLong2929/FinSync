@@ -15,6 +15,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
@@ -56,7 +57,8 @@ fun FeaturePage(title: String, onBack: (() -> Unit)? = null, dirty: Boolean = fa
         },
         topBar = {
             Surface(color = androidx.compose.ui.graphics.Color.Transparent) {
-                Row(Modifier.fillMaxWidth().padding(horizontal = Space.medium, vertical = Space.small),
+                Row(Modifier.fillMaxWidth().testTag("feature-page-header")
+                    .padding(horizontal = Space.medium, vertical = Space.small).heightIn(min = LiquidTokens.minTarget),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(Space.small)) {
                     if (onBack != null) TextButton(onClick = back,
@@ -158,7 +160,7 @@ fun LedgerRow(title: String, subtitle: String, value: String, onClick: (() -> Un
             Text(subtitle, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             if(!inline) Text(value, style = MaterialTheme.typography.titleMedium.copy(fontFeatureSettings = "tnum"), color = tone)
         }
-        if(inline) Text(value, style = MaterialTheme.typography.labelLarge.copy(fontFeatureSettings = "tnum"), color = tone)
+        if(inline) Text(value, style = MaterialTheme.typography.labelLarge.copy(fontFamily = com.finsync.ui.theme.FinSyncDisplayFamily, fontFeatureSettings = "tnum"), color = tone)
     }
 }
 
@@ -219,10 +221,11 @@ fun ChromeTextField(
     colors: TextFieldColors = OutlinedTextFieldDefaults.colors(
         unfocusedContainerColor = MaterialTheme.colorScheme.surfaceContainerLow,
         focusedContainerColor = MaterialTheme.colorScheme.surfaceContainerLowest),
+    leadingIcon: @Composable (() -> Unit)? = null,
 ) {
     OutlinedTextField(value, onValueChange, modifier, label = label, singleLine = singleLine,
         minLines = minLines, maxLines = maxLines, readOnly = readOnly, supportingText = supportingText, trailingIcon = trailingIcon,
         isError = isError, keyboardOptions = keyboardOptions, textStyle = textStyle,
         enabled = enabled, visualTransformation = visualTransformation, keyboardActions = keyboardActions,
-        shape = shape, colors = colors)
+        shape = shape, colors = colors, leadingIcon = leadingIcon)
 }

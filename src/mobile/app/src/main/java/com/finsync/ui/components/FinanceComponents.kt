@@ -30,7 +30,7 @@ fun MoneyText(
     Text(
         text = if (signed && amount > 0) "+${formatVnd(amount)}" else formatVnd(amount),
         modifier = modifier,
-        style = style.copy(fontFeatureSettings = "tnum"),
+        style = style.copy(fontFamily = com.finsync.ui.theme.FinSyncDisplayFamily, fontFeatureSettings = "tnum"),
     )
 }
 
@@ -41,7 +41,9 @@ fun FinanceCard(
     content: @Composable () -> Unit,
 ) {
     Card(
-        modifier = modifier.fillMaxWidth().liquidGlass(MaterialTheme.shapes.large),
+        modifier = modifier.fillMaxWidth().liquidGlass(MaterialTheme.shapes.large,
+            elevation = if (emphasized) com.finsync.ui.theme.DockTokens.elevation else LiquidSurfaceTokens.readingElevation,
+            tint = if (emphasized) com.finsync.ui.theme.LiquidTokens.lilacTile else LiquidSurfaceTokens.porcelain),
         shape = MaterialTheme.shapes.large,
         colors = CardDefaults.cardColors(
             containerColor = Color.Transparent,

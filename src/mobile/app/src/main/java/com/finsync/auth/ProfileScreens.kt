@@ -29,9 +29,11 @@ fun ProfileScreen(user: AuthUser, profile: LocalProfile?, loading: Boolean, load
     store: LocalProfileStore, onRetry: () -> Unit, onSaved: (LocalProfile) -> Unit,
     onBack: () -> Unit, onWorkspace: () -> Unit, onSignOut: () -> Unit,
     accountApi: AuthRepository? = null, remoteBusy: Boolean = false, remoteFailure: AuthFailure? = null,
-    onIdentity: (AuthUser) -> Unit = {}, onExpired: () -> Unit = {}) {
+    onIdentity: (AuthUser) -> Unit = {}, onExpired: () -> Unit = {},
+    onFriends: (() -> Unit)? = null, onLocalSignOut: (() -> Unit)? = null, onBankNotifications: (() -> Unit)? = null) {
     var editing by rememberSaveable(user.id) { mutableStateOf(false) }
     var confirmSignOut by rememberSaveable { mutableStateOf(false) }
+    var confirmLocalSignOut by rememberSaveable { mutableStateOf(false) }
     var saved by rememberSaveable { mutableStateOf(false) }
     if (editing && profile != null) {
         ProfileEditor(profile, user.email, store, accountApi, onIdentity, onExpired,
@@ -40,7 +42,9 @@ fun ProfileScreen(user: AuthUser, profile: LocalProfile?, loading: Boolean, load
         })
         return
     }
-    FeaturePage("My profile", onBack, compact = true) {
+    FeaturePage("My profile", onBack, compact = true, headerAction = {
+        TextButton(onClick = { confirmSignOut = true }, enabled = !remoteBusy) { Text("Log out") }
+    }) {
         item { FinanceCard {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Space.medium)) {
                 UserAvatar(profile?.displayName ?: user.displayName, profile?.avatarPath, Modifier.size(LiquidTokens.chromeSize))
@@ -51,8 +55,15 @@ fun ProfileScreen(user: AuthUser, profile: LocalProfile?, loading: Boolean, load
                 }
             }
         } }
+        if (onFriends != null) item { MetalOutlineButton(onClick = onFriends, enabled = !remoteBusy,
+            modifier = Modifier.fillMaxWidth()) { Text("Friends & invitations") } }
+        if (onBankNotifications != null) item { MetalOutlineButton(onClick = onBankNotifications, enabled = !remoteBusy,
+            modifier = Modifier.fillMaxWidth()) { Text("Bank notifications") } }
         if (loading || remoteBusy) item { LinearProgressIndicator(Modifier.fillMaxWidth()) }
-        if (remoteFailure != null) item { ErrorText("Couldn't sign out on the server. Check your connection and try again.") }
+        if (remoteFailure != null) item { FinanceCard {
+            ErrorText("Couldn't sign out on the server. Check your connection and try again.")
+            if (onLocalSignOut != null) TextButton(onClick = { confirmLocalSignOut = true }, enabled = !remoteBusy) { Text("Sign out locally instead") }
+        } }
         if (loadError) item { FinanceCard {
             ErrorText(if (accountApi != null) "Couldn't load your account. Check your connection and try again." else "Couldn't read your profile on this device.")
             TextButton(onClick = onRetry) { Text("Try again") }
@@ -100,6 +111,11 @@ fun ProfileScreen(user: AuthUser, profile: LocalProfile?, loading: Boolean, load
         title = { Text("Sign out?") }, text = { Text("You'll need your email and password to sign in again. Your saved profile stays on this device.") },
         confirmButton = { TextButton(onClick = { confirmSignOut = false; onSignOut() }) { Text("Sign out") } },
         dismissButton = { TextButton(onClick = { confirmSignOut = false }) { Text("Stay signed in") } })
+    if (confirmLocalSignOut) MetalDialog(onDismissRequest = { confirmLocalSignOut = false },
+        title = { Text("Sign out on this device?") },
+        text = { Text("This clears your sign-in here. Server sign-out could not be confirmed. Your saved profile and local ledgers are retained.") },
+        confirmButton = { TextButton(onClick = { confirmLocalSignOut = false; onLocalSignOut?.invoke() }) { Text("Confirm local sign out") } },
+        dismissButton = { TextButton(onClick = { confirmLocalSignOut = false }) { Text("Cancel") } })
 }
 
 @Composable

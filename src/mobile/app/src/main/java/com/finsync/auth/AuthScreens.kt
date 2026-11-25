@@ -28,7 +28,8 @@ import com.finsync.ui.theme.Space
 
 /** Local exploration is separate from authentication. Only a real repository may succeed. */
 @Composable
-fun AuthHost(controller: AuthController, appContent: @Composable (() -> Unit) -> Unit) {
+fun AuthHost(controller: AuthController, bankRequestToken: Int = 0, requestedBankId: String? = null,
+    appContent: @Composable (() -> Unit) -> Unit) {
     val view = androidx.compose.ui.platform.LocalView.current
     DisposableEffect(view) {
         val bars = (view.context as? android.app.Activity)?.window?.let { androidx.core.view.WindowCompat.getInsetsController(it, view) }
@@ -49,6 +50,17 @@ fun AuthHost(controller: AuthController, appContent: @Composable (() -> Unit) ->
     var profileLoading by remember(state.user?.id) { mutableStateOf(false) }
     var profileError by remember(state.user?.id) { mutableStateOf(false) }
     var reload by remember { mutableIntStateOf(0) }
+    var showPeople by remember(state.user?.id) { mutableStateOf(false) }
+    var showBank by remember(state.user?.id) { mutableStateOf(false) }
+    val bank = com.finsync.bank.LocalBankController.current
+    val bankState = bank?.state?.collectAsStateWithLifecycle()?.value
+    var notificationTarget by remember(state.user?.id) { mutableStateOf<String?>(null) }
+    LaunchedEffect(bankRequestToken, state.authenticated) {
+        if (bankRequestToken > 0 && state.authenticated && state.page == AuthPage.Account) {
+            notificationTarget = requestedBankId
+        }
+    }
+    val people = com.finsync.social.LocalPeopleController.current
     LaunchedEffect(state.user?.id, reload) {
         val user = state.user ?: return@LaunchedEffect
         profileLoading = true; profileError = false
@@ -73,10 +85,13 @@ fun AuthHost(controller: AuthController, appContent: @Composable (() -> Unit) ->
         screens.SaveableStateProvider("finance") {
             appContent { controller.open(if (state.authenticated) AuthPage.Account else AuthPage.Welcome) }
         }
-    } else Box(Modifier.fillMaxSize().safeDrawingPadding()) {
+    } else Box(Modifier.fillMaxSize().liquidAtmosphere().safeDrawingPadding()) {
+        CompositionLocalProvider(LocalAtmosphereProvided provides true) {
         key(state.page) {
             when (state.page) {
-                AuthPage.Account -> if (state.user != null && state.authenticated) ProfileScreen(
+                AuthPage.Account -> if (showBank && bank != null && state.authenticated) com.finsync.bank.BankCaptureScreen(bank) { showBank = false }
+                    else if (showPeople && people != null && state.authenticated) com.finsync.social.PeopleScreen(people) { showPeople = false }
+                    else if (state.user != null && state.authenticated) ProfileScreen(
                     state.user!!, profile, profileLoading, profileError, profileStore,
                     onRetry = { reload++ }, onSaved = { profile = it },
                     onBack = { if (!state.busy) controller.open(AuthPage.Workspace) },
@@ -84,24 +99,22 @@ fun AuthHost(controller: AuthController, appContent: @Composable (() -> Unit) ->
                     accountApi = controller.accountRepository.takeIf { it.supportsAccountApi },
                     remoteBusy = state.busy, remoteFailure = state.failure,
                     onIdentity = controller::updateIdentity,
-                    onExpired = controller::expireSession)
+                    onExpired = controller::expireSession,
+                    onFriends = if (people != null) ({ showPeople = true }) else null,
+                    onLocalSignOut = controller::leaveAccount,
+                    onBankNotifications = if (bank != null) ({ showBank = true }) else null)
                     else AuthLanding(state, controller)
                 AuthPage.Login, AuthPage.Register, AuthPage.ForgotPassword -> AuthForm(state, controller)
                 else -> AuthLanding(state, controller)
             }
         }
-    }
-    }
-}
-
-@Composable
-private fun AuthHeading(title: String, subtitle: String) {
-    Column(verticalArrangement = Arrangement.spacedBy(Space.small)) {
-        Box(Modifier.size(LiquidTokens.compactChromeSize).liquidLens(),contentAlignment=Alignment.Center) {
-            Icon(painterResource(R.drawable.ic_brand_monogram),null,Modifier.size(com.finsync.ui.theme.DockTokens.medallion),tint=LiquidTokens.ink)
         }
-        Text(title, style = MaterialTheme.typography.headlineMedium)
-        Text(subtitle, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    }
+    }
+    // Overlay the account page rather than discarding an in-progress profile edit.
+    val alert = bankState?.data?.candidates?.find { it.id == notificationTarget }
+    if (bank != null && alert != null && state.authenticated && state.page == AuthPage.Account) {
+        com.finsync.bank.BankNotificationPrompt(alert, bank, { notificationTarget = null }, { notificationTarget = null })
     }
 }
 
@@ -130,7 +143,7 @@ private fun AuthLanding(state: AuthUiState, controller: AuthController) {
             AuthPage.RegistrationFeedback -> "Your account is ready. Sign in with your email and password."
             AuthPage.Account -> "You're signed in."
             else -> "Everyday spending, shared plans and a little room for the future."
-        }) }
+        }, showcase = page == AuthPage.Welcome, compact = page != AuthPage.Welcome || LocalDensity.current.fontScale > LiquidTokens.largeFont) }
         if (page == AuthPage.Explore) item { FinanceCard {
             Text("Sample workspace", style = MaterialTheme.typography.titleMedium)
             Text("Balances and people are examples. Changes stay in this session and reset when the app closes. No bank account is connected and no money is moved.")
@@ -233,31 +246,37 @@ private fun AuthForm(state: AuthUiState, controller: AuthController) {
     FeaturePage("FinSync", { navigate(if (recovery) AuthPage.Login else AuthPage.Welcome) },
         primaryAction = if (keyboardOpen) action else null) {
         item { AuthHeading(if (registration) "A fresh start" else if (recovery) "Forgot password?" else "Welcome back",
-            if (registration) "Make room for what matters." else if (recovery) "Let's help you get back to your account." else "Your next move starts here.") }
-        item { Column(verticalArrangement = Arrangement.spacedBy(Space.small)) {
+            if (registration) "Make room for what matters." else if (recovery) "Let's help you get back to your account." else "Your next move starts here.", compact = registration || recovery || keyboardOpen || LocalDensity.current.fontScale > LiquidTokens.largeFont) }
+        item { AuthFormPlane {
             if (registration) ChromeTextField(displayName, { displayName = it; controller.clearErrors() }, Modifier.fillMaxWidth(),
+                leadingIcon = { AuthFieldIcon(R.drawable.ic_person) }, colors = authFieldColors(),
                 label = { Text("Display name") }, singleLine = true, enabled = !state.busy,
-                isError = state.errors.displayName != null, supportingText = { ErrorText(state.errors.displayName) },
+                isError = state.errors.displayName != null, supportingText = if (state.errors.displayName != null) ({ ErrorText(state.errors.displayName) }) else null,
                 keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Words, imeAction = ImeAction.Next))
             ChromeTextField(email, { email = it; controller.clearErrors() }, Modifier.fillMaxWidth().semantics { contentType = ContentType.EmailAddress + ContentType.Username },
+                leadingIcon = { AuthFieldIcon(R.drawable.ic_mail) }, colors = authFieldColors(),
                 label = { Text("Email address") }, singleLine = true, enabled = !state.busy,
-                isError = state.errors.email != null, supportingText = { ErrorText(state.errors.email); if (state.errors.email == null) Text(" ") },
+                isError = state.errors.email != null, supportingText = if (state.errors.email != null) ({ ErrorText(state.errors.email) }) else null,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, autoCorrectEnabled = false, imeAction = if (recovery) ImeAction.Done else ImeAction.Next),
                 keyboardActions = KeyboardActions(onNext = { passwordFocus.requestFocus() }, onDone = { submit() }))
             if (!recovery) ChromeTextField(password, { password = it; controller.clearErrors() },
-                Modifier.fillMaxWidth().focusRequester(passwordFocus).semantics { contentType = if (registration) ContentType.NewPassword else ContentType.Password },
+                leadingIcon = { AuthFieldIcon(R.drawable.ic_lock) }, colors = authFieldColors(),
+                modifier = Modifier.fillMaxWidth().focusRequester(passwordFocus).semantics { contentType = if (registration) ContentType.NewPassword else ContentType.Password },
                 label = { Text("Password") }, singleLine = true, enabled = !state.busy,
                 isError = state.errors.password != null,
-                supportingText = { if (state.errors.password != null) ErrorText(state.errors.password) else Text(if (registration) "8+ characters · Up to 72 UTF-8 bytes" else " ") },
+                supportingText = if (state.errors.password != null || registration) ({
+                    if (state.errors.password != null) ErrorText(state.errors.password) else Text("8+ characters · Up to 72 UTF-8 bytes")
+                }) else null,
                 visualTransformation = if (visible) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = { IconButton(onClick = { visible = !visible }, enabled = !state.busy) {
                     Icon(painterResource(R.drawable.ic_visibility), contentDescription = if (visible) "Hide password" else "Show password")
                 } }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, autoCorrectEnabled = false, imeAction = if (registration) ImeAction.Next else ImeAction.Done),
                 keyboardActions = KeyboardActions(onNext = { confirmFocus.requestFocus() }, onDone = { submit() }))
             if (registration) ChromeTextField(confirmation, { confirmation = it; controller.clearErrors() },
-                Modifier.fillMaxWidth().focusRequester(confirmFocus).semantics { contentType = ContentType.NewPassword },
+                leadingIcon = { AuthFieldIcon(R.drawable.ic_lock) }, colors = authFieldColors(),
+                modifier = Modifier.fillMaxWidth().focusRequester(confirmFocus).semantics { contentType = ContentType.NewPassword },
                 label = { Text("Confirm password") }, singleLine = true, enabled = !state.busy,
-                isError = state.errors.confirmation != null, supportingText = { ErrorText(state.errors.confirmation); if (state.errors.confirmation == null) Text(" ") },
+                isError = state.errors.confirmation != null, supportingText = if (state.errors.confirmation != null) ({ ErrorText(state.errors.confirmation) }) else null,
                 visualTransformation = if (confirmVisible) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = { IconButton(onClick = { confirmVisible = !confirmVisible }, enabled = !state.busy) {
                     Icon(painterResource(R.drawable.ic_visibility), contentDescription = if (confirmVisible) "Hide confirmation password" else "Show confirmation password")
@@ -265,13 +284,13 @@ private fun AuthForm(state: AuthUiState, controller: AuthController) {
                 keyboardActions = KeyboardActions(onDone = { submit() }))
             if (!registration && !recovery) TextButton(onClick = { navigate(AuthPage.ForgotPassword) }, enabled = !state.busy,
                 modifier = Modifier.align(Alignment.End)) { Text("Forgot password?") }
+            if (!keyboardOpen) action()
         } }
         if (recovery) item { FinanceCard {
             Text("Email recovery is coming", style = MaterialTheme.typography.titleMedium)
             Text("You can enter your email here, but recovery emails are not sent yet.",
                 style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
         } }
-        if (!keyboardOpen) item { action() }
         item { TextButton(onClick = { navigate(if (registration || recovery) AuthPage.Login else AuthPage.Register) }, enabled = !state.busy,
             modifier = Modifier.fillMaxWidth()) { Text(if (registration || recovery) "Back to sign in" else "New here? Sign up") } }
     }

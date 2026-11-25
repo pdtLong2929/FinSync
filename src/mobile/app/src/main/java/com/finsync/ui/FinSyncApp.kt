@@ -99,6 +99,9 @@ import com.finsync.ui.components.liquidAtmosphere
 import com.finsync.ui.components.liquidLens
 import com.finsync.ui.groups.GroupFlow
 import com.finsync.ui.reports.ReportFlow
+import com.finsync.bank.*
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.CompositionLocalProvider
 
 private enum class Destination(@param:StringRes val label: Int, @param:DrawableRes val icon: Int) {
     Overview(R.string.overview, R.drawable.ic_overview),
@@ -109,10 +112,23 @@ private enum class Destination(@param:StringRes val label: Int, @param:DrawableR
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FinSyncApp(dashboardState: DashboardUiState, onRetry: () -> Unit = {}, finance: FinanceViewModel = remember { FinanceViewModel() }, onAccount: (() -> Unit)? = null) {
+fun FinSyncApp(dashboardState: DashboardUiState, onRetry: () -> Unit = {}, finance: FinanceViewModel = remember { FinanceViewModel() }, onAccount: (() -> Unit)? = null, bankOpenRequest: Int = 0, bankCandidateId: String? = null) {
+    val bank = LocalBankController.current
+    val bankState = bank?.state?.collectAsState()?.value
     val accountProfile = com.finsync.auth.LocalAccountProfile.current
     val financeState by finance.uiState.collectAsStateWithLifecycle()
+    val serverGroups = com.finsync.groups.LocalServerGroups.current
+    val serverSnapshot = serverGroups?.state?.collectAsState()?.value
+    var deviceGroups by rememberSaveable(serverGroups != null) { mutableStateOf(false) }
+    val activeGroups = if (serverGroups != null && !deviceGroups) serverSnapshot?.ledger?.groups.orEmpty() else financeState.groups
     var route by rememberSaveable { mutableStateOf("") }
+    var consumedBankRequest by rememberSaveable { mutableStateOf(0) }
+    var pendingBankCandidate by rememberSaveable { mutableStateOf<String?>(null) }
+    LaunchedEffect(bankOpenRequest) {
+        if (bankOpenRequest > 0 && bank != null && bankOpenRequest != consumedBankRequest) {
+            consumedBankRequest = bankOpenRequest; pendingBankCandidate = bankCandidateId
+        }
+    }
     var transactionOrigin by rememberSaveable { mutableStateOf("") }
     var destinationName by rememberSaveable { mutableStateOf(Destination.Overview.name) }
     val destination = Destination.valueOf(destinationName)
@@ -150,7 +166,7 @@ fun FinSyncApp(dashboardState: DashboardUiState, onRetry: () -> Unit = {}, finan
     val savedScreens = rememberSaveableStateHolder()
     val quickExpense = {
         if (destination == Destination.Groups) {
-            val groups = financeState.groups.filter { it.joined }
+            val groups = activeGroups.filter { it.joined }
             if (groups.size == 1) route = "group/${groups.first().id}/expense" else showLedgerPicker = true
         } else { transactionOrigin = ""; route = "transaction/new" }
     }
@@ -201,6 +217,10 @@ fun FinSyncApp(dashboardState: DashboardUiState, onRetry: () -> Unit = {}, finan
                             Text(stringResource(R.string.app_name), style = MaterialTheme.typography.titleMedium)
                         }
                     }, actions = {
+                        if (bank != null) IconButton(onClick = { pendingBankCandidate = null; route = "bank-inbox" },
+                            modifier = Modifier.size(LiquidTokens.minTarget).semantics { contentDescription = "Bank notifications" }) {
+                            Icon(painterResource(R.drawable.ic_wallet), null)
+                        }
                         if (onAccount != null) IconButton(onClick = onAccount,
                             modifier = Modifier.size(LiquidTokens.minTarget).semantics { contentDescription = "Account" }) {
                             com.finsync.auth.UserAvatar(accountProfile?.displayName, accountProfile?.avatarPath,
@@ -226,7 +246,8 @@ fun FinSyncApp(dashboardState: DashboardUiState, onRetry: () -> Unit = {}, finan
                 Box(Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.TopCenter) {
                     val contentModifier = Modifier.widthIn(max = LayoutTokens.maxContentWidth).fillMaxWidth()
                     val screen: @Composable () -> Unit = {
-                    if (route == "transactions" || route.startsWith("transaction/")) key(route) {
+                    if (route == "bank-inbox" && bank != null) BankCaptureScreen(bank) { navigateTo("") }
+                    else if (route == "transactions" || route.startsWith("transaction/")) key(route) {
                         val entry = financeState.entries.find { it.id == route.substringAfterLast('/') }
                         when {
                             route == "transaction/new" || route.startsWith("transaction/edit/") -> TransactionFormScreen(financeState, entry,
@@ -267,8 +288,26 @@ fun FinSyncApp(dashboardState: DashboardUiState, onRetry: () -> Unit = {}, finan
                                 { navigateTo("") }, { navigateTo("wallet/edit/${wallet.id}") }, { navigateTo("wallet/history/${wallet.id}") }, { finance.archiveWallet(wallet.id) })
                             else -> WalletListScreen(financeState, amountsHidden, { amountsHidden = !amountsHidden }, { navigateTo("wallet/$it") }, { navigateTo("wallet/new") }, onHistory = { navigateTo("transactions") }, onTransfer = { navigateTo("transfer/new") }, onTransferHistory = { navigateTo("transfer/history") })
                         }
-                    } else if (destination == Destination.Groups) GroupFlow(financeState, finance, route,
-                        navigateTo, notifySaved)
+                    } else if (destination == Destination.Groups) Column(Modifier.fillMaxSize()) {
+                        if (serverGroups != null && route.isEmpty()) com.finsync.ui.components.ChoiceChips(
+                            listOf("Server groups", "On this device"), if (deviceGroups) "On this device" else "Server groups",
+                            { deviceGroups = it == "On this device" })
+                        if (serverGroups != null && !deviceGroups) com.finsync.groups.ServerGroupFlow(serverGroups, route, navigateTo, notifySaved)
+                        else CompositionLocalProvider(com.finsync.groups.LocalServerGroups provides null) { GroupFlow(financeState, finance, route,
+                        navigateTo, notifySaved, onUndo = { message, restore ->
+                            scope.launch {
+                                snackbarHost.currentSnackbarData?.dismiss()
+                                var text = message
+                                var label = "Undo"
+                                while (snackbarHost.showSnackbar(text, label, withDismissAction = true,
+                                        duration = androidx.compose.material3.SnackbarDuration.Long) == androidx.compose.material3.SnackbarResult.ActionPerformed) {
+                                    val error = restore()
+                                    if (error == null) { snackbarHost.showSnackbar("Record restored"); break }
+                                    text = error; label = "Try again"
+                                }
+                            }
+                        }) }
+                    }
                     else if (destination == Destination.Reports) ReportFlow(financeState, finance, route,
                         navigateTo, notifySaved, onTransaction = { transactionOrigin = route; navigateTo("transaction/$it") })
                     else if (destination == Destination.Overview) DashboardScreen(
@@ -287,17 +326,29 @@ fun FinSyncApp(dashboardState: DashboardUiState, onRetry: () -> Unit = {}, finan
                     // Retain browsing state, never retain submitted or discarded form drafts.
                     val browsing = route.isEmpty() || route == "transactions" || route.startsWith("wallet/history/") ||
                         route.substringBefore('?') in listOf("budgets", "goals", "charts", "charts/trend", "analytics", "categories", "insights") ||
-                        (route.startsWith("group/") && !route.endsWith("/expense") && !route.endsWith("/members") && !route.contains("/settle/"))
-                    androidx.compose.runtime.CompositionLocalProvider(com.finsync.ui.components.LocalCategories provides financeState.categories) {
+                        (route.startsWith("group/") && !route.endsWith("/expense") && !route.endsWith("/members") &&
+                            !route.endsWith("/edit") && !route.contains("/expense/edit/") && !route.contains("/payment/") && !route.contains("/settle/"))
+                    androidx.compose.runtime.CompositionLocalProvider(
+                        com.finsync.ui.components.LocalCategories provides financeState.categories,
+                        com.finsync.ui.components.LocalAtmosphereProvided provides route.isEmpty(),
+                    ) {
                         if (browsing) savedScreens.SaveableStateProvider("$destinationName/$route", screen) else screen()
                     }
                 }
             }
         }
     }
+    val incomingBankAlert = bankState?.data?.candidates?.find { it.id == pendingBankCandidate }
+    if (bank != null && incomingBankAlert != null) BankNotificationPrompt(incomingBankAlert, bank,
+        { pendingBankCandidate = null }, { message -> pendingBankCandidate = null; scope.launch { snackbarHost.showSnackbar(message) } })
+    if (bankState?.unsaved != null) com.finsync.ui.components.MetalDialog(
+        onDismissRequest = {}, title = { Text("Wallet changes weren't saved") },
+        text = { Text(bankState.error ?: "Your last saved ledger has been restored. Retry the changes or keep the saved version.") },
+        confirmButton = { TextButton(onClick = { scope.launch { bank.retryPersonal() } }, enabled = !bankState.busy) { Text(if (bankState.busy) "Saving…" else "Retry wallet save") } },
+        dismissButton = { TextButton(onClick = bank::discardUnsaved, enabled = !bankState.busy) { Text("Keep saved version") } })
     if (showLedgerPicker) ModalBottomSheet(onDismissRequest = { showLedgerPicker = false },containerColor=com.finsync.ui.components.LiquidSurfaceTokens.frost) {
         Text("Choose a group", Modifier.padding(Space.large), style = MaterialTheme.typography.headlineSmall)
-        val groups = financeState.groups.filter { it.joined }
+        val groups = activeGroups.filter { it.joined }
         if (groups.isEmpty()) Text("Create or join a group first.", Modifier.padding(Space.large))
         LazyColumn(Modifier.fillMaxWidth()) {
             items(groups, key = { it.id }) { group ->

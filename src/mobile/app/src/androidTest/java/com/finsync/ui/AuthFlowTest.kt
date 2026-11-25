@@ -60,6 +60,14 @@ class AuthFlowTest {
             compose.onNodeWithText("Email address").assertIsFocused()
             // Compose focus can precede Android attaching the editable input connection.
             keyboard.awaitOpen(compose)
+            // Gboard may already be visible while Android still has a dummy input
+            // connection. Real key injection must wait for the editor, not a timer.
+            compose.waitUntil(5_000) { compose.runOnIdle {
+                val input = compose.activity.getSystemService(android.view.inputmethod.InputMethodManager::class.java)
+                compose.activity.window.decorView.hasWindowFocus() && input.isAcceptingText
+            } }
+            compose.onNodeWithText("Email address").assertIsFocused()
+            instrumentation.waitForIdleSync()
             // Real Android key events, not Compose's synthetic text replacement.
             instrumentation.sendStringSync("123@")
             compose.waitUntil(5_000) {

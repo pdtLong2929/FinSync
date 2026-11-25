@@ -92,8 +92,9 @@ import java.time.YearMonth
                 }
                 }
             }
-            item { Text("Spending by Category", style = MaterialTheme.typography.titleMedium) }
-            if(chartMode == "Compare" && plot.points.isNotEmpty()) item {
+            item { LiquidCard {
+                Text("Spending by Category", style = MaterialTheme.typography.titleMedium)
+                if(chartMode == "Compare" && plot.points.isNotEmpty()) {
                 Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(Space.small)) {
                     Box(Modifier.weight(1f), contentAlignment = Alignment.Center) {
                         AnalyticsPlot(plot, ChartKind.Donut, -1, showLegend = false, plotHeight = SoftFinanceTokens.reportDonutHeight) { selected = it; chart = "Category"; showDetails = true }
@@ -117,15 +118,16 @@ import java.time.YearMonth
                     }
                 }
             }
-            if(report.categories.isEmpty()) item { Text("No expenses yet. Choose another month.") }
+                if(report.categories.isEmpty()) Text("No expenses yet. Choose another month.")
+            } }
             items(report.categories.entries.sortedByDescending { it.value }, key = { it.key }) { (category, amount) ->
-                Row(Modifier.fillMaxWidth().heightIn(min = LiquidTokens.minTarget).clickable {
+                Row(Modifier.fillMaxWidth().liquidGlass(LiquidTokens.rowShape).heightIn(min = LiquidTokens.minTarget).clickable {
                     chart = "Category"
                     // Category chart ordering follows the same aggregation as its drilldown.
                     val categories = analyticsResult(state.entries, state.categories, state.budgets, start, end, null, null, AnalyticsQuestion.Categories, today)
                     selected = categories.points.indexOfFirst { it.category == category || it.label == category }
                     showDetails = true
-                }.padding(vertical = Space.small), horizontalArrangement = Arrangement.spacedBy(Space.medium), verticalAlignment = Alignment.CenterVertically) {
+                }.padding(Space.medium), horizontalArrangement = Arrangement.spacedBy(Space.medium), verticalAlignment = Alignment.CenterVertically) {
                     CategoryBadge(category)
                     Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(Space.small)) {
                         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
@@ -138,12 +140,15 @@ import java.time.YearMonth
             }
         }
         item {
-            FlowRow(horizontalArrangement = Arrangement.spacedBy(Space.small)) {
-                TextButton(onClick = { onOpen("${if(chartMode == "Trend") "charts/trend" else "charts"}?start=$start&end=$end") }) { Text("See analytics") }
-                TextButton(onClick = { onOpen("analytics") }) { Text("Income & dates") }
-                TextButton(onClick = { onOpen("budgets") }) { Text("Budgets") }
-                TextButton(onClick = { onOpen("goals") }) { Text("Savings goals") }
-                TextButton(onClick = { onOpen("insights") }) { Text("Spending guide") }
+            LiquidCard {
+                Text("Explore your finances", style = MaterialTheme.typography.titleMedium)
+                FinanceActionGrid(listOf(
+                    FinanceAction("See analytics", com.finsync.R.drawable.ic_reports) { onOpen("${if(chartMode == "Trend") "charts/trend" else "charts"}?start=$start&end=$end") },
+                    FinanceAction("Income & dates", com.finsync.R.drawable.ic_filter) { onOpen("analytics") },
+                    FinanceAction("Budgets", com.finsync.R.drawable.ic_wallet) { onOpen("budgets") },
+                    FinanceAction("Savings goals", com.finsync.R.drawable.ic_category_gift) { onOpen("goals") },
+                    FinanceAction("Spending guide", com.finsync.R.drawable.ic_category_education) { onOpen("insights") },
+                ))
             }
         }
     }

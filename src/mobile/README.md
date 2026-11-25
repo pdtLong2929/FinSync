@@ -1,14 +1,68 @@
 # FinSync Android Frontend
 
+**2026-11-25 PA4 live integration:** signed-in Groups now offers **Server groups**
+and **On this device** separately. Groups, guest members, four expense split modes,
+balances, payment records and invitation-token joins use the new PA4 backend.
+Local data remains unchanged. Online corrections/deletions and friend delivery
+are not supported by this adapter. See [PA4_BACKEND_INTEGRATION.md](PA4_BACKEND_INTEGRATION.md)
+for runtime, endpoint coverage, verification and exact limitations. Earlier
+local-only Groups statements below describe On this device mode.
+
 > Performed by: Nguyễn Phú Đạt (24120038). Team review pending.
 
-Updated **2026-11-07**. Kotlin, Jetpack Compose, Material3 and the approved bright
+Updated **2026-11-23**. Kotlin, Jetpack Compose, Material3 and the approved bright
 Liquid Metal design. Application ID: `com.finsync`.
+
+**Bank notification review (local, opt-in):** Overview → Bank notifications icon,
+or My profile → Bank notifications → Set up bank alerts. Acknowledge the privacy
+notice, grant Android notification access, select installed banking apps and
+enable capture; enable reminder permission separately. Supported new VND alerts
+enter a review inbox, never an automatic expense. Confirm Expense/Income, a
+balanced own-wallet Transfer, link an existing entry, or Ignore. OTPs and balance
+amounts are excluded; original notification text is not stored/uploaded. The first
+confirmed entry starts durable local wallet/transaction/category/transfer storage
+for the current workspace (including its existing sample values). Budgets/goals
+keep their previous behavior. This is not bank balance synchronization. Details,
+privacy and exact limits: [BANK_NOTIFICATION_CAPTURE.md](BANK_NOTIFICATION_CAPTURE.md).
+
+**Friends and invitations frontend:** Groups → Friends & invitations / Join with
+code; group → Members → Invite members (email, accepted friends or local code).
+Requests persist as **unsent device drafts** until a social backend is supplied.
+No fictional friendships are preloaded, and saving a code does not join a group.
+Profile is available from Overview's top-right avatar, with Edit profile,
+Friends & invitations and a confirmed Log out action. See
+[People frontend handoff](PEOPLE_FRONTEND_HANDOFF.md) for behavior, integration
+boundaries and the research-only bank-transfer capture proposal.
 
 **User account management now uses the demo backend and PostgreSQL/Redis:** real
 registration, login, profile read/update, refresh and server logout. Financial
-screens still use fictional in-memory local data; process death discards financial
-edits. No finance API, AI, real bank connection or money movement is claimed.
+Groups now use a durable device ledger, scoped to the signed-in account or the
+device workspace. A new workspace starts empty. Personal finance screens still
+use fictional in-memory data. Group sync, online invitations and finance APIs
+are pending backend integration.
+
+### Groups and debts on this device
+
+Open **Explore FinSync → Open sample workspace → Groups**, or open Groups after
+sign-in. Each group has **Expenses / Balances / Members** sections. Create a group,
+add member names, add an expense and review its split. Equal, Exact, Percentage and
+Shares use whole-VND allocation. Tap an expense to see its original allocation,
+edit its prefilled details or confirm removal; the snackbar offers **Undo**.
+
+In **Balances**, use **Record payment** and choose **Full amount** or **Partial
+payment**, then review and confirm the external payment record. Tap a confirmed
+history row to correct its amount/date or remove an incorrect record with Undo.
+These actions only update the shared ledger, never move/refund money or alter a
+personal wallet. Existing payments are retained when an expense changes. Edit the
+group's name/type/description from its details header. The debt explanation is
+available on demand; optimized repayment paths preserve every member's net balance.
+
+Groups, members, expenses and settlement history survive app restarts through an
+atomic private file. Save errors retain the previous ledger and the form draft.
+Signing in with another account opens that account's own ledger. Device workspace
+data remains available when returning to exploration. Online invitations display
+their unavailable state until group sync is integrated. Preview/test fixtures
+remain separate from the normal app's empty-first-launch ledger.
 
 ## Start here
 

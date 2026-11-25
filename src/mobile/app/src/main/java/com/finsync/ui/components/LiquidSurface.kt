@@ -9,6 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.*
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.ContentScale
@@ -31,33 +33,41 @@ internal object LiquidSurfaceTokens {
     val violet = Color(0xFF8953F4)
     val blue = Color(0xFF657DF4)
     val rim = Color(0xFFFEFDFF)
-}
-
-internal fun Modifier.liquidAtmosphere(): Modifier = drawWithCache {
-    val w = size.width; val h = size.height
-    val lights = listOf(
-        Brush.radialGradient(listOf(LiquidSurfaceTokens.rim.copy(alpha = .92f), Color.Transparent), Offset(w*.12f,h*.04f), w*.86f),
-        Brush.radialGradient(listOf(LiquidTokens.lavender.copy(alpha = .28f), Color.Transparent), Offset(w*.96f,h*.25f), w*.8f),
-        Brush.radialGradient(listOf(LiquidTokens.ice.copy(alpha = .83f), Color.Transparent), Offset(w*.05f,h*.57f), w*.72f),
-        Brush.radialGradient(listOf(LiquidTokens.lavender.copy(alpha = .18f), Color.Transparent), Offset(w*.7f,h*.9f), w*.65f),
-    )
-    onDrawBehind { drawRect(LiquidTokens.day); lights.forEach { drawRect(it) } }
+    val porcelain = Color(0xFFFDFBFF)
+    val porcelainEdge = Color(0xFFE4DFF1)
+    val readingElevation = 3.dp
+    val heroElevation = 12.dp
+    val insetShape = RoundedCornerShape(18.dp)
+    val inset = Color(0xFFE5E1F2)
+    val bevel = 1.dp
+    val contour = Color(0xFFB7ABD9)
+    val backingOffset = 5.dp
+    const val backingScale = .965f
+    const val pressScale = .985f
+    const val pressDuration = 120
 }
 
 /** A translucent reading plane with directional reflection and an illuminated rim. */
-internal fun Modifier.liquidGlass(shape: Shape = LiquidSurfaceTokens.radius, elevation: androidx.compose.ui.unit.Dp = 8.dp, tint: Color = LiquidSurfaceTokens.frost): Modifier =
-    shadow(elevation, shape, clip = false, ambientColor = LiquidSurfaceTokens.shade.copy(alpha = .6f),
-        spotColor = LiquidSurfaceTokens.shade.copy(alpha = .65f))
+internal fun Modifier.liquidGlass(shape: Shape = LiquidSurfaceTokens.radius, elevation: androidx.compose.ui.unit.Dp = LiquidSurfaceTokens.readingElevation, tint: Color = LiquidSurfaceTokens.porcelain): Modifier =
+    shadow(elevation, shape, clip = false, ambientColor = LiquidSurfaceTokens.shade.copy(alpha = .25f),
+        spotColor = LiquidSurfaceTokens.shade.copy(alpha = .4f))
         .clip(shape).drawWithCache {
             // Opaque base avoids Android elevation occlusion rectangles beneath text render nodes.
             val plane = Brush.linearGradient(listOf(LiquidSurfaceTokens.rim,
-                tint, if(tint == LiquidSurfaceTokens.frost) Color(0xFFE6E0F8) else lerp(tint, LiquidTokens.lavender, .18f)),
+                tint, lerp(tint, LiquidTokens.lavender, .055f)),
                 end = Offset(size.width*.75f, size.height))
             val light = Brush.radialGradient(listOf(LiquidSurfaceTokens.rim.copy(alpha = .85f), Color.Transparent),
                 center = Offset(size.width*.12f, -size.height*.15f), radius = size.width*.65f)
-            onDrawBehind { drawRect(plane); drawRect(light) }
-        }.border(1.dp, Brush.linearGradient(listOf(LiquidSurfaceTokens.rim, LiquidSurfaceTokens.rim.copy(alpha = .35f),
-            LiquidSurfaceTokens.rim.copy(alpha = .85f))), shape)
+            val innerLip = Path().apply {
+                moveTo(size.width*.06f,size.height*.97f)
+                cubicTo(size.width*.32f,size.height*.99f,size.width*.73f,size.height*.99f,size.width*.94f,size.height*.97f)
+            }
+            onDrawBehind {
+                drawRect(plane); drawRect(light)
+                drawPath(innerLip,LiquidSurfaceTokens.contour.copy(alpha=.18f),style=Stroke(LiquidSurfaceTokens.bevel.toPx()))
+            }
+        }.border(1.dp, Brush.linearGradient(listOf(LiquidSurfaceTokens.rim, LiquidSurfaceTokens.porcelainEdge.copy(alpha = .65f),
+            LiquidSurfaceTokens.rim)), shape)
 
 /** Circular chrome/lavender lens. The specular band stays above the central glyph. */
 internal fun Modifier.liquidLens(shape: Shape = CircleShape): Modifier = shadow(8.dp, shape, clip = false,
@@ -76,25 +86,50 @@ internal fun Modifier.liquidLens(shape: Shape = CircleShape): Modifier = shadow(
     }.border(1.2.dp, Brush.linearGradient(listOf(LiquidSurfaceTokens.rim, LiquidTokens.lavender, LiquidSurfaceTokens.rim)), shape)
 
 internal fun Modifier.liquidSelected(action: Boolean = false): Modifier = drawWithCache {
-    val body=if(action) Brush.verticalGradient(0f to Color(0xFF9E88D3),.25f to Color(0xFF7252B8),
-        .7f to Color(0xFF6742AD),1f to Color(0xFF8356CE)) else Brush.linearGradient(0f to Color(0xFFB5A2EC), .35f to Color(0xFF7960CE),
+    val body=if(action) Brush.linearGradient(listOf(LiquidTokens.heroDeep, LiquidTokens.violet, LiquidTokens.heroDeep), end=Offset(size.width,size.height)) else Brush.linearGradient(0f to Color(0xFFB5A2EC), .35f to Color(0xFF7960CE),
         .72f to Color(0xFF7852D7), 1f to Color(0xFFB38AFF),end=Offset(size.width*.4f,size.height))
     val gloss=Brush.radialGradient(listOf(LiquidSurfaceTokens.rim.copy(alpha=if(action) .22f else .6f),Color.Transparent),
         Offset(size.width*.25f,0f),if(action) size.height*.9f else size.width*.7f)
-    onDrawBehind { drawRect(body); drawRect(gloss) }
+    val reflection=Path().apply {
+        moveTo(0f,size.height*.2f)
+        cubicTo(size.width*.25f,-size.height*.05f,size.width*.68f,size.height*.28f,size.width,size.height*.08f)
+    }
+    val edge=Path().apply {
+        moveTo(size.width*.08f,size.height*.94f)
+        cubicTo(size.width*.32f,size.height*.99f,size.width*.7f,size.height*.99f,size.width*.92f,size.height*.94f)
+    }
+    onDrawBehind {
+        drawRect(body); drawRect(gloss)
+        drawPath(reflection,LiquidSurfaceTokens.rim.copy(alpha=if(action) .24f else .38f),style=Stroke(LiquidSurfaceTokens.bevel.toPx()))
+        drawPath(edge,LiquidTokens.ice.copy(alpha=.42f),style=Stroke(LiquidSurfaceTokens.bevel.toPx()))
+    }
 }
 
 @Composable internal fun LiquidCard(modifier: Modifier=Modifier, foil: Boolean=false, content: @Composable ColumnScope.()->Unit) {
-    Box(modifier.liquidGlass()) {
+    Box(modifier, propagateMinConstraints = true) {
+    if(foil) Box(Modifier.matchParentSize().graphicsLayer {
+        translationY = LiquidSurfaceTokens.backingOffset.toPx()
+        scaleX = LiquidSurfaceTokens.backingScale
+    }.drawWithCache {
+        // Only the lower metal lip is opaque, so the glass can reveal the scene.
+        val thickness = LiquidSurfaceTokens.backingOffset.toPx()*1.6f
+        val lip = Brush.verticalGradient(listOf(LiquidTokens.silver, LiquidTokens.ice, LiquidTokens.silver),
+            startY = size.height-thickness, endY = size.height)
+        onDrawBehind {
+            drawRoundRect(lip, Offset(0f,size.height-thickness), Size(size.width,thickness), CornerRadius(thickness/2))
+        }
+    })
+    Box(Modifier.fillMaxWidth().then(if (foil) Modifier.spatialGlass(prominent = true) else Modifier.liquidGlass())) {
         if(foil) {
             Box(Modifier.matchParentSize().drawWithCache {
                 val reflectedLight=Brush.radialGradient(listOf(LiquidTokens.lavender.copy(alpha=.35f),Color.Transparent),
                     Offset(size.width*.83f,size.height*.78f),size.width*.6f)
                 onDrawBehind { drawRect(reflectedLight) }
             })
-            Image(painterResource(R.drawable.overview_liquid_silver),null,Modifier.matchParentSize(),contentScale=ContentScale.FillBounds)
+            Image(painterResource(R.drawable.overview_liquid_silver),null,Modifier.matchParentSize().graphicsLayer { alpha = .45f },contentScale=ContentScale.FillBounds)
         }
         Column(Modifier.fillMaxWidth().padding(16.dp),verticalArrangement=Arrangement.spacedBy(8.dp),content=content)
+    }
     }
 }
 

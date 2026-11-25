@@ -1,8 +1,29 @@
 # FinSync — Android Frontend Technical Guide
 
+**2026-11-25 PA4 update:** [PA4_BACKEND_INTEGRATION.md](PA4_BACKEND_INTEGRATION.md)
+documents the server-authoritative Groups/debt adapter, shared authenticated HTTP
+transport, UUID mapping, server rounding, token invitations and separate device
+ledgers. The earlier local-only Groups descriptions apply to On this device mode.
+
+**2026-11-23 bank capture update:** [BANK_NOTIFICATION_CAPTURE.md](BANK_NOTIFICATION_CAPTURE.md)
+documents the opt-in Android listener, VND candidate extraction, native review,
+account-scoped AtomicFile journal and durable personal-ledger observer after the
+first confirmed bank record. No bank backend/API/SMS/Accessibility integration.
+The original in-memory personal-ledger statements below apply before enrollment;
+budget/goal persistence is unchanged. Existing sample values are preserved and
+explicitly disclosed rather than treated as bank balances.
+
+Friends/group invitation UI and account entry points added 2026-11-23:
+[PEOPLE_FRONTEND_HANDOFF.md](PEOPLE_FRONTEND_HANDOFF.md). `social/` contains the
+typed repository seam, atomic account-scoped draft store, controller and native
+screens. MainActivity provides an isolated controller per workspace. The default
+adapter never delivers requests or creates friendships/memberships. Existing
+account APIs and financial calculations are unchanged. Backend delivery and code
+resolution remain pending. No bank/SMS/notification-reader permission was added.
+
 > *Performed by: Nguyễn Phú Đạt (24120038) | Reviewed by: Pending team review | Edited by: Pending confirmation*
 
-Updated **2026-11-07** from the Android source/build configuration. This describes
+Updated **2026-11-23** from the Android source/build configuration. This describes
 the client and local auth integration, not all PA3 Part E integration. The team
 must still confirm the selected Part E functional group and acceptance criteria.
 
@@ -11,8 +32,13 @@ must still confirm the selected Part E functional group and acceptance criteria.
 > *Performed by: Nguyễn Phú Đạt (24120038) | Reviewed by: Pending team review | Edited by: Pending confirmation*
 
 Kotlin/Jetpack Compose/Material 3 implement the four tabs and child screens in the
-approved bright Liquid Metal style. Finance operations use fictional **in-memory**
-state. Registration/login now use the real Spring Boot API and PostgreSQL through
+approved bright Liquid Metal style. Personal finance operations use fictional
+in-memory state. Groups use `FileGroupLedgerStore` and `GroupLedgerPersistence`
+for an account-scoped, empty-first-launch device ledger. AtomicFile writes run on
+the IO dispatcher, serialize per ViewModel, and preserve the last complete ledger
+if a save fails. A read failure blocks edits and offers Retry without replacing
+the existing file. Signing in/out rebinds the group workspace. No group API is used.
+Registration/login use the Spring Boot API and PostgreSQL through
 `HttpAuthRepository` (platform HTTP/JSON, IO dispatcher, no new library). JWTs are
 memory-only. The demo branch also connects server profiles, refresh and remote
 logout through PostgreSQL/Redis. See [account integration](USER_ACCOUNT_INTEGRATION.md).
@@ -133,7 +159,7 @@ snapshot loading preserves the AVD user-data partition.
 
 Use the serial discovered above, or select it explicitly from `adb devices -l`.
 `install -r` retains Android package data but cannot preserve in-memory finance
-state across process termination. Do not use uninstall/clear-data/wipe commands.
+state across process termination. Groups are retained in private device storage.
 
 ```powershell
 & $adb -s $deviceSerial install -r 'app\build\outputs\apk\debug\app-debug.apk'
@@ -167,7 +193,7 @@ Source paths below are under `app/src/main/java/com/finsync/`:
 | `auth/LocalProfile*`, `ProfileScreens.kt`, `UserAvatar.kt` | Device-only profile validation/storage, photo selection, edit/details and Overview avatar |
 | `ui/FinSyncApp.kt` | Destinations, local child-route strings, Back/origin and feedback |
 | `ui/FinanceViewModel.kt` | FinanceState, StateFlow and validated local mutations |
-| `data/` | Fictional personal/group/budget/goal fixtures |
+| `data/` | Personal/budget/goal and preview fixtures; `FileGroupLedgerStore` for durable device group ledgers |
 | `domain/` | VND validation/arithmetic, transfers, splits/debts and report calculations |
 | `ui/dashboard/` | Overview components, mapping and dashboard state |
 | `ui/wallets/` | Wallet CRUD/history and transfer form/review/result |
@@ -231,8 +257,8 @@ is declared. Chrome artwork is local decoration; controls/text/charts remain nat
 | Transfers | Active eligible non-credit wallets, review/confirm/result/history, request-ID duplicate protection | Manual bookkeeping, no money movement |
 | Transactions | Whole-VND amount, expense/income, category grid, wallet/default, date/notes, validation, edit/detail/delete/Undo | No remote write, durable persistence or receipt upload |
 | History | Day grouping; title/note/category/wallet search; type/date/category/wallet/amount filters; Apply/Reset | Local filtering |
-| Groups | Create/search/details/members, sample invitation, Equal/Exact/Percentage/Shares and live allocation difference | No online invitations or multi-user sync |
-| Debts | Summary/details/history, confirmation and local external-settlement record | No payment service or remote recipient acknowledgement |
+| Groups | Expenses/Balances/Members sections, group create/edit/search, member management, expense detail/edit/remove/Undo, four split methods, persistent device ledger | Online invitations and multi-device sync await backend integration |
+| Debts | Optimized repayment explanation, direct full/partial recording, history amount/date correction, confirmed removal/Undo | No payment service or remote recipient acknowledgement |
 | Reports | Comparison/category/trend/drilldown; donut/bar/line/stacked/calendar/budget views via compatible analytics questions | Local ledger; no export service |
 | Budgets | Weekly/monthly create/edit, on-screen 80%/100% warnings | No OS push/background alert service |
 | Goals | Target/deadline and manually recorded saved progress | No automatic wallet allocation |
@@ -245,6 +271,24 @@ expense; non-exact split rounding remainder goes to the payer in `splitExpense`.
 Personal wallets/reports and group ledgers remain separate. Transfers are excluded
 from income/spending. Archived wallet balances remain in net worth; credit debt
 reduces it. Savings progress is a separate tracker, not another net-worth asset.
+
+### Shared-ledger record corrections
+
+Shared expense edits retain payer, participant amounts and split method/inputs.
+New optional version1 JSON fields persist split metadata; existing files without
+these fields keep their exact recorded allocations and edit as Exact amounts.
+Editing or removing an expense recalculates shared balances while preserving
+confirmed payment records; previous payments can consequently produce new debt
+suggestions. Original expense shares are explicitly distinct from current debt.
+
+Payment history supports reviewed amount/date corrections and confirmed record
+removal. This is bookkeeping, not a payment reversal. Undo is offered after a
+successful durable removal, is idempotent and remains scoped to its originating
+workspace. Failed restores can be retried. Disk failures roll back only group data.
+Only the group owner or original payer can edit/remove an expense; payment records
+can be corrected by the owner or involved participants. Former-member financial
+history is protected; metadata-only expense corrections remain possible. These
+are local client rules; future backend integration must enforce authorization.
 
 ## 9. Data lifetime and UI states
 

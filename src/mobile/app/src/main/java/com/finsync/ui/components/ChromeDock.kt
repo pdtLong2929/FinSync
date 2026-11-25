@@ -8,6 +8,13 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithCache
@@ -69,15 +76,20 @@ internal fun Modifier.chromeNavigationSurface(shape: Shape = DockTokens.shape): 
 @Composable
 internal fun ChromeButton(onClick: () -> Unit, modifier: Modifier = Modifier, enabled: Boolean = true,
     content: @Composable RowScope.() -> Unit) {
+    val interactions = remember { MutableInteractionSource() }
+    val pressed by interactions.collectIsPressedAsState()
+    val scale by animateFloatAsState(if (pressed && enabled) LiquidSurfaceTokens.pressScale else 1f,
+        tween(LiquidSurfaceTokens.pressDuration), label = "chrome-press")
     val finish = if (enabled) Modifier.liquidSelected(action=true) else Modifier.background(DockTokens.silver)
     Button(onClick = onClick,
         modifier = modifier.heightIn(min = DockTokens.actionHeight)
+            .graphicsLayer { scaleX = scale; scaleY = scale }
             .shadow(DockTokens.elevation, CircleShape, ambientColor = DockTokens.shadow.copy(alpha = .18f),
                 spotColor = DockTokens.shadow.copy(alpha = .24f))
             .clip(CircleShape).then(finish)
             .border(BorderStroke(DockTokens.edge, Brush.linearGradient(listOf(DockTokens.reflection,
                 DockTokens.violetLight, DockTokens.lilac))), CircleShape),
-        enabled = enabled, shape = CircleShape,
+        enabled = enabled, shape = CircleShape, interactionSource = interactions,
         colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent, contentColor = DockTokens.onAction,
             disabledContainerColor = Color.Transparent, disabledContentColor = DockTokens.text),
         content = content,

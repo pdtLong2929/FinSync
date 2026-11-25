@@ -32,13 +32,16 @@ import com.finsync.ui.theme.Space
 internal data class ChromeTab(val key: String, @param:StringRes val label: Int, @param:DrawableRes val icon: Int)
 
 internal object ChromeNavigationTokens {
-    val icon = 20.dp
-    val indicatorWidth = 64.dp
-    val indicatorHeight = 26.dp
-    val minimumTarget = 56.dp
-    val gap = 2.dp
-    val dockShape = RoundedCornerShape(20.dp)
-    val tileShape = RoundedCornerShape(14.dp)
+    val icon = 24.dp
+    val indicatorWidth = 44.dp
+    val indicatorHeight = 32.dp
+    val minimumTarget = 64.dp
+    val gap = 4.dp
+    val outerInset = 12.dp
+    val innerInset = 8.dp
+    val dockShape = RoundedCornerShape(24.dp)
+    val tileShape = RoundedCornerShape(16.dp)
+    val indicatorShape = RoundedCornerShape(12.dp)
 }
 
 /** Equal slots and a common vertical center; large labels retain the full four-tab row. */
@@ -48,44 +51,45 @@ internal fun ChromeNavigation(tabs: List<ChromeTab>, selectedKey: String, onAdd:
     val action: @Composable () -> Unit = {
         if(onAdd != null) FilledIconButton(onClick = onAdd,
             modifier = Modifier.size(DockTokens.actionHeight)
-                .then(if(overviewFinish) Modifier.liquidLens(ChromeNavigationTokens.tileShape)
+                .then(if(overviewFinish) Modifier.premiumDockAction()
                     else Modifier.chromeNavigationSurface(ChromeNavigationTokens.tileShape))
                 .semantics { contentDescription = addLabel },
             shape=ChromeNavigationTokens.tileShape,
             colors=IconButtonDefaults.filledIconButtonColors(containerColor=Color.Transparent,
                 contentColor=if(overviewFinish) DockTokens.onAction else DockTokens.selectedText)) {
-            Icon(painterResource(R.drawable.ic_add), null, Modifier.size(DockTokens.medallion))
+            Icon(painterResource(R.drawable.ic_add), null, Modifier.size(DockTokens.quickActionIcon))
         }
     }
-    Column(Modifier.fillMaxWidth().padding(horizontal=Space.small,vertical=Space.small).navigationBarsPadding(),
+    Column(Modifier.fillMaxWidth().padding(horizontal=if(largeText) Space.small else ChromeNavigationTokens.outerInset,vertical=Space.small).navigationBarsPadding(),
         horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(Space.small)) {
         if(largeText && onAdd != null) action()
-        Row(Modifier.fillMaxWidth()
-            .then(if(overviewFinish) Modifier.liquidGlass(ChromeNavigationTokens.dockShape)
+        Row(Modifier.fillMaxWidth().height(IntrinsicSize.Min)
+            .then(if(overviewFinish) Modifier.premiumDockSurface()
                 else Modifier.chromeNavigationSurface(ChromeNavigationTokens.dockShape))
-            .padding(6.dp).selectableGroup(),verticalAlignment=Alignment.CenterVertically) {
+            .padding(if(largeText) ChromeNavigationTokens.gap else ChromeNavigationTokens.innerInset)
+            .selectableGroup(),verticalAlignment=Alignment.CenterVertically) {
             tabs.forEachIndexed { index, tab ->
                 if(index==tabs.size/2 && onAdd!=null && !largeText)
                     Box(Modifier.weight(1f),contentAlignment=Alignment.Center) { action() }
                 val active=tab.key==selectedKey
-                Box(Modifier.weight(1f),contentAlignment=Alignment.Center) {
-                    Column(Modifier.fillMaxWidth().heightIn(min=ChromeNavigationTokens.minimumTarget)
+                Box(Modifier.weight(1f).fillMaxHeight(),contentAlignment=Alignment.TopCenter) {
+                    Column(Modifier.fillMaxWidth().fillMaxHeight().heightIn(min=ChromeNavigationTokens.minimumTarget)
                         .testTag("chrome-tab-${tab.key}").clip(ChromeNavigationTokens.tileShape)
-                        .then(if(active && overviewFinish) Modifier.liquidSelected()
-                            else if(active) Modifier.chromeSelectedFinish() else Modifier)
                         .selectable(selected=active,role=Role.Tab,onClick={onSelect(tab.key)})
                         .padding(vertical=ChromeNavigationTokens.gap),
                         horizontalAlignment=Alignment.CenterHorizontally,
-                        verticalArrangement=Arrangement.spacedBy(ChromeNavigationTokens.gap,Alignment.CenterVertically)) {
-                        Box(Modifier.height(ChromeNavigationTokens.indicatorHeight).fillMaxWidth()
+                        verticalArrangement=Arrangement.spacedBy(ChromeNavigationTokens.gap)) {
+                        Box(Modifier.size(ChromeNavigationTokens.indicatorWidth, ChromeNavigationTokens.indicatorHeight)
+                            .then(if(active) Modifier.premiumDockIndicator() else Modifier)
                             .testTag("chrome-icon-${tab.key}"),contentAlignment=Alignment.Center) {
-                            Icon(painterResource(tab.icon),null,Modifier.size(ChromeNavigationTokens.icon),
+                            SculptedIcon(tab.icon,Modifier.size(ChromeNavigationTokens.icon), monochrome=active,
                                 tint=if(active) DockTokens.onAction else DockTokens.text)
                         }
                         Text(stringResource(tab.label),Modifier.fillMaxWidth().testTag("chrome-label-${tab.key}"),
-                            style=MaterialTheme.typography.labelSmall.copy(fontSize=10.sp),
-                            fontWeight=FontWeight.SemiBold,textAlign=TextAlign.Center,maxLines=1,softWrap=false,
-                            color=if(active) DockTokens.onAction else DockTokens.text)
+                            style=MaterialTheme.typography.labelSmall,
+                            fontWeight=if(active) FontWeight.SemiBold else FontWeight.Medium,
+                            textAlign=TextAlign.Center,maxLines=2,
+                            color=if(active) DockTokens.selectedText else DockTokens.text)
                     }
                 }
             }

@@ -17,6 +17,11 @@ class HttpAuthRepository(baseUrl: String, allowLocalHttp: Boolean = false,
     override val supportsAccountApi = true
     override fun acceptSession(session: AuthSession) = sessions.install(session)
     override fun clearSession() = sessions.clear()
+    /** Reuses account refresh serialization and rejects replies from a changed login. */
+    internal suspend fun groupRequest(method: String, path: String, body: JSONObject? = null): AccountReply = accountLock.withLock {
+        require(path.startsWith("groups") || path.startsWith("categories"))
+        protectedCall(method, path, body)
+    }
 
     override suspend fun signIn(email: String, password: String): AuthResult = authResult {
         val tokens = http.call("POST", "auth/login", JSONObject().put("email", email.trim().lowercase(Locale.ROOT))

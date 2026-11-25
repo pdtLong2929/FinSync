@@ -5,6 +5,7 @@ import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
+import org.json.JSONArray
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.SocketTimeoutException
@@ -58,11 +59,14 @@ internal class AccountHttp(baseUrl: String, allowLocalHttp: Boolean) {
             currentCoroutineContext().ensureActive()
             val stream = if (status in 200..299) connection.inputStream else connection.errorStream
             // Avoid readNBytes: the client supports API26.
-            val buffer = ByteArray(65_537); var length = 0
+            val limit = if (path.startsWith("groups") || path.startsWith("categories")) 2_097_152 else 65_536
+            val buffer = ByteArray(limit + 1); var length = 0
             stream?.use { while (length < buffer.size) { val count = it.read(buffer, length, buffer.size - length); if (count < 0) break; length += count } }
-            require(length <= 65_536)
+            require(length <= limit)
             currentCoroutineContext().ensureActive()
-            AccountReply(status, if (length == 0) JSONObject() else JSONObject(String(buffer, 0, length, Charsets.UTF_8)))
+            val text = String(buffer, 0, length, Charsets.UTF_8).trim()
+            AccountReply(status, if (text.isEmpty()) JSONObject() else if (text.startsWith("["))
+                JSONObject().put("items", JSONArray(text)) else JSONObject(text))
         } catch (cancelled: kotlinx.coroutines.CancellationException) { throw cancelled }
         catch (failed: AccountApiException) { throw failed }
         catch (_: SocketTimeoutException) {

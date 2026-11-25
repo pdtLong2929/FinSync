@@ -50,7 +50,7 @@ fun FinSyncTheme(
     MaterialTheme(
         // Bright brand appearance under both Android settings, as requested.
         colorScheme = LightColors,
-        typography = TitaniumTypography,
+        typography = FinSyncTypography,
         shapes = Shapes(
             small = RoundedCornerShape(MetalTokens.fieldRadius),
             medium = RoundedCornerShape(MetalTokens.fieldRadius),
@@ -60,15 +60,3 @@ fun FinSyncTheme(
     )
     }
 }
-
-private val TitaniumTypography = Typography(
-    displaySmall = TextStyle(fontFamily = FontFamily.SansSerif, fontWeight = FontWeight.Light, fontSize = 40.sp, lineHeight = 48.sp, letterSpacing = (-1.5).sp, fontFeatureSettings = "tnum"),
-    headlineLarge = TextStyle(fontFamily = FontFamily.SansSerif, fontWeight = FontWeight.Medium, fontSize = 34.sp, lineHeight = 42.sp, letterSpacing = (-1).sp, fontFeatureSettings = "tnum"),
-    headlineMedium = TextStyle(fontFamily = FontFamily.SansSerif, fontWeight = FontWeight.Medium, fontSize = 30.sp, lineHeight = 38.sp, letterSpacing = (-0.75).sp, fontFeatureSettings = "tnum"),
-    headlineSmall = TextStyle(fontFamily = FontFamily.SansSerif, fontWeight = FontWeight.Medium, fontSize = 26.sp, lineHeight = 34.sp, letterSpacing = (-0.5).sp),
-    titleLarge = TextStyle(fontWeight = FontWeight.Medium, fontSize = 22.sp, lineHeight = 28.sp, letterSpacing = (-0.4).sp),
-    titleMedium = TextStyle(fontWeight = FontWeight.SemiBold, fontSize = 16.sp, lineHeight = 24.sp),
-    bodyLarge = TextStyle(fontSize = 16.sp, lineHeight = 24.sp),
-    bodyMedium = TextStyle(fontSize = 14.sp, lineHeight = 21.sp),
-    labelLarge = TextStyle(fontWeight = FontWeight.SemiBold, fontSize = 14.sp, lineHeight = 20.sp),
-)
