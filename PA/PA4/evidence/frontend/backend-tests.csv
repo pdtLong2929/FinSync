@@ -1,0 +1,8 @@
+suite,tests,failures,errors,skipped,timestamp_as_reported,original_report_sha256
+com.finsync.AccountApiTests,8,0,0,0,,2f4b05b75935f89791d41ee0c14cd1d6b7f45229746e7c1eefc024942dfd6d1d
+com.finsync.AccountPersistenceTests,4,0,0,0,,2af3079c8865f42369e572750b85a049d18fa0c7b56c649c917e828e101f65e4
+com.finsync.DebtSettlementApiTests,1,0,0,0,,98816856e6ecdf9fa752ffaad4e0cf3e9c2e01e642c7866d52b8de1723766d8e
+com.finsync.DebtSimplificationEngineTests,2,0,0,0,,47b31114f78f97991c175d7d9796eb0a2e1e777498ad1d62285aa6703b1bd5d4
+com.finsync.ExpenseSplitCalculatorTests,4,0,0,0,,7e797dacce2392c0317d85f80e450aa92fd3e4120b7eb3d6a0188b18773af503
+com.finsync.FinSyncApplicationTests,1,0,0,0,,e912b0e87724f7e494103763191da3f28ea8b9595524abffeaad47ff9bb566f5
+com.finsync.GroupExpenseApiTests,1,0,0,0,,d5dfd5fb4a3f849d00fe7528fc783cf49cc037bf8952cb4081ea1101df16fc46

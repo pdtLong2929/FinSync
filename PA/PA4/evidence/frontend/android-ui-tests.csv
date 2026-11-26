@@ -1,0 +1,16 @@
+test,broad_2026_11_25,targeted_2026_11_25,capture_2026_11_26,last_observed_result
+com.finsync.ui.AuthBackendIntegrationTest#duplicateRegistrationAndUnsupportedRecoveryNeverClaimSuccess,PASS,,,PASS
+com.finsync.ui.AuthBackendIntegrationTest#expiredAccessAndConcurrentProfileRequestsRotateRefreshSafely,PASS,,,PASS
+com.finsync.ui.AuthBackendIntegrationTest#realRegistrationLoginIdentityAndLocalSignOut,FAIL,PASS,,PASS
+com.finsync.ui.AuthBackendIntegrationTest#unreachableBackendIsOfflineAndNeverStoresSession,PASS,,,PASS
+com.finsync.ui.DeviceGroupLedgerTest#changedDebtSuggestionDoesNotClaimGroupIsSettled,PASS,,,PASS
+com.finsync.ui.DeviceGroupLedgerTest#damagedLedgerIsReportedAndNeverReplacedByEmptyData,PASS,,,PASS
+com.finsync.ui.DeviceGroupLedgerTest#emptyStartCreateMembersSplitSettleAndReloadFromDisk,PASS,,,PASS
+com.finsync.ui.DeviceGroupLedgerTest#saveFailureKeepsFormAndRetryCommitsOnce,PASS,,,PASS
+com.finsync.ui.GroupCompletionTest#expensesAndPaymentsCanBeCorrectedRemovedUndoneAndReloaded,PASS,,,PASS
+com.finsync.ui.GroupCompletionTest#splitMetadataRoundTripsAndLegacyVersionOneKeepsAmounts,PASS,,,PASS
+com.finsync.ui.GroupCompletionTest#threeSectionsRemainReadableAt320dpAnd150Percent,PASS,,,PASS
+com.finsync.ui.GroupFlowTest#partialSettlementExplainsRemainingBalanceBeforeConfirmation,PASS,,,PASS
+com.finsync.ui.GroupFlowTest#splitExpenseAndRecordExternalSettlement,PASS,,,PASS
+com.finsync.ui.ServerGroupIntegrationTest#nativeCreateExpensePartialPaymentAndFreshServerReload,PASS,PASS,PASS,PASS
+com.finsync.ui.ServerGroupIntegrationTest#realInvitationFourSplitMethodsIdempotencyAndAccessIsolation,PASS,PASS,,PASS
