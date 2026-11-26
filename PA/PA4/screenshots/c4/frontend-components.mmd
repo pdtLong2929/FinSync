@@ -1,0 +1,46 @@
+flowchart TB
+    subgraph Mobile["Android application container · com.finsync · Kotlin / Compose / Material 3"]
+        Entry["MainActivity<br/>Composition root"]
+        AuthUI["AuthHost / ProfileScreen<br/>Account UI"]
+        Shell["FinSyncApp<br/>Four tabs and routes"]
+        GroupUI["ServerGroupFlow / GroupFlow<br/>Expense and debt UI"]
+        AuthState["AuthViewModel / AuthController<br/>AuthUiState"]
+        ServerState["ServerGroups<br/>ServerGroupSnapshot"]
+        LocalState["FinanceViewModel<br/>FinanceState"]
+        Preview["ServerSplit.kt<br/>Online split preview"]
+        Domain["GroupFinance.kt<br/>GroupRecordEdits.kt"]
+        Account["HttpAuthRepository<br/>Protected HTTP and refresh"]
+        Session["AuthSessionStore<br/>Memory-only tokens"]
+        HTTP["AccountHttp<br/>HttpURLConnection / IO"]
+        LocalWrites["GroupLedgerPersistence<br/>Write and rollback"]
+        LocalStore["FileGroupLedgerStore<br/>Validated atomic JSON"]
+        Files[("App-private no-backup files<br/>Device group ledgers")]
+        Entry --> AuthUI
+        Entry --> Shell
+        AuthUI --> AuthState
+        AuthUI -->|Profile API| Account
+        AuthState --> Account
+        Shell --> GroupUI
+        Shell --> LocalState
+        GroupUI -->|Server groups| ServerState
+        GroupUI -->|On this device| LocalState
+        GroupUI --> Preview
+        Preview --> Domain
+        LocalState --> Domain
+        LocalState --> LocalWrites
+        LocalWrites --> LocalStore
+        LocalStore --> Files
+        ServerState -->|groupRequest| Account
+        Account --> Session
+        Account --> HTTP
+    end
+    API["Spring Boot API container<br/>Account and PA4 endpoints"]
+    HTTP -->|"Bearer JSON · /api/v1"| API
+    classDef ui fill:#efeaff,stroke:#6b55a4,color:#17122d
+    classDef state fill:#e7f4fb,stroke:#39728b,color:#142e3b
+    classDef data fill:#eef5ed,stroke:#52754e,color:#20361e
+    classDef external fill:#f4f4f7,stroke:#696674,color:#25232c
+    class Entry,AuthUI,Shell,GroupUI ui
+    class AuthState,ServerState,LocalState,Preview,Domain state
+    class Account,Session,HTTP,LocalWrites,LocalStore,Files data
+    class API external

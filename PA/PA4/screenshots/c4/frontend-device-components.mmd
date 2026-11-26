@@ -1,0 +1,28 @@
+flowchart TB
+    subgraph Device["Supporting components inside the same Android application"]
+        Profile["ProfileScreen / ProfileEditor<br/>Account details and local extras"]
+        ProfileStore["LocalProfileStore / UserAvatar<br/>Private preferences and avatar files"]
+        People["PeopleScreen / PeopleController<br/>Friends and unsent invitation drafts"]
+        PeopleStore["DevicePeopleRepository<br/>PeopleRepository: connected = false"]
+        Review["BankCaptureScreen / BankQuickSheet<br/>Manual review and explicit Save"]
+        Bank["BankController / FileBankStore<br/>Candidates and enrolled personal ledger"]
+        Listener["BankNotificationListener / BankReminder<br/>Opt-in notification listener and private reminders"]
+        Finance["FinanceViewModel<br/>Personal-ledger observer"]
+        Files[("App-private storage<br/>Profiles, people drafts and bank journal")]
+        Profile --> ProfileStore
+        ProfileStore --> Files
+        People --> PeopleStore
+        PeopleStore --> Files
+        Listener --> Bank
+        Review --> Bank
+        Bank --> Files
+        Bank <-->|"Confirmed entries / durable edits"| Finance
+    end
+    Android["Android notification framework<br/>Explicit user-granted access"]
+    Android --> Listener
+    classDef ui fill:#efeaff,stroke:#6b55a4,color:#17122d
+    classDef data fill:#e7f4fb,stroke:#39728b,color:#142e3b
+    classDef external fill:#f4f4f7,stroke:#696674,color:#25232c
+    class Profile,People,Review ui
+    class ProfileStore,PeopleStore,Bank,Listener,Finance,Files data
+    class Android external

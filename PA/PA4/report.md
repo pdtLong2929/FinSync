@@ -334,53 +334,169 @@ Every component in the C4 Level 3 Backend Diagram maps directly to Java classes 
 4. **Debt Minimization:** On `GET /api/v1/groups/{groupId}/debts`, `DebtSettlementServiceImpl` derives per-member net balances from `MEMBERS`-funded expenses and `CONFIRMED` settlements, passes them to `DebtSimplificationEngine.simplify(...)`, and returns the simplified transfer plan alongside the raw-vs-simplified reduction percentage.
 
 ### C.5. C4 Model Level 3 — Frontend Component Diagram (Android Jetpack Compose)
-> *Performed by: Nguyen Phu Dat (24120038) | Reviewed by: Nguyen Le Duc Nhat (24120403) | Edited by: Nguyen Phu Dat (24120038)*
+> *Performed by: Nguyen Phu Dat (24120038) | Reviewed by: Nguyen Le Duc Nhat (24120403; assigned, review pending) | Edited by: Nguyen Phu Dat (24120038)*
+
+**Source baseline:** Android source at commit [`66bb585`](https://github.com/pdtLong2929/FinSync/commit/66bb585) on `feat/pa4-group-expense-debt`, as of 25 November 2026. The diagrams describe the implemented Android container, including the PA4 authenticated group-expense and debt integration. Each component represents a logical responsibility within the Android process.
+
+#### C.5.1. Main application, account and PA4 group components
+
+The composition root is `MainActivity`. `FinSyncApp` coordinates the four tabs and existing feature routes. The same group forms support two explicitly separate modes: **Server groups**, whose published snapshot comes from the API, and **On this device**, whose ledger is managed by `FinanceViewModel` and private atomic files. Arrows show calls/dependencies; UI observes the corresponding read-only StateFlows to receive results.
 
 ```mermaid
-flowchart TD
-    subgraph AndroidAppContainer["Android Client Application (Jetpack Compose)"]
-        subgraph PresentationLayer["UI / Screen Layer (Jetpack Compose)"]
-            AuthScreen["AuthScreen / LoginComposable<br/>[Form inputs, validation UI]"]
-            HomeScreen["HomeScreen / DashboardComposable<br/>[Balance summary cards, quick actions]"]
-            Feature1Screen["Feature1ScreenComposable<br/>[UI for Selected Functional Group 1]"]
-            Feature2Screen["Feature2ScreenComposable<br/>[UI for Selected Functional Group 2]"]
-        end
-
-        subgraph StateLayer["ViewModel & State Management Layer"]
-            AuthViewModel["AuthViewModel<br/>[StateFlow&lt;AuthState&gt;]"]
-            HomeViewModel["HomeViewModel<br/>[StateFlow&lt;DashboardUiState&gt;]"]
-            Feature1ViewModel["Feature1ViewModel<br/>[StateFlow&lt;Feature1UiState&gt;]"]
-            Feature2ViewModel["Feature2ViewModel<br/>[StateFlow&lt;Feature2UiState&gt;]"]
-        end
-
-        subgraph DataLayer["Repository & Client Networking Layer"]
-            AuthRepository["AuthRepository<br/>[Local Session + Remote Handshake]"]
-            Feature1Repo["Feature1Repository<br/>[Coroutines / Dispatchers.IO]"]
-            Feature2Repo["Feature2Repository<br/>[Coroutines / Dispatchers.IO]"]
-            RetrofitClient["RetrofitApiService / OkHttpClient<br/>[BaseURL: 10.0.2.2:8080, AuthInterceptor]"]
-            EncryptedPrefs["EncryptedPreferencesHelper<br/>[AES-256 GCM KeyStore Storage]"]
-        end
+flowchart TB
+    subgraph Mobile["Android application container · com.finsync · Kotlin / Compose / Material 3"]
+        Entry["MainActivity<br/>Composition root"]
+        AuthUI["AuthHost / ProfileScreen<br/>Account UI"]
+        Shell["FinSyncApp<br/>Four tabs and routes"]
+        GroupUI["ServerGroupFlow / GroupFlow<br/>Expense and debt UI"]
+        AuthState["AuthViewModel / AuthController<br/>AuthUiState"]
+        ServerState["ServerGroups<br/>ServerGroupSnapshot"]
+        LocalState["FinanceViewModel<br/>FinanceState"]
+        Preview["ServerSplit.kt<br/>Online split preview"]
+        Domain["GroupFinance.kt<br/>GroupRecordEdits.kt"]
+        Account["HttpAuthRepository<br/>Protected HTTP and refresh"]
+        Session["AuthSessionStore<br/>Memory-only tokens"]
+        HTTP["AccountHttp<br/>HttpURLConnection / IO"]
+        LocalWrites["GroupLedgerPersistence<br/>Write and rollback"]
+        LocalStore["FileGroupLedgerStore<br/>Validated atomic JSON"]
+        Files[("App-private no-backup files<br/>Device group ledgers")]
+        Entry --> AuthUI
+        Entry --> Shell
+        AuthUI --> AuthState
+        AuthUI -->|Profile API| Account
+        AuthState --> Account
+        Shell --> GroupUI
+        Shell --> LocalState
+        GroupUI -->|Server groups| ServerState
+        GroupUI -->|On this device| LocalState
+        GroupUI --> Preview
+        Preview --> Domain
+        LocalState --> Domain
+        LocalState --> LocalWrites
+        LocalWrites --> LocalStore
+        LocalStore --> Files
+        ServerState -->|groupRequest| Account
+        Account --> Session
+        Account --> HTTP
     end
-
-    AuthScreen --> AuthViewModel
-    HomeScreen --> HomeViewModel
-    Feature1Screen --> Feature1ViewModel
-    Feature2Screen --> Feature2ViewModel
-
-    AuthViewModel --> AuthRepository
-    Feature1ViewModel --> Feature1Repo
-    Feature2ViewModel --> Feature2Repo
-
-    AuthRepository --> RetrofitClient
-    AuthRepository --> EncryptedPrefs
-    Feature1Repo --> RetrofitClient
-    Feature2Repo --> RetrofitClient
+    API["Spring Boot API container<br/>Account and PA4 endpoints"]
+    HTTP -->|"Bearer JSON · /api/v1"| API
+    classDef ui fill:#efeaff,stroke:#6b55a4,color:#17122d
+    classDef state fill:#e7f4fb,stroke:#39728b,color:#142e3b
+    classDef data fill:#eef5ed,stroke:#52754e,color:#20361e
+    classDef external fill:#f4f4f7,stroke:#696674,color:#25232c
+    class Entry,AuthUI,Shell,GroupUI ui
+    class AuthState,ServerState,LocalState,Preview,Domain state
+    class Account,Session,HTTP,LocalWrites,LocalStore,Files data
+    class API external
 ```
 
-### C.6. Frontend Component Catalog and UI State Management
-> *Performed by: Nguyen Phu Dat (24120038) | Reviewed by: Nguyen Le Duc Nhat (24120403) | Edited by: Nguyen Phu Dat (24120038)*
+Editable [Mermaid source](screenshots/c4/frontend-components.mmd), [SVG](screenshots/c4/frontend-components.svg) and [PNG](screenshots/c4/frontend-components.png) are supplied for rendering and submission.
 
-<!-- TODO: [Dat] Describe Android components, ViewModels, UI State flows, and integration with Kotlin code in /src/mobile/. -->
+`AccountHttp` implements HTTP transport with Android/Java `HttpURLConnection` and is reused through `HttpAuthRepository`. `AuthSessionStore` retains access and refresh tokens in process memory. Persistent local profile preferences contain profile data, while login credentials remain outside the device preference and ledger files.
+
+#### C.5.2. Supporting device-only features and Android services
+
+Profile extras, unsent social requests and opt-in bank-notification bookkeeping remain distinct from the online Groups API. This companion view records those implemented components without suggesting that they are new backend services.
+
+```mermaid
+flowchart TB
+    subgraph Device["Supporting components inside the same Android application"]
+        Profile["ProfileScreen / ProfileEditor<br/>Account details and local extras"]
+        ProfileStore["LocalProfileStore / UserAvatar<br/>Private preferences and avatar files"]
+        People["PeopleScreen / PeopleController<br/>Friends and unsent invitation drafts"]
+        PeopleStore["DevicePeopleRepository<br/>PeopleRepository: connected = false"]
+        Review["BankCaptureScreen / BankQuickSheet<br/>Manual review and explicit Save"]
+        Bank["BankController / FileBankStore<br/>Candidates and enrolled personal ledger"]
+        Listener["BankNotificationListener / BankReminder<br/>Opt-in notification listener and private reminders"]
+        Finance["FinanceViewModel<br/>Personal-ledger observer"]
+        Files[("App-private storage<br/>Profiles, people drafts and bank journal")]
+        Profile --> ProfileStore
+        ProfileStore --> Files
+        People --> PeopleStore
+        PeopleStore --> Files
+        Listener --> Bank
+        Review --> Bank
+        Bank --> Files
+        Bank <-->|"Confirmed entries / durable edits"| Finance
+    end
+    Android["Android notification framework<br/>Explicit user-granted access"]
+    Android --> Listener
+    classDef ui fill:#efeaff,stroke:#6b55a4,color:#17122d
+    classDef data fill:#e7f4fb,stroke:#39728b,color:#142e3b
+    classDef external fill:#f4f4f7,stroke:#696674,color:#25232c
+    class Profile,People,Review ui
+    class ProfileStore,PeopleStore,Bank,Listener,Finance,Files data
+    class Android external
+```
+
+Editable [Mermaid source](screenshots/c4/frontend-device-components.mmd), [SVG](screenshots/c4/frontend-device-components.svg) and [PNG](screenshots/c4/frontend-device-components.png) are supplied separately. Android notification access is a user-granted operating-system capability, not a bank-account connection. `BankNotificationListener` appends candidates through `FileBankStore`; `BankController` handles review and confirmed bookkeeping. No bank credentials, SMS reader, payment initiation or bank API integration is represented.
+
+### C.6. Frontend Component Catalog and UI State Management
+> *Performed by: Nguyen Phu Dat (24120038) | Reviewed by: Nguyen Le Duc Nhat (24120403; assigned, review pending) | Edited by: Nguyen Phu Dat (24120038)*
+
+#### C.6.1. Component catalog and source traceability
+
+All paths below are relative to `src/mobile/app/src/main/java/com/finsync/` in the baseline commit. Files are grouped only where they implement one logical component; names are actual source identifiers.
+
+| Component | Responsibility and public state | Source evidence |
+| --- | --- | --- |
+| Application composition root | Creates activity ViewModels; binds account/device workspaces; supplies bank, people and authenticated server-group controllers with CompositionLocal providers. Bank-alert intents carry an opaque candidate ID. | [`MainActivity.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/MainActivity.kt) |
+| Authentication state | `AuthViewModel` owns the repository and `AuthController`; `StateFlow<AuthUiState>` exposes page, busy, validation errors, failure and public user identity. Expiry/refresh and sign-out are coordinated here. | [`auth/AuthController.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/auth/AuthController.kt) |
+| Account UI and profile | `AuthHost` switches native account screens and preserves finance UI state while profile is open. `ProfileScreen` and its editor load/update supported account fields through the repository. | [`auth/AuthScreens.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/auth/AuthScreens.kt), [`auth/ProfileScreens.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/auth/ProfileScreens.kt) |
+| App shell and navigation | `FinSyncApp` maintains destination and string routes with Compose saveable state; handles dialogs, snackbar/Undo and the four bottom tabs. It chooses Server groups or On this device. | [`ui/FinSyncApp.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/ui/FinSyncApp.kt) |
+| Personal-finance and device-group state | `FinanceViewModel` exposes `StateFlow<FinanceState>` and native edit actions. Personal entries and group expenses/settlements remain separate collections. `DashboardViewModel` provides the existing demo-backed dashboard bootstrap, not a dashboard API repository. | [`ui/FinanceViewModel.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/ui/FinanceViewModel.kt), [`ui/dashboard/DashboardViewModel.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/ui/dashboard/DashboardViewModel.kt) |
+| Dashboard, Wallets and Reports presentation | Native Compose screens consume the current finance state. Reports aggregate available personal entries; they do not claim financial API synchronization or incorporate group debt into personal wallet balances. | [`ui/dashboard/DashboardScreen.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/ui/dashboard/DashboardScreen.kt), [`ui/wallets/WalletScreens.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/ui/wallets/WalletScreens.kt), [`ui/reports/ReportScreens.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/ui/reports/ReportScreens.kt) |
+| PA4 group presentation | `ServerGroupFlow` dispatches online routes into shared group forms/detail screens. `GroupFlow` retains device-ledger routes. Expense forms, member management, debt details and settlement confirmation are reusable native composables. | [`groups/ServerGroupFlow.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/groups/ServerGroupFlow.kt), [`ui/groups/GroupScreens.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/ui/groups/GroupScreens.kt), [`ui/groups/GroupExpenseForm.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/ui/groups/GroupExpenseForm.kt), [`ui/groups/DebtScreens.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/ui/groups/DebtScreens.kt) |
+| Online Groups adapter/controller | `ServerGroups` is a coroutine-based controller/adapter, **not** a ViewModel or separate Retrofit repository. `StateFlow<ServerGroupSnapshot>` publishes complete server group/expense/payment snapshots, categories, member balances, debt plans and loading/busy/error state. It maps each group's caller member UUID to the UI alias `me`. | [`groups/ServerGroups.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/groups/ServerGroups.kt) |
+| Authentication and protected requests | `AuthRepository` is the account boundary; `HttpAuthRepository` implements real account operations and serialized protected group requests. `UnavailableAuthRepository` refuses account operations when no endpoint is configured. | [`auth/AuthRepository.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/auth/AuthRepository.kt), [`auth/HttpAuthRepository.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/auth/HttpAuthRepository.kt) |
+| HTTP transport | `AccountHttp` performs bounded JSON request/response I/O on `Dispatchers.IO`, applies timeouts, supplies the Bearer token and disables redirects. Groups list arrays and object responses are decoded explicitly. | [`auth/AccountHttp.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/auth/AccountHttp.kt) |
+| Session storage | `AuthSessionStore` holds access/refresh credentials only in process memory. Family checks reject late results after an account/session change; repository refresh is serialized. Credentials are redacted from diagnostic object strings. | [`auth/AuthSession.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/auth/AuthSession.kt), [`auth/HttpAuthRepository.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/auth/HttpAuthRepository.kt) |
+| Device-group persistence | `GroupLedgerPersistence` exposes `GroupStorageState`, loads the selected workspace, serializes writes and restores the previous ledger on write failure. `FileGroupLedgerStore` validates and stores versioned JSON through `AtomicFile` in app-private no-backup storage. | [`ui/GroupLedgerPersistence.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/ui/GroupLedgerPersistence.kt), [`data/GroupLedgerStore.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/data/GroupLedgerStore.kt) |
+| Financial rules and preview | `GroupFinance.kt` validates fields, allocates integer VND and simplifies local debts; `GroupRecordEdits.kt` governs local corrections/removals. `ServerSplit.kt` mirrors the backend's largest-remainder preview. Online balances and transfer suggestions are read from the server. | [`domain/GroupFinance.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/domain/GroupFinance.kt), [`ui/GroupRecordEdits.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/ui/GroupRecordEdits.kt), [`groups/ServerSplit.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/groups/ServerSplit.kt) |
+| Local profile extras | `LocalProfileStore` stores account-scoped preferences and private avatar files; supported name/phone fields use account APIs, while birthday, bio and avatar remain device-only. This store does not persist login credentials. | [`auth/LocalProfileStore.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/auth/LocalProfileStore.kt), [`auth/UserAvatar.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/auth/UserAvatar.kt) |
+| Friends/invitation drafts | `PeopleController` publishes `PeopleUiState`. `DevicePeopleRepository` implements `PeopleRepository` with `connected=false` and atomic per-workspace drafts. Actual online token joins are handled by `ServerGroups`, not by silently activating this repository. | [`social/PeopleController.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/social/PeopleController.kt), [`social/PeopleRepository.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/social/PeopleRepository.kt) |
+| Bank-notification bookkeeping | System-bound `BankNotificationListener` accepts only approved new app notifications, parses supported VND candidates and writes `FileBankStore`. `BankReminder` posts a private tap-to-review reminder. `BankController` publishes `BankUiState`, confirms records and observes durable personal-ledger edits after enrollment. | [`bank/BankNotificationListener.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/bank/BankNotificationListener.kt), [`bank/BankController.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/bank/BankController.kt), [`bank/BankStore.kt`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/app/src/main/java/com/finsync/bank/BankStore.kt) |
+
+#### C.6.2. State ownership, navigation and lifetime
+
+The UI follows unidirectional data flow: native input invokes a controller/ViewModel action; validation and I/O complete outside composable rendering; a new state snapshot is published; observing composables recompose. Activity ViewModels use lifecycle scopes. Remembered controllers use their existing Compose scopes, and `MainActivity` keys workspace-bound objects by the current account/device identity. Repository callbacks and session-family checks prevent old-account responses being applied to another login.
+
+`FinSyncApp` uses `rememberSaveable`, a saveable-state holder and explicit string routes; it does not use a Navigation Compose `NavController`. Form drafts are UI-local state. Financial input fields use numeric keyboards and the shared keyboard-safe `FeaturePage` action area. Leaving dirty forms requests confirmation. Loading, validation, empty, error/Retry and success feedback are driven by the state of the actual local or remote operation, rather than a simulated success delay.
+
+Local durable files survive an Activity/ViewModel restart. Process-memory sessions and in-memory-only finance state are not promised to survive process death. The bank journal persists personal wallets/entries/categories/transfers after explicit enrollment; budgets/goals retain their earlier behavior. The diagram therefore shows neither Room nor a universal persistent finance database.
+
+#### C.6.3. Online group-expense request and update sequence
+
+1. After real account login, `MainActivity` provides `ServerGroups` backed by the same `HttpAuthRepository`. Entering Server groups loads groups, current categories, every expense page, settlements and server debt summaries. A complete `ServerGroupSnapshot` is published only after these reads succeed. No local group is automatically uploaded or merged.
+2. The shared expense form validates title, whole-VND amount, date, payer, participants and split inputs. Its online preview calls `serverSplit`; Equal/Percentage/Shares rounding follows the backend's largest-remainder and participant-order rules. On this device retains its original payer-remainder rule. The final online record uses the server's returned allocation.
+3. Save sends `/api/v1/groups/{id}/expenses` through `groupRequest` with a stable UUID `requestId`, the server category/member UUIDs and split inputs. A successful mutation is followed by an authoritative reload. Reusing the same request ID protects expense/payment retries from creating duplicates.
+4. The repository serializes token refresh and checks session family around protected responses. `AccountHttp` performs network I/O on `Dispatchers.IO`; response failure is mapped to a safe UI error. A successful write followed by failed refresh is reported as **Saved on server / Refresh**, not silently posted again. Uncertain non-idempotent create/member/join requests require refresh before retry.
+
+The debug endpoint defaults to `http://10.0.2.2:8080` for the emulator. The base URL is configurable; release has no default account endpoint and configured release endpoints must use HTTPS. Diagram URLs describe the development setup, not a deployed production service.
+
+#### C.6.4. Debt settlement and device-ledger boundaries
+
+Online Balances displays the API's `memberBalances` and `simplifiedTransfers`; it does not reconstruct them using local payer rounding. A user records an already completed outside-app payment, reviews a full/partial amount and date, then confirms. The client posts `/settlements` with a stable request ID and reloads server balances/history. Recording a settlement does not initiate or verify a money transfer and does not reduce a personal FinSync wallet automatically.
+
+Device-group actions instead pass through `FinanceViewModel` → `GroupLedgerPersistence` → `FileGroupLedgerStore`. A failed write restores the previous displayed ledger, retains the form and allows retry. Workspace isolation and validated atomic files protect other accounts and prior saved data. Local expense/payment corrections, confirmed removals and Undo remain supported independently of the online API.
+
+#### C.6.5. Implemented states, limits and verification evidence
+
+| Situation | Implemented behavior |
+| --- | --- |
+| First use / no matching groups or expenses | Native empty state and create/add action; no fabricated server records. |
+| Loading / saving | Progress and busy state; guarded submission. State is not declared saved before the operation succeeds. |
+| Invalid amount, date, allocation or member name | Field/form validation blocks the invalid operation; Backend validates remote permissions and outstanding debt again. |
+| Network/service failure or expired session | Safe error and explicit retry/sign-in guidance. Online mode does not silently fall back to a device ledger or queue mutations offline. |
+| Disk read/write failure | Device ledger Retry, write rollback and corrupt-file protection; saved data is not replaced by an empty success state. |
+| Notification permission denied | The bank setup remains explicit; capture/reminders require their separate user grants. Pending bookkeeping is not a bank sync. |
+| Successful write | Updated server snapshot or durable local state plus confirmation/snackbar; local deletion can expose Undo. |
+| Unsupported server operations | Online expense/payment edit/delete/Undo and guest rename/restore are not advertised as functional. Friends/email remain unsent drafts; online single-use invitation tokens use the actual API. Only VND groups are supported. |
+
+The integration baseline built successfully with **98/98 Android JVM tests**. The broad Pixel 7 run passed 14/15 UI cases; the remaining auth/profile automation case and both affected live-group cases subsequently passed **3/3** after test-input stabilization and the server amount-reading correction. All 15 distinct scenarios passed across the broad and targeted runs. The preceding lint run had 0 errors, 38 warnings and 3 hints. Backend tests passed 21/21. Live Android tests verified four split modes, token invitations between accounts, access isolation, idempotency, native partial payment, server reload and unchanged personal-ledger data; local regressions covered persistence, rollback, corrections/Undo and 320dp/150% section labels.
+
+Source tests: `ServerSplitTest.kt`, `ServerGroupIntegrationTest.kt`, `GroupFinanceTest.kt`, `GroupLedgerPersistenceTest.kt`, `DeviceGroupLedgerTest.kt`, `GroupCompletionTest.kt` and `AuthBackendIntegrationTest.kt`. Detailed runtime/evidence references are in [`PA4_BACKEND_INTEGRATION.md`](https://github.com/pdtLong2929/FinSync/blob/66bb585/src/mobile/PA4_BACKEND_INTEGRATION.md). Tests used isolated QA fixtures and an actual separate PostgreSQL database; they do not certify bank transfers, production deployment, full TalkBack, API 26 or all device sizes.
 
 ### C.7. Code-to-Architecture Conformance Audit (Zero-Penalty Guarantee)
 > *Performed by: Nguyen Le Duc Nhat (24120403) | Reviewed by: Pham Dinh Tieu Long (24120087) | Edited by: Nguyen Le Duc Nhat (24120403)*
