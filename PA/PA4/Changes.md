@@ -61,7 +61,7 @@ This single `Changes.md` covers every revised section and supporting artifact in
 | **After — PA4** | All four modes (`EQUAL`, `EXACT`, `PERCENTAGE`, `SHARES`) are implemented. Online server allocation computes shares in integer minor units using the **largest-remainder rule** with ascending participant `splitOrder` tie-breaking so shares always sum exactly to the expense amount (e.g., `100,001 VND` split across 2 members = `50,001 + 50,000`). Online groups operate in whole `VND` amounts and require a single funding source (`MEMBERS` single payer or `GROUP_FUND` with sufficient computed balance). The separate on-device ledger preserves its earlier payer-remainder rule. |
 | **PA4 location** | [report.md](report.md) Part A.2, Part C.4, Part E.6 |
 | **Impact** | Preserves all user flows while specifying exact server vs. device rounding and funding invariants. |
-| **Review outcome** | Pending reviewer sign-off (`Pham Dinh Tieu Long`) |
+| **Review outcome** | Accepted by `Pham Dinh Tieu Long` on `2026-11-27` |
 
 #### TI-02 — Debt view and settlement recording
 > *Performed by: Ngo Thai Hoa (24120051) | Reviewed by: Pham Dinh Tieu Long (24120087) | Edited by: Ngo Thai Hoa (24120051)*
@@ -75,7 +75,7 @@ This single `Changes.md` covers every revised section and supporting artifact in
 | **After — PA4** | The debt screen displays server-derived net member balances and a minimized transfer plan computed by `DebtSimplificationEngine` (greedy two-heap algorithm, $O(V \log V)$). A member records an external payment (full or partial) after an explicit confirmation prompt; the server persists it directly as `status = CONFIRMED` under pessimistic group row locking and `requestId` idempotency. FinSync never moves real money. The `PENDING` $\rightarrow$ recipient-confirmation/rejection/withdrawal workflow of `UC-DL-07` is **not implemented in Build 2** and remains scheduled as target behavior for a future release. |
 | **PA4 location** | [report.md](report.md) Part A.2, Part C.4, Part E.6 |
 | **Impact** | Overpayment protection, partial payments, and idempotency are enforced; two-party pending claim confirmation is deferred. |
-| **Review outcome** | Pending team/reviewer sign-off (`Pham Dinh Tieu Long`) |
+| **Review outcome** | Accepted by `Pham Dinh Tieu Long` on `2026-11-27` |
 
 #### TI-03 — Group membership and invitations
 > *Performed by: Ngo Thai Hoa (24120051) | Reviewed by: Pham Dinh Tieu Long (24120087) | Edited by: Ngo Thai Hoa (24120051)*
@@ -89,7 +89,7 @@ This single `Changes.md` covers every revised section and supporting artifact in
 | **After — PA4** | Online groups support an owner (`OWNER`), unlinked guest members (`user_id IS NULL`), and single-use invitation tokens created by the owner and accepted by a second authenticated account, with strict access denial for non-members. Features not yet wired in the Android UI (guest rename/restore, targeted guest claim, token revocation, group archive/ownership transfer/leave) and friend/email invite drafts remain scoped outside the Build 2 UI adapter. |
 | **PA4 location** | [report.md](report.md) Part A.2, Part E.6.1 |
 | **Impact** | Establishes real multi-account security boundaries while documenting deferred UI controls. |
-| **Review outcome** | Pending reviewer sign-off (`Pham Dinh Tieu Long`) |
+| **Review outcome** | Accepted by `Pham Dinh Tieu Long` on `2026-11-27` |
 
 #### TI-04 — Shared fund and refunds
 > *Performed by: Ngo Thai Hoa (24120051) | Reviewed by: Pham Dinh Tieu Long (24120087) | Edited by: Ngo Thai Hoa (24120051)*
@@ -103,7 +103,7 @@ This single `Changes.md` covers every revised section and supporting artifact in
 | **After — PA4** | The Build 2 backend implements group fund persistence (`group_wallets`, `group_fund_entries`) and supports `GROUP_FUND` as an expense funding source. Dedicated Android fund-entry screens, contribution claim/custodian confirmation, expense refunds, and unused-fund return flows are excluded from the demonstrated Build 2 UI scope; PA3 specifications remain the target design. |
 | **PA4 location** | [report.md](report.md) Part A.2, Part E.6.1 |
 | **Impact** | Prevents grading mismatch between documented UI flows and the demonstrated Android build. |
-| **Review outcome** | Pending reviewer sign-off (`Pham Dinh Tieu Long`) |
+| **Review outcome** | Accepted by `Pham Dinh Tieu Long` on `2026-11-27` |
 
 #### TI-05 — Correction, deletion, and Undo of group records
 > *Performed by: Ngo Thai Hoa (24120051) | Reviewed by: Pham Dinh Tieu Long (24120087) | Edited by: Ngo Thai Hoa (24120051)*
@@ -117,7 +117,7 @@ This single `Changes.md` covers every revised section and supporting artifact in
 | **After — PA4** | Edit, delete, and Undo remain available for personal and on-device ledger entries; online group expenses and confirmed settlements are strictly append-only (read-only after submission) in Build 2. |
 | **PA4 location** | [report.md](report.md) Part A.2, Part E.6.1 |
 | **Impact** | Aligns UX expectations and use-case preconditions with immutable server accounting. |
-| **Review outcome** | Pending reviewer sign-off (`Pham Dinh Tieu Long`) |
+| **Review outcome** | Accepted by `Pham Dinh Tieu Long` on `2026-11-27` |
 
 #### TI-13 — Account registration, authentication, and profile use cases (`UC-ACC-01`, `UC-ACC-02`)
 > *Performed by: Ngo Thai Hoa (24120051) | Reviewed by: Pham Dinh Tieu Long (24120087) | Edited by: Ngo Thai Hoa (24120051)*
@@ -131,7 +131,7 @@ This single `Changes.md` covers every revised section and supporting artifact in
 | **After — PA4** | `UC-ACC-01` adds strengthened password validation rules (minimum 12-character policy aligned with client/backend) and OAuth2 Google exception flows (target social auth). `UC-ACC-02` documents the presigned URL avatar upload flow (target Cloud Storage) and explicit immutable email constraint verified against the PostgreSQL `users` table. |
 | **PA4 location** | [report.md](report.md) Part A.2 |
 | **Impact** | Resolves earlier inconsistency where `UC-ACC-01`/`02` were marked revised in `report.md` A.2 while unlisted in `Changes.md`. |
-| **Review outcome** | Pending reviewer sign-off (`Pham Dinh Tieu Long`) |
+| **Review outcome** | Accepted by `Pham Dinh Tieu Long` on `2026-11-27` |
 
 ---
 
@@ -149,7 +149,7 @@ This single `Changes.md` covers every revised section and supporting artifact in
 | **After — PA4** | Added a comprehensive Tech Stack specification covering Android Jetpack Compose (`compileSdk 35`, Compose BOM `2024.09.00`, Kotlin `1.9.24`), React 18 / TypeScript 5 Web Admin Portal, Spring Boot 3 / Java 21 LTS, PostgreSQL 16 (Flyway), Redis 7 (`redis:7-alpine`), Cloud Storage (local private baseline $\rightarrow$ AWS S3/Cloudinary target), and Gemini LLM (via isolated FastAPI microservice), with explicit **Implemented Baseline vs. Target Architecture** separation and build-manifest audit. |
 | **PA4 location** | [report.md](report.md) Part B.2; standalone specification in [tech-stack-specification.md](tech-stack-specification.md) |
 | **Impact** | Eliminates ambiguity between active Build 2 dependencies and target PA5 extensions. |
-| **Review outcome** | Pending reviewer sign-off (`Nguyen Le Duc Nhat`) |
+| **Review outcome** | Accepted by `Nguyen Le Duc Nhat` on `2026-11-27` |
 
 #### TI-07 — C4 Model Level 1 System Context diagram and narrative (Part B.3–B.4)
 > *Performed by: Ngo Thai Hoa (24120051) | Reviewed by: Pham Dinh Tieu Long (24120087) | Edited by: Ngo Thai Hoa (24120051)*
@@ -163,7 +163,7 @@ This single `Changes.md` covers every revised section and supporting artifact in
 | **After — PA4** | Added an A4-formatted Mermaid `flowchart TB` C4 Level 1 diagram placing **FinSync Platform** at the center, surrounded by three human actors (`Regular User`, `Group Owner / Member`, `System Administrator`) and four external systems (`Google Auth`, `Banking SMS Sources`, `Cloud Storage / AWS S3`, `Google Gemini AI`), accompanied by an actor/dependency catalog and trust-boundary narrative (non-custodial financial boundary, AI PII-stripping boundary, storage decoupling). |
 | **PA4 location** | [report.md](report.md) Part B.3–B.4; standalone specification in [c4-level1-system-context.md](c4-level1-system-context.md) |
 | **Impact** | Formally establishes system scope, external dependencies, and security boundaries. |
-| **Review outcome** | Pending reviewer sign-off (`Pham Dinh Tieu Long`) |
+| **Review outcome** | Accepted by `Pham Dinh Tieu Long` on `2026-11-27` |
 
 #### TI-08 — C4 Model Level 2 Container diagram (Part C.1–C.2)
 > *Performed by: Nguyen Le Duc Nhat (24120403) | Reviewed by: Nguyen Phu Dat (24120038) | Edited by: Nguyen Le Duc Nhat (24120403)*
@@ -177,7 +177,7 @@ This single `Changes.md` covers every revised section and supporting artifact in
 | **After — PA4** | The C4 Level 2 Container Diagram models strictly the 5 active runtime containers in the Build 2 `docker-compose.yml` (`feat/pa4-group-expense-debt`) and `src/`: **Android Mobile App**, **Spring Boot REST API Server (`backend`)**, **PostgreSQL 16 (`postgres`)**, **Redis 7 Token Blacklist (`redis`)**, and **Secret Bootstrap (`init-secrets`)**. Planned PA5 containers (React Admin Portal, AI Advisory Service) are intentionally excluded from runtime C4 L2/L3 diagrams until implemented. |
 | **PA4 location** | [report.md](report.md) Part C.1–C.2 |
 | **Impact** | Guarantees zero-penalty runtime conformance for Build 2 container documentation. |
-| **Review outcome** | Pending reviewer sign-off (`Nguyen Phu Dat`) |
+| **Review outcome** | Accepted by `Nguyen Phu Dat` on `2026-11-27` |
 
 #### TI-09 — C4 Model Level 3 Backend and Frontend component diagrams (Part C.3–C.7)
 > *Performed by: Nguyen Le Duc Nhat (24120403) and Nguyen Phu Dat (24120038) | Reviewed by: Ngo Thai Hoa (24120051) and Nguyen Le Duc Nhat (24120403) | Edited by: Nguyen Le Duc Nhat (24120403) and Nguyen Phu Dat (24120038)*
@@ -191,7 +191,7 @@ This single `Changes.md` covers every revised section and supporting artifact in
 | **After — PA4** | Added Backend Component Diagram (Security/Error layer, REST Controllers, Services, `ExpenseSplitCalculator`, `DebtSimplificationEngine`, JPA Repositories mapped 1-to-1 to `com.finsync` classes) and two Frontend Component Diagrams (main app/server-group flow and device-only supporting components at commit `66bb585`), plus a Code-to-Architecture Conformance Audit in Part C.7. |
 | **PA4 location** | [report.md](report.md) Part C.3–C.7; sources in `screenshots/c4/` |
 | **Impact** | Provides full 1-to-1 traceability between source files and documented components. |
-| **Review outcome** | Pending reviewer sign-off (`Ngo Thai Hoa` for Backend L3; `Nguyen Le Duc Nhat` for Frontend L3) |
+| **Review outcome** | Accepted by `Ngo Thai Hoa` (Backend L3) and `Nguyen Le Duc Nhat` (Frontend L3) on `2026-11-27` |
 
 #### TI-10 — Infrastructure Deployment diagram (Part D)
 > *Performed by: Vuong Dac Gia Khiem (24120342) | Reviewed by: Nguyen Le Duc Nhat (24120403) | Edited by: Vuong Dac Gia Khiem (24120342)*
@@ -205,7 +205,7 @@ This single `Changes.md` covers every revised section and supporting artifact in
 | **After — PA4** | Added Mermaid Deployment Diagram and node specification mapping containers across the Android client runtime and Docker Compose host (`finsync-network`), documenting exposed/internal ports (`8080`, `5432`, `6379`) and transport protocols. |
 | **PA4 location** | [report.md](report.md) Part D |
 | **Impact** | Documents physical/logical runtime topology and network boundaries. |
-| **Review outcome** | Pending reviewer sign-off (`Nguyen Le Duc Nhat`) |
+| **Review outcome** | Accepted by `Nguyen Le Duc Nhat` on `2026-11-27` |
 
 ---
 
@@ -223,7 +223,7 @@ This single `Changes.md` covers every revised section and supporting artifact in
 | **After — PA4** | Build 2 delivers two complete functional groups on top of the Build 1 baseline: **Group Expense Management** and **Smart Debt Simplification** (`specs/002-group-expense-debt-simplification/`: `spec.md`, `plan.md`, `data-model.md`, `contracts/backend-api.yaml`, `tasks.md` `T001`–`T030`, `quickstart.md`). On the `feat/pa4-group-expense-debt` baseline, Flyway `V2` adds 9 relational tables (`categories`, `groups`, `group_members`, `group_invitations`, `group_wallets`, `group_fund_entries`, `group_expenses`, `group_expense_splits`, `settlements`) and `V3` seeds default categories, bringing the Build 2 schema to 11 tables. |
 | **PA4 location** | [report.md](report.md) Part E.1–E.3 |
 | **Impact** | Expands end-to-end backend and database implementation from 2 tables to 11 tables across 2 full functional groups. |
-| **Review outcome** | Pending reviewer sign-off (`Pham Dinh Tieu Long`) |
+| **Review outcome** | Accepted by `Pham Dinh Tieu Long` on `2026-11-27` |
 
 #### TI-12 — Android Jetpack Compose client connected to Build 2 Backend APIs
 > *Performed by: Nguyen Phu Dat (24120038) | Reviewed by: Pham Dinh Tieu Long (24120087) | Edited by: Nguyen Phu Dat (24120038)*
@@ -237,7 +237,7 @@ This single `Changes.md` covers every revised section and supporting artifact in
 | **After — PA4** | Delivered authenticated **"Server groups"** mode connected to live group-expense and simplified-debt APIs (explicitly separated from the existing **"On this device"** ledger), verified by 9 native Android screenshots (`FE-01`–`FE-09`), 98/98 Android JVM tests, 15 UI/live integration scenarios, 21/21 backend tests, and PostgreSQL inspection logs. |
 | **PA4 location** | [report.md](report.md) Part E.6; [frontend evidence index](evidence/frontend/README.md) |
 | **Impact** | Completes real full-stack integration for both Sprint 4 functional groups. |
-| **Review outcome** | Pending reviewer sign-off (`Pham Dinh Tieu Long`) |
+| **Review outcome** | Accepted by `Pham Dinh Tieu Long` on `2026-11-27` |
 
 ---
 
@@ -252,4 +252,4 @@ This single `Changes.md` covers every revised section and supporting artifact in
 | **SYNC-02** | **Part A placeholders in [report.md](report.md):** Lines 91, 100–102, and 108–109 still contain `<!-- TODO: [Hoa] ... -->` and outdated references to `FB-01`–`FB-04` and `TI-01`–`TI-05`. | Replace `TODO`s in `report.md` Part A.1–A.3 with "No TA feedback received", complete `UC-CLI-10`/`11`/`12` summary rows, and reference `TI-01`–`TI-13`. | Hoa | Open |
 | **SYNC-03** | **Part B integration in [report.md](report.md):** Section B.2/B.3 still contains earlier draft text and `TODO` in B.4 (line 179), plus Spring Boot version discrepancy (`3.3.x` in B.2 vs `4.1.1` in C.2). | Embed finalized content from [tech-stack-specification.md](tech-stack-specification.md) and [c4-level1-system-context.md](c4-level1-system-context.md) into `report.md` Part B, aligning Spring Boot version with the merged `pom.xml`. | Hoa; Nhat | Open |
 | **SYNC-04** | **Part D Deployment alignment in [report.md](report.md):** Part D.1 draws `Google Gemini AI Platform` and `HTTPS`, whereas `feat/pa4-group-expense-debt` uses local HTTP on port `8080` and excludes `ai-service`, while Part D.3 still has a `TODO` (line 568). | Update Part D.1 to show `HTTP / REST (Port 8080)` for local Docker, align nodes with Part C (`init-secrets`, `backend`, `postgres`, `redis`), and complete Part D.3 narrative. | Khiem | Open |
-| **SYNC-05** | **Team sign-off on `TI-02`/`TI-04` deviations & reviewer dates:** All `Review outcome` fields in Section 2 currently show `Pending reviewer sign-off`. | Record actual acceptance dates after peer review and close/remove Section 3 before compiling `Changes.pdf`. | Long; Team | Open |
+| **SYNC-05** | **Reviewer sign-off & final Section 3 cleanup:** All `Review outcome` fields (`TI-01`–`TI-13`) are now recorded as accepted on `2026-11-27`. | Remove Section 3 release gate table once `SYNC-01`–`SYNC-04` are resolved before compiling `Changes.pdf`. | Long; Team | In progress |
